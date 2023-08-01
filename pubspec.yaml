@@ -40,6 +40,7 @@ dependencies:
     get: ^4.6.5
     image_picker: ^1.0.1
     timeago: ^3.5.0
+    equatable: ^2.0.5
     video_compress: 3.1.1
     video_player: ^2.7.0
 
