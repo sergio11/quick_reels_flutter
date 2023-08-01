@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:quickreels/constants.dart';
 import 'package:quickreels/model/user.dart';
+import 'package:quickreels/view/screens/home_screen.dart';
 import 'package:quickreels/view/screens/login_screen.dart';
 
 class AuthController extends GetxController {
@@ -27,7 +28,7 @@ class AuthController extends GetxController {
     if (user == null) {
       Get.offAll(() => LoginScreen());
     } else {
-      //Get.offAll(() => const HomeScreen());
+      Get.offAll(() => const HomeScreen());
     }
   }
 

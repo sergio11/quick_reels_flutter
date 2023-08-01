@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:quickreels/constants.dart';
 import 'package:quickreels/view/widgets/text_input_field.dart';
-
 import 'signup_screen.dart';
 
 class LoginScreen extends StatelessWidget {
+
   LoginScreen({Key? key}) : super(key: key);
 
   final TextEditingController _emailController = TextEditingController();
