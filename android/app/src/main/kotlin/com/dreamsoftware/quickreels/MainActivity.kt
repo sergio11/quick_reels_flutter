@@ -1,4 +1,4 @@
-package com.example.quickreels
+package com.dreamsoftware.quickreels
 
 import io.flutter.embedding.android.FlutterActivity
 
