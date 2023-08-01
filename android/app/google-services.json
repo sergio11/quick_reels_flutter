@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "59566622519",
+    "project_id": "quickreels-68219",
+    "storage_bucket": "quickreels-68219.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:59566622519:android:646fc9f30ab499c3b07cb2",
+        "android_client_info": {
+          "package_name": "com.dreamsoftware.quickreels"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "59566622519-l3s28hsmqpm69scvm3285kmd8li3ave4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAn_l2emCgUUADWTCf52MHwS3kZEhaYH-Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "59566622519-l3s28hsmqpm69scvm3285kmd8li3ave4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
