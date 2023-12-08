@@ -68,6 +68,7 @@ class SignupScreen extends BaseView<SignupController> {
     );
   }
 
+
   Widget _buildAvatarInput() {
     return AvatarInputSelector(
       onPickUpImageFromGallery: () {},
