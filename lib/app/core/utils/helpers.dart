@@ -55,11 +55,11 @@ AnimateGradient wrapIntoAnimateGradient({required Widget child}) {
       secondaryEnd: Alignment.topRight,
       primaryColors: [
         AppColors.colorPrimary.withOpacity(0.8),
-        AppColors.colorDark.withOpacity(0.8)
+        AppColors.colorShadow.withOpacity(0.8)
       ],
       secondaryColors: [
-        AppColors.colorDark.withOpacity(0.8),
-        AppColors.colorAccent.withOpacity(0.8)
+        AppColors.colorPrimaryMedium.withOpacity(0.8),
+        AppColors.colorShadow.withOpacity(0.9)
       ],
       child: child);
 }

@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:quickreels/app/core/base/base_view.dart';
+import 'package:quickreels/app/core/utils/textfield_validation.dart';
 import 'package:quickreels/app/core/values/app_colors.dart';
+import 'package:quickreels/app/core/widget/common_button.dart';
 import 'package:quickreels/app/core/widget/common_onboarding_container.dart';
-import 'package:quickreels/app/core/widget/text_input_field.dart';
+import 'package:quickreels/app/core/widget/text_field_input.dart';
 import 'package:quickreels/app/features/signin/controllers/signin_controller.dart';
 
 class SignInScreen extends BaseView<SignInController> {
 
   final VoidCallback onSignInSuccess;
   final VoidCallback onGoToSignUp;
+
+  final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -18,6 +22,15 @@ class SignInScreen extends BaseView<SignInController> {
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
     return null;
+  }
+
+  void onLoginClicked() async {
+    if (_formKey.currentState?.validate() == true) {
+      controller.loginUser(
+        _emailController.text,
+        _passwordController.text,
+      );
+    }
   }
 
   @override
@@ -40,33 +53,43 @@ class SignInScreen extends BaseView<SignInController> {
   Widget _buildScreenContent(BuildContext context) {
     return CommonOnBoardingContainer(
       children: [
-        Text(
-          'Quick Reels',
-          style: TextStyle(
-            fontSize: 35,
-            color: AppColors.buttonColor,
-            fontWeight: FontWeight.w900,
-          ),
-        ),
-        const Text(
-          'Login',
-          style: TextStyle(
-            fontSize: 25,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        const SizedBox(height: 25,),
-        _buildEmailTextInput(context),
-        const SizedBox(height: 25,),
-        _buildPasswordTextInput(context),
-        const SizedBox(
-          height: 30,
-        ),
-        _buildSignInButton(context),
-        const SizedBox(height: 15,),
-        _buildBottomSection(context),
+        _buildTitleScreen(context),
+        _buildSignInForm(context),
+        _buildSignUpRow(context),
       ],
     );
+  }
+
+  Widget _buildTitleScreen(context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text("QuickReels - Instant Access to Limitless Entertainment",
+            textAlign: TextAlign.center,
+            style: Theme.of(context)
+                .textTheme
+                .headlineSmall
+                ?.copyWith(color: AppColors.colorWhite, fontWeight: FontWeight.w400)),
+      ],
+    );
+  }
+
+  Widget _buildSignInForm(BuildContext context) {
+    return Form(
+        key: _formKey,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            _buildEmailTextInput(),
+            _buildPasswordTextInput(),
+            const SizedBox(
+              height: 25,
+            ),
+            _buildSignInButton()
+          ],
+        ));
   }
 
   Widget _buildScreenBackground() {
@@ -80,88 +103,68 @@ class SignInScreen extends BaseView<SignInController> {
     );
   }
 
-  Widget _buildEmailTextInput(BuildContext context) {
-    return Container(
-      width: MediaQuery
-          .of(context)
-          .size
-          .width,
-      margin: const EdgeInsets.symmetric(horizontal: 20),
-      child: TextInputField(
-        controller: _emailController,
-        labelText: 'Email',
-        icon: Icons.email,
+  Widget _buildEmailTextInput() {
+    return TextFieldInput(
+      hintText: "Email",
+      icon: const Icon(
+        Icons.mail,
+        size: 16,
       ),
+      textInputType: TextInputType.emailAddress,
+      textEditingController: _emailController,
+      onValidate: (value) =>
+      value != null && value.isNotEmpty && value.isValidEmail(),
+      errorText: "Email",
     );
   }
 
-  Widget _buildPasswordTextInput(BuildContext context) {
-    return Container(
-      width: MediaQuery
-          .of(context)
-          .size
-          .width,
-      margin: const EdgeInsets.symmetric(horizontal: 20),
-      child: TextInputField(
-        controller: _passwordController,
-        labelText: 'Password',
-        icon: Icons.lock,
-        isObscure: true,
+  Widget _buildPasswordTextInput() {
+    return TextFieldInput(
+      hintText: "Password",
+      icon: const Icon(
+        Icons.password,
+        size: 16,
       ),
+      textInputType: TextInputType.text,
+      textEditingController: _passwordController,
+      isPass: true,
+      onValidate: (value) =>
+      value != null && value.isNotEmpty && value.isValidPassword(),
+      errorText: "Password",
     );
   }
 
-  Widget _buildSignInButton(context) {
-    return Container(
-      width: MediaQuery
-          .of(context)
-          .size
-          .width - 40,
-      height: 50,
-      decoration: BoxDecoration(
-        color: AppColors.buttonColor,
-        borderRadius: const BorderRadius.all(
-          Radius.circular(5),
-        ),
-      ),
-      child: InkWell(
-        onTap: () =>
-            controller.loginUser(
-              _emailController.text,
-              _passwordController.text,
-            ),
-        child: const Center(
-          child: Text(
-            'Login',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-        ),
-      ),
+  Widget _buildSignInButton() {
+    return CommonButton(
+      text: 'Login',
+      textColor: AppColors.colorWhite,
+      borderColor: AppColors.colorWhite,
+      onPressed: onLoginClicked,
+      styleType: CommonButtonStyleType.reverse,
+      sizeType: CommonButtonSizeType.large,
     );
   }
 
-  Widget _buildBottomSection(context) {
+  Widget _buildSignUpRow(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text(
-          'Don\'t have an account? ',
-          style: TextStyle(
-            fontSize: 20,
-          ),
-        ),
-        InkWell(
+        Text('Don\'t have an account? ',
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium
+                ?.copyWith(color: AppColors.colorWhite)),
+        GestureDetector(
           onTap: onGoToSignUp,
           child: Text(
-            'Register',
-            style: TextStyle(fontSize: 20, color: AppColors.buttonColor),
+            'Sign Up',
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium
+                ?.copyWith(color: AppColors.colorWhite),
           ),
         ),
       ],
     );
   }
-
 }

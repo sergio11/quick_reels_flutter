@@ -3,25 +3,30 @@ import 'package:flutter/material.dart';
 abstract class AppColors {
   // COLORS
   static const backgroundColor = Colors.black;
-  static var buttonColor = Colors.red[400];
+  static const Color buttonColor = Colors.red;
   static const borderColor = Colors.grey;
 
   static const Color pageBackground = Color(0xFFFAFBFD);
-  static const Color statusBarColor = Color(0xFF38686A);
-  static const Color appBarColor = Color(0xFF38686A);
+  static const Color statusBarColor = Colors.red;
+  static const Color appBarColor = Colors.red;
   static const Color appBarIconColor = Color(0xFFFFFFFF);
   static const Color appBarTextColor = Color(0xFFFFFFFF);
 
   static const Color centerTextColor = Colors.grey;
-  static const MaterialColor colorPrimarySwatch = Colors.cyan;
-  static const Color colorPrimary = Color(0xFF38686A);
-  static const Color colorAccent = Color(0xFF38686A);
+  static const MaterialColor colorPrimarySwatch = Colors.red;
+  static const Color colorPrimary = Colors.red;
+  static const Color colorPrimaryMedium = Color(0xFFF44336);
+  static const Color colorAccent = Color(0xFF00BCD4);
   static const Color colorLightGreen = Color(0xFF00EFA7);
   static const Color colorWhite = Color(0xFFFFFFFF);
   static const Color lightGreyColor = Color(0xFFC4C4C4);
   static const Color errorColor = Color(0xFFAB0B0B);
   static const Color colorDark = Color(0xFF323232);
 
+  static const Color colorSecondary = Color(0xFF424242);
+  static const Color colorSecondaryExtraLight = Color(0xFFE0E0E0);
+
+  static const Color colorShadow = Color(0xFF353535);
   static const Color buttonBgColor = colorPrimary;
   static const Color disabledButtonBgColor = Color(0xFFBFBFC0);
   static const Color defaultRippleColor = Color(0x0338686A);
@@ -40,7 +45,7 @@ abstract class AppColors {
 
   static Color barrierColor = const Color(0xFF000000).withOpacity(0.5);
 
-  static Color timelineDividerColor = const Color(0x5438686A);
+  static const Color timelineDividerColor = Color(0x5438686A);
 
   static const Color gradientStartColor = Colors.black87;
   static const Color gradientEndColor = Colors.transparent;
