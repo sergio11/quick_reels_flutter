@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quickreels/constants.dart';
+import 'package:quickreels/app/core/values/app_colors.dart';
 
 class TextInputField extends StatelessWidget {
   final TextEditingController controller;
@@ -27,12 +27,12 @@ class TextInputField extends StatelessWidget {
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5),
             borderSide: const BorderSide(
-              color: borderColor,
+              color: AppColors.borderColor,
             )),
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5),
             borderSide: const BorderSide(
-              color: borderColor,
+              color: AppColors.borderColor,
             )),
       ),
       obscureText: isObscure,

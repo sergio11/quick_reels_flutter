@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 abstract class AppColors {
+  // COLORS
+  static const backgroundColor = Colors.black;
+  static var buttonColor = Colors.red[400];
+  static const borderColor = Colors.grey;
+
   static const Color pageBackground = Color(0xFFFAFBFD);
   static const Color statusBarColor = Color(0xFF38686A);
   static const Color appBarColor = Color(0xFF38686A);
