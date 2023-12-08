@@ -36,7 +36,7 @@ class AvatarInputSelector extends StatelessWidget {
         bottom: 0,
         left: 100,
         child: Container(
-            height: 40,
+            height: 35,
             decoration: BoxDecoration(
               border: Border.all(color: AppColors.colorSecondaryExtraLight, width: 1),
               shape: BoxShape.circle,

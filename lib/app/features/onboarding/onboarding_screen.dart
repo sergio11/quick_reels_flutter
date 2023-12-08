@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quickreels/app/core/values/app_colors.dart';
 import 'package:quickreels/app/core/widget/common_button.dart';
 import 'package:quickreels/app/core/widget/common_onboarding_container.dart';
@@ -67,10 +68,19 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         const SizedBox(
           height: 0,
         ),
+        _buildMainLogo(),
         _buildCarouselSlider(),
         _buildActions(),
         _buildFooter()
       ]);
+  }
+
+  Widget _buildMainLogo() {
+    return SvgPicture.asset(
+      'assets/images/main_logo.svg',
+      color: AppColors.colorWhite,
+      height: 80,
+    );
   }
 
   Widget _buildCarouselSlider() {
@@ -84,43 +94,46 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           aspectRatio: 2.0),
       items: [
         {
-          "image": "image1.png",
+          "image": "discover.png",
           "title": "Discover QuickReels",
-          "text": "Explore exciting and diverse content.",
+          "text": "Experience QuickReels: Your gateway to a vast entertainment universe. Discover, indulge, and enjoy limitless content, tailored just for you.",
         },
         {
-          "image": "image2.png",
+          "image": "explore.png",
           "title": "Explore Collections",
-          "text": "Discover personalized collections for you.",
+          "text": "Uncover curated collections made just for you. Explore tailored assortments, uniquely crafted to match your preferences.",
         },
         {
-          "image": "image3.png",
+          "image": "favorites.png",
           "title": "Save Favorites",
-          "text": "Save your favorite videos to watch later.",
+          "text": "Bookmark your preferred videos for later viewing. Keep your favorites handy, ready for your leisure time.",
         },
         {
-          "image": "image4.png",
+          "image": "share.png",
           "title": "Share & Follow",
-          "text": "Share your experiences and follow other users.",
+          "text": "Engage and connect by sharing experiences, and follow fellow users for more interaction.",
         }
       ].map((slideItem) {
         return Builder(
           builder: (BuildContext context) {
             return Container(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 width: MediaQuery.of(context).size.width,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Image.asset(
-                      "assets/${slideItem["image"]!}",
-                      height: 85,
+                      "assets/images/${slideItem["image"]!}",
+                      height: 50,
+                      color: AppColors.colorWhite,
                     ),
+                    const SizedBox(height: 25,),
                     Text(slideItem["title"]!,
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                             color: AppColors.colorWhite, fontWeight: FontWeight.bold)),
+                    const SizedBox(height: 20,),
                     Text(slideItem["text"]!,
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
