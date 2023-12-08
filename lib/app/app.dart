@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:quickreels/app/di/app_binding.dart';
 import 'package:quickreels/app/routes/app_pages.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '/app/core/values/app_colors.dart';
 import '/flavors/build_config.dart';
 import '/flavors/env_config.dart';
