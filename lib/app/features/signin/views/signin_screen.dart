@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quickreels/app/core/base/base_view.dart';
 import 'package:quickreels/app/core/utils/textfield_validation.dart';
 import 'package:quickreels/app/core/values/app_colors.dart';
@@ -53,6 +54,7 @@ class SignInScreen extends BaseView<SignInController> {
   Widget _buildScreenContent(BuildContext context) {
     return CommonOnBoardingContainer(
       children: [
+        _buildMainLogo(),
         _buildTitleScreen(context),
         _buildSignInForm(context),
         _buildSignUpRow(context),
@@ -60,16 +62,24 @@ class SignInScreen extends BaseView<SignInController> {
     );
   }
 
+  Widget _buildMainLogo() {
+    return SvgPicture.asset(
+      'assets/images/main_logo.svg',
+      color: AppColors.colorWhite,
+      height: 80,
+    );
+  }
+
   Widget _buildTitleScreen(context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text("QuickReels - Instant Access to Limitless Entertainment",
+        Text("Explore a boundless world of movies and shows, personalized for you.",
             textAlign: TextAlign.center,
             style: Theme.of(context)
                 .textTheme
-                .headlineSmall
-                ?.copyWith(color: AppColors.colorWhite, fontWeight: FontWeight.w400)),
+            .labelLarge
+                ?.copyWith(color: AppColors.colorWhite, fontWeight: FontWeight.w300)),
       ],
     );
   }
