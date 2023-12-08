@@ -1,38 +1,23 @@
 import 'dart:io';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:quickreels/app/core/base/base_controller.dart';
 import 'package:quickreels/app/domain/usecase/sign_up_user_use_case.dart';
-import 'package:quickreels/app/features/home/views/home_screen.dart';
-import 'package:quickreels/app/features/login/views/login_screen.dart';
-import 'package:quickreels/constants.dart';
+import 'package:quickreels/app/features/signup/model/signup_ui_data.dart';
 
-class SignupController extends GetxController {
+class SignupController extends BaseController {
 
   final SignUpUserUseCase signUpUserUseCase;
 
-  late Rx<User?> _user;
-  late Rx<File?> _pickedImage;
+  final Rx<SignUpUiData> _uiData = const SignUpUiData().obs;
+
+  SignUpUiData get uiData => _uiData.value;
 
   SignupController({ required this.signUpUserUseCase });
-
-  File? get profilePhoto => _pickedImage.value;
-  User get user => _user.value!;
 
   @override
   void onReady() {
     super.onReady();
-    _user = Rx<User?>(firebaseAuth.currentUser);
-    _user.bindStream(firebaseAuth.authStateChanges());
-    ever(_user, _setInitialScreen);
-  }
-
-  _setInitialScreen(User? user) {
-    if (user == null) {
-      Get.offAll(() => LoginScreen());
-    } else {
-      Get.offAll(() => const HomeScreen());
-    }
   }
 
   void pickImage() async {
@@ -42,19 +27,19 @@ class SignupController extends GetxController {
       Get.snackbar('Profile Picture',
           'You have successfully selected your profile picture!');
     }
-    _pickedImage = Rx<File?>(File(pickedImage!.path));
+    _uiData.value = uiData.copyWith(pickedImage: File(pickedImage!.path));
   }
 
   // registering the user
   void registerUser(
-      String username, String email, String password, File? image) async {
+      String username, String email, String password) async {
     try {
       if (username.isNotEmpty &&
           email.isNotEmpty &&
           password.isNotEmpty &&
-          image != null) {
+          uiData.pickedImage != null) {
 
-        await signUpUserUseCase(SignUpParams(email, password, username, "", image));
+        //await signUpUserUseCase(SignUpParams(email, password, username, "", image));
 
       } else {
         Get.snackbar(

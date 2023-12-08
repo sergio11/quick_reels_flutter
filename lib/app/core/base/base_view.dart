@@ -90,27 +90,15 @@ abstract class BaseView<Controller extends BaseController>
     );
   }
 
-  Color pageBackgroundColor() {
-    return AppColors.pageBackground;
-  }
+  Color pageBackgroundColor() => AppColors.pageBackground;
 
-  Color statusBarColor() {
-    return AppColors.pageBackground;
-  }
+  Color statusBarColor() => AppColors.pageBackground;
 
-  Widget? floatingActionButton() {
-    return null;
-  }
+  Widget? floatingActionButton() => null;
 
-  Widget? bottomNavigationBar() {
-    return null;
-  }
+  Widget? bottomNavigationBar() => null;
 
-  Widget? drawer() {
-    return null;
-  }
+  Widget? drawer() => null;
 
-  Widget _showLoading() {
-    return const Loading();
-  }
+  Widget _showLoading() => const Loading();
 }
