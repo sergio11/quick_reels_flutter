@@ -22,7 +22,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.SIGN_UP,
-      page: () => SignupScreen(),
+      page: () => SignupScreen(onGoToSignIn: () => Get.offAllNamed(Routes.SIGN_IN),),
       binding: SignupBinding(),
     )
   ];
