@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -80,14 +79,6 @@ abstract class BaseView<Controller extends BaseController>
     });
 
     return Container();
-  }
-
-  void showToast(String message) {
-    Fluttertoast.showToast(
-        msg: message,
-        toastLength: Toast.LENGTH_SHORT,
-        timeInSecForIosWeb: 1
-    );
   }
 
   Color pageBackgroundColor() => AppColors.pageBackground;
