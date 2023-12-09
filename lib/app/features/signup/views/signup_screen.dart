@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quickreels/app/core/base/base_view.dart';
 import 'package:quickreels/app/core/utils/textfield_validation.dart';
 import 'package:quickreels/app/core/values/app_colors.dart';
@@ -10,34 +11,31 @@ import 'package:quickreels/app/features/signup/controllers/signup_controller.dar
 import 'package:quickreels/app/features/signup/model/signup_ui_data.dart';
 
 class SignupScreen extends BaseView<SignupController, SignUpUiData> {
-
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _repeatPasswordController =
-  TextEditingController();
+      TextEditingController();
 
   final VoidCallback onGoToSignIn;
 
-  SignupScreen({ required this.onGoToSignIn });
-
-  @override
-  PreferredSizeWidget? appBar(BuildContext context) {
-   return null;
-  }
+  SignupScreen({required this.onGoToSignIn});
 
   @override
   bool immersiveMode() => true;
 
   void onSignUpUser() async {
-    if (_formKey.currentState?.validate() == true) {}
+    if (_formKey.currentState?.validate() == true) {
+      controller.registerUser(_usernameController.text, _emailController.text,
+          _passwordController.text, _repeatPasswordController.text);
+    }
   }
 
   @override
   Widget body(BuildContext context, SignUpUiData uiData) {
     return Stack(
-      children: _buildScreenStack(context),
+      children: _buildScreenStack(context, uiData),
     );
   }
 
@@ -52,29 +50,37 @@ class SignupScreen extends BaseView<SignupController, SignUpUiData> {
     );
   }
 
-  List<Widget> _buildScreenStack(BuildContext context) {
+  List<Widget> _buildScreenStack(BuildContext context, SignUpUiData uiData) {
     final screenStack = [
       _buildScreenBackground(),
-      _buildScreenContent(context)
+      _buildScreenContent(context, uiData)
     ];
     return screenStack;
   }
 
-  Widget _buildScreenContent(BuildContext context) {
+  Widget _buildScreenContent(BuildContext context, SignUpUiData uiData) {
     return CommonOnBoardingContainer(
       children: [
-        _buildAvatarInput(),
+        _buildMainLogo(),
+        _buildAvatarInput(uiData),
         _buildSignUpForm(),
         _buildNotAccountRow(context)
       ],
     );
   }
 
+  Widget _buildMainLogo() {
+    return SvgPicture.asset(
+      'assets/images/main_logo.svg',
+      color: AppColors.colorWhite,
+      height: 70,
+    );
+  }
 
-  Widget _buildAvatarInput() {
+  Widget _buildAvatarInput(SignUpUiData uiData) {
     return AvatarInputSelector(
-      onPickUpImageFromGallery: () {},
-      avatarImageData: null,
+      onPickUpImageFromGallery: () => controller.pickImage(),
+      avatarImageData: uiData.pickedImageData,
     );
   }
 
@@ -102,7 +108,7 @@ class SignupScreen extends BaseView<SignupController, SignUpUiData> {
         icon: const Icon(Icons.person, size: 16),
         textInputType: TextInputType.text,
         onValidate: (value) =>
-        value != null && value.isNotEmpty && value.isValidName(),
+            value != null && value.isNotEmpty && value.isValidName(),
         errorText: "Invalid username",
         textEditingController: _usernameController);
   }
@@ -114,7 +120,7 @@ class SignupScreen extends BaseView<SignupController, SignUpUiData> {
       textInputType: TextInputType.emailAddress,
       textEditingController: _emailController,
       onValidate: (value) =>
-      value != null && value.isNotEmpty && value.isValidEmail(),
+          value != null && value.isNotEmpty && value.isValidEmail(),
       errorText: "Invalid email",
     );
   }
@@ -126,7 +132,7 @@ class SignupScreen extends BaseView<SignupController, SignUpUiData> {
       textInputType: TextInputType.text,
       textEditingController: _passwordController,
       onValidate: (value) =>
-      value != null && value.isNotEmpty && value.isValidPassword(),
+          value != null && value.isNotEmpty && value.isValidPassword(),
       errorText: "Invalid password",
       isPass: true,
     );
@@ -139,7 +145,9 @@ class SignupScreen extends BaseView<SignupController, SignUpUiData> {
       textInputType: TextInputType.text,
       textEditingController: _repeatPasswordController,
       onValidate: (value) =>
-      value != null && value.isNotEmpty && _passwordController.value.text == value,
+          value != null &&
+          value.isNotEmpty &&
+          _passwordController.value.text == value,
       errorText: "Password not match",
       isPass: true,
     );
@@ -169,10 +177,8 @@ class SignupScreen extends BaseView<SignupController, SignUpUiData> {
           onTap: onGoToSignIn,
           child: Text(
             'Login',
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium
-                ?.copyWith(color: AppColors.colorWhite, fontWeight: FontWeight.bold),
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                color: AppColors.colorWhite, fontWeight: FontWeight.bold),
           ),
         ),
       ],
