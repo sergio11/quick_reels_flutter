@@ -5,15 +5,11 @@ import 'package:quickreels/app/core/base/base_controller.dart';
 import 'package:quickreels/app/domain/usecase/sign_up_user_use_case.dart';
 import 'package:quickreels/app/features/signup/model/signup_ui_data.dart';
 
-class SignupController extends BaseController {
+class SignupController extends BaseController<SignUpUiData> {
 
   final SignUpUserUseCase signUpUserUseCase;
 
-  final Rx<SignUpUiData> _uiData = const SignUpUiData().obs;
-
-  SignUpUiData get uiData => _uiData.value;
-
-  SignupController({ required this.signUpUserUseCase });
+  SignupController({ required this.signUpUserUseCase }): super(initialUiState: const SignUpUiData());
 
   @override
   void onReady() {
@@ -27,7 +23,7 @@ class SignupController extends BaseController {
       Get.snackbar('Profile Picture',
           'You have successfully selected your profile picture!');
     }
-    _uiData.value = uiData.copyWith(pickedImage: File(pickedImage!.path));
+    updateState(uiData.copyWith(pickedImage: File(pickedImage!.path)));
   }
 
   // registering the user

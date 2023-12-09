@@ -7,8 +7,9 @@ import 'package:quickreels/app/core/widget/common_button.dart';
 import 'package:quickreels/app/core/widget/common_onboarding_container.dart';
 import 'package:quickreels/app/core/widget/text_field_input.dart';
 import 'package:quickreels/app/features/signin/controllers/signin_controller.dart';
+import 'package:quickreels/app/features/signin/model/signin_ui_data.dart';
 
-class SignInScreen extends BaseView<SignInController> {
+class SignInScreen extends BaseView<SignInController, SignInUiData> {
 
   final VoidCallback onSignInSuccess;
   final VoidCallback onGoToSignUp;
@@ -21,9 +22,7 @@ class SignInScreen extends BaseView<SignInController> {
   SignInScreen({required this.onSignInSuccess, required this.onGoToSignUp});
 
   @override
-  PreferredSizeWidget? appBar(BuildContext context) {
-    return null;
-  }
+  bool immersiveMode() => true;
 
   void onLoginClicked() async {
     if (_formKey.currentState?.validate() == true) {
@@ -35,11 +34,12 @@ class SignInScreen extends BaseView<SignInController> {
   }
 
   @override
-  Widget body(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: _buildScreenStack(context),
-      ),
+  Widget body(BuildContext context, SignInUiData uiData) {
+    if(uiData.isSignInSuccess) {
+      onSignInSuccess();
+    }
+    return Stack(
+      children: _buildScreenStack(context),
     );
   }
 

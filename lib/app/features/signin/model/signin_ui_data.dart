@@ -5,7 +5,6 @@ part 'signin_ui_data.freezed.dart';
 @freezed
 class SignInUiData with _$SignInUiData {
   const factory SignInUiData({
-    @Default(false) final bool isLoading,
-    final String? errorMessage,
+    @Default(false) final bool isSignInSuccess,
   }) = _SignInUiData;
 }

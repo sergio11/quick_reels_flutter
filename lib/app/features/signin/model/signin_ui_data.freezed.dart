@@ -16,8 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SignInUiData {
-  bool get isLoading => throw _privateConstructorUsedError;
-  String? get errorMessage => throw _privateConstructorUsedError;
+  bool get isSignInSuccess => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SignInUiDataCopyWith<SignInUiData> get copyWith =>
@@ -30,7 +29,7 @@ abstract class $SignInUiDataCopyWith<$Res> {
           SignInUiData value, $Res Function(SignInUiData) then) =
       _$SignInUiDataCopyWithImpl<$Res, SignInUiData>;
   @useResult
-  $Res call({bool isLoading, String? errorMessage});
+  $Res call({bool isSignInSuccess});
 }
 
 /// @nodoc
@@ -46,107 +45,91 @@ class _$SignInUiDataCopyWithImpl<$Res, $Val extends SignInUiData>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isLoading = null,
-    Object? errorMessage = freezed,
+    Object? isSignInSuccess = null,
   }) {
     return _then(_value.copyWith(
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
+      isSignInSuccess: null == isSignInSuccess
+          ? _value.isSignInSuccess
+          : isSignInSuccess // ignore: cast_nullable_to_non_nullable
               as bool,
-      errorMessage: freezed == errorMessage
-          ? _value.errorMessage
-          : errorMessage // ignore: cast_nullable_to_non_nullable
-              as String?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_SignInUiDataCopyWith<$Res>
+abstract class _$$SignInUiDataImplCopyWith<$Res>
     implements $SignInUiDataCopyWith<$Res> {
-  factory _$$_SignInUiDataCopyWith(
-          _$_SignInUiData value, $Res Function(_$_SignInUiData) then) =
-      __$$_SignInUiDataCopyWithImpl<$Res>;
+  factory _$$SignInUiDataImplCopyWith(
+          _$SignInUiDataImpl value, $Res Function(_$SignInUiDataImpl) then) =
+      __$$SignInUiDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, String? errorMessage});
+  $Res call({bool isSignInSuccess});
 }
 
 /// @nodoc
-class __$$_SignInUiDataCopyWithImpl<$Res>
-    extends _$SignInUiDataCopyWithImpl<$Res, _$_SignInUiData>
-    implements _$$_SignInUiDataCopyWith<$Res> {
-  __$$_SignInUiDataCopyWithImpl(
-      _$_SignInUiData _value, $Res Function(_$_SignInUiData) _then)
+class __$$SignInUiDataImplCopyWithImpl<$Res>
+    extends _$SignInUiDataCopyWithImpl<$Res, _$SignInUiDataImpl>
+    implements _$$SignInUiDataImplCopyWith<$Res> {
+  __$$SignInUiDataImplCopyWithImpl(
+      _$SignInUiDataImpl _value, $Res Function(_$SignInUiDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isLoading = null,
-    Object? errorMessage = freezed,
+    Object? isSignInSuccess = null,
   }) {
-    return _then(_$_SignInUiData(
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
+    return _then(_$SignInUiDataImpl(
+      isSignInSuccess: null == isSignInSuccess
+          ? _value.isSignInSuccess
+          : isSignInSuccess // ignore: cast_nullable_to_non_nullable
               as bool,
-      errorMessage: freezed == errorMessage
-          ? _value.errorMessage
-          : errorMessage // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_SignInUiData implements _SignInUiData {
-  const _$_SignInUiData({this.isLoading = false, this.errorMessage});
+class _$SignInUiDataImpl implements _SignInUiData {
+  const _$SignInUiDataImpl({this.isSignInSuccess = false});
 
   @override
   @JsonKey()
-  final bool isLoading;
-  @override
-  final String? errorMessage;
+  final bool isSignInSuccess;
 
   @override
   String toString() {
-    return 'SignInUiData(isLoading: $isLoading, errorMessage: $errorMessage)';
+    return 'SignInUiData(isSignInSuccess: $isSignInSuccess)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SignInUiData &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
-            (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage));
+            other is _$SignInUiDataImpl &&
+            (identical(other.isSignInSuccess, isSignInSuccess) ||
+                other.isSignInSuccess == isSignInSuccess));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, errorMessage);
+  int get hashCode => Object.hash(runtimeType, isSignInSuccess);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SignInUiDataCopyWith<_$_SignInUiData> get copyWith =>
-      __$$_SignInUiDataCopyWithImpl<_$_SignInUiData>(this, _$identity);
+  _$$SignInUiDataImplCopyWith<_$SignInUiDataImpl> get copyWith =>
+      __$$SignInUiDataImplCopyWithImpl<_$SignInUiDataImpl>(this, _$identity);
 }
 
 abstract class _SignInUiData implements SignInUiData {
-  const factory _SignInUiData(
-      {final bool isLoading, final String? errorMessage}) = _$_SignInUiData;
+  const factory _SignInUiData({final bool isSignInSuccess}) =
+      _$SignInUiDataImpl;
 
   @override
-  bool get isLoading;
-  @override
-  String? get errorMessage;
+  bool get isSignInSuccess;
   @override
   @JsonKey(ignore: true)
-  _$$_SignInUiDataCopyWith<_$_SignInUiData> get copyWith =>
+  _$$SignInUiDataImplCopyWith<_$SignInUiDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

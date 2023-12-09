@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
@@ -6,17 +7,18 @@ import 'package:quickreels/app/domain/model/failure.dart';
 import 'package:quickreels/app/domain/model/page_state.dart';
 import '/flavors/build_config.dart';
 
-abstract class BaseController extends GetxController {
+abstract class BaseController<UIState> extends GetxController {
+
   final Logger logger = BuildConfig.instance.config.logger;
 
   AppLocalizations get appLocalization => AppLocalizations.of(Get.context!)!;
 
+  BuildContext get context => Get.context!;
+
   //Controls page state
   final _pageSateController = PageState.DEFAULT.obs;
-  //Reload the page
-  final _refreshController = false.obs;
 
-  final logoutController = false.obs;
+  PageState get pageState => _pageSateController.value;
 
   final _messageController = ''.obs;
 
@@ -30,9 +32,22 @@ abstract class BaseController extends GetxController {
 
   String get successMessage => _messageController.value;
 
-  refreshPage(bool refresh) => _refreshController(refresh);
+  final UIState initialUiState;
 
-  PageState get pageState => _pageSateController.value;
+  late Rx<UIState> _uiData;
+
+  UIState get uiData => _uiData.value;
+
+  //Reload the page
+  final _refreshController = false.obs;
+
+  final logoutController = false.obs;
+
+  BaseController({ required this.initialUiState}) {
+    _uiData = initialUiState.obs;
+  }
+
+  refreshPage(bool refresh) => _refreshController(refresh);
 
   updatePageState(PageState state) => _pageSateController(state);
 
@@ -48,28 +63,32 @@ abstract class BaseController extends GetxController {
 
   showSuccessMessage(String msg) => _successMessageController(msg);
 
+  updateState(UIState newState) => _uiData(newState);
+
   // ignore: long-parameter-list
   dynamic callUseCase<T>(
     Future<T> future, {
     Function(Failure exception)? onError,
     Function(T response)? onSuccess,
     Function? onStart,
-    Function? onComplete,
+    Function(bool isSuccess)? onComplete,
   }) async {
     Failure? _exception;
-    onStart == null ? showLoading() : onStart();
+    showLoading();
+    if (onStart != null) onStart();
     try {
       final T response = await future;
+      hideLoading();
       if (onSuccess != null) onSuccess(response);
-      onComplete == null ? hideLoading() : onComplete();
+      if (onComplete != null) onComplete(true);
       return response;
     } on Failure catch (exception) {
       _exception = exception;
       showErrorMessage(exception.message);
     }
+    hideLoading();
     if (onError != null) onError(_exception);
-
-    onComplete == null ? hideLoading() : onComplete();
+    if (onComplete != null) onComplete(false);
   }
 
   @override

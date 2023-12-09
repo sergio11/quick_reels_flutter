@@ -1,5 +1,6 @@
 abstract class AppValues {
   static const double padding = 16;
+  static const double avatarRadius = 45;
   static const double padding_zero = 0;
   static const double halfPadding = 8;
   static const double smallPadding = 10;

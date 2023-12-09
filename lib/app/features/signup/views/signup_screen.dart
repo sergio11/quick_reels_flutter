@@ -7,8 +7,9 @@ import 'package:quickreels/app/core/widget/common_button.dart';
 import 'package:quickreels/app/core/widget/common_onboarding_container.dart';
 import 'package:quickreels/app/core/widget/text_field_input.dart';
 import 'package:quickreels/app/features/signup/controllers/signup_controller.dart';
+import 'package:quickreels/app/features/signup/model/signup_ui_data.dart';
 
-class SignupScreen extends BaseView<SignupController> {
+class SignupScreen extends BaseView<SignupController, SignUpUiData> {
 
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _usernameController = TextEditingController();
@@ -26,16 +27,17 @@ class SignupScreen extends BaseView<SignupController> {
    return null;
   }
 
+  @override
+  bool immersiveMode() => true;
+
   void onSignUpUser() async {
     if (_formKey.currentState?.validate() == true) {}
   }
 
   @override
-  Widget body(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: _buildScreenStack(context),
-      ),
+  Widget body(BuildContext context, SignUpUiData uiData) {
+    return Stack(
+      children: _buildScreenStack(context),
     );
   }
 
