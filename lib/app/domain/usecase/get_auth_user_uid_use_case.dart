@@ -1,6 +1,6 @@
+import 'package:quickreels/app/core/base/base_use_case.dart';
 import 'package:quickreels/app/domain/repository/auth_repository.dart';
 
-import '../../core/base/base_use_case.dart';
 
 class GetAuthUserUidUseCase extends BaseUseCase<String, DefaultParams>{
 

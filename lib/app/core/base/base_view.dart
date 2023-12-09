@@ -20,7 +20,7 @@ abstract class BaseView<Controller extends BaseController, UIState>
 
   Widget body(BuildContext context, UIState uiData);
 
-  PreferredSizeWidget? appBar(BuildContext context) => null;
+  PreferredSizeWidget? appBar(BuildContext context, UIState uiData) => null;
 
   @override
   Widget build(BuildContext context) {
@@ -63,14 +63,13 @@ abstract class BaseView<Controller extends BaseController, UIState>
     return WillPopScope(
         onWillPop: () async {
           Get.back();
-          print("MoveToBackground 1");
           return false;
         },
         child: Scaffold(
           //sets ios status bar color
           backgroundColor: pageBackgroundColor(),
           key: globalKey,
-          appBar: appBar(context),
+          appBar: appBar(context, uiData),
           floatingActionButton: floatingActionButton(),
           body: pageContent(context, uiData),
           bottomNavigationBar: bottomNavigationBar(),

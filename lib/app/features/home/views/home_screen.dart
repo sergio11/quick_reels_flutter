@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_floating_bottom_bar/flutter_floating_bottom_bar.dart';
 import 'package:quickreels/app/core/values/app_colors.dart';
+import 'package:quickreels/app/features/profile/views/profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -91,12 +92,13 @@ class _HomeScreenState extends State<HomeScreen>
             controller: tabController,
             dragStartBehavior: DragStartBehavior.down,
             physics: const BouncingScrollPhysics(),
-            children: [1, 2, 3, 4, 5]
-                .map<Widget>(
-                  (e) => PageView(
-                      key: ValueKey('infinite_list_key#${e.toString()}')),
-                )
-                .toList(),
+            children: [
+              Text("Home"),
+              Text("Search"),
+              Text("Add"),
+              Text("Favorite"),
+              ProfileScreen()
+            ],
           ),
           child: Stack(
             alignment: Alignment.center,
@@ -152,5 +154,4 @@ class _HomeScreenState extends State<HomeScreen>
       ),
     );
   }
-
 }

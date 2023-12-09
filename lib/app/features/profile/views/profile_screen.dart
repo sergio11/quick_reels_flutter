@@ -1,0 +1,175 @@
+
+import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:quickreels/app/core/base/base_view.dart';
+import 'package:quickreels/app/core/utils/helpers.dart';
+import 'package:quickreels/app/features/profile/controller/profile_controller.dart';
+import 'package:quickreels/app/features/profile/model/profile_ui_data.dart';
+
+class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
+
+  @override
+  PreferredSizeWidget? appBar(BuildContext context, ProfileUiData uiData) {
+    return AppBar(
+      backgroundColor: Colors.black12,
+      leading: const Icon(
+        Icons.person_add_alt_1_outlined,
+      ),
+      actions: const [
+        Icon(Icons.more_horiz),
+      ],
+      title: Text(
+        uiData.userData?.username ?? "",
+        style: const TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget body(BuildContext context, ProfileUiData uiData) {
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      buildCircleAvatar(imageUrl: uiData.userData?.photoUrl ?? "")
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  _buildProfileRowMetrics(context, uiData),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    width: 140,
+                    height: 47,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.black12,
+                      ),
+                    ),
+                    child: Center(
+                      child: InkWell(
+                        onTap: () {
+                          if (uiData.isAuthUser) {
+                            controller.signOut();
+                          } else {
+                            controller.followUser();
+                          }
+                        },
+                        child: Text(
+                          uiData.isAuthUser
+                              ? 'Sign Out'
+                              : uiData.isFollowing
+                              ? 'Unfollow'
+                              : 'Follow',
+                          style: const TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  // video list
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+
+  Widget _buildProfileRowMetrics(BuildContext context, ProfileUiData uiData) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Column(
+          children: [
+            Text(
+              uiData.userData?.followingCount.toString() ?? "",
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 5),
+            const Text(
+              'Following',
+              style: TextStyle(
+                fontSize: 14,
+              ),
+            ),
+          ],
+        ),
+        Container(
+          color: Colors.black54,
+          width: 1,
+          height: 15,
+          margin: const EdgeInsets.symmetric(
+            horizontal: 15,
+          ),
+        ),
+        Column(
+          children: [
+            Text(
+              uiData.userData?.followersCount.toString() ?? "",
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 5),
+            const Text(
+              'Followers',
+              style: TextStyle(
+                fontSize: 14,
+              ),
+            ),
+          ],
+        ),
+        Container(
+          color: Colors.black54,
+          width: 1,
+          height: 15,
+          margin: const EdgeInsets.symmetric(
+            horizontal: 15,
+          ),
+        ),
+        Column(
+          children: [
+            Text(
+              uiData.userData?.likesCount.toString() ?? "",
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 5),
+            const Text(
+              'Likes',
+              style: TextStyle(
+                fontSize: 14,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}

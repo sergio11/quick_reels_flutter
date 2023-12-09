@@ -26,6 +26,8 @@ import 'package:quickreels/app/domain/usecase/get_user_details_use_case.dart';
 import 'package:quickreels/app/domain/usecase/sign_in_user_use_case.dart';
 import 'package:quickreels/app/domain/usecase/sign_out_use_case.dart';
 import 'package:quickreels/app/domain/usecase/sign_up_user_use_case.dart';
+import 'package:quickreels/app/features/shared/app_controller.dart';
+import 'package:quickreels/app/features/shared/events/app_event_bus.dart';
 
 class AppBinding extends Bindings {
 
@@ -36,6 +38,7 @@ class AppBinding extends Bindings {
     _initDatasourceDependencies();
     _initRepositoryDependencies();
     _initUseCasesDependencies();
+    _initSharedDependencies();
   }
 
   void _initFirebaseDependencies() {
@@ -69,5 +72,11 @@ class AppBinding extends Bindings {
     Get.put<SignUpUserUseCase>(SignUpUserUseCase(authRepository: Get.find()));
     Get.put<GetUserDetailsUseCase>(
         GetUserDetailsUseCase(authRepository: Get.find()));
+  }
+
+  void _initSharedDependencies() {
+    Get.put<AppEventBus>(AppEventBus());
+    Get.put<AppController>(
+        AppController(eventBus: Get.find(), getAuthUserUidUseCase: Get.find()));
   }
 }
