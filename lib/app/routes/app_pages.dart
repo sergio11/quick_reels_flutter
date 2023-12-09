@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:quickreels/app/features/home/views/home_screen.dart';
 import 'package:quickreels/app/features/onboarding/onboarding_screen.dart';
 import 'package:quickreels/app/features/signin/bindings/signin_binding.dart';
 import 'package:quickreels/app/features/signin/views/signin_screen.dart';
@@ -10,7 +11,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.ONBOARDING;
+  static const INITIAL = Routes.HOME;
 
   static final routes = [
     GetPage(
@@ -32,6 +33,10 @@ class AppPages {
       name: _Paths.SIGN_UP,
       page: () => SignupScreen(onGoToSignIn: () => Get.offAllNamed(Routes.SIGN_IN),),
       binding: SignupBinding(),
+    ),
+    GetPage(
+      name: _Paths.HOME,
+      page: () => const HomeScreen(),
     )
   ];
 }
