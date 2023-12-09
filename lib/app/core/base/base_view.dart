@@ -41,7 +41,7 @@ abstract class BaseView<Controller extends BaseController, UIState>
   }
 
   Widget annotatedRegion(BuildContext context, UIState uiData) {
-    if(immersiveMode()) {
+    if (immersiveMode()) {
       disableSystemUI();
     } else {
       enableSystemUI();
@@ -60,16 +60,22 @@ abstract class BaseView<Controller extends BaseController, UIState>
   }
 
   Widget pageScaffold(BuildContext context, UIState uiData) {
-    return Scaffold(
-      //sets ios status bar color
-      backgroundColor: pageBackgroundColor(),
-      key: globalKey,
-      appBar: appBar(context),
-      floatingActionButton: floatingActionButton(),
-      body: pageContent(context, uiData),
-      bottomNavigationBar: bottomNavigationBar(),
-      drawer: drawer(),
-    );
+    return WillPopScope(
+        onWillPop: () async {
+          Get.back();
+          print("MoveToBackground 1");
+          return false;
+        },
+        child: Scaffold(
+          //sets ios status bar color
+          backgroundColor: pageBackgroundColor(),
+          key: globalKey,
+          appBar: appBar(context),
+          floatingActionButton: floatingActionButton(),
+          body: pageContent(context, uiData),
+          bottomNavigationBar: bottomNavigationBar(),
+          drawer: drawer(),
+        ));
   }
 
   Widget pageContent(BuildContext context, UIState uiData) {
@@ -98,7 +104,7 @@ abstract class BaseView<Controller extends BaseController, UIState>
   bool immersiveMode() => false;
 
   Widget _showLoading() => CommonScreenProgressIndicator(
-    backgroundColor: AppColors.colorDark.withOpacity(0.5),
-    spinnerColor: AppColors.colorPrimary,
-  );
+        backgroundColor: AppColors.colorDark.withOpacity(0.5),
+        spinnerColor: AppColors.colorPrimary,
+      );
 }

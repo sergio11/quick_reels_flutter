@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$SignUpUiData {
   File? get pickedImage => throw _privateConstructorUsedError;
+  Uint8List? get pickedImageData => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SignUpUiDataCopyWith<SignUpUiData> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $SignUpUiDataCopyWith<$Res> {
           SignUpUiData value, $Res Function(SignUpUiData) then) =
       _$SignUpUiDataCopyWithImpl<$Res, SignUpUiData>;
   @useResult
-  $Res call({File? pickedImage});
+  $Res call({File? pickedImage, Uint8List? pickedImageData});
 }
 
 /// @nodoc
@@ -46,12 +47,17 @@ class _$SignUpUiDataCopyWithImpl<$Res, $Val extends SignUpUiData>
   @override
   $Res call({
     Object? pickedImage = freezed,
+    Object? pickedImageData = freezed,
   }) {
     return _then(_value.copyWith(
       pickedImage: freezed == pickedImage
           ? _value.pickedImage
           : pickedImage // ignore: cast_nullable_to_non_nullable
               as File?,
+      pickedImageData: freezed == pickedImageData
+          ? _value.pickedImageData
+          : pickedImageData // ignore: cast_nullable_to_non_nullable
+              as Uint8List?,
     ) as $Val);
   }
 }
@@ -64,7 +70,7 @@ abstract class _$$SignUpUiDataImplCopyWith<$Res>
       __$$SignUpUiDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({File? pickedImage});
+  $Res call({File? pickedImage, Uint8List? pickedImageData});
 }
 
 /// @nodoc
@@ -79,12 +85,17 @@ class __$$SignUpUiDataImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? pickedImage = freezed,
+    Object? pickedImageData = freezed,
   }) {
     return _then(_$SignUpUiDataImpl(
       pickedImage: freezed == pickedImage
           ? _value.pickedImage
           : pickedImage // ignore: cast_nullable_to_non_nullable
               as File?,
+      pickedImageData: freezed == pickedImageData
+          ? _value.pickedImageData
+          : pickedImageData // ignore: cast_nullable_to_non_nullable
+              as Uint8List?,
     ));
   }
 }
@@ -92,14 +103,16 @@ class __$$SignUpUiDataImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SignUpUiDataImpl implements _SignUpUiData {
-  const _$SignUpUiDataImpl({this.pickedImage});
+  const _$SignUpUiDataImpl({this.pickedImage, this.pickedImageData});
 
   @override
   final File? pickedImage;
+  @override
+  final Uint8List? pickedImageData;
 
   @override
   String toString() {
-    return 'SignUpUiData(pickedImage: $pickedImage)';
+    return 'SignUpUiData(pickedImage: $pickedImage, pickedImageData: $pickedImageData)';
   }
 
   @override
@@ -108,11 +121,14 @@ class _$SignUpUiDataImpl implements _SignUpUiData {
         (other.runtimeType == runtimeType &&
             other is _$SignUpUiDataImpl &&
             (identical(other.pickedImage, pickedImage) ||
-                other.pickedImage == pickedImage));
+                other.pickedImage == pickedImage) &&
+            const DeepCollectionEquality()
+                .equals(other.pickedImageData, pickedImageData));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, pickedImage);
+  int get hashCode => Object.hash(runtimeType, pickedImage,
+      const DeepCollectionEquality().hash(pickedImageData));
 
   @JsonKey(ignore: true)
   @override
@@ -122,10 +138,14 @@ class _$SignUpUiDataImpl implements _SignUpUiData {
 }
 
 abstract class _SignUpUiData implements SignUpUiData {
-  const factory _SignUpUiData({final File? pickedImage}) = _$SignUpUiDataImpl;
+  const factory _SignUpUiData(
+      {final File? pickedImage,
+      final Uint8List? pickedImageData}) = _$SignUpUiDataImpl;
 
   @override
   File? get pickedImage;
+  @override
+  Uint8List? get pickedImageData;
   @override
   @JsonKey(ignore: true)
   _$$SignUpUiDataImplCopyWith<_$SignUpUiDataImpl> get copyWith =>
