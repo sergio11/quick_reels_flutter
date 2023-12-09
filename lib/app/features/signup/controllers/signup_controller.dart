@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:quickreels/app/core/base/base_controller.dart';
 import 'package:quickreels/app/domain/usecase/sign_up_user_use_case.dart';
@@ -11,43 +10,34 @@ class SignupController extends BaseController<SignUpUiData> {
 
   SignupController({ required this.signUpUserUseCase }): super(initialUiState: const SignUpUiData());
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
   void pickImage() async {
     final pickedImage =
     await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedImage != null) {
-      Get.snackbar('Profile Picture',
-          'You have successfully selected your profile picture!');
+      final pickedFileImage = File(pickedImage.path);
+      final pickedFileImageData = pickedFileImage.readAsBytesSync();
+      updateState(uiData.copyWith(pickedImage: pickedFileImage, pickedImageData: pickedFileImageData));
+      showSuccessMessage('You have successfully selected your profile picture!');
+    } else {
+      showErrorMessage('An error occurred while picking the picture');
     }
-    updateState(uiData.copyWith(pickedImage: File(pickedImage!.path)));
   }
 
   // registering the user
   void registerUser(
-      String username, String email, String password) async {
+      String username, String email, String password, String repeatPassword) async {
     try {
       if (username.isNotEmpty &&
           email.isNotEmpty &&
           password.isNotEmpty &&
-          uiData.pickedImage != null) {
-
-        //await signUpUserUseCase(SignUpParams(email, password, username, "", image));
-
+          repeatPassword.isNotEmpty &&
+          uiData.pickedImageData != null) {
+        await signUpUserUseCase(SignUpParams(email, password, username, "", uiData.pickedImageData!));
       } else {
-        Get.snackbar(
-          'Error Creating Account',
-          'Please enter all the fields',
-        );
+        showErrorMessage('Please enter all the fields');
       }
     } catch (e) {
-      Get.snackbar(
-        'Error Creating Account',
-        e.toString(),
-      );
+      showErrorMessage('An error occurred while creating the account');
     }
   }
 }
