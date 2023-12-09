@@ -14,7 +14,8 @@ class UserBoMapper extends Mapper<UserDTO, UserBO> {
         email: object.email,
         bio: object.bio,
         followers: object.followers,
-        following: object.following
+        following: object.following,
+        likes: []
     );
   }
 }

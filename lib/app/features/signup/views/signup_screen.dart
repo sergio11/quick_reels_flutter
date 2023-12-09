@@ -19,8 +19,12 @@ class SignupScreen extends BaseView<SignupController, SignUpUiData> {
       TextEditingController();
 
   final VoidCallback onGoToSignIn;
+  final VoidCallback onSignUpSuccess;
 
-  SignupScreen({required this.onGoToSignIn});
+  SignupScreen({
+    required this.onGoToSignIn,
+    required this.onSignUpSuccess
+  });
 
   @override
   bool immersiveMode() => true;
@@ -34,6 +38,9 @@ class SignupScreen extends BaseView<SignupController, SignUpUiData> {
 
   @override
   Widget body(BuildContext context, SignUpUiData uiData) {
+    if(uiData.isSignUpSuccess) {
+      onSignUpSuccess();
+    }
     return Stack(
       children: _buildScreenStack(context, uiData),
     );

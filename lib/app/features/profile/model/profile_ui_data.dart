@@ -7,5 +7,8 @@ part 'profile_ui_data.freezed.dart';
 class ProfileUiData with _$ProfileUiData {
   const factory ProfileUiData({
     final UserBO? userData,
+    @Default(false) final bool isFollowing,
+    @Default("") final String userUuid,
+    @Default(false) final bool isAuthUser,
   }) = _ProfileUpUiData;
 }
