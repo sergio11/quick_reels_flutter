@@ -2,13 +2,16 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:quickreels/app/core/base/base_controller.dart';
 import 'package:quickreels/app/domain/usecase/sign_up_user_use_case.dart';
+import 'package:quickreels/app/features/shared/events/app_event_bus.dart';
+import 'package:quickreels/app/features/shared/events/events.dart';
 import 'package:quickreels/app/features/signup/model/signup_ui_data.dart';
 
 class SignupController extends BaseController<SignUpUiData> {
 
   final SignUpUserUseCase signUpUserUseCase;
+  final AppEventBus appEventBus;
 
-  SignupController({ required this.signUpUserUseCase }): super(initialUiState: const SignUpUiData());
+  SignupController({ required this.signUpUserUseCase, required this.appEventBus }): super(initialUiState: const SignUpUiData());
 
   void pickImage() async {
     final pickedImage =
@@ -32,12 +35,22 @@ class SignupController extends BaseController<SignUpUiData> {
           password.isNotEmpty &&
           repeatPassword.isNotEmpty &&
           uiData.pickedImageData != null) {
-        await signUpUserUseCase(SignUpParams(email, password, username, "", uiData.pickedImageData!));
+        callUseCase(
+            signUpUserUseCase(SignUpParams(email, password, username, "", uiData.pickedImageData!)),
+            onComplete: (isSuccess) => _handleSignUpCompleted(isSuccess)
+        );
       } else {
         showErrorMessage('Please enter all the fields');
       }
     } catch (e) {
       showErrorMessage('An error occurred while creating the account');
+    }
+  }
+
+  void _handleSignUpCompleted(bool isSuccess) {
+    updateState(SignUpUiData(isSignUpSuccess: isSuccess));
+    if(isSuccess) {
+      appEventBus.sendEvent(SignInEvent());
     }
   }
 }

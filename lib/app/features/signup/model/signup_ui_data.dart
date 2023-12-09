@@ -8,6 +8,7 @@ part 'signup_ui_data.freezed.dart';
 @freezed
 class SignUpUiData with _$SignUpUiData {
   const factory SignUpUiData({
+    @Default(false) bool isSignUpSuccess,
     final File? pickedImage,
     final Uint8List? pickedImageData
   }) = _SignUpUiData;

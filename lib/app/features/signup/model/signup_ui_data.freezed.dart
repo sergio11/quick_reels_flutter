@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SignUpUiData {
+  bool get isSignUpSuccess => throw _privateConstructorUsedError;
   File? get pickedImage => throw _privateConstructorUsedError;
   Uint8List? get pickedImageData => throw _privateConstructorUsedError;
 
@@ -30,7 +31,8 @@ abstract class $SignUpUiDataCopyWith<$Res> {
           SignUpUiData value, $Res Function(SignUpUiData) then) =
       _$SignUpUiDataCopyWithImpl<$Res, SignUpUiData>;
   @useResult
-  $Res call({File? pickedImage, Uint8List? pickedImageData});
+  $Res call(
+      {bool isSignUpSuccess, File? pickedImage, Uint8List? pickedImageData});
 }
 
 /// @nodoc
@@ -46,10 +48,15 @@ class _$SignUpUiDataCopyWithImpl<$Res, $Val extends SignUpUiData>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isSignUpSuccess = null,
     Object? pickedImage = freezed,
     Object? pickedImageData = freezed,
   }) {
     return _then(_value.copyWith(
+      isSignUpSuccess: null == isSignUpSuccess
+          ? _value.isSignUpSuccess
+          : isSignUpSuccess // ignore: cast_nullable_to_non_nullable
+              as bool,
       pickedImage: freezed == pickedImage
           ? _value.pickedImage
           : pickedImage // ignore: cast_nullable_to_non_nullable
@@ -70,7 +77,8 @@ abstract class _$$SignUpUiDataImplCopyWith<$Res>
       __$$SignUpUiDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({File? pickedImage, Uint8List? pickedImageData});
+  $Res call(
+      {bool isSignUpSuccess, File? pickedImage, Uint8List? pickedImageData});
 }
 
 /// @nodoc
@@ -84,10 +92,15 @@ class __$$SignUpUiDataImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isSignUpSuccess = null,
     Object? pickedImage = freezed,
     Object? pickedImageData = freezed,
   }) {
     return _then(_$SignUpUiDataImpl(
+      isSignUpSuccess: null == isSignUpSuccess
+          ? _value.isSignUpSuccess
+          : isSignUpSuccess // ignore: cast_nullable_to_non_nullable
+              as bool,
       pickedImage: freezed == pickedImage
           ? _value.pickedImage
           : pickedImage // ignore: cast_nullable_to_non_nullable
@@ -103,8 +116,12 @@ class __$$SignUpUiDataImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SignUpUiDataImpl implements _SignUpUiData {
-  const _$SignUpUiDataImpl({this.pickedImage, this.pickedImageData});
+  const _$SignUpUiDataImpl(
+      {this.isSignUpSuccess = false, this.pickedImage, this.pickedImageData});
 
+  @override
+  @JsonKey()
+  final bool isSignUpSuccess;
   @override
   final File? pickedImage;
   @override
@@ -112,7 +129,7 @@ class _$SignUpUiDataImpl implements _SignUpUiData {
 
   @override
   String toString() {
-    return 'SignUpUiData(pickedImage: $pickedImage, pickedImageData: $pickedImageData)';
+    return 'SignUpUiData(isSignUpSuccess: $isSignUpSuccess, pickedImage: $pickedImage, pickedImageData: $pickedImageData)';
   }
 
   @override
@@ -120,6 +137,8 @@ class _$SignUpUiDataImpl implements _SignUpUiData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SignUpUiDataImpl &&
+            (identical(other.isSignUpSuccess, isSignUpSuccess) ||
+                other.isSignUpSuccess == isSignUpSuccess) &&
             (identical(other.pickedImage, pickedImage) ||
                 other.pickedImage == pickedImage) &&
             const DeepCollectionEquality()
@@ -127,7 +146,7 @@ class _$SignUpUiDataImpl implements _SignUpUiData {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, pickedImage,
+  int get hashCode => Object.hash(runtimeType, isSignUpSuccess, pickedImage,
       const DeepCollectionEquality().hash(pickedImageData));
 
   @JsonKey(ignore: true)
@@ -139,9 +158,12 @@ class _$SignUpUiDataImpl implements _SignUpUiData {
 
 abstract class _SignUpUiData implements SignUpUiData {
   const factory _SignUpUiData(
-      {final File? pickedImage,
+      {final bool isSignUpSuccess,
+      final File? pickedImage,
       final Uint8List? pickedImageData}) = _$SignUpUiDataImpl;
 
+  @override
+  bool get isSignUpSuccess;
   @override
   File? get pickedImage;
   @override
