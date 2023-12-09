@@ -17,8 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$SignUpUiData {
   File? get pickedImage => throw _privateConstructorUsedError;
-  bool get isLoading => throw _privateConstructorUsedError;
-  String? get errorMessage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SignUpUiDataCopyWith<SignUpUiData> get copyWith =>
@@ -31,7 +29,7 @@ abstract class $SignUpUiDataCopyWith<$Res> {
           SignUpUiData value, $Res Function(SignUpUiData) then) =
       _$SignUpUiDataCopyWithImpl<$Res, SignUpUiData>;
   @useResult
-  $Res call({File? pickedImage, bool isLoading, String? errorMessage});
+  $Res call({File? pickedImage});
 }
 
 /// @nodoc
@@ -48,126 +46,88 @@ class _$SignUpUiDataCopyWithImpl<$Res, $Val extends SignUpUiData>
   @override
   $Res call({
     Object? pickedImage = freezed,
-    Object? isLoading = null,
-    Object? errorMessage = freezed,
   }) {
     return _then(_value.copyWith(
       pickedImage: freezed == pickedImage
           ? _value.pickedImage
           : pickedImage // ignore: cast_nullable_to_non_nullable
               as File?,
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      errorMessage: freezed == errorMessage
-          ? _value.errorMessage
-          : errorMessage // ignore: cast_nullable_to_non_nullable
-              as String?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_SignUpUiDataCopyWith<$Res>
+abstract class _$$SignUpUiDataImplCopyWith<$Res>
     implements $SignUpUiDataCopyWith<$Res> {
-  factory _$$_SignUpUiDataCopyWith(
-          _$_SignUpUiData value, $Res Function(_$_SignUpUiData) then) =
-      __$$_SignUpUiDataCopyWithImpl<$Res>;
+  factory _$$SignUpUiDataImplCopyWith(
+          _$SignUpUiDataImpl value, $Res Function(_$SignUpUiDataImpl) then) =
+      __$$SignUpUiDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({File? pickedImage, bool isLoading, String? errorMessage});
+  $Res call({File? pickedImage});
 }
 
 /// @nodoc
-class __$$_SignUpUiDataCopyWithImpl<$Res>
-    extends _$SignUpUiDataCopyWithImpl<$Res, _$_SignUpUiData>
-    implements _$$_SignUpUiDataCopyWith<$Res> {
-  __$$_SignUpUiDataCopyWithImpl(
-      _$_SignUpUiData _value, $Res Function(_$_SignUpUiData) _then)
+class __$$SignUpUiDataImplCopyWithImpl<$Res>
+    extends _$SignUpUiDataCopyWithImpl<$Res, _$SignUpUiDataImpl>
+    implements _$$SignUpUiDataImplCopyWith<$Res> {
+  __$$SignUpUiDataImplCopyWithImpl(
+      _$SignUpUiDataImpl _value, $Res Function(_$SignUpUiDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? pickedImage = freezed,
-    Object? isLoading = null,
-    Object? errorMessage = freezed,
   }) {
-    return _then(_$_SignUpUiData(
+    return _then(_$SignUpUiDataImpl(
       pickedImage: freezed == pickedImage
           ? _value.pickedImage
           : pickedImage // ignore: cast_nullable_to_non_nullable
               as File?,
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      errorMessage: freezed == errorMessage
-          ? _value.errorMessage
-          : errorMessage // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_SignUpUiData implements _SignUpUiData {
-  const _$_SignUpUiData(
-      {this.pickedImage, this.isLoading = false, this.errorMessage});
+class _$SignUpUiDataImpl implements _SignUpUiData {
+  const _$SignUpUiDataImpl({this.pickedImage});
 
   @override
   final File? pickedImage;
-  @override
-  @JsonKey()
-  final bool isLoading;
-  @override
-  final String? errorMessage;
 
   @override
   String toString() {
-    return 'SignUpUiData(pickedImage: $pickedImage, isLoading: $isLoading, errorMessage: $errorMessage)';
+    return 'SignUpUiData(pickedImage: $pickedImage)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SignUpUiData &&
+            other is _$SignUpUiDataImpl &&
             (identical(other.pickedImage, pickedImage) ||
-                other.pickedImage == pickedImage) &&
-            (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading) &&
-            (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage));
+                other.pickedImage == pickedImage));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, pickedImage, isLoading, errorMessage);
+  int get hashCode => Object.hash(runtimeType, pickedImage);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SignUpUiDataCopyWith<_$_SignUpUiData> get copyWith =>
-      __$$_SignUpUiDataCopyWithImpl<_$_SignUpUiData>(this, _$identity);
+  _$$SignUpUiDataImplCopyWith<_$SignUpUiDataImpl> get copyWith =>
+      __$$SignUpUiDataImplCopyWithImpl<_$SignUpUiDataImpl>(this, _$identity);
 }
 
 abstract class _SignUpUiData implements SignUpUiData {
-  const factory _SignUpUiData(
-      {final File? pickedImage,
-      final bool isLoading,
-      final String? errorMessage}) = _$_SignUpUiData;
+  const factory _SignUpUiData({final File? pickedImage}) = _$SignUpUiDataImpl;
 
   @override
   File? get pickedImage;
   @override
-  bool get isLoading;
-  @override
-  String? get errorMessage;
-  @override
   @JsonKey(ignore: true)
-  _$$_SignUpUiDataCopyWith<_$_SignUpUiData> get copyWith =>
+  _$$SignUpUiDataImplCopyWith<_$SignUpUiDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
