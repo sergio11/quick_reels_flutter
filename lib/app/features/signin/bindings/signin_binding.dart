@@ -5,7 +5,7 @@ class SignInBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<SignInController>(
-      () => SignInController(signInUserUseCase: Get.find(), appEventBus: Get.find()),
+      () => SignInController(signInUserUseCase: Get.find()),
     );
   }
 }

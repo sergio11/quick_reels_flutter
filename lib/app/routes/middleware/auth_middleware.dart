@@ -4,9 +4,8 @@ import 'package:quickreels/app/features/shared/app_controller.dart';
 import 'package:quickreels/app/routes/app_pages.dart';
 
 class AuthMiddleware extends GetMiddleware {
-
   @override
-  RouteSettings? redirect(String? route)  {
+  RouteSettings? redirect(String? route) {
     print("AuthMiddleware route -> $route");
     final appController = Get.find<AppController>();
     if (route != null) {
