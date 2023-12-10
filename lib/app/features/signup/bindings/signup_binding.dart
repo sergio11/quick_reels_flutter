@@ -5,7 +5,7 @@ class SignupBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<SignupController>(
-      () => SignupController(signUpUserUseCase: Get.find(), appEventBus: Get.find()),
+      () => SignupController(signUpUserUseCase: Get.find()),
     );
   }
 }

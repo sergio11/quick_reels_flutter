@@ -1,5 +1,3 @@
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -27,18 +25,22 @@ import 'package:quickreels/app/domain/usecase/sign_in_user_use_case.dart';
 import 'package:quickreels/app/domain/usecase/sign_out_use_case.dart';
 import 'package:quickreels/app/domain/usecase/sign_up_user_use_case.dart';
 import 'package:quickreels/app/features/shared/app_controller.dart';
-import 'package:quickreels/app/features/shared/events/app_event_bus.dart';
+import 'package:quickreels/app/core/utils/app_event_bus.dart';
 
 class AppBinding extends Bindings {
-
   @override
   void dependencies() {
+    _initCoreDependencies();
     _initFirebaseDependencies();
     _initMapperDependencies();
     _initDatasourceDependencies();
     _initRepositoryDependencies();
     _initUseCasesDependencies();
     _initSharedDependencies();
+  }
+
+  void _initCoreDependencies() {
+    Get.put<AppEventBus>(AppEventBus());
   }
 
   void _initFirebaseDependencies() {
@@ -54,28 +56,38 @@ class AppBinding extends Bindings {
   }
 
   void _initDatasourceDependencies() {
-    Get.put<UserDatasource>(UserDatasourceImpl(firestore: Get.find(), userDtoMapper: Get.find(), saveUserDtoMapper: Get.find()));
+    Get.put<UserDatasource>(UserDatasourceImpl(
+        firestore: Get.find(),
+        userDtoMapper: Get.find(),
+        saveUserDtoMapper: Get.find()));
     Get.put<AuthDatasource>(AuthDatasourceImpl(auth: Get.find()));
     Get.put<StorageDatasource>(StorageDatasourceImpl(storage: Get.find()));
   }
 
   void _initRepositoryDependencies() {
-    Get.put<UserRepository>(UserRepositoryImpl(userDatasource: Get.find(), userBoMapper: Get.find()));
-    Get.put<AuthRepository>(AuthRepositoryImpl(authDatasource: Get.find(), userDatasource: Get.find(), storageDatasource: Get.find(), userBoMapper: Get.find()));
+    Get.put<UserRepository>(UserRepositoryImpl(
+        userDatasource: Get.find(), userBoMapper: Get.find()));
+    Get.put<AuthRepository>(AuthRepositoryImpl(
+        authDatasource: Get.find(),
+        userDatasource: Get.find(),
+        storageDatasource: Get.find(),
+        userBoMapper: Get.find()));
   }
 
   void _initUseCasesDependencies() {
     Get.put<GetAuthUserUidUseCase>(
         GetAuthUserUidUseCase(authRepository: Get.find()));
-    Get.put<SignInUserUseCase>(SignInUserUseCase(authRepository: Get.find()));
-    Get.put<SignOutUseCase>(SignOutUseCase(authRepository: Get.find()));
-    Get.put<SignUpUserUseCase>(SignUpUserUseCase(authRepository: Get.find()));
+    Get.put<SignInUserUseCase>(
+        SignInUserUseCase(authRepository: Get.find(), appEventBus: Get.find()));
+    Get.put<SignOutUseCase>(
+        SignOutUseCase(authRepository: Get.find(), appEventBus: Get.find()));
+    Get.put<SignUpUserUseCase>(
+        SignUpUserUseCase(authRepository: Get.find(), appEventBus: Get.find()));
     Get.put<GetUserDetailsUseCase>(
         GetUserDetailsUseCase(authRepository: Get.find()));
   }
 
   void _initSharedDependencies() {
-    Get.put<AppEventBus>(AppEventBus());
     Get.put<AppController>(
         AppController(eventBus: Get.find(), getAuthUserUidUseCase: Get.find()));
   }

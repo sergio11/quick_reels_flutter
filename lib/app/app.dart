@@ -8,7 +8,10 @@ import '/flavors/build_config.dart';
 import '/flavors/env_config.dart';
 
 class App extends StatefulWidget {
-  const App({Key? key}) : super(key: key);
+
+  final AppBinding appBindings;
+
+  const App({Key? key, required this.appBindings}) : super(key: key);
 
   @override
   AppState createState() => AppState();
@@ -22,7 +25,7 @@ class AppState extends State<App> {
     return GetMaterialApp(
       title: _envConfig.appName,
       initialRoute: AppPages.INITIAL,
-      initialBinding: AppBinding(),
+      initialBinding: widget.appBindings,
       getPages: AppPages.routes,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: _getSupportedLocal(),
