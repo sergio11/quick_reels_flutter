@@ -1,7 +1,9 @@
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
-import 'package:quickreels/app/features/home/views/home_screen.dart';
+import 'package:quickreels/app/features/main/bindings/main_binding.dart';
+import 'package:quickreels/app/features/main/views/main_screen.dart';
 import 'package:quickreels/app/features/onboarding/onboarding_screen.dart';
+import 'package:quickreels/app/features/profile/bindings/profile_binding.dart';
 import 'package:quickreels/app/features/profile/views/profile_screen.dart';
 import 'package:quickreels/app/features/signin/bindings/signin_binding.dart';
 import 'package:quickreels/app/features/signin/views/signin_screen.dart';
@@ -50,15 +52,21 @@ class AppPages {
         curve: Curves.easeInOut,
         transitionDuration: const Duration(milliseconds: 500),
         middlewares: [AuthMiddleware()]),
-    GetPage(name: _Paths.HOME, page: () => const HomeScreen(), children: [
-      GetPage(
-          name: _Paths.PROFILE,
-          page: () => ProfileScreen(),
-          transition: Transition.downToUp,
-          curve: Curves.easeInOut,
-          transitionDuration: const Duration(milliseconds: 400))
-    ], middlewares: [
-      AuthMiddleware()
-    ]),
+    GetPage(
+        name: _Paths.HOME,
+        page: () => MainScreen(),
+        binding: MainBinding(),
+        bindings: [ProfileBinding()],
+        children: [
+          GetPage(
+              name: _Paths.PROFILE,
+              page: () => ProfileScreen(),
+              transition: Transition.downToUp,
+              curve: Curves.easeInOut,
+              transitionDuration: const Duration(milliseconds: 400))
+        ],
+        middlewares: [
+          AuthMiddleware()
+        ]),
   ];
 }

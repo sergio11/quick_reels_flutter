@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:quickreels/app/core/base/base_use_case.dart';
 import 'package:quickreels/app/domain/usecase/get_auth_user_uid_use_case.dart';
-import 'package:quickreels/app/features/shared/events/app_event_bus.dart';
+import 'package:quickreels/app/core/utils/app_event_bus.dart';
 import 'package:quickreels/app/features/shared/events/events.dart';
 
 class AppController extends GetxController {
@@ -30,9 +30,12 @@ class AppController extends GetxController {
 
   void checkAuthStatus() async {
     try {
+      print("checkAuthStatus CALLED!");
       final authUserUuid = await getAuthUserUidUseCase(const DefaultParams());
       _isAuthenticated = authUserUuid.isNotEmpty;
+      print("_isAuthenticated -> $_isAuthenticated");
     } catch (e) {
+      print("catch $e - _isAuthenticated -> $_isAuthenticated");
       _isAuthenticated = false;
     }
   }
