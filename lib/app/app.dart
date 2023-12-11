@@ -41,7 +41,7 @@ class AppState extends State<App> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        fontFamily: 'Roboto',
+        fontFamily: 'Poppins',
       ),
       debugShowCheckedModeBanner: false,
     );
