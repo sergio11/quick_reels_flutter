@@ -83,7 +83,7 @@ class CommonDialogBoxState extends State<CommonDialogBox> with SingleTickerProvi
                 style: Theme.of(context)
                     .textTheme
                     .titleLarge
-                    ?.copyWith(color: AppColors.colorAccent),
+                    ?.copyWith(color: AppColors.colorPrimary),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(
@@ -94,7 +94,7 @@ class CommonDialogBoxState extends State<CommonDialogBox> with SingleTickerProvi
                 style: Theme.of(context)
                     .textTheme
                     .titleMedium
-                    ?.copyWith(color: AppColors.colorAccent),
+                    ?.copyWith(color: AppColors.colorPrimary),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(
@@ -125,7 +125,7 @@ class CommonDialogBoxState extends State<CommonDialogBox> with SingleTickerProvi
                       blurRadius: 20),
                 ]),
             child: CircleAvatar(
-              backgroundColor: AppColors.colorSecondary,
+              backgroundColor: AppColors.colorPrimary,
               radius: AppValues.avatarRadius,
               child: ClipRRect(
                   borderRadius: const BorderRadius.all(
@@ -147,9 +147,8 @@ class CommonDialogBoxState extends State<CommonDialogBox> with SingleTickerProvi
       buttons.add(Flexible(
           child: CommonButton(
             text: widget.cancelledText!,
-            textColor: AppColors.colorPrimary,
-            borderColor: AppColors.colorAccent,
-            styleType: CommonButtonStyleType.reverse,
+            textColor: AppColors.colorWhite,
+            borderColor: AppColors.colorWhite,
             sizeType: CommonButtonSizeType.small,
             onPressed: () {
               widget.onCancelled?.call();
@@ -160,8 +159,9 @@ class CommonDialogBoxState extends State<CommonDialogBox> with SingleTickerProvi
     buttons.add(Flexible(
       child: CommonButton(
         text: widget.acceptText,
-        textColor: AppColors.colorPrimary,
-        borderColor: AppColors.colorSecondary,
+        textColor: AppColors.colorWhite,
+        borderColor: AppColors.colorWhite,
+        styleType: CommonButtonStyleType.reverse,
         sizeType: CommonButtonSizeType.small,
         onPressed: () {
           widget.onAccepted?.call();
