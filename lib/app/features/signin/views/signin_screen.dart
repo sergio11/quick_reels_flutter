@@ -21,9 +21,6 @@ class SignInScreen extends BaseView<SignInController, SignInUiData> {
 
   SignInScreen({required this.onSignInSuccess, required this.onGoToSignUp});
 
-  @override
-  bool immersiveMode() => true;
-
   void onLoginClicked() async {
     if (_formKey.currentState?.validate() == true) {
       controller.loginUser(

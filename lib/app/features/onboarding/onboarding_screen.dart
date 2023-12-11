@@ -26,7 +26,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   @override
   void initState() {
     super.initState();
-    disableSystemUI();
     _videoController =
         VideoPlayerController.asset("assets/videos/onboarding_video.mp4")
           ..initialize().then((_) {

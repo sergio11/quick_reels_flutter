@@ -10,6 +10,7 @@ import 'package:quickreels/app/features/signin/views/signin_screen.dart';
 import 'package:quickreels/app/features/signup/bindings/signup_binding.dart';
 import 'package:quickreels/app/features/signup/views/signup_screen.dart';
 import 'package:quickreels/app/routes/middleware/auth_middleware.dart';
+import 'package:quickreels/app/routes/middleware/system_ui_middleware.dart';
 
 part 'app_routes.dart';
 
@@ -24,13 +25,19 @@ class AppPages {
     _Paths.SIGN_UP
   ];
 
+  static final immersiveModeRoutes = [
+    _Paths.ONBOARDING,
+    _Paths.SIGN_IN,
+    _Paths.SIGN_UP
+  ];
+
   static final routes = [
     GetPage(
         name: _Paths.ONBOARDING,
         page: () => OnBoardingScreen(
             onSignInPressed: () => Get.toNamed(Routes.SIGN_IN),
             onSignUpPressed: () => Get.toNamed(Routes.SIGN_UP)),
-        middlewares: [AuthMiddleware()]),
+        middlewares: [AuthMiddleware(), SystemUiMiddleware()]),
     GetPage(
         name: _Paths.SIGN_IN,
         page: () => SignInScreen(
@@ -40,7 +47,7 @@ class AppPages {
         transition: Transition.rightToLeft,
         curve: Curves.easeInOut,
         transitionDuration: const Duration(milliseconds: 500),
-        middlewares: [AuthMiddleware()]),
+        middlewares: [AuthMiddleware(), SystemUiMiddleware()]),
     GetPage(
         name: _Paths.SIGN_UP,
         page: () => SignupScreen(
@@ -51,12 +58,14 @@ class AppPages {
         transition: Transition.rightToLeft,
         curve: Curves.easeInOut,
         transitionDuration: const Duration(milliseconds: 500),
-        middlewares: [AuthMiddleware()]),
+        middlewares: [AuthMiddleware(), SystemUiMiddleware()]),
     GetPage(
         name: _Paths.HOME,
         page: () => MainScreen(),
         binding: MainBinding(),
-        bindings: [ProfileBinding()],
+        bindings: [
+          ProfileBinding()
+        ],
         children: [
           GetPage(
               name: _Paths.PROFILE,
@@ -66,7 +75,8 @@ class AppPages {
               transitionDuration: const Duration(milliseconds: 400))
         ],
         middlewares: [
-          AuthMiddleware()
+          AuthMiddleware(),
+          SystemUiMiddleware()
         ]),
   ];
 }
