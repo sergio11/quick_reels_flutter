@@ -5,9 +5,9 @@ class UserBO {
   final String photoUrl;
   final String username;
   final String bio;
-  final List followers;
-  final List following;
-  final List likes;
+  final List<String> followers;
+  final List<String> following;
+  final List<String> likes;
 
   const UserBO({
     required this.username,

@@ -29,6 +29,17 @@ class MainController extends BaseController<MainUiData> with GetSingleTickerProv
   void onInit() {
     super.onInit();
     tabController = TabController(vsync: this, length: uiData.tabItems.length);
+  }
+
+  @override
+  void onClose() {
+    tabController.dispose();
+    super.onClose();
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
     tabController.animation?.addListener(
           () {
         final value = tabController.animation!.value.round();
@@ -37,12 +48,6 @@ class MainController extends BaseController<MainUiData> with GetSingleTickerProv
         }
       },
     );
-  }
-
-  @override
-  void onClose() {
-    tabController.dispose();
-    super.onClose();
   }
 
   void changePage(int newPage) {

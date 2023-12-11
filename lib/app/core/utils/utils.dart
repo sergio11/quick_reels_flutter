@@ -103,7 +103,7 @@ showConfirmDialog(
           descriptions: description,
           acceptText: "Accept",
           cancelledText: "Cancel",
-          img: Image.asset("assets/******.png"),
+          img: Image.asset("assets/images/app_dialog_logo.png"),
           onAccepted: onAcceptPressed,
           onCancelled: onCancelPressed,
         );

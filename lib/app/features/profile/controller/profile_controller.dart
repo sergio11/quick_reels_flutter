@@ -35,7 +35,9 @@ class ProfileController extends BaseController<ProfileUiData> {
     _loadCurrentUserDetails();
   }
 
-  void signOut() async {}
+  void signOut() async {
+
+  }
 
   void followUser() async {}
 

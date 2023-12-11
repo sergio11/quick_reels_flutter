@@ -85,7 +85,7 @@ abstract class BaseView<Controller extends BaseController, UIState>
 
   Color pageBackgroundColor() => AppColors.pageBackground;
 
-  Color statusBarColor() => AppColors.pageBackground;
+  Color statusBarColor() => AppColors.colorPrimary;
 
   Widget? floatingActionButton() => null;
 
