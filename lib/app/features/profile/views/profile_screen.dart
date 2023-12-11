@@ -1,13 +1,12 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:quickreels/app/core/base/base_view.dart';
 import 'package:quickreels/app/core/utils/helpers.dart';
+import 'package:quickreels/app/core/utils/utils.dart';
 import 'package:quickreels/app/features/profile/controller/profile_controller.dart';
 import 'package:quickreels/app/features/profile/model/profile_ui_data.dart';
 
 class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
-
   @override
   PreferredSizeWidget? appBar(BuildContext context, ProfileUiData uiData) {
     return AppBar(
@@ -37,10 +36,14 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
             SizedBox(
               child: Column(
                 children: [
+                  const SizedBox(
+                    height: 20,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      buildCircleAvatar(imageUrl: uiData.userData?.photoUrl ?? "")
+                      buildCircleAvatar(
+                          imageUrl: uiData.userData?.photoUrl ?? "")
                     ],
                   ),
                   const SizedBox(
@@ -62,7 +65,14 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
                       child: InkWell(
                         onTap: () {
                           if (uiData.isAuthUser) {
-                            controller.signOut();
+                            showConfirmDialog(
+                              context: context,
+                              title: 'Sign Out',
+                              description: 'Are you sure you want to log out?',
+                              onAcceptPressed: () {
+                                controller.signOut();
+                              },
+                            );
                           } else {
                             controller.followUser();
                           }
@@ -71,8 +81,8 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
                           uiData.isAuthUser
                               ? 'Sign Out'
                               : uiData.isFollowing
-                              ? 'Unfollow'
-                              : 'Follow',
+                                  ? 'Unfollow'
+                                  : 'Follow',
                           style: const TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
@@ -93,7 +103,6 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
       ),
     );
   }
-
 
   Widget _buildProfileRowMetrics(BuildContext context, ProfileUiData uiData) {
     return Row(
