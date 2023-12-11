@@ -26,9 +26,6 @@ class SignupScreen extends BaseView<SignupController, SignUpUiData> {
     required this.onSignUpSuccess
   });
 
-  @override
-  bool immersiveMode() => true;
-
   void onSignUpUser() async {
     if (_formKey.currentState?.validate() == true) {
       controller.registerUser(_usernameController.text, _emailController.text,

@@ -41,11 +41,6 @@ abstract class BaseView<Controller extends BaseController, UIState>
   }
 
   Widget annotatedRegion(BuildContext context, UIState uiData) {
-    if (immersiveMode()) {
-      disableSystemUI();
-    } else {
-      enableSystemUI();
-    }
     return AnnotatedRegion(
       value: SystemUiOverlayStyle(
         //Status bar color for android
@@ -78,9 +73,7 @@ abstract class BaseView<Controller extends BaseController, UIState>
   }
 
   Widget pageContent(BuildContext context, UIState uiData) {
-    return SafeArea(
-      child: body(context, uiData),
-    );
+    return body(context, uiData);
   }
 
   Widget onShowErrorSnackBar(String message) {
@@ -99,8 +92,6 @@ abstract class BaseView<Controller extends BaseController, UIState>
   Widget? bottomNavigationBar() => null;
 
   Widget? drawer() => null;
-
-  bool immersiveMode() => false;
 
   Widget _showLoading() => CommonScreenProgressIndicator(
         backgroundColor: AppColors.colorDark.withOpacity(0.5),
