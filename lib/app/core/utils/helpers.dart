@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:quickreels/app/core/values/app_colors.dart';
 import 'package:quickreels/app/core/widget/animate_gradient_widget.dart';
 import 'package:quickreels/app/core/widget/common_screen_progress_indicator.dart';
@@ -62,4 +63,12 @@ AnimateGradient wrapIntoAnimateGradient({required Widget child}) {
         AppColors.colorShadow.withOpacity(0.9)
       ],
       child: child);
+}
+
+Widget buildAppLogo() {
+  return SvgPicture.asset(
+    "assets/images/app_logo.svg",
+    color: AppColors.colorWhite,
+    height: 60,
+  );
 }

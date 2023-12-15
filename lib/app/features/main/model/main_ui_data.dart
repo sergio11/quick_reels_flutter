@@ -9,5 +9,6 @@ class MainUiData with _$MainUiData {
     @Default([]) final List<Widget> tabItems,
     @Default([]) final List<IconData> tabMenuItems,
     @Default(0) final int currentPage,
+    @Default("") final String pageTitle,
   }) = _MainUiData;
 }
