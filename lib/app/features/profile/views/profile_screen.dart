@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:quickreels/app/core/base/base_view.dart';
 import 'package:quickreels/app/core/utils/helpers.dart';
 import 'package:quickreels/app/core/utils/utils.dart';
@@ -7,25 +6,6 @@ import 'package:quickreels/app/features/profile/controller/profile_controller.da
 import 'package:quickreels/app/features/profile/model/profile_ui_data.dart';
 
 class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
-  @override
-  PreferredSizeWidget? appBar(BuildContext context, ProfileUiData uiData) {
-    return AppBar(
-      backgroundColor: Colors.black12,
-      leading: const Icon(
-        Icons.person_add_alt_1_outlined,
-      ),
-      actions: const [
-        Icon(Icons.more_horiz),
-      ],
-      title: Text(
-        uiData.userData?.username ?? "",
-        style: const TextStyle(
-          fontWeight: FontWeight.bold,
-          color: Colors.white,
-        ),
-      ),
-    );
-  }
 
   @override
   Widget body(BuildContext context, ProfileUiData uiData) {
