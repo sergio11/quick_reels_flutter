@@ -36,36 +36,33 @@ class ProfileController extends BaseController<ProfileUiData> {
   }
 
   void signOut() async {
-
+    callUseCase(
+        signOutUseCase(const DefaultParams()),
+        onComplete: (_) => _handleSignOutCompleted()
+    );
   }
 
   void followUser() async {}
 
   void _loadUserDetails(String userUuid) async {
+    _loadUserOrCurrentUserDetails(userUuid, userUuid == await getAuthUserUidUseCase(const DefaultParams()));
+  }
+
+  void _loadCurrentUserDetails() async {
+    final String authUserUid = await getAuthUserUidUseCase(const DefaultParams());
+    _loadUserOrCurrentUserDetails(authUserUid, true);
+  }
+
+  void _loadUserOrCurrentUserDetails(String userUuid, bool isAuthUser) async {
     try {
-      final String authUserUid =
-          await getAuthUserUidUseCase(const DefaultParams());
-      final userDetails =
-          await getUserDetailsUseCase(GetUserDetailsParams(userUuid));
-      updateState(uiData.copyWith(
-          userData: userDetails,
-          userUuid: userUuid,
-          isAuthUser: authUserUid == userUuid));
+      final userDetails = await getUserDetailsUseCase(GetUserDetailsParams(userUuid));
+      updateState(uiData.copyWith(userData: userDetails, userUuid: userUuid, isAuthUser: isAuthUser));
     } catch (e) {
       showErrorMessage("An error occurred while loading user details");
     }
   }
-
-  void _loadCurrentUserDetails() async {
-    try {
-      final String authUserUid =
-          await getAuthUserUidUseCase(const DefaultParams());
-      final userDetails =
-          await getUserDetailsUseCase(GetUserDetailsParams(authUserUid));
-      updateState(uiData.copyWith(
-          userData: userDetails, userUuid: authUserUid, isAuthUser: true));
-    } catch (e) {
-      showErrorMessage("An error occurred while loading user details");
-    }
+  void _handleSignOutCompleted() async {
+    print("_handleSignOutCompleted CALLED!");
+    logoutController.value = true;
   }
 }

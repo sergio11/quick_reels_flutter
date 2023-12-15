@@ -53,44 +53,7 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
                   const SizedBox(
                     height: 15,
                   ),
-                  Container(
-                    width: 140,
-                    height: 47,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.black12,
-                      ),
-                    ),
-                    child: Center(
-                      child: InkWell(
-                        onTap: () {
-                          if (uiData.isAuthUser) {
-                            showConfirmDialog(
-                              context: context,
-                              title: 'Sign Out',
-                              description: 'Are you sure you want to log out?',
-                              onAcceptPressed: () {
-                                controller.signOut();
-                              },
-                            );
-                          } else {
-                            controller.followUser();
-                          }
-                        },
-                        child: Text(
-                          uiData.isAuthUser
-                              ? 'Sign Out'
-                              : uiData.isFollowing
-                                  ? 'Unfollow'
-                                  : 'Follow',
-                          style: const TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  _buildMainActionButton(context, uiData),
                   const SizedBox(
                     height: 25,
                   ),
@@ -180,5 +143,45 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
         ),
       ],
     );
+  }
+
+  Widget _buildMainActionButton(BuildContext context, ProfileUiData uiData) {
+    return Container(
+        width: 140,
+        height: 47,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.black12,
+          ),
+        ),
+        child: Center(
+          child: InkWell(
+            onTap: () {
+              if (uiData.isAuthUser) {
+                showConfirmDialog(
+                  context: context,
+                  title: 'Sign Out',
+                  description: 'Are you sure you want to log out?',
+                  onAcceptPressed: () {
+                    controller.signOut();
+                  },
+                );
+              } else {
+                controller.followUser();
+              }
+            },
+            child: Text(
+              uiData.isAuthUser
+                  ? 'Sign Out'
+                  : uiData.isFollowing
+                      ? 'Unfollow'
+                      : 'Follow',
+              style: const TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ));
   }
 }

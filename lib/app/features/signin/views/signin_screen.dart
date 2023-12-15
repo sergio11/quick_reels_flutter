@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quickreels/app/core/base/base_view.dart';
 import 'package:quickreels/app/core/utils/textfield_validation.dart';
+import 'package:quickreels/app/core/utils/utils.dart';
 import 'package:quickreels/app/core/values/app_colors.dart';
 import 'package:quickreels/app/core/widget/common_button.dart';
 import 'package:quickreels/app/core/widget/common_onboarding_container.dart';
@@ -22,6 +23,7 @@ class SignInScreen extends BaseView<SignInController, SignInUiData> {
   SignInScreen({required this.onSignInSuccess, required this.onGoToSignUp});
 
   void onLoginClicked() async {
+    hideKeyboard(context);
     if (_formKey.currentState?.validate() == true) {
       controller.loginUser(
         _emailController.text,

@@ -8,6 +8,7 @@ import 'package:quickreels/app/core/utils/utils.dart';
 import 'package:quickreels/app/core/values/app_colors.dart';
 import 'package:quickreels/app/core/widget/common_screen_progress_indicator.dart';
 import 'package:quickreels/app/domain/model/page_state.dart';
+import 'package:quickreels/app/routes/app_pages.dart';
 import '/flavors/build_config.dart';
 
 abstract class BaseView<Controller extends BaseController, UIState>
@@ -18,6 +19,8 @@ abstract class BaseView<Controller extends BaseController, UIState>
 
   final Logger logger = BuildConfig.instance.config.logger;
 
+  BuildContext get context => Get.context!;
+
   Widget body(BuildContext context, UIState uiData);
 
   PreferredSizeWidget? appBar(BuildContext context, UIState uiData) => null;
@@ -27,7 +30,14 @@ abstract class BaseView<Controller extends BaseController, UIState>
     return GestureDetector(
       child: Stack(
         children: [
-          Obx(() => annotatedRegion(context, controller.uiData)),
+          Obx(() {
+            if (controller.logoutController.isTrue) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                Get.offAllNamed(AppPages.INITIAL);
+              });
+            }
+            return annotatedRegion(context, controller.uiData);
+          }),
           Obx(() => controller.pageState == PageState.LOADING
               ? _showLoading()
               : Container()),

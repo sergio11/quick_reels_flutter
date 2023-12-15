@@ -1,4 +1,5 @@
 import 'package:flutter/animation.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quickreels/app/features/main/bindings/main_binding.dart';
 import 'package:quickreels/app/features/main/views/main_screen.dart';
@@ -33,50 +34,59 @@ class AppPages {
 
   static final routes = [
     GetPage(
-        name: _Paths.ONBOARDING,
-        page: () => OnBoardingScreen(
-            onSignInPressed: () => Get.toNamed(Routes.SIGN_IN),
-            onSignUpPressed: () => Get.toNamed(Routes.SIGN_UP)),
-        middlewares: [AuthMiddleware(), SystemUiMiddleware()]),
+      name: _Paths.ONBOARDING,
+      page: () => OnBoardingScreen(
+        onSignInPressed: () => _navigateTo(Routes.SIGN_IN),
+        onSignUpPressed: () => _navigateTo(Routes.SIGN_UP),
+      ),
+      middlewares: [AuthMiddleware(), SystemUiMiddleware()],
+    ),
     GetPage(
-        name: _Paths.SIGN_IN,
-        page: () => SignInScreen(
-            onSignInSuccess: () => Get.offAllNamed(Routes.HOME),
-            onGoToSignUp: () => Get.toNamed(Routes.SIGN_UP)),
-        binding: SignInBinding(),
-        transition: Transition.rightToLeft,
-        curve: Curves.easeInOut,
-        transitionDuration: const Duration(milliseconds: 500),
-        middlewares: [AuthMiddleware(), SystemUiMiddleware()]),
+      name: _Paths.SIGN_IN,
+      page: () => SignInScreen(
+        onSignInSuccess: () => _navigateTo(Routes.HOME),
+        onGoToSignUp: () => _navigateTo(Routes.SIGN_UP),
+      ),
+      binding: SignInBinding(),
+      transition: Transition.rightToLeft,
+      curve: Curves.easeInOut,
+      transitionDuration: const Duration(milliseconds: 500),
+      middlewares: [AuthMiddleware(), SystemUiMiddleware()],
+    ),
     GetPage(
-        name: _Paths.SIGN_UP,
-        page: () => SignupScreen(
-              onGoToSignIn: () => Get.offNamed(Routes.SIGN_IN),
-              onSignUpSuccess: () => Get.offAllNamed(Routes.HOME),
-            ),
-        binding: SignupBinding(),
-        transition: Transition.rightToLeft,
-        curve: Curves.easeInOut,
-        transitionDuration: const Duration(milliseconds: 500),
-        middlewares: [AuthMiddleware(), SystemUiMiddleware()]),
+      name: _Paths.SIGN_UP,
+      page: () => SignupScreen(
+        onGoToSignIn: () => _navigateTo(Routes.SIGN_IN),
+        onSignUpSuccess: () => _navigateTo(Routes.HOME),
+      ),
+      binding: SignupBinding(),
+      transition: Transition.rightToLeft,
+      curve: Curves.easeInOut,
+      transitionDuration: const Duration(milliseconds: 500),
+      middlewares: [AuthMiddleware(), SystemUiMiddleware()],
+    ),
     GetPage(
-        name: _Paths.HOME,
-        page: () => MainScreen(),
-        binding: MainBinding(),
-        bindings: [
-          ProfileBinding()
-        ],
-        children: [
-          GetPage(
-              name: _Paths.PROFILE,
-              page: () => ProfileScreen(),
-              transition: Transition.downToUp,
-              curve: Curves.easeInOut,
-              transitionDuration: const Duration(milliseconds: 400))
-        ],
-        middlewares: [
-          AuthMiddleware(),
-          SystemUiMiddleware()
-        ]),
+      name: _Paths.HOME,
+      page: () => MainScreen(),
+      binding: MainBinding(),
+      bindings: [ProfileBinding()],
+      children: [
+        GetPage(
+          name: _Paths.PROFILE,
+          page: () => ProfileScreen(),
+          transition: Transition.downToUp,
+          curve: Curves.easeInOut,
+          transitionDuration: const Duration(milliseconds: 400),
+        )
+      ],
+      middlewares: [AuthMiddleware(), SystemUiMiddleware()],
+    ),
   ];
+
+  static void _navigateTo(String route) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.toNamed(route);
+    });
+  }
 }
+
