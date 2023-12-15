@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_floating_bottom_bar/flutter_floating_bottom_bar.dart';
 import 'package:quickreels/app/core/base/base_view.dart';
+import 'package:quickreels/app/core/utils/helpers.dart';
 import 'package:quickreels/app/core/values/app_colors.dart';
 import 'package:quickreels/app/features/main/controller/main_controller.dart';
 import 'package:quickreels/app/features/main/model/main_ui_data.dart';
@@ -11,6 +12,27 @@ class MainScreen extends BaseView<MainController, MainUiData> {
   final Color selectedColor = AppColors.colorPrimary;
 
   void onAddPostClicked() {}
+
+  @override
+  PreferredSizeWidget? appBar(BuildContext context, MainUiData uiData) {
+    return AppBar(
+      backgroundColor: AppColors.colorPrimary,
+      leading: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: buildAppLogo(),
+      ),
+      actions: const [
+        Icon(Icons.more_horiz),
+      ],
+      title: Text(
+        uiData.pageTitle,
+        style: const TextStyle(
+          fontWeight: FontWeight.bold,
+          color: AppColors.colorWhite,
+        ),
+      ),
+    );
+  }
 
   @override
   Widget body(BuildContext context, MainUiData uiData) {

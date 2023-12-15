@@ -2,6 +2,7 @@ import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:quickreels/app/core/utils/helpers.dart';
 import 'package:quickreels/app/core/values/app_colors.dart';
 import 'package:quickreels/app/core/widget/common_dialog_box.dart';
 
@@ -83,7 +84,7 @@ showAlertDialog(
           title: title,
           descriptions: description,
           acceptText: "Accept",
-          img: Image.asset("assets/*****.png"),
+          img: buildAppLogo(),
           onAccepted: onAcceptPressed,
         );
       });
@@ -103,7 +104,7 @@ showConfirmDialog(
           descriptions: description,
           acceptText: "Accept",
           cancelledText: "Cancel",
-          img: Image.asset("assets/images/app_dialog_logo.png"),
+          img: buildAppLogo(),
           onAccepted: onAcceptPressed,
           onCancelled: onCancelPressed,
         );

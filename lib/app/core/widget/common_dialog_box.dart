@@ -5,7 +5,7 @@ import 'package:quickreels/app/core/widget/common_button.dart';
 
 class CommonDialogBox extends StatefulWidget {
   final String title, descriptions, acceptText;
-  final Image img;
+  final Widget img;
   final String? cancelledText;
   final Function()? onAccepted;
   final Function()? onCancelled;

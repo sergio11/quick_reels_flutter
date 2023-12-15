@@ -19,6 +19,7 @@ mixin _$MainUiData {
   List<Widget> get tabItems => throw _privateConstructorUsedError;
   List<IconData> get tabMenuItems => throw _privateConstructorUsedError;
   int get currentPage => throw _privateConstructorUsedError;
+  String get pageTitle => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MainUiDataCopyWith<MainUiData> get copyWith =>
@@ -32,7 +33,10 @@ abstract class $MainUiDataCopyWith<$Res> {
       _$MainUiDataCopyWithImpl<$Res, MainUiData>;
   @useResult
   $Res call(
-      {List<Widget> tabItems, List<IconData> tabMenuItems, int currentPage});
+      {List<Widget> tabItems,
+      List<IconData> tabMenuItems,
+      int currentPage,
+      String pageTitle});
 }
 
 /// @nodoc
@@ -51,6 +55,7 @@ class _$MainUiDataCopyWithImpl<$Res, $Val extends MainUiData>
     Object? tabItems = null,
     Object? tabMenuItems = null,
     Object? currentPage = null,
+    Object? pageTitle = null,
   }) {
     return _then(_value.copyWith(
       tabItems: null == tabItems
@@ -65,6 +70,10 @@ class _$MainUiDataCopyWithImpl<$Res, $Val extends MainUiData>
           ? _value.currentPage
           : currentPage // ignore: cast_nullable_to_non_nullable
               as int,
+      pageTitle: null == pageTitle
+          ? _value.pageTitle
+          : pageTitle // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -78,7 +87,10 @@ abstract class _$$MainUiDataImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<Widget> tabItems, List<IconData> tabMenuItems, int currentPage});
+      {List<Widget> tabItems,
+      List<IconData> tabMenuItems,
+      int currentPage,
+      String pageTitle});
 }
 
 /// @nodoc
@@ -95,6 +107,7 @@ class __$$MainUiDataImplCopyWithImpl<$Res>
     Object? tabItems = null,
     Object? tabMenuItems = null,
     Object? currentPage = null,
+    Object? pageTitle = null,
   }) {
     return _then(_$MainUiDataImpl(
       tabItems: null == tabItems
@@ -109,6 +122,10 @@ class __$$MainUiDataImplCopyWithImpl<$Res>
           ? _value.currentPage
           : currentPage // ignore: cast_nullable_to_non_nullable
               as int,
+      pageTitle: null == pageTitle
+          ? _value.pageTitle
+          : pageTitle // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -119,7 +136,8 @@ class _$MainUiDataImpl implements _MainUiData {
   const _$MainUiDataImpl(
       {final List<Widget> tabItems = const [],
       final List<IconData> tabMenuItems = const [],
-      this.currentPage = 0})
+      this.currentPage = 0,
+      this.pageTitle = ""})
       : _tabItems = tabItems,
         _tabMenuItems = tabMenuItems;
 
@@ -144,10 +162,13 @@ class _$MainUiDataImpl implements _MainUiData {
   @override
   @JsonKey()
   final int currentPage;
+  @override
+  @JsonKey()
+  final String pageTitle;
 
   @override
   String toString() {
-    return 'MainUiData(tabItems: $tabItems, tabMenuItems: $tabMenuItems, currentPage: $currentPage)';
+    return 'MainUiData(tabItems: $tabItems, tabMenuItems: $tabMenuItems, currentPage: $currentPage, pageTitle: $pageTitle)';
   }
 
   @override
@@ -159,7 +180,9 @@ class _$MainUiDataImpl implements _MainUiData {
             const DeepCollectionEquality()
                 .equals(other._tabMenuItems, _tabMenuItems) &&
             (identical(other.currentPage, currentPage) ||
-                other.currentPage == currentPage));
+                other.currentPage == currentPage) &&
+            (identical(other.pageTitle, pageTitle) ||
+                other.pageTitle == pageTitle));
   }
 
   @override
@@ -167,7 +190,8 @@ class _$MainUiDataImpl implements _MainUiData {
       runtimeType,
       const DeepCollectionEquality().hash(_tabItems),
       const DeepCollectionEquality().hash(_tabMenuItems),
-      currentPage);
+      currentPage,
+      pageTitle);
 
   @JsonKey(ignore: true)
   @override
@@ -180,7 +204,8 @@ abstract class _MainUiData implements MainUiData {
   const factory _MainUiData(
       {final List<Widget> tabItems,
       final List<IconData> tabMenuItems,
-      final int currentPage}) = _$MainUiDataImpl;
+      final int currentPage,
+      final String pageTitle}) = _$MainUiDataImpl;
 
   @override
   List<Widget> get tabItems;
@@ -188,6 +213,8 @@ abstract class _MainUiData implements MainUiData {
   List<IconData> get tabMenuItems;
   @override
   int get currentPage;
+  @override
+  String get pageTitle;
   @override
   @JsonKey(ignore: true)
   _$$MainUiDataImplCopyWith<_$MainUiDataImpl> get copyWith =>
