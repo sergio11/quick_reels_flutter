@@ -1,44 +1,18 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:quickreels/app/domain/model/user.dart';
 
 class CommentBO {
-  String username;
-  String comment;
-  final datePublished;
-  List likes;
-  String profilePhoto;
-  String uid;
-  String id;
+
+  final String commentId;
+  final String postId;
+  final DateTime datePublished;
+  final String text;
+  final UserBO author;
 
   CommentBO({
-    required this.username,
-    required this.comment,
+    required this.commentId,
+    required this.postId,
     required this.datePublished,
-    required this.likes,
-    required this.profilePhoto,
-    required this.uid,
-    required this.id,
+    required this.text,
+    required this.author
   });
-
-  Map<String, dynamic> toJson() => {
-    'username': username,
-    'comment': comment,
-    'datePublished': datePublished,
-    'likes': likes,
-    'profilePhoto': profilePhoto,
-    'uid': uid,
-    'id': id,
-  };
-
-  static CommentBO fromSnap(DocumentSnapshot snap) {
-    var snapshot = snap.data() as Map<String, dynamic>;
-    return CommentBO(
-      username: snapshot['username'],
-      comment: snapshot['comment'],
-      datePublished: snapshot['datePublished'],
-      likes: snapshot['likes'],
-      profilePhoto: snapshot['profilePhoto'],
-      uid: snapshot['uid'],
-      id: snapshot['id'],
-    );
-  }
 }
