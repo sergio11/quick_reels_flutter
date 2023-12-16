@@ -9,10 +9,12 @@ import 'package:quickreels/app/data/datasource/dto/reel_dto.dart';
 import 'package:quickreels/app/data/datasource/dto/save_reel_comment_dto.dart';
 import 'package:quickreels/app/data/datasource/dto/create_reel_dto.dart';
 import 'package:quickreels/app/data/datasource/dto/save_user_dto.dart';
+import 'package:quickreels/app/data/datasource/dto/song_dto.dart';
 import 'package:quickreels/app/data/datasource/dto/update_reel_dto.dart';
 import 'package:quickreels/app/data/datasource/dto/user_dto.dart';
 import 'package:quickreels/app/data/datasource/impl/auth_datasource_impl.dart';
 import 'package:quickreels/app/data/datasource/impl/reels_datasource_impl.dart';
+import 'package:quickreels/app/data/datasource/impl/song_datasource_impl.dart';
 import 'package:quickreels/app/data/datasource/impl/storage_datasource_impl.dart';
 import 'package:quickreels/app/data/datasource/impl/user_datasource_impl.dart';
 import 'package:quickreels/app/data/datasource/mapper/comment_dto_mapper.dart';
@@ -20,9 +22,11 @@ import 'package:quickreels/app/data/datasource/mapper/reel_dto_mapper.dart';
 import 'package:quickreels/app/data/datasource/mapper/save_reel_comment_dto_mapper.dart';
 import 'package:quickreels/app/data/datasource/mapper/save_reel_dto_mapper.dart';
 import 'package:quickreels/app/data/datasource/mapper/save_user_dto_mapper.dart';
+import 'package:quickreels/app/data/datasource/mapper/song_dto_mapper.dart';
 import 'package:quickreels/app/data/datasource/mapper/update_post_dto_mapper.dart';
 import 'package:quickreels/app/data/datasource/mapper/user_dto_mapper.dart';
 import 'package:quickreels/app/data/datasource/reel_datasource.dart';
+import 'package:quickreels/app/data/datasource/song_datasource.dart';
 import 'package:quickreels/app/data/datasource/storage_datasource.dart';
 import 'package:quickreels/app/data/datasource/user_datasource.dart';
 import 'package:quickreels/app/data/mapper/comment_bo_mapper.dart';
@@ -87,6 +91,7 @@ class AppBinding extends Bindings {
     Get.put<Mapper<ReelBoMapperData, ReelBO>>(ReelBoMapper());
     Get.put<Mapper<CommentBoMapperData, CommentBO>>(
         CommentBoMapper(userMapper: Get.find()));
+    Get.put<Mapper<DocumentSnapshot, SongDTO>>(SongDtoMapper());
   }
 
   void _initDatasourceDependencies() {
@@ -103,6 +108,8 @@ class AppBinding extends Bindings {
         updateReelMapper: Get.find(),
         commentMapper: Get.find(),
         reelMapper: Get.find()));
+    Get.put<SongDatasource>(
+        SongDataSourceImpl(firestore: Get.find(), songMapper: Get.find()));
   }
 
   void _initRepositoryDependencies() {
@@ -119,7 +126,8 @@ class AppBinding extends Bindings {
         storageDatasource: Get.find(),
         userBoMapper: Get.find(),
         reelBoMapper: Get.find(),
-        commentBoMapper: Get.find()));
+        commentBoMapper: Get.find(),
+        songDatasource: Get.find()));
   }
 
   void _initUseCasesDependencies() {

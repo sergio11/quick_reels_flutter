@@ -8,6 +8,7 @@ import 'package:quickreels/app/data/datasource/dto/save_reel_comment_dto.dart';
 import 'package:quickreels/app/data/datasource/dto/update_reel_dto.dart';
 import 'package:quickreels/app/data/datasource/dto/user_dto.dart';
 import 'package:quickreels/app/data/datasource/reel_datasource.dart';
+import 'package:quickreels/app/data/datasource/song_datasource.dart';
 import 'package:quickreels/app/data/datasource/storage_datasource.dart';
 import 'package:quickreels/app/data/datasource/user_datasource.dart';
 import 'package:quickreels/app/data/mapper/comment_bo_mapper.dart';
@@ -23,6 +24,7 @@ class ReelRepositoryImpl implements ReelRepository {
   final ReelsDatasource reelsDatasource;
   final UserDatasource userDatasource;
   final StorageDatasource storageDatasource;
+  final SongDatasource songDatasource;
   final Mapper<UserDTO, UserBO> userBoMapper;
   final Mapper<ReelBoMapperData, ReelBO> reelBoMapper;
   final Mapper<CommentBoMapperData, CommentBO> commentBoMapper;
@@ -31,6 +33,7 @@ class ReelRepositoryImpl implements ReelRepository {
       {required this.reelsDatasource,
       required this.userDatasource,
       required this.storageDatasource,
+      required this.songDatasource,
       required this.userBoMapper,
       required this.reelBoMapper,
       required this.commentBoMapper});
@@ -231,7 +234,9 @@ class ReelRepositoryImpl implements ReelRepository {
 
   Future<ReelBO> _mapToReelBO(ReelDTO reel) async {
     final author = await userDatasource.findByUid(reel.authorUid);
-    return reelBoMapper(ReelBoMapperData(userDTO: author, reelDTO: reel));
+    final song = await songDatasource.findById(reel.songId);
+    return reelBoMapper(
+        ReelBoMapperData(userDTO: author, reelDTO: reel, songDTO: song));
   }
 
   Future<CommentBO> _mapToCommentBO(CommentDTO comment) async {

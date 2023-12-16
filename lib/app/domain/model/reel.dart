@@ -2,6 +2,7 @@ class ReelBO {
   final String description;
   final String username;
   final String songName;
+  final String songUrl;
   final List<String> likes;
   final List<String> bookmarks;
   final String reelId;
@@ -17,6 +18,7 @@ class ReelBO {
   const ReelBO(
       {required this.description,
       required this.songName,
+      required this.songUrl,
       required this.username,
       required this.likes,
       required this.bookmarks,

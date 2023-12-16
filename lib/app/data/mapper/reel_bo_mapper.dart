@@ -1,5 +1,6 @@
 import 'package:quickreels/app/core/utils/mapper.dart';
 import 'package:quickreels/app/data/datasource/dto/reel_dto.dart';
+import 'package:quickreels/app/data/datasource/dto/song_dto.dart';
 import 'package:quickreels/app/data/datasource/dto/user_dto.dart';
 import 'package:quickreels/app/domain/model/reel.dart';
 
@@ -8,6 +9,7 @@ class ReelBoMapper extends Mapper<ReelBoMapperData, ReelBO> {
   ReelBO call(ReelBoMapperData object) {
     final reelDTO = object.reelDTO;
     final userDTO = object.userDTO;
+    final songDTO = object.songDTO;
     return ReelBO(
       description: reelDTO.description,
       username: userDTO.username,
@@ -21,7 +23,8 @@ class ReelBoMapper extends Mapper<ReelBoMapperData, ReelBO> {
       commentCount: reelDTO.commentCount,
       tags: reelDTO.tags,
       placeInfo: reelDTO.placeInfo,
-      songName: reelDTO.songName,
+      songName: songDTO.name,
+      songUrl: songDTO.url,
       shareCount: reelDTO.shareCount,
     );
   }
@@ -30,6 +33,7 @@ class ReelBoMapper extends Mapper<ReelBoMapperData, ReelBO> {
 class ReelBoMapperData {
   final ReelDTO reelDTO;
   final UserDTO userDTO;
+  final SongDTO songDTO;
 
-  ReelBoMapperData({required this.reelDTO, required this.userDTO});
+  ReelBoMapperData({required this.reelDTO, required this.userDTO, required this.songDTO});
 }
