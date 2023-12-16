@@ -6,16 +6,12 @@ import 'package:quickreels/app/domain/model/failure.dart';
 import 'package:quickreels/app/domain/model/user.dart';
 import 'package:quickreels/app/domain/repository/user_repository.dart';
 
-
 class UserRepositoryImpl implements UserRepository {
-
   final UserDatasource userDatasource;
   final Mapper<UserDTO, UserBO> userBoMapper;
 
-  UserRepositoryImpl({
-    required this.userDatasource,
-    required this.userBoMapper
-  });
+  UserRepositoryImpl(
+      {required this.userDatasource, required this.userBoMapper});
 
   @override
   Future<bool> followUser(String uid, String followId) async {
@@ -30,13 +26,13 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<UserBO> findByUid(String uid) async {
-     try {
-       final user = await userDatasource.findByUid(uid);
-       return userBoMapper(user);
-     } catch (ex) {
-       debugPrint("findByUid - ex -> ${ex.toString()}");
-       throw Failure(message: ex.toString());
-     }
+    try {
+      final user = await userDatasource.findByUid(uid);
+      return userBoMapper(user);
+    } catch (ex) {
+      debugPrint("findByUid - ex -> ${ex.toString()}");
+      throw Failure(message: ex.toString());
+    }
   }
 
   @override
@@ -51,12 +47,23 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<List<UserBO>> findAllThatUserIsFollowingBy(String uid) async {
+  Future<List<UserBO>> findAllFollowedBy(String uid) async {
     try {
-      final userList = await userDatasource.findAllThatUserIsFollowingBy(uid);
+      final userList = await userDatasource.findAllFollowedBy(uid);
       return userList.map((e) => userBoMapper(e)).toList();
     } catch (ex) {
-      debugPrint("findAllThatUserIsFollowingBy - ex -> ${ex.toString()}");
+      debugPrint("findAllFollowedBy - ex -> ${ex.toString()}");
+      throw Failure(message: ex.toString());
+    }
+  }
+
+  @override
+  Future<List<UserBO>> findAllFollowersBy(String uid) async {
+    try {
+      final userList = await userDatasource.findAllFollowersBy(uid);
+      return userList.map((e) => userBoMapper(e)).toList();
+    } catch (ex) {
+      debugPrint("findAllFollowersBy - ex -> ${ex.toString()}");
       throw Failure(message: ex.toString());
     }
   }
