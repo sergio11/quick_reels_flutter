@@ -20,9 +20,12 @@ class ReelDtoMapper extends Mapper<DocumentSnapshot, ReelDTO> {
             : [],
         commentCount:
         snapshot['commentsCount'] is int ? snapshot['commentsCount'] : 0,
+        shareCount:
+        snapshot['shareCount'] is int ? snapshot['shareCount'] : 0,
         tags: snapshot['tags'] is List
             ? List<String>.from(snapshot['tags'] as List)
             : [],
-        placeInfo: snapshot['placeInfo']);
+        placeInfo: snapshot['placeInfo'],
+        songName: snapshot['songName']);
   }
 }

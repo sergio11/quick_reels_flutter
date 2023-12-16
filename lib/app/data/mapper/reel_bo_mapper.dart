@@ -1,4 +1,3 @@
-
 import 'package:quickreels/app/core/utils/mapper.dart';
 import 'package:quickreels/app/data/datasource/dto/reel_dto.dart';
 import 'package:quickreels/app/data/datasource/dto/user_dto.dart';
@@ -14,14 +13,16 @@ class ReelBoMapper extends Mapper<ReelBoMapperData, ReelBO> {
       username: userDTO.username,
       likes: reelDTO.likes,
       bookmarks: reelDTO.bookmarks,
-      postId: reelDTO.reelId,
+      reelId: reelDTO.reelId,
       datePublished: reelDTO.datePublished,
-      postUrl: reelDTO.url,
-      postAuthorUid: userDTO.uid,
-      profImage: userDTO.photoUrl,
+      url: reelDTO.url,
+      authorUid: userDTO.uid,
+      authImageUrl: userDTO.photoUrl,
       commentCount: reelDTO.commentCount,
       tags: reelDTO.tags,
       placeInfo: reelDTO.placeInfo,
+      songName: reelDTO.songName,
+      shareCount: reelDTO.shareCount,
     );
   }
 }
