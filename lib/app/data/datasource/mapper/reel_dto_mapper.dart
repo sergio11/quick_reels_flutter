@@ -26,6 +26,6 @@ class ReelDtoMapper extends Mapper<DocumentSnapshot, ReelDTO> {
             ? List<String>.from(snapshot['tags'] as List)
             : [],
         placeInfo: snapshot['placeInfo'],
-        songName: snapshot['songName']);
+        songId: snapshot['songId']);
   }
 }

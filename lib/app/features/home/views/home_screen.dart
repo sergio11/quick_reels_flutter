@@ -1,8 +1,10 @@
+import 'package:audio_wave/audio_wave.dart';
 import 'package:flutter/material.dart';
 import 'package:quickreels/app/core/base/base_view.dart';
 import 'package:quickreels/app/core/utils/helpers.dart';
+import 'package:quickreels/app/core/values/app_colors.dart';
 import 'package:quickreels/app/core/widget/circle_animation.dart';
-import 'package:quickreels/app/core/widget/video_player_item.dart';
+import 'package:quickreels/app/core/widget/reel_player_item.dart';
 import 'package:quickreels/app/domain/model/reel.dart';
 import 'package:quickreels/app/features/home/controller/home_controller.dart';
 import 'package:quickreels/app/features/home/model/home_ui_data.dart';
@@ -26,8 +28,8 @@ class HomeScreen extends BaseView<HomeController, HomeUiData> {
         final reel = uiData.reels[index];
         return Stack(
           children: [
-            VideoPlayerItem(
-              videoUrl: reel.url,
+            ReelPlayerItem(
+              reel: reel,
             ),
             Column(
               children: [
@@ -66,6 +68,7 @@ class HomeScreen extends BaseView<HomeController, HomeUiData> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            const SizedBox(height: 5),
             Text(
               reelBO.description,
               style: const TextStyle(
@@ -73,26 +76,54 @@ class HomeScreen extends BaseView<HomeController, HomeUiData> {
                 color: Colors.white,
               ),
             ),
-            Row(
-              children: [
-                const Icon(
-                  Icons.music_note,
-                  size: 15,
-                  color: Colors.white,
-                ),
-                Text(
-                  reelBO.songName,
-                  style: const TextStyle(
-                    fontSize: 15,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            )
+            const SizedBox(height: 5),
+            _buildSongData(reelBO)
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildSongData(ReelBO reelBO) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            const Icon(
+              Icons.music_note,
+              size: 30,
+              color: Colors.white,
+            ),
+            Text(
+              reelBO.songName,
+              style: const TextStyle(
+                fontSize: 15,
+                color: AppColors.colorWhite,
+                fontStyle: FontStyle.italic,
+                fontWeight: FontWeight.w600,
+              ),
+            )
+          ],
+        ),
+        const SizedBox(height: 10),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            return AudioWave(
+              height: 40,
+              width: constraints.maxWidth,
+              spacing: 2.5,
+              animationLoop: 0,
+              bars: List.generate(30, (index) {
+                final heightFactor = [0.7, 0.8, 1, 0.9, 0.5, 0.4, 0.35, 0.6][index % 8];
+                return AudioWaveBar(
+                  heightFactor: heightFactor.toDouble(),
+                  color: AppColors.colorWhite,
+                );
+              }),
+            );
+          },
+        )
+      ],
     );
   }
 

@@ -3,7 +3,7 @@ class ReelDTO {
   final String description;
   final String authorUid;
   final DateTime datePublished;
-  final String songName;
+  final String songId;
   final String url;
   final List<String> likes;
   final List<String> bookmarks;
@@ -17,7 +17,7 @@ class ReelDTO {
       required this.description,
       required this.authorUid,
       required this.datePublished,
-      required this.songName,
+      required this.songId,
       required this.url,
       required this.likes,
       required this.bookmarks,
