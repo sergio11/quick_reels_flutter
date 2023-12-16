@@ -1,28 +1,32 @@
 class ReelBO {
   final String description;
   final String username;
+  final String songName;
   final List<String> likes;
   final List<String> bookmarks;
-  final String postId;
-  final String postAuthorUid;
+  final String reelId;
+  final String authorUid;
   final DateTime datePublished;
-  final String postUrl;
-  final String profImage;
+  final String url;
+  final String authImageUrl;
   final int commentCount;
+  final int shareCount;
   final List<String> tags;
   final String? placeInfo;
 
   const ReelBO(
       {required this.description,
+      required this.songName,
       required this.username,
       required this.likes,
       required this.bookmarks,
-      required this.postId,
-      required this.postAuthorUid,
+      required this.reelId,
+      required this.authorUid,
       required this.datePublished,
-      required this.postUrl,
-      required this.profImage,
+      required this.url,
+      required this.authImageUrl,
       required this.commentCount,
+      required this.shareCount,
       required this.tags,
       this.placeInfo});
 }

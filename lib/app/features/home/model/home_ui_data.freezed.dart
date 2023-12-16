@@ -16,7 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$HomeUiData {
-  int get currentPage => throw _privateConstructorUsedError;
+  String get authUserUuid => throw _privateConstructorUsedError;
+  List<ReelBO> get reels => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeUiDataCopyWith<HomeUiData> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $HomeUiDataCopyWith<$Res> {
           HomeUiData value, $Res Function(HomeUiData) then) =
       _$HomeUiDataCopyWithImpl<$Res, HomeUiData>;
   @useResult
-  $Res call({int currentPage});
+  $Res call({String authUserUuid, List<ReelBO> reels});
 }
 
 /// @nodoc
@@ -45,13 +46,18 @@ class _$HomeUiDataCopyWithImpl<$Res, $Val extends HomeUiData>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? currentPage = null,
+    Object? authUserUuid = null,
+    Object? reels = null,
   }) {
     return _then(_value.copyWith(
-      currentPage: null == currentPage
-          ? _value.currentPage
-          : currentPage // ignore: cast_nullable_to_non_nullable
-              as int,
+      authUserUuid: null == authUserUuid
+          ? _value.authUserUuid
+          : authUserUuid // ignore: cast_nullable_to_non_nullable
+              as String,
+      reels: null == reels
+          ? _value.reels
+          : reels // ignore: cast_nullable_to_non_nullable
+              as List<ReelBO>,
     ) as $Val);
   }
 }
@@ -64,7 +70,7 @@ abstract class _$$HomeUiDataImplCopyWith<$Res>
       __$$HomeUiDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int currentPage});
+  $Res call({String authUserUuid, List<ReelBO> reels});
 }
 
 /// @nodoc
@@ -78,13 +84,18 @@ class __$$HomeUiDataImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? currentPage = null,
+    Object? authUserUuid = null,
+    Object? reels = null,
   }) {
     return _then(_$HomeUiDataImpl(
-      currentPage: null == currentPage
-          ? _value.currentPage
-          : currentPage // ignore: cast_nullable_to_non_nullable
-              as int,
+      authUserUuid: null == authUserUuid
+          ? _value.authUserUuid
+          : authUserUuid // ignore: cast_nullable_to_non_nullable
+              as String,
+      reels: null == reels
+          ? _value._reels
+          : reels // ignore: cast_nullable_to_non_nullable
+              as List<ReelBO>,
     ));
   }
 }
@@ -92,15 +103,25 @@ class __$$HomeUiDataImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$HomeUiDataImpl implements _HomeUiData {
-  const _$HomeUiDataImpl({this.currentPage = 0});
+  const _$HomeUiDataImpl(
+      {this.authUserUuid = "", final List<ReelBO> reels = const []})
+      : _reels = reels;
 
   @override
   @JsonKey()
-  final int currentPage;
+  final String authUserUuid;
+  final List<ReelBO> _reels;
+  @override
+  @JsonKey()
+  List<ReelBO> get reels {
+    if (_reels is EqualUnmodifiableListView) return _reels;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_reels);
+  }
 
   @override
   String toString() {
-    return 'HomeUiData(currentPage: $currentPage)';
+    return 'HomeUiData(authUserUuid: $authUserUuid, reels: $reels)';
   }
 
   @override
@@ -108,12 +129,14 @@ class _$HomeUiDataImpl implements _HomeUiData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$HomeUiDataImpl &&
-            (identical(other.currentPage, currentPage) ||
-                other.currentPage == currentPage));
+            (identical(other.authUserUuid, authUserUuid) ||
+                other.authUserUuid == authUserUuid) &&
+            const DeepCollectionEquality().equals(other._reels, _reels));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, currentPage);
+  int get hashCode => Object.hash(
+      runtimeType, authUserUuid, const DeepCollectionEquality().hash(_reels));
 
   @JsonKey(ignore: true)
   @override
@@ -123,10 +146,13 @@ class _$HomeUiDataImpl implements _HomeUiData {
 }
 
 abstract class _HomeUiData implements HomeUiData {
-  const factory _HomeUiData({final int currentPage}) = _$HomeUiDataImpl;
+  const factory _HomeUiData(
+      {final String authUserUuid, final List<ReelBO> reels}) = _$HomeUiDataImpl;
 
   @override
-  int get currentPage;
+  String get authUserUuid;
+  @override
+  List<ReelBO> get reels;
   @override
   @JsonKey(ignore: true)
   _$$HomeUiDataImplCopyWith<_$HomeUiDataImpl> get copyWith =>
