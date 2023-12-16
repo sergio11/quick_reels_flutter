@@ -31,20 +31,27 @@ class HomeScreen extends BaseView<HomeController, HomeUiData> {
             ReelPlayerItem(
               reel: reel,
             ),
-            Column(
+            Expanded(
+                child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
+                    child: Padding(
+                  padding:
+                      const EdgeInsets.only(bottom: 100, left: 20, top: 20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _buildReelAuthorInfo(reel),
-                      _buildReelActions(reel, uiData.authUserUuid),
+                      _buildSongData(reel),
                     ],
                   ),
-                ),
+                )),
+                _buildReelActions(reel, uiData.authUserUuid),
               ],
-            ),
+            ))
           ],
         );
       },
@@ -52,35 +59,29 @@ class HomeScreen extends BaseView<HomeController, HomeUiData> {
   }
 
   Widget _buildReelAuthorInfo(ReelBO reelBO) {
-    return Expanded(
-      child: Container(
-        padding: const EdgeInsets.only(left: 20, top: 20),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Text(
-              reelBO.username,
-              style: const TextStyle(
-                fontSize: 20,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 5),
-            Text(
-              reelBO.description,
-              style: const TextStyle(
-                fontSize: 15,
-                color: Colors.white,
-              ),
-            ),
-            const SizedBox(height: 5),
-            _buildSongData(reelBO)
-          ],
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Text(
+          reelBO.username,
+          style: const TextStyle(
+            fontSize: 20,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-      ),
+        const SizedBox(height: 5),
+        Text(
+          reelBO.description,
+          style: const TextStyle(
+            fontSize: 15,
+            color: Colors.white,
+          ),
+        ),
+        const SizedBox(height: 5),
+      ],
     );
   }
 
@@ -114,7 +115,8 @@ class HomeScreen extends BaseView<HomeController, HomeUiData> {
               spacing: 2.5,
               animationLoop: 0,
               bars: List.generate(30, (index) {
-                final heightFactor = [0.7, 0.8, 1, 0.9, 0.5, 0.4, 0.35, 0.6][index % 8];
+                final heightFactor =
+                    [0.7, 0.8, 1, 0.9, 0.5, 0.4, 0.35, 0.6][index % 8];
                 return AudioWaveBar(
                   heightFactor: heightFactor.toDouble(),
                   color: AppColors.colorWhite,
