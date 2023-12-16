@@ -5,6 +5,7 @@ import 'package:quickreels/app/core/utils/helpers.dart';
 import 'package:quickreels/app/core/values/app_colors.dart';
 import 'package:quickreels/app/core/widget/circle_animation.dart';
 import 'package:quickreels/app/core/widget/reel_player_item.dart';
+import 'package:quickreels/app/core/widget/tags_row.dart';
 import 'package:quickreels/app/domain/model/reel.dart';
 import 'package:quickreels/app/features/home/controller/home_controller.dart';
 import 'package:quickreels/app/features/home/model/home_ui_data.dart';
@@ -81,6 +82,7 @@ class HomeScreen extends BaseView<HomeController, HomeUiData> {
           ),
         ),
         const SizedBox(height: 5),
+        TagsRow(tags: reelBO.tags),
       ],
     );
   }
