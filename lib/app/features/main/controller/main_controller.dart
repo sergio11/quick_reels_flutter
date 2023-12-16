@@ -39,6 +39,7 @@ class MainController extends BaseController<MainUiData>
   void onInit() {
     super.onInit();
     tabController = TabController(vsync: this, length: uiData.tabItems.length);
+    changePage(0);
   }
 
   @override
@@ -62,6 +63,6 @@ class MainController extends BaseController<MainUiData>
 
   void changePage(int newPage) {
     updateState(uiData.copyWith(
-        currentPage: newPage, pageTitle: pageTitleList[newPage]));
+        currentPage: newPage, pageTitle: pageTitleList[newPage], hasAppBar: newPage > 0));
   }
 }
