@@ -37,6 +37,12 @@ import 'package:quickreels/app/domain/model/user.dart';
 import 'package:quickreels/app/domain/repository/auth_repository.dart';
 import 'package:quickreels/app/domain/repository/reel_repository.dart';
 import 'package:quickreels/app/domain/repository/user_repository.dart';
+import 'package:quickreels/app/domain/usecase/fetch_user_home_feed_use_case.dart';
+import 'package:quickreels/app/domain/usecase/find_bookmark_reels_by_user_use_case.dart';
+import 'package:quickreels/app/domain/usecase/find_favorites_posts_by_user_use_case.dart';
+import 'package:quickreels/app/domain/usecase/find_followers_by_user_use_case.dart';
+import 'package:quickreels/app/domain/usecase/find_reel_by_id_use_case.dart';
+import 'package:quickreels/app/domain/usecase/find_reels_by_user_use_case.dart';
 import 'package:quickreels/app/domain/usecase/get_auth_user_uid_use_case.dart';
 import 'package:quickreels/app/domain/usecase/get_user_details_use_case.dart';
 import 'package:quickreels/app/domain/usecase/sign_in_user_use_case.dart';
@@ -127,6 +133,20 @@ class AppBinding extends Bindings {
         SignUpUserUseCase(authRepository: Get.find(), appEventBus: Get.find()));
     Get.put<GetUserDetailsUseCase>(
         GetUserDetailsUseCase(authRepository: Get.find()));
+    Get.put<FetchUserHomeFeedUseCase>(FetchUserHomeFeedUseCase(
+        authRepository: Get.find(),
+        reelRepository: Get.find(),
+        userRepository: Get.find()));
+    Get.put<FindBookmarkReelsByUserUseCase>(
+        FindBookmarkReelsByUserUseCase(reelRepository: Get.find()));
+    Get.put<FindFavoritesReelsByUserUseCase>(
+        FindFavoritesReelsByUserUseCase(reelRepository: Get.find()));
+    Get.put<FindFollowersByUserUseCase>(
+        FindFollowersByUserUseCase(userRepository: Get.find()));
+    Get.put<FindReelByIdUseCase>(
+        FindReelByIdUseCase(reelRepository: Get.find()));
+    Get.put<FindReelsByUserUseCase>(
+        FindReelsByUserUseCase(reelRepository: Get.find()));
   }
 
   void _initSharedDependencies() {

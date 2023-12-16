@@ -1,6 +1,7 @@
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quickreels/app/features/home/bindings/home_binding.dart';
 import 'package:quickreels/app/features/main/bindings/main_binding.dart';
 import 'package:quickreels/app/features/main/views/main_screen.dart';
 import 'package:quickreels/app/features/onboarding/onboarding_screen.dart';
@@ -69,7 +70,7 @@ class AppPages {
       name: _Paths.HOME,
       page: () => MainScreen(),
       binding: MainBinding(),
-      bindings: [ProfileBinding()],
+      bindings: [HomeBinding(), ProfileBinding()],
       children: [
         GetPage(
           name: _Paths.PROFILE,
