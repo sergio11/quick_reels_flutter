@@ -22,7 +22,7 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      buildCircleAvatar(
+                      buildCircleImage(
                           imageUrl: uiData.userData?.photoUrl ?? "")
                     ],
                   ),

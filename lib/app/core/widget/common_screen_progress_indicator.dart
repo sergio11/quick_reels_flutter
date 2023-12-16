@@ -13,8 +13,8 @@ class CommonScreenProgressIndicator extends StatelessWidget {
 
   const CommonScreenProgressIndicator({
     super.key,
-    this.backgroundColor = AppColors.colorPrimary,
-    this.spinnerColor = AppColors.colorAccent,
+    this.backgroundColor = AppColors.colorWhite,
+    this.spinnerColor = AppColors.colorPrimary,
     this.spinnerSize = DEFAULT_SPINNER_SIZE
   });
 

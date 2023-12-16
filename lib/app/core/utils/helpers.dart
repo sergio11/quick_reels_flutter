@@ -5,7 +5,7 @@ import 'package:quickreels/app/core/values/app_colors.dart';
 import 'package:quickreels/app/core/widget/animate_gradient_widget.dart';
 import 'package:quickreels/app/core/widget/common_screen_progress_indicator.dart';
 
-Widget buildCircleAvatar({
+Widget buildCircleImage({
   required String imageUrl,
   double? radius,
   bool showBackgroundColor = true,
@@ -13,7 +13,7 @@ Widget buildCircleAvatar({
   return imageUrl.isEmpty
       ? CommonScreenProgressIndicator(
           backgroundColor:
-              showBackgroundColor ? AppColors.colorPrimary : Colors.transparent,
+              showBackgroundColor ? AppColors.colorWhite : Colors.transparent,
           spinnerSize: radius ?? 40,
         )
       : _buildCachedNetworkImage(
