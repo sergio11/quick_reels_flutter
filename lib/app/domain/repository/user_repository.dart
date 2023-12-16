@@ -7,5 +7,7 @@ abstract class UserRepository {
 
   Future<List<UserBO>> findByName(String username);
 
-  Future<List<UserBO>> findAllThatUserIsFollowingBy(String uid);
+  Future<List<UserBO>> findAllFollowedBy(String uid);
+
+  Future<List<UserBO>> findAllFollowersBy(String uid);
 }

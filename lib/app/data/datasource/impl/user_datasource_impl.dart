@@ -9,10 +9,11 @@ class UserDatasourceImpl extends UserDatasource {
   final Mapper<DocumentSnapshot, UserDTO> userDtoMapper;
   final Mapper<SaveUserDTO, Map<String, dynamic>> saveUserDtoMapper;
 
-  UserDatasourceImpl(
-      {required this.firestore,
-      required this.userDtoMapper,
-      required this.saveUserDtoMapper});
+  UserDatasourceImpl({
+    required this.firestore,
+    required this.userDtoMapper,
+    required this.saveUserDtoMapper,
+  });
 
   @override
   Future<UserDTO> findByUid(String uid) async {
@@ -22,23 +23,26 @@ class UserDatasourceImpl extends UserDatasource {
 
   @override
   Future<void> followUser(String uid, String followId) async {
-    DocumentSnapshot snap = await firestore.collection('users').doc(uid).get();
-    List following = (snap.data()! as dynamic)['following'];
-
-    if (following.contains(followId)) {
-      await firestore.collection('users').doc(followId).update({
+    final userRef = firestore.collection('users');
+    final uidDoc = userRef.doc(uid);
+    final followIdDoc = userRef.doc(followId);
+    final uidSnap = await uidDoc.get();
+    final uidData = uidSnap.data()!;
+    final uidFollowing = List<String>.from(uidData['following'] ?? []);
+    if (uidFollowing.contains(followId)) {
+      await followIdDoc.update({
         'followers': FieldValue.arrayRemove([uid])
       });
 
-      await firestore.collection('users').doc(uid).update({
+      await uidDoc.update({
         'following': FieldValue.arrayRemove([followId])
       });
     } else {
-      await firestore.collection('users').doc(followId).update({
+      await followIdDoc.update({
         'followers': FieldValue.arrayUnion([uid])
       });
 
-      await firestore.collection('users').doc(uid).update({
+      await uidDoc.update({
         'following': FieldValue.arrayUnion([followId])
       });
     }
@@ -54,29 +58,34 @@ class UserDatasourceImpl extends UserDatasource {
 
   @override
   Future<List<UserDTO>> findByName(String username) async {
-    final docSnap = await firestore
+    final querySnapshot = await firestore
         .collection('users')
-        .where(
-          'username',
-          isGreaterThanOrEqualTo: username,
-        )
+        .where('username', isGreaterThanOrEqualTo: username)
         .get();
-    return docSnap.docs
-        .map((doc) => userDtoMapper(doc))
-        .toList();
+
+    return querySnapshot.docs.map((doc) => userDtoMapper(doc)).toList();
   }
 
   @override
-  Future<List<UserDTO>> findAllThatUserIsFollowingBy(String uid) async {
-    final userSnap = await firestore.collection('users').doc(uid).get();
-    final userDTO = userDtoMapper(userSnap);
-    final followingSnap = await firestore
-        .collection('users')
-        .where('followers', arrayContains: uid)
+  Future<List<UserDTO>> findAllFollowedBy(String uid) async {
+    return _findAllByArrayContains('users', 'followers', uid);
+  }
+
+  @override
+  Future<List<UserDTO>> findAllFollowersBy(String uid) async {
+    return _findAllByArrayContains('users', 'following', uid);
+  }
+
+  Future<List<UserDTO>> _findAllByArrayContains(
+      String collection,
+      String arrayField,
+      String uid,
+      ) async {
+    final snapshot = await firestore
+        .collection(collection)
+        .where(arrayField, arrayContains: uid)
         .get();
-    final followingDTOList = followingSnap.docs
-        .map((doc) => userDtoMapper(doc))
-        .toList();
-    return followingDTOList..add(userDTO);
+
+    return snapshot.docs.map((doc) => userDtoMapper(doc)).toList();
   }
 }
