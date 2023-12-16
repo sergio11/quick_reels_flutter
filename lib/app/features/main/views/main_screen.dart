@@ -15,7 +15,7 @@ class MainScreen extends BaseView<MainController, MainUiData> {
 
   @override
   PreferredSizeWidget? appBar(BuildContext context, MainUiData uiData) {
-    return AppBar(
+    return uiData.hasAppBar ? AppBar(
       backgroundColor: AppColors.colorPrimary,
       leading: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -31,7 +31,7 @@ class MainScreen extends BaseView<MainController, MainUiData> {
           color: AppColors.colorWhite,
         ),
       ),
-    );
+    ) : null;
   }
 
   @override

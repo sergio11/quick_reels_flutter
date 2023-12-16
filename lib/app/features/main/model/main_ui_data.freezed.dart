@@ -20,6 +20,7 @@ mixin _$MainUiData {
   List<IconData> get tabMenuItems => throw _privateConstructorUsedError;
   int get currentPage => throw _privateConstructorUsedError;
   String get pageTitle => throw _privateConstructorUsedError;
+  bool get hasAppBar => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MainUiDataCopyWith<MainUiData> get copyWith =>
@@ -36,7 +37,8 @@ abstract class $MainUiDataCopyWith<$Res> {
       {List<Widget> tabItems,
       List<IconData> tabMenuItems,
       int currentPage,
-      String pageTitle});
+      String pageTitle,
+      bool hasAppBar});
 }
 
 /// @nodoc
@@ -56,6 +58,7 @@ class _$MainUiDataCopyWithImpl<$Res, $Val extends MainUiData>
     Object? tabMenuItems = null,
     Object? currentPage = null,
     Object? pageTitle = null,
+    Object? hasAppBar = null,
   }) {
     return _then(_value.copyWith(
       tabItems: null == tabItems
@@ -74,6 +77,10 @@ class _$MainUiDataCopyWithImpl<$Res, $Val extends MainUiData>
           ? _value.pageTitle
           : pageTitle // ignore: cast_nullable_to_non_nullable
               as String,
+      hasAppBar: null == hasAppBar
+          ? _value.hasAppBar
+          : hasAppBar // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -90,7 +97,8 @@ abstract class _$$MainUiDataImplCopyWith<$Res>
       {List<Widget> tabItems,
       List<IconData> tabMenuItems,
       int currentPage,
-      String pageTitle});
+      String pageTitle,
+      bool hasAppBar});
 }
 
 /// @nodoc
@@ -108,6 +116,7 @@ class __$$MainUiDataImplCopyWithImpl<$Res>
     Object? tabMenuItems = null,
     Object? currentPage = null,
     Object? pageTitle = null,
+    Object? hasAppBar = null,
   }) {
     return _then(_$MainUiDataImpl(
       tabItems: null == tabItems
@@ -126,6 +135,10 @@ class __$$MainUiDataImplCopyWithImpl<$Res>
           ? _value.pageTitle
           : pageTitle // ignore: cast_nullable_to_non_nullable
               as String,
+      hasAppBar: null == hasAppBar
+          ? _value.hasAppBar
+          : hasAppBar // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -137,7 +150,8 @@ class _$MainUiDataImpl implements _MainUiData {
       {final List<Widget> tabItems = const [],
       final List<IconData> tabMenuItems = const [],
       this.currentPage = 0,
-      this.pageTitle = ""})
+      this.pageTitle = "",
+      this.hasAppBar = true})
       : _tabItems = tabItems,
         _tabMenuItems = tabMenuItems;
 
@@ -165,10 +179,13 @@ class _$MainUiDataImpl implements _MainUiData {
   @override
   @JsonKey()
   final String pageTitle;
+  @override
+  @JsonKey()
+  final bool hasAppBar;
 
   @override
   String toString() {
-    return 'MainUiData(tabItems: $tabItems, tabMenuItems: $tabMenuItems, currentPage: $currentPage, pageTitle: $pageTitle)';
+    return 'MainUiData(tabItems: $tabItems, tabMenuItems: $tabMenuItems, currentPage: $currentPage, pageTitle: $pageTitle, hasAppBar: $hasAppBar)';
   }
 
   @override
@@ -182,7 +199,9 @@ class _$MainUiDataImpl implements _MainUiData {
             (identical(other.currentPage, currentPage) ||
                 other.currentPage == currentPage) &&
             (identical(other.pageTitle, pageTitle) ||
-                other.pageTitle == pageTitle));
+                other.pageTitle == pageTitle) &&
+            (identical(other.hasAppBar, hasAppBar) ||
+                other.hasAppBar == hasAppBar));
   }
 
   @override
@@ -191,7 +210,8 @@ class _$MainUiDataImpl implements _MainUiData {
       const DeepCollectionEquality().hash(_tabItems),
       const DeepCollectionEquality().hash(_tabMenuItems),
       currentPage,
-      pageTitle);
+      pageTitle,
+      hasAppBar);
 
   @JsonKey(ignore: true)
   @override
@@ -205,7 +225,8 @@ abstract class _MainUiData implements MainUiData {
       {final List<Widget> tabItems,
       final List<IconData> tabMenuItems,
       final int currentPage,
-      final String pageTitle}) = _$MainUiDataImpl;
+      final String pageTitle,
+      final bool hasAppBar}) = _$MainUiDataImpl;
 
   @override
   List<Widget> get tabItems;
@@ -215,6 +236,8 @@ abstract class _MainUiData implements MainUiData {
   int get currentPage;
   @override
   String get pageTitle;
+  @override
+  bool get hasAppBar;
   @override
   @JsonKey(ignore: true)
   _$$MainUiDataImplCopyWith<_$MainUiDataImpl> get copyWith =>

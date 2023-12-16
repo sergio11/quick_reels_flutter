@@ -1,5 +1,6 @@
 import 'package:audio_wave/audio_wave.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:quickreels/app/core/base/base_view.dart';
 import 'package:quickreels/app/core/utils/helpers.dart';
 import 'package:quickreels/app/core/values/app_colors.dart';
@@ -21,41 +22,46 @@ class HomeScreen extends BaseView<HomeController, HomeUiData> {
   }
 
   Widget _buildScreenContent(BuildContext context, HomeUiData uiData) {
-    return PageView.builder(
-      itemCount: uiData.reels.length,
-      controller: PageController(initialPage: 0, viewportFraction: 1),
-      scrollDirection: Axis.vertical,
-      itemBuilder: (context, index) {
-        final reel = uiData.reels[index];
-        return Stack(
-          children: [
-            ReelPlayerItem(
-              reel: reel,
-            ),
-            Expanded(
-                child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
+    return Stack(
+      children: [
+        PageView.builder(
+          itemCount: uiData.reels.length,
+          controller: PageController(initialPage: 0, viewportFraction: 1),
+          scrollDirection: Axis.vertical,
+          itemBuilder: (context, index) {
+            final reel = uiData.reels[index];
+            return Stack(
               children: [
+                ReelPlayerItem(
+                  reel: reel,
+                ),
                 Expanded(
-                    child: Padding(
-                  padding:
-                      const EdgeInsets.only(bottom: 100, left: 20, top: 20),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildReelAuthorInfo(reel),
-                      _buildSongData(reel),
-                    ],
-                  ),
-                )),
-                _buildReelActions(reel, uiData.authUserUuid),
+                    child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                        child: Padding(
+                      padding: const EdgeInsets.only(
+                          bottom: 100, left: 20, top: 100),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildReelAuthorInfo(reel),
+                          _buildSongData(reel),
+                        ],
+                      ),
+                    )),
+                    _buildReelActions(reel, uiData.authUserUuid),
+                  ],
+                ))
               ],
-            ))
-          ],
-        );
-      },
+            );
+          },
+        ),
+        _buildMainLogo(),
+      ],
     );
   }
 
@@ -77,7 +83,7 @@ class HomeScreen extends BaseView<HomeController, HomeUiData> {
         Text(
           reelBO.description,
           style: const TextStyle(
-            fontSize: 15,
+            fontSize: 12,
             color: Colors.white,
           ),
         ),
@@ -204,6 +210,17 @@ class HomeScreen extends BaseView<HomeController, HomeUiData> {
         ],
       ),
     );
+  }
+
+  Widget _buildMainLogo() {
+    return Container(
+        padding: const EdgeInsets.all(10),
+        alignment: Alignment.topCenter,
+        child: SvgPicture.asset(
+          'assets/images/main_logo.svg',
+          color: AppColors.colorWhite,
+          height: 50,
+        ));
   }
 
   Widget _buildProfileImage(String authImageUrl) {
