@@ -16,11 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MainUiData {
-  List<Widget> get tabItems => throw _privateConstructorUsedError;
   List<IconData> get tabMenuItems => throw _privateConstructorUsedError;
   int get currentPage => throw _privateConstructorUsedError;
-  String get pageTitle => throw _privateConstructorUsedError;
-  bool get hasAppBar => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MainUiDataCopyWith<MainUiData> get copyWith =>
@@ -33,12 +30,7 @@ abstract class $MainUiDataCopyWith<$Res> {
           MainUiData value, $Res Function(MainUiData) then) =
       _$MainUiDataCopyWithImpl<$Res, MainUiData>;
   @useResult
-  $Res call(
-      {List<Widget> tabItems,
-      List<IconData> tabMenuItems,
-      int currentPage,
-      String pageTitle,
-      bool hasAppBar});
+  $Res call({List<IconData> tabMenuItems, int currentPage});
 }
 
 /// @nodoc
@@ -54,17 +46,10 @@ class _$MainUiDataCopyWithImpl<$Res, $Val extends MainUiData>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tabItems = null,
     Object? tabMenuItems = null,
     Object? currentPage = null,
-    Object? pageTitle = null,
-    Object? hasAppBar = null,
   }) {
     return _then(_value.copyWith(
-      tabItems: null == tabItems
-          ? _value.tabItems
-          : tabItems // ignore: cast_nullable_to_non_nullable
-              as List<Widget>,
       tabMenuItems: null == tabMenuItems
           ? _value.tabMenuItems
           : tabMenuItems // ignore: cast_nullable_to_non_nullable
@@ -73,14 +58,6 @@ class _$MainUiDataCopyWithImpl<$Res, $Val extends MainUiData>
           ? _value.currentPage
           : currentPage // ignore: cast_nullable_to_non_nullable
               as int,
-      pageTitle: null == pageTitle
-          ? _value.pageTitle
-          : pageTitle // ignore: cast_nullable_to_non_nullable
-              as String,
-      hasAppBar: null == hasAppBar
-          ? _value.hasAppBar
-          : hasAppBar // ignore: cast_nullable_to_non_nullable
-              as bool,
     ) as $Val);
   }
 }
@@ -93,12 +70,7 @@ abstract class _$$MainUiDataImplCopyWith<$Res>
       __$$MainUiDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {List<Widget> tabItems,
-      List<IconData> tabMenuItems,
-      int currentPage,
-      String pageTitle,
-      bool hasAppBar});
+  $Res call({List<IconData> tabMenuItems, int currentPage});
 }
 
 /// @nodoc
@@ -112,17 +84,10 @@ class __$$MainUiDataImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? tabItems = null,
     Object? tabMenuItems = null,
     Object? currentPage = null,
-    Object? pageTitle = null,
-    Object? hasAppBar = null,
   }) {
     return _then(_$MainUiDataImpl(
-      tabItems: null == tabItems
-          ? _value._tabItems
-          : tabItems // ignore: cast_nullable_to_non_nullable
-              as List<Widget>,
       tabMenuItems: null == tabMenuItems
           ? _value._tabMenuItems
           : tabMenuItems // ignore: cast_nullable_to_non_nullable
@@ -131,14 +96,6 @@ class __$$MainUiDataImplCopyWithImpl<$Res>
           ? _value.currentPage
           : currentPage // ignore: cast_nullable_to_non_nullable
               as int,
-      pageTitle: null == pageTitle
-          ? _value.pageTitle
-          : pageTitle // ignore: cast_nullable_to_non_nullable
-              as String,
-      hasAppBar: null == hasAppBar
-          ? _value.hasAppBar
-          : hasAppBar // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -147,22 +104,8 @@ class __$$MainUiDataImplCopyWithImpl<$Res>
 
 class _$MainUiDataImpl implements _MainUiData {
   const _$MainUiDataImpl(
-      {final List<Widget> tabItems = const [],
-      final List<IconData> tabMenuItems = const [],
-      this.currentPage = 0,
-      this.pageTitle = "",
-      this.hasAppBar = true})
-      : _tabItems = tabItems,
-        _tabMenuItems = tabMenuItems;
-
-  final List<Widget> _tabItems;
-  @override
-  @JsonKey()
-  List<Widget> get tabItems {
-    if (_tabItems is EqualUnmodifiableListView) return _tabItems;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_tabItems);
-  }
+      {final List<IconData> tabMenuItems = const [], this.currentPage = 0})
+      : _tabMenuItems = tabMenuItems;
 
   final List<IconData> _tabMenuItems;
   @override
@@ -176,16 +119,10 @@ class _$MainUiDataImpl implements _MainUiData {
   @override
   @JsonKey()
   final int currentPage;
-  @override
-  @JsonKey()
-  final String pageTitle;
-  @override
-  @JsonKey()
-  final bool hasAppBar;
 
   @override
   String toString() {
-    return 'MainUiData(tabItems: $tabItems, tabMenuItems: $tabMenuItems, currentPage: $currentPage, pageTitle: $pageTitle, hasAppBar: $hasAppBar)';
+    return 'MainUiData(tabMenuItems: $tabMenuItems, currentPage: $currentPage)';
   }
 
   @override
@@ -193,25 +130,15 @@ class _$MainUiDataImpl implements _MainUiData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MainUiDataImpl &&
-            const DeepCollectionEquality().equals(other._tabItems, _tabItems) &&
             const DeepCollectionEquality()
                 .equals(other._tabMenuItems, _tabMenuItems) &&
             (identical(other.currentPage, currentPage) ||
-                other.currentPage == currentPage) &&
-            (identical(other.pageTitle, pageTitle) ||
-                other.pageTitle == pageTitle) &&
-            (identical(other.hasAppBar, hasAppBar) ||
-                other.hasAppBar == hasAppBar));
+                other.currentPage == currentPage));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_tabItems),
-      const DeepCollectionEquality().hash(_tabMenuItems),
-      currentPage,
-      pageTitle,
-      hasAppBar);
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_tabMenuItems), currentPage);
 
   @JsonKey(ignore: true)
   @override
@@ -222,22 +149,13 @@ class _$MainUiDataImpl implements _MainUiData {
 
 abstract class _MainUiData implements MainUiData {
   const factory _MainUiData(
-      {final List<Widget> tabItems,
-      final List<IconData> tabMenuItems,
-      final int currentPage,
-      final String pageTitle,
-      final bool hasAppBar}) = _$MainUiDataImpl;
+      {final List<IconData> tabMenuItems,
+      final int currentPage}) = _$MainUiDataImpl;
 
-  @override
-  List<Widget> get tabItems;
   @override
   List<IconData> get tabMenuItems;
   @override
   int get currentPage;
-  @override
-  String get pageTitle;
-  @override
-  bool get hasAppBar;
   @override
   @JsonKey(ignore: true)
   _$$MainUiDataImplCopyWith<_$MainUiDataImpl> get copyWith =>
