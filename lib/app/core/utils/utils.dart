@@ -121,15 +121,14 @@ Future<void> showReelPreviewDialog(
     barrierDismissible: false,
     builder: (BuildContext context) {
       return Dialog(
-        insetPadding: EdgeInsets.zero,
-        child: SizedBox(
-            width: double.infinity,
-            height: double.infinity,
-            child: ReelsPreview(
-              reel: reel,
-              authUserUuid: authUserUuid,
-            )),
-      );
+          insetPadding: EdgeInsets.zero,
+          child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: ReelsPreview(
+                reel: reel,
+                authUserUuid: authUserUuid,
+              )));
     },
   );
 }

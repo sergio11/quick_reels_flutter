@@ -42,7 +42,7 @@ class HomeScreen extends BaseView<HomeController, HomeUiData> {
         child: SvgPicture.asset(
           'assets/images/main_logo.svg',
           color: AppColors.colorWhite,
-          height: 50,
+          height: 55,
         ));
   }
 }

@@ -140,7 +140,7 @@ class ReelDetailItemState extends State<ReelDetailItem> {
         width: size.width,
         height: size.height,
         decoration: const BoxDecoration(
-          color: Colors.black,
+          color: AppColors.colorDark,
         ),
         child: _isVideoPlaying
             ? VideoPlayer(_videoPlayerController)

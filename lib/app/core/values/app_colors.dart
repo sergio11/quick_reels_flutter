@@ -6,7 +6,7 @@ abstract class AppColors {
   static const Color buttonColor = Colors.red;
   static const borderColor = Colors.grey;
 
-  static const Color pageBackground = Color(0xFFFAFBFD);
+  static const Color pageBackground = Colors.black12;
   static const Color statusBarColor = Colors.red;
   static const Color appBarColor = Colors.red;
   static const Color appBarIconColor = Color(0xFFFFFFFF);
