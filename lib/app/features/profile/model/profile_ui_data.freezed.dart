@@ -20,6 +20,7 @@ mixin _$ProfileUiData {
   bool get isFollowing => throw _privateConstructorUsedError;
   String get userUuid => throw _privateConstructorUsedError;
   bool get isAuthUser => throw _privateConstructorUsedError;
+  List<ReelBO> get reels => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProfileUiDataCopyWith<ProfileUiData> get copyWith =>
@@ -33,7 +34,11 @@ abstract class $ProfileUiDataCopyWith<$Res> {
       _$ProfileUiDataCopyWithImpl<$Res, ProfileUiData>;
   @useResult
   $Res call(
-      {UserBO? userData, bool isFollowing, String userUuid, bool isAuthUser});
+      {UserBO? userData,
+      bool isFollowing,
+      String userUuid,
+      bool isAuthUser,
+      List<ReelBO> reels});
 }
 
 /// @nodoc
@@ -53,6 +58,7 @@ class _$ProfileUiDataCopyWithImpl<$Res, $Val extends ProfileUiData>
     Object? isFollowing = null,
     Object? userUuid = null,
     Object? isAuthUser = null,
+    Object? reels = null,
   }) {
     return _then(_value.copyWith(
       userData: freezed == userData
@@ -71,6 +77,10 @@ class _$ProfileUiDataCopyWithImpl<$Res, $Val extends ProfileUiData>
           ? _value.isAuthUser
           : isAuthUser // ignore: cast_nullable_to_non_nullable
               as bool,
+      reels: null == reels
+          ? _value.reels
+          : reels // ignore: cast_nullable_to_non_nullable
+              as List<ReelBO>,
     ) as $Val);
   }
 }
@@ -84,7 +94,11 @@ abstract class _$$ProfileUpUiDataImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {UserBO? userData, bool isFollowing, String userUuid, bool isAuthUser});
+      {UserBO? userData,
+      bool isFollowing,
+      String userUuid,
+      bool isAuthUser,
+      List<ReelBO> reels});
 }
 
 /// @nodoc
@@ -102,6 +116,7 @@ class __$$ProfileUpUiDataImplCopyWithImpl<$Res>
     Object? isFollowing = null,
     Object? userUuid = null,
     Object? isAuthUser = null,
+    Object? reels = null,
   }) {
     return _then(_$ProfileUpUiDataImpl(
       userData: freezed == userData
@@ -120,6 +135,10 @@ class __$$ProfileUpUiDataImplCopyWithImpl<$Res>
           ? _value.isAuthUser
           : isAuthUser // ignore: cast_nullable_to_non_nullable
               as bool,
+      reels: null == reels
+          ? _value._reels
+          : reels // ignore: cast_nullable_to_non_nullable
+              as List<ReelBO>,
     ));
   }
 }
@@ -131,7 +150,9 @@ class _$ProfileUpUiDataImpl implements _ProfileUpUiData {
       {this.userData,
       this.isFollowing = false,
       this.userUuid = "",
-      this.isAuthUser = false});
+      this.isAuthUser = false,
+      final List<ReelBO> reels = const []})
+      : _reels = reels;
 
   @override
   final UserBO? userData;
@@ -144,10 +165,18 @@ class _$ProfileUpUiDataImpl implements _ProfileUpUiData {
   @override
   @JsonKey()
   final bool isAuthUser;
+  final List<ReelBO> _reels;
+  @override
+  @JsonKey()
+  List<ReelBO> get reels {
+    if (_reels is EqualUnmodifiableListView) return _reels;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_reels);
+  }
 
   @override
   String toString() {
-    return 'ProfileUiData(userData: $userData, isFollowing: $isFollowing, userUuid: $userUuid, isAuthUser: $isAuthUser)';
+    return 'ProfileUiData(userData: $userData, isFollowing: $isFollowing, userUuid: $userUuid, isAuthUser: $isAuthUser, reels: $reels)';
   }
 
   @override
@@ -162,12 +191,13 @@ class _$ProfileUpUiDataImpl implements _ProfileUpUiData {
             (identical(other.userUuid, userUuid) ||
                 other.userUuid == userUuid) &&
             (identical(other.isAuthUser, isAuthUser) ||
-                other.isAuthUser == isAuthUser));
+                other.isAuthUser == isAuthUser) &&
+            const DeepCollectionEquality().equals(other._reels, _reels));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, userData, isFollowing, userUuid, isAuthUser);
+  int get hashCode => Object.hash(runtimeType, userData, isFollowing, userUuid,
+      isAuthUser, const DeepCollectionEquality().hash(_reels));
 
   @JsonKey(ignore: true)
   @override
@@ -182,7 +212,8 @@ abstract class _ProfileUpUiData implements ProfileUiData {
       {final UserBO? userData,
       final bool isFollowing,
       final String userUuid,
-      final bool isAuthUser}) = _$ProfileUpUiDataImpl;
+      final bool isAuthUser,
+      final List<ReelBO> reels}) = _$ProfileUpUiDataImpl;
 
   @override
   UserBO? get userData;
@@ -192,6 +223,8 @@ abstract class _ProfileUpUiData implements ProfileUiData {
   String get userUuid;
   @override
   bool get isAuthUser;
+  @override
+  List<ReelBO> get reels;
   @override
   @JsonKey(ignore: true)
   _$$ProfileUpUiDataImplCopyWith<_$ProfileUpUiDataImpl> get copyWith =>

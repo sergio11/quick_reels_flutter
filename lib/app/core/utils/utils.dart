@@ -5,6 +5,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:quickreels/app/core/utils/helpers.dart';
 import 'package:quickreels/app/core/values/app_colors.dart';
 import 'package:quickreels/app/core/widget/common_dialog_box.dart';
+import 'package:quickreels/app/core/widget/reel_preview_widget.dart';
+import 'package:quickreels/app/domain/model/reel.dart';
 
 // for picking up image from gallery
 pickImageAsBytes(ImageSource source) async {
@@ -53,9 +55,9 @@ showErrorSnackBar({required BuildContext context, required String message}) {
 
 showSnackBar(
     {required BuildContext context,
-      required String title,
-      required String message,
-      required ContentType contentType}) {
+    required String title,
+    required String message,
+    required ContentType contentType}) {
   ScaffoldMessenger.of(context)
     ..hideCurrentSnackBar()
     ..showSnackBar(SnackBar(
@@ -65,6 +67,7 @@ showSnackBar(
       content: AwesomeSnackbarContent(
         title: title,
         message: message,
+
         /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
         contentType: contentType,
       ),
@@ -73,9 +76,9 @@ showSnackBar(
 
 showAlertDialog(
     {required BuildContext context,
-      required String title,
-      required String description,
-      Function()? onAcceptPressed}) {
+    required String title,
+    required String description,
+    Function()? onAcceptPressed}) {
   showDialog(
       barrierColor: Colors.black.withOpacity(0.5),
       context: context,
@@ -92,10 +95,10 @@ showAlertDialog(
 
 showConfirmDialog(
     {required BuildContext context,
-      required String title,
-      required String description,
-      Function()? onAcceptPressed,
-      Function()? onCancelPressed}) {
+    required String title,
+    required String description,
+    Function()? onAcceptPressed,
+    Function()? onCancelPressed}) {
   showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -109,4 +112,24 @@ showConfirmDialog(
           onCancelled: onCancelPressed,
         );
       });
+}
+
+Future<void> showReelPreviewDialog(
+    BuildContext context, ReelBO reel, String authUserUuid) async {
+  await showDialog<void>(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      return Dialog(
+        insetPadding: EdgeInsets.zero,
+        child: SizedBox(
+            width: double.infinity,
+            height: double.infinity,
+            child: ReelsPreview(
+              reel: reel,
+              authUserUuid: authUserUuid,
+            )),
+      );
+    },
+  );
 }
