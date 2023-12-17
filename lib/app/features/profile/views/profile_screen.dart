@@ -179,7 +179,7 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
         physics: const NeverScrollableScrollPhysics(),
         itemCount: uiData.reels.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
+          crossAxisCount: 3,
           childAspectRatio: 1,
           crossAxisSpacing: 5,
         ),
