@@ -1,6 +1,8 @@
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quickreels/app/features/discover/bindings/discover_content_binding.dart';
+import 'package:quickreels/app/features/discover/views/discover_content_screen.dart';
 import 'package:quickreels/app/features/home/bindings/home_binding.dart';
 import 'package:quickreels/app/features/main/bindings/main_binding.dart';
 import 'package:quickreels/app/features/main/views/main_screen.dart';
@@ -70,11 +72,18 @@ class AppPages {
       name: _Paths.HOME,
       page: () => MainScreen(),
       binding: MainBinding(),
-      bindings: [HomeBinding(), ProfileBinding()],
+      bindings: [HomeBinding(), ProfileBinding(), DiscoverContentBinding()],
       children: [
         GetPage(
           name: _Paths.PROFILE,
           page: () => ProfileScreen(),
+          transition: Transition.downToUp,
+          curve: Curves.easeInOut,
+          transitionDuration: const Duration(milliseconds: 400),
+        ),
+        GetPage(
+          name: _Paths.DISCOVER,
+          page: () => DiscoverContentScreen(onShowUserProfile: (_) {}),
           transition: Transition.downToUp,
           curve: Curves.easeInOut,
           transitionDuration: const Duration(milliseconds: 400),
@@ -90,4 +99,3 @@ class AppPages {
     });
   }
 }
-

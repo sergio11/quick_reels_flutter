@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_floating_bottom_bar/flutter_floating_bottom_bar.dart';
 import 'package:quickreels/app/core/base/base_view.dart';
 import 'package:quickreels/app/core/values/app_colors.dart';
+import 'package:quickreels/app/features/discover/views/discover_content_screen.dart';
 import 'package:quickreels/app/features/home/views/home_screen.dart';
 import 'package:quickreels/app/features/main/controller/main_controller.dart';
 import 'package:quickreels/app/features/main/model/main_ui_data.dart';
@@ -16,7 +17,7 @@ class MainScreen extends BaseView<MainController, MainUiData> {
     HomeScreen(
       onGoToComments: () {},
     ),
-    const Text("Search"),
+    DiscoverContentScreen(onShowUserProfile: (_) {}),
     const Text("Add"),
     const Text("Favorites"),
     ProfileScreen()

@@ -47,6 +47,9 @@ import 'package:quickreels/app/domain/usecase/find_favorites_posts_by_user_use_c
 import 'package:quickreels/app/domain/usecase/find_followers_by_user_use_case.dart';
 import 'package:quickreels/app/domain/usecase/find_reel_by_id_use_case.dart';
 import 'package:quickreels/app/domain/usecase/find_reels_by_user_use_case.dart';
+import 'package:quickreels/app/domain/usecase/find_reels_order_by_date_published_use_case.dart';
+import 'package:quickreels/app/domain/usecase/find_users_by_name_use_case.dart';
+import 'package:quickreels/app/domain/usecase/follow_user_use_case.dart';
 import 'package:quickreels/app/domain/usecase/get_auth_user_uid_use_case.dart';
 import 'package:quickreels/app/domain/usecase/get_user_details_use_case.dart';
 import 'package:quickreels/app/domain/usecase/sign_in_user_use_case.dart';
@@ -155,6 +158,12 @@ class AppBinding extends Bindings {
         FindReelByIdUseCase(reelRepository: Get.find()));
     Get.put<FindReelsByUserUseCase>(
         FindReelsByUserUseCase(reelRepository: Get.find()));
+    Get.put<FindReelsOrderByDatePublishedUseCase>(
+        FindReelsOrderByDatePublishedUseCase(reelRepository: Get.find()));
+    Get.put<FollowUserUseCase>(FollowUserUseCase(
+        authRepository: Get.find(), userRepository: Get.find()));
+    Get.put<FindUsersByNameUseCase>(
+        FindUsersByNameUseCase(userRepository: Get.find()));
   }
 
   void _initSharedDependencies() {
