@@ -36,6 +36,7 @@ abstract class BaseView<Controller extends BaseController, UIState>
                 Get.offAllNamed(AppPages.INITIAL);
               });
             }
+            print("BaseView Obx controller.uiData UPDATED");
             return annotatedRegion(context, controller.uiData);
           }),
           Obx(() => controller.pageState == PageState.LOADING

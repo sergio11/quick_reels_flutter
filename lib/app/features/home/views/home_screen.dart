@@ -20,16 +20,18 @@ class HomeScreen extends BaseView<HomeController, HomeUiData> {
     return Stack(
       children: [
         PageView.builder(
-          itemCount: uiData.reels.length,
-          controller: PageController(initialPage: 0, viewportFraction: 1),
-          scrollDirection: Axis.vertical,
-          itemBuilder: (context, index) => ReelDetailItem(
-            contentPadding: const EdgeInsets.symmetric(vertical: 100, horizontal: 20),
-            reel: uiData.reels[index],
-            authUserUuid: uiData.authUserUuid,
-            onGoToComments: () {},
-            onReelLiked: () {},
-          )),
+            itemCount: uiData.reels.length,
+            controller: PageController(initialPage: 0, viewportFraction: 1),
+            scrollDirection: Axis.vertical,
+            itemBuilder: (context, index) => ReelDetailItem(
+                  contentPadding:
+                      const EdgeInsets.symmetric(vertical: 100, horizontal: 20),
+                  reel: uiData.reels[index],
+                  authUserUuid: uiData.authUserUuid,
+                  onGoToComments: () {},
+                  onReelLiked: () =>
+                      controller.likeReel(uiData.reels[index].reelId),
+                )),
         _buildMainLogo(),
       ],
     );

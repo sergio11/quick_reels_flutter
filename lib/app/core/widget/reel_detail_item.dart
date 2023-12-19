@@ -5,6 +5,7 @@ import 'package:quickreels/app/core/utils/helpers.dart';
 import 'package:quickreels/app/core/values/app_colors.dart';
 import 'package:quickreels/app/core/widget/circle_animation.dart';
 import 'package:quickreels/app/core/widget/common_screen_progress_indicator.dart';
+import 'package:quickreels/app/core/widget/icon_action_animation.dart';
 import 'package:quickreels/app/core/widget/tags_row.dart';
 import 'package:quickreels/app/domain/model/reel.dart';
 import 'package:video_player/video_player.dart';
@@ -34,6 +35,7 @@ class ReelDetailItemState extends State<ReelDetailItem> {
   late VideoPlayerController _videoPlayerController;
   bool _isVideoPlaying = true;
   bool _isAudioPlaying = false;
+  bool isLikeAnimating = false;
 
   @override
   void initState() {
@@ -71,6 +73,19 @@ class ReelDetailItemState extends State<ReelDetailItem> {
     super.dispose();
   }
 
+  void _startLikeAnimation() {
+    setState(() {
+      isLikeAnimating = true;
+    });
+    widget.onReelLiked();
+  }
+
+  void _stopLikeAnimation() {
+    setState(() {
+      isLikeAnimating = false;
+    });
+  }
+
   void _updateVideoPlayingState(bool isPlaying) {
     if (_isVideoPlaying != isPlaying) {
       setState(() {
@@ -98,30 +113,50 @@ class ReelDetailItemState extends State<ReelDetailItem> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      children: [
-        _buildVideoController(context),
-        Expanded(
-            child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-                child: Padding(
-              padding: widget.contentPadding,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildReelAuthorInfo(),
-                  if (_isAudioPlaying) _buildSongData(),
-                ],
-              ),
-            )),
-            _buildReelActions(),
-          ],
-        ))
-      ],
+      children: [_buildVideoController(context), _buildReelScreen(context)],
     );
+  }
+
+  Widget _buildReelScreen(BuildContext context) {
+    return GestureDetector(
+        child: Stack(alignment: Alignment.center, children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                  child: Padding(
+                padding: widget.contentPadding,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildReelAuthorInfo(),
+                    if (_isAudioPlaying) _buildSongData(),
+                  ],
+                ),
+              )),
+              _buildReelActions(),
+            ],
+          ),
+          AnimatedOpacity(
+            duration: const Duration(milliseconds: 200),
+            opacity: isLikeAnimating ? 1 : 0,
+            child: IconActionAnimation(
+              isAnimating: isLikeAnimating,
+              duration: const Duration(
+                milliseconds: 400,
+              ),
+              onEnd: () => _stopLikeAnimation(),
+              child: const Icon(
+                Icons.favorite,
+                color: Colors.redAccent,
+                size: 100,
+              ),
+            ),
+          )
+        ]),
+        onDoubleTap: () => _startLikeAnimation());
   }
 
   Widget _buildVideoController(BuildContext context) {
@@ -253,72 +288,81 @@ class ReelDetailItemState extends State<ReelDetailItem> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Column(
-            children: [
-              InkWell(
-                onTap: widget.onReelLiked,
-                child: Icon(
-                  Icons.favorite,
-                  size: 30,
-                  color: widget.reel.likes.contains(widget.authUserUuid)
-                      ? Colors.red
-                      : Colors.white,
-                ),
-              ),
-              const SizedBox(height: 10),
-              Text(
-                widget.reel.likes.length.toString(),
-                style: const TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
-                ),
-              )
-            ],
-          ),
-          Column(
-            children: [
-              InkWell(
-                onTap: widget.onGoToComments,
-                child: const Icon(
-                  Icons.comment,
-                  size: 30,
-                  color: Colors.white,
-                ),
-              ),
-              const SizedBox(height: 10),
-              Text(
-                widget.reel.commentCount.toString(),
-                style: const TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
-                ),
-              )
-            ],
-          ),
-          Column(
-            children: [
-              InkWell(
-                onTap: () {},
-                child: const Icon(
-                  Icons.reply,
-                  size: 30,
-                  color: Colors.white,
-                ),
-              ),
-              const SizedBox(height: 10),
-              Text(
-                widget.reel.shareCount.toString(),
-                style: const TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
-                ),
-              )
-            ],
-          ),
+          _buildLikeActionButton(),
+          const SizedBox(height: 5),
+          _buildCommentsAction(),
+          const SizedBox(height: 5),
+          _buildShareAction(),
           const SizedBox(height: 20),
           _buildProfileImage(widget.reel.authImageUrl),
         ],
       ),
     );
+  }
+
+  Widget _buildActionColumn(
+    IconData icon,
+    int count,
+    VoidCallback onTap,
+    bool isIconButton,
+    bool isLiked,
+  ) {
+    return Column(
+      children: [
+        isIconButton
+            ? IconActionAnimation(
+                isAnimating: isLikeAnimating,
+                duration: const Duration(
+                  milliseconds: 400,
+                ),
+                onEnd: () => _stopLikeAnimation(),
+                child: IconButton(
+                  icon: Icon(
+                    icon,
+                    size: 30,
+                    color: isLiked
+                        ? AppColors.colorPrimaryMedium
+                        : AppColors.colorWhite,
+                  ),
+                  onPressed: onTap,
+                ),
+              )
+            : InkWell(
+                onTap: onTap,
+                child: Icon(
+                  icon,
+                  size: 30,
+                  color: Colors.white,
+                ),
+              ),
+        Text(
+          count.toString(),
+          style: Theme.of(context)
+              .textTheme
+              .labelMedium
+              ?.copyWith(color: AppColors.colorWhite),
+        )
+      ],
+    );
+  }
+
+  Widget _buildLikeActionButton() {
+    bool isLiked = widget.reel.likes.contains(widget.authUserUuid);
+    return _buildActionColumn(
+        isLiked ? Icons.favorite : Icons.favorite_border,
+        widget.reel.likes.length,
+        _startLikeAnimation,
+        true,
+        isLiked);
+  }
+
+  Widget _buildCommentsAction() {
+    return _buildActionColumn(Icons.comment, widget.reel.commentCount,
+        widget.onGoToComments, false, false);
+  }
+
+  Widget _buildShareAction() {
+    return _buildActionColumn(
+        Icons.reply, widget.reel.shareCount, () {}, false, false);
   }
 }

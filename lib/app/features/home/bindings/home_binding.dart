@@ -5,7 +5,10 @@ class HomeBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<HomeController>(
-      () => HomeController(fetchUserHomeFeedUseCase: Get.find(), getAuthUserUidUseCase:  Get.find()),
+      () => HomeController(
+          fetchUserHomeFeedUseCase: Get.find(),
+          getAuthUserUidUseCase: Get.find(),
+          likeReelUseCase: Get.find()),
     );
   }
 }
