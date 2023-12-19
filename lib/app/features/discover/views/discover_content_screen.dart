@@ -15,7 +15,7 @@ class DiscoverContentScreen
   final Function(String userUid) onShowUserProfile;
 
   final Random random = Random();
-  final List<double> reelItemHeights = [250, 150, 300, 200];
+  final List<double> reelItemHeights = [250, 220, 300, 200, 270];
 
   DiscoverContentScreen({required this.onShowUserProfile});
 

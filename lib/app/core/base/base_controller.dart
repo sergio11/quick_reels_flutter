@@ -8,7 +8,6 @@ import 'package:quickreels/app/domain/model/page_state.dart';
 import '/flavors/build_config.dart';
 
 abstract class BaseController<UIState> extends GetxController {
-
   final Logger logger = BuildConfig.instance.config.logger;
 
   AppLocalizations get appLocalization => AppLocalizations.of(Get.context!)!;
@@ -43,7 +42,7 @@ abstract class BaseController<UIState> extends GetxController {
 
   final logoutController = false.obs;
 
-  BaseController({ required this.initialUiState}) {
+  BaseController({required this.initialUiState}) {
     _uiData = initialUiState.obs;
   }
 
@@ -63,7 +62,10 @@ abstract class BaseController<UIState> extends GetxController {
 
   showSuccessMessage(String msg) => _successMessageController(msg);
 
-  updateState(UIState newState) => _uiData(newState);
+  updateState(UIState newState) {
+    _uiData.value = newState;
+    _uiData.refresh();
+  }
 
   // ignore: long-parameter-list
   dynamic callUseCase<T>(
