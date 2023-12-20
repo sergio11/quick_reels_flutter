@@ -13,15 +13,10 @@ class MainScreen extends BaseView<MainController, MainUiData> {
   final Color unselectedColor = AppColors.colorWhite;
   final Color selectedColor = AppColors.colorPrimary;
 
-  final List<Widget> tabItems = [
-    HomeScreen(
-      onGoToComments: () {},
-    ),
-    DiscoverContentScreen(onShowUserProfile: (_) {}),
-    const Text("Add"),
-    const Text("Favorites"),
-    ProfileScreen()
-  ];
+  final Function(String reelUuid) onGoToComments;
+  final Function(String userUid) onShowUserProfile;
+
+  MainScreen({required this.onGoToComments, required this.onShowUserProfile});
 
   void onAddPostClicked() {}
 
@@ -82,7 +77,16 @@ class MainScreen extends BaseView<MainController, MainUiData> {
       controller: controller.tabController,
       dragStartBehavior: DragStartBehavior.down,
       physics: const BouncingScrollPhysics(),
-      children: tabItems,
+      children: [
+        HomeScreen(
+          onGoToComments: onGoToComments,
+          onGoToUserProfile: onShowUserProfile,
+        ),
+        DiscoverContentScreen(onShowUserProfile: onShowUserProfile),
+        const Text("Add"),
+        const Text("Favorites"),
+        ProfileScreen()
+      ],
     );
   }
 
