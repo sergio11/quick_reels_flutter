@@ -13,7 +13,7 @@ class CommentBoMapper extends Mapper<CommentBoMapperData, CommentBO> {
   CommentBO call(CommentBoMapperData object) {
     return CommentBO(
         commentId: object.commentDTO.commentId,
-        postId: object.commentDTO.postId,
+        postId: object.commentDTO.reelId,
         datePublished: object.commentDTO.datePublished,
         text: object.commentDTO.text,
         author: userMapper(object.userDTO));

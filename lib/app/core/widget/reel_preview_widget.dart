@@ -21,6 +21,7 @@ class _ReelsPreviewState extends State<ReelsPreview> {
       authUserUuid: widget.authUserUuid,
       onGoToComments: () {},
       onReelLiked: () {},
+      onGoToAuthorProfile: () {},
     );
   }
 }

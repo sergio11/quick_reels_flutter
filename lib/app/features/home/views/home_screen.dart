@@ -7,9 +7,10 @@ import 'package:quickreels/app/features/home/controller/home_controller.dart';
 import 'package:quickreels/app/features/home/model/home_ui_data.dart';
 
 class HomeScreen extends BaseView<HomeController, HomeUiData> {
-  final VoidCallback onGoToComments;
+  final Function(String reelUuid) onGoToComments;
+  final Function(String userUuid) onGoToUserProfile;
 
-  HomeScreen({required this.onGoToComments});
+  HomeScreen({required this.onGoToComments, required this.onGoToUserProfile});
 
   @override
   Widget body(BuildContext context, uiData) {
@@ -28,9 +29,12 @@ class HomeScreen extends BaseView<HomeController, HomeUiData> {
                       const EdgeInsets.symmetric(vertical: 100, horizontal: 20),
                   reel: uiData.reels[index],
                   authUserUuid: uiData.authUserUuid,
-                  onGoToComments: () {},
+                  onGoToComments: () =>
+                      onGoToComments(uiData.reels[index].reelId),
                   onReelLiked: () =>
                       controller.likeReel(uiData.reels[index].reelId),
+                  onGoToAuthorProfile: () =>
+                      onGoToUserProfile(uiData.reels[index].authorUid),
                 )),
         _buildMainLogo(),
       ],

@@ -1,6 +1,8 @@
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quickreels/app/features/comments/bindings/comments_binding.dart';
+import 'package:quickreels/app/features/comments/views/comments_screen.dart';
 import 'package:quickreels/app/features/discover/bindings/discover_content_binding.dart';
 import 'package:quickreels/app/features/discover/views/discover_content_screen.dart';
 import 'package:quickreels/app/features/home/bindings/home_binding.dart';
@@ -22,6 +24,9 @@ class AppPages {
   AppPages._();
 
   static const INITIAL = Routes.ONBOARDING;
+
+  static const String USER_UUID_KEY = 'USER_UUID';
+  static const String REEL_UUID_KEY = 'REEL_UUID_KEY';
 
   static final unrestrictedRoutes = [
     _Paths.ONBOARDING,
@@ -70,7 +75,13 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.HOME,
-      page: () => MainScreen(),
+      page: () => MainScreen(
+        onGoToComments: (reelUuid) => _navigateTo(_Paths.HOME + _Paths.COMMENTS,
+            arguments: {REEL_UUID_KEY: reelUuid}),
+        onShowUserProfile: (userUuid) => _navigateTo(
+            _Paths.HOME + _Paths.PROFILE,
+            arguments: {USER_UUID_KEY: userUuid}),
+      ),
       binding: MainBinding(),
       bindings: [HomeBinding(), ProfileBinding(), DiscoverContentBinding()],
       children: [
@@ -78,13 +89,31 @@ class AppPages {
           name: _Paths.PROFILE,
           page: () => ProfileScreen(),
           transition: Transition.downToUp,
+          bindings: [ProfileBinding()],
           curve: Curves.easeInOut,
           transitionDuration: const Duration(milliseconds: 400),
         ),
         GetPage(
           name: _Paths.DISCOVER,
-          page: () => DiscoverContentScreen(onShowUserProfile: (_) {}),
+          page: () => DiscoverContentScreen(
+              onShowUserProfile: (userUuid) => _navigateTo(
+                  _Paths.HOME + _Paths.PROFILE,
+                  arguments: {USER_UUID_KEY: userUuid})),
           transition: Transition.downToUp,
+          curve: Curves.easeInOut,
+          transitionDuration: const Duration(milliseconds: 400),
+        ),
+        GetPage(
+          name: _Paths.COMMENTS,
+          bindings: [CommentsBinding()],
+          page: () => CommentsScreen(
+              onBackPressed: () {
+                Get.back();
+              },
+              onShowUserProfile: (userUuid) => _navigateTo(
+                  _Paths.HOME + _Paths.PROFILE,
+                  arguments: {USER_UUID_KEY: userUuid})),
+          transition: Transition.leftToRight,
           curve: Curves.easeInOut,
           transitionDuration: const Duration(milliseconds: 400),
         )
@@ -93,9 +122,9 @@ class AppPages {
     ),
   ];
 
-  static void _navigateTo(String route) {
+  static void _navigateTo(String route, {Map<String, dynamic>? arguments}) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Get.toNamed(route);
+      Get.toNamed(route, arguments: arguments ?? {});
     });
   }
 }

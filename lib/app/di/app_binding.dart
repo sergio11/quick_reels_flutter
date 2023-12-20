@@ -42,6 +42,7 @@ import 'package:quickreels/app/domain/repository/auth_repository.dart';
 import 'package:quickreels/app/domain/repository/reel_repository.dart';
 import 'package:quickreels/app/domain/repository/user_repository.dart';
 import 'package:quickreels/app/domain/usecase/fetch_user_home_feed_use_case.dart';
+import 'package:quickreels/app/domain/usecase/find_all_comments_by_reel_use_case.dart';
 import 'package:quickreels/app/domain/usecase/find_bookmark_reels_by_user_use_case.dart';
 import 'package:quickreels/app/domain/usecase/find_favorites_posts_by_user_use_case.dart';
 import 'package:quickreels/app/domain/usecase/find_followers_by_user_use_case.dart';
@@ -53,6 +54,7 @@ import 'package:quickreels/app/domain/usecase/follow_user_use_case.dart';
 import 'package:quickreels/app/domain/usecase/get_auth_user_uid_use_case.dart';
 import 'package:quickreels/app/domain/usecase/get_user_details_use_case.dart';
 import 'package:quickreels/app/domain/usecase/like_reel_use_case.dart';
+import 'package:quickreels/app/domain/usecase/publish_comment_use_case.dart';
 import 'package:quickreels/app/domain/usecase/sign_in_user_use_case.dart';
 import 'package:quickreels/app/domain/usecase/sign_out_use_case.dart';
 import 'package:quickreels/app/domain/usecase/sign_up_user_use_case.dart';
@@ -167,6 +169,10 @@ class AppBinding extends Bindings {
         FindUsersByNameUseCase(userRepository: Get.find()));
     Get.put<LikeReelUseCase>(LikeReelUseCase(
         authRepository: Get.find(), reelRepository: Get.find()));
+    Get.put<PublishCommentUseCase>(PublishCommentUseCase(
+        authRepository: Get.find(), reelRepository: Get.find()));
+    Get.put<FindAllCommentsByReelUseCase>(
+        FindAllCommentsByReelUseCase(reelRepository: Get.find()));
   }
 
   void _initSharedDependencies() {

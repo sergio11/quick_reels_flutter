@@ -16,12 +16,14 @@ class ReelDetailItem extends StatefulWidget {
   final String authUserUuid;
   final VoidCallback onGoToComments;
   final VoidCallback onReelLiked;
+  final VoidCallback onGoToAuthorProfile;
   final EdgeInsetsGeometry contentPadding;
   const ReelDetailItem(
       {Key? key,
       required this.reel,
       required this.authUserUuid,
       required this.onGoToComments,
+      required this.onGoToAuthorProfile,
       required this.onReelLiked,
       this.contentPadding = const EdgeInsets.all(20)})
       : super(key: key);
@@ -257,26 +259,29 @@ class ReelDetailItemState extends State<ReelDetailItem> {
   }
 
   Widget _buildProfileImage(String authImageUrl) {
-    return CircleAnimation(
-      child: SizedBox(
-        width: 60,
-        height: 60,
-        child: Column(
-          children: [
-            Container(
-                padding: const EdgeInsets.all(5),
-                height: 50,
-                width: 50,
-                decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                      colors: [
-                        Colors.grey,
-                        Colors.white,
-                      ],
-                    ),
-                    borderRadius: BorderRadius.circular(25)),
-                child: buildCircleImage(imageUrl: authImageUrl, radius: 25))
-          ],
+    return GestureDetector(
+      onTap: widget.onGoToAuthorProfile,
+      child: CircleAnimation(
+        child: SizedBox(
+          width: 60,
+          height: 60,
+          child: Column(
+            children: [
+              Container(
+                  padding: const EdgeInsets.all(5),
+                  height: 50,
+                  width: 50,
+                  decoration: BoxDecoration(
+                      gradient: const LinearGradient(
+                        colors: [
+                          Colors.grey,
+                          Colors.white,
+                        ],
+                      ),
+                      borderRadius: BorderRadius.circular(25)),
+                  child: buildCircleImage(imageUrl: authImageUrl, radius: 25))
+            ],
+          ),
         ),
       ),
     );
@@ -348,12 +353,8 @@ class ReelDetailItemState extends State<ReelDetailItem> {
 
   Widget _buildLikeActionButton() {
     bool isLiked = widget.reel.likes.contains(widget.authUserUuid);
-    return _buildActionColumn(
-        isLiked ? Icons.favorite : Icons.favorite_border,
-        widget.reel.likes.length,
-        _startLikeAnimation,
-        true,
-        isLiked);
+    return _buildActionColumn(isLiked ? Icons.favorite : Icons.favorite_border,
+        widget.reel.likes.length, _startLikeAnimation, true, isLiked);
   }
 
   Widget _buildCommentsAction() {

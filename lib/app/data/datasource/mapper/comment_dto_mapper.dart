@@ -8,7 +8,7 @@ class CommentDtoMapper extends Mapper<DocumentSnapshot, CommentDTO> {
     var snapshot = object.data() as Map<String, dynamic>;
     return CommentDTO(
         commentId: snapshot['commentId'],
-        postId: snapshot['postId'],
+        reelId: snapshot['reelId'],
         text: snapshot['text'],
         authorUid: snapshot['authorUid'],
         datePublished: (snapshot['datePublished'] as Timestamp).toDate());

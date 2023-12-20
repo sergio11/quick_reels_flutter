@@ -59,7 +59,7 @@ abstract class BaseView<Controller extends BaseController, UIState>
         statusBarIconBrightness: Brightness.dark,
       ),
       child: Material(
-        color: Colors.transparent,
+        color: AppColors.backgroundColor,
         child: pageScaffold(context, uiData),
       ),
     );
