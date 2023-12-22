@@ -3,20 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_floating_bottom_bar/flutter_floating_bottom_bar.dart';
 import 'package:quickreels/app/core/base/base_view.dart';
 import 'package:quickreels/app/core/values/app_colors.dart';
-import 'package:quickreels/app/features/discover/views/discover_content_screen.dart';
-import 'package:quickreels/app/features/home/views/home_screen.dart';
 import 'package:quickreels/app/features/main/controller/main_controller.dart';
 import 'package:quickreels/app/features/main/model/main_ui_data.dart';
-import 'package:quickreels/app/features/profile/views/profile_screen.dart';
 
 class MainScreen extends BaseView<MainController, MainUiData> {
   final Color unselectedColor = AppColors.colorWhite;
   final Color selectedColor = AppColors.colorPrimary;
 
-  final Function(String reelUuid) onGoToComments;
-  final Function(String userUid) onShowUserProfile;
+  final List<Widget> tabItems;
 
-  MainScreen({required this.onGoToComments, required this.onShowUserProfile});
+  MainScreen({required this.tabItems});
 
   void onAddPostClicked() {}
 
@@ -29,47 +25,51 @@ class MainScreen extends BaseView<MainController, MainUiData> {
 
   Widget _buildBottomBar(BuildContext context, MainUiData uiData) {
     return BottomBar(
-      clip: Clip.none,
-      fit: StackFit.expand,
-      icon: (width, height) => Center(
-        child: IconButton(
-          padding: EdgeInsets.zero,
-          onPressed: null,
-          icon: Icon(
-            Icons.arrow_upward_rounded,
-            color: unselectedColor,
-            size: width,
-          ),
-        ),
-      ),
-      borderRadius: BorderRadius.circular(500),
-      barDecoration: BoxDecoration(
-        border: Border.all(color: AppColors.colorWhite, width: 2),
+        clip: Clip.none,
+        fit: StackFit.expand,
+        icon: (width, height) => Center(
+              child: IconButton(
+                padding: EdgeInsets.zero,
+                onPressed: null,
+                icon: Icon(
+                  Icons.arrow_upward_rounded,
+                  color: unselectedColor,
+                  size: width,
+                ),
+              ),
+            ),
         borderRadius: BorderRadius.circular(500),
-      ),
-      duration: const Duration(milliseconds: 500),
-      curve: Curves.decelerate,
-      showIcon: true,
-      width: MediaQuery.of(context).size.width * 0.8,
-      barColor: AppColors.backgroundColor,
-      start: 2,
-      end: 0,
-      offset: 10,
-      barAlignment: Alignment.bottomCenter,
-      iconHeight: 30,
-      iconWidth: 30,
-      reverse: false,
-      hideOnScroll: true,
-      scrollOpposite: false,
-      onBottomBarHidden: () {},
-      onBottomBarShown: () {},
-      body: (context, controller) => _buildTabBarView(uiData),
-      child: Stack(
-        alignment: Alignment.center,
-        clipBehavior: Clip.none,
-        children: [_buildTabBar(uiData), _buildFloatingActionButton(uiData)],
-      ),
-    );
+        barDecoration: !uiData.isKeyboardVisible ? BoxDecoration(
+          border: Border.all(color: AppColors.colorWhite, width: 2),
+          borderRadius: BorderRadius.circular(500),
+        ) : null,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.decelerate,
+        showIcon: true,
+        width: MediaQuery.of(context).size.width * 0.8,
+        barColor: AppColors.backgroundColor,
+        start: 2,
+        end: 0,
+        offset: 10,
+        barAlignment: Alignment.bottomCenter,
+        iconHeight: 30,
+        iconWidth: 30,
+        reverse: false,
+        hideOnScroll: true,
+        scrollOpposite: false,
+        onBottomBarHidden: () {},
+        onBottomBarShown: () {},
+        body: (context, controller) => _buildTabBarView(uiData),
+        child: Visibility(
+            visible: !uiData.isKeyboardVisible,
+            child: Stack(
+              alignment: Alignment.center,
+              clipBehavior: Clip.none,
+              children: [
+                _buildTabBar(uiData),
+                _buildFloatingActionButton(uiData)
+              ],
+            )));
   }
 
   Widget _buildTabBarView(MainUiData uiData) {
@@ -77,16 +77,7 @@ class MainScreen extends BaseView<MainController, MainUiData> {
       controller: controller.tabController,
       dragStartBehavior: DragStartBehavior.down,
       physics: const BouncingScrollPhysics(),
-      children: [
-        HomeScreen(
-          onGoToComments: onGoToComments,
-          onGoToUserProfile: onShowUserProfile,
-        ),
-        DiscoverContentScreen(onShowUserProfile: onShowUserProfile),
-        const Text("Add"),
-        const Text("Favorites"),
-        ProfileScreen()
-      ],
+      children: tabItems,
     );
   }
 

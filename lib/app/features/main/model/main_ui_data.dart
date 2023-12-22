@@ -8,5 +8,6 @@ class MainUiData with _$MainUiData {
   const factory MainUiData({
     @Default([]) final List<IconData> tabMenuItems,
     @Default(0) final int currentPage,
+    @Default(false) final bool isKeyboardVisible
   }) = _MainUiData;
 }

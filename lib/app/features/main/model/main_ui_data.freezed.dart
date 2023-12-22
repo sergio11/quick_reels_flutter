@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$MainUiData {
   List<IconData> get tabMenuItems => throw _privateConstructorUsedError;
   int get currentPage => throw _privateConstructorUsedError;
+  bool get isKeyboardVisible => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MainUiDataCopyWith<MainUiData> get copyWith =>
@@ -30,7 +31,8 @@ abstract class $MainUiDataCopyWith<$Res> {
           MainUiData value, $Res Function(MainUiData) then) =
       _$MainUiDataCopyWithImpl<$Res, MainUiData>;
   @useResult
-  $Res call({List<IconData> tabMenuItems, int currentPage});
+  $Res call(
+      {List<IconData> tabMenuItems, int currentPage, bool isKeyboardVisible});
 }
 
 /// @nodoc
@@ -48,6 +50,7 @@ class _$MainUiDataCopyWithImpl<$Res, $Val extends MainUiData>
   $Res call({
     Object? tabMenuItems = null,
     Object? currentPage = null,
+    Object? isKeyboardVisible = null,
   }) {
     return _then(_value.copyWith(
       tabMenuItems: null == tabMenuItems
@@ -58,6 +61,10 @@ class _$MainUiDataCopyWithImpl<$Res, $Val extends MainUiData>
           ? _value.currentPage
           : currentPage // ignore: cast_nullable_to_non_nullable
               as int,
+      isKeyboardVisible: null == isKeyboardVisible
+          ? _value.isKeyboardVisible
+          : isKeyboardVisible // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -70,7 +77,8 @@ abstract class _$$MainUiDataImplCopyWith<$Res>
       __$$MainUiDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<IconData> tabMenuItems, int currentPage});
+  $Res call(
+      {List<IconData> tabMenuItems, int currentPage, bool isKeyboardVisible});
 }
 
 /// @nodoc
@@ -86,6 +94,7 @@ class __$$MainUiDataImplCopyWithImpl<$Res>
   $Res call({
     Object? tabMenuItems = null,
     Object? currentPage = null,
+    Object? isKeyboardVisible = null,
   }) {
     return _then(_$MainUiDataImpl(
       tabMenuItems: null == tabMenuItems
@@ -96,6 +105,10 @@ class __$$MainUiDataImplCopyWithImpl<$Res>
           ? _value.currentPage
           : currentPage // ignore: cast_nullable_to_non_nullable
               as int,
+      isKeyboardVisible: null == isKeyboardVisible
+          ? _value.isKeyboardVisible
+          : isKeyboardVisible // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -104,7 +117,9 @@ class __$$MainUiDataImplCopyWithImpl<$Res>
 
 class _$MainUiDataImpl implements _MainUiData {
   const _$MainUiDataImpl(
-      {final List<IconData> tabMenuItems = const [], this.currentPage = 0})
+      {final List<IconData> tabMenuItems = const [],
+      this.currentPage = 0,
+      this.isKeyboardVisible = false})
       : _tabMenuItems = tabMenuItems;
 
   final List<IconData> _tabMenuItems;
@@ -119,10 +134,13 @@ class _$MainUiDataImpl implements _MainUiData {
   @override
   @JsonKey()
   final int currentPage;
+  @override
+  @JsonKey()
+  final bool isKeyboardVisible;
 
   @override
   String toString() {
-    return 'MainUiData(tabMenuItems: $tabMenuItems, currentPage: $currentPage)';
+    return 'MainUiData(tabMenuItems: $tabMenuItems, currentPage: $currentPage, isKeyboardVisible: $isKeyboardVisible)';
   }
 
   @override
@@ -133,12 +151,17 @@ class _$MainUiDataImpl implements _MainUiData {
             const DeepCollectionEquality()
                 .equals(other._tabMenuItems, _tabMenuItems) &&
             (identical(other.currentPage, currentPage) ||
-                other.currentPage == currentPage));
+                other.currentPage == currentPage) &&
+            (identical(other.isKeyboardVisible, isKeyboardVisible) ||
+                other.isKeyboardVisible == isKeyboardVisible));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_tabMenuItems), currentPage);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_tabMenuItems),
+      currentPage,
+      isKeyboardVisible);
 
   @JsonKey(ignore: true)
   @override
@@ -150,12 +173,15 @@ class _$MainUiDataImpl implements _MainUiData {
 abstract class _MainUiData implements MainUiData {
   const factory _MainUiData(
       {final List<IconData> tabMenuItems,
-      final int currentPage}) = _$MainUiDataImpl;
+      final int currentPage,
+      final bool isKeyboardVisible}) = _$MainUiDataImpl;
 
   @override
   List<IconData> get tabMenuItems;
   @override
   int get currentPage;
+  @override
+  bool get isKeyboardVisible;
   @override
   @JsonKey(ignore: true)
   _$$MainUiDataImplCopyWith<_$MainUiDataImpl> get copyWith =>
