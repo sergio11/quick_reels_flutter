@@ -22,7 +22,7 @@ class HomeScreen extends BaseView<HomeController, HomeUiData> {
       children: [
         PageView.builder(
             itemCount: uiData.reels.length,
-            controller: PageController(initialPage: 0, viewportFraction: 1),
+            controller: controller.pageController,
             scrollDirection: Axis.vertical,
             itemBuilder: (context, index) => ReelDetailItem(
                   contentPadding:
@@ -35,6 +35,7 @@ class HomeScreen extends BaseView<HomeController, HomeUiData> {
                       controller.likeReel(uiData.reels[index].reelId),
                   onGoToAuthorProfile: () =>
                       onGoToUserProfile(uiData.reels[index].authorUid),
+                  onReelFinished: () => controller.nextReel(),
                 )),
         _buildMainLogo(),
       ],

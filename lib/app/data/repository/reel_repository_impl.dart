@@ -153,6 +153,7 @@ class ReelRepositoryImpl implements ReelRepository {
     try {
       final reelsListDTO = await reelsDatasource
           .findAllByUserUidListOrderByDatePublished(userUidList);
+      print("reelsListDTO -> ${reelsListDTO.length}");
       final reels = await Future.wait(
           reelsListDTO.map((reelDTO) async => _mapToReelBO(reelDTO)));
       return reels;

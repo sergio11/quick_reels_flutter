@@ -17,6 +17,7 @@ class ReelDetailItem extends StatefulWidget {
   final VoidCallback onGoToComments;
   final VoidCallback onReelLiked;
   final VoidCallback onGoToAuthorProfile;
+  final VoidCallback onReelFinished;
   final EdgeInsetsGeometry contentPadding;
   const ReelDetailItem(
       {Key? key,
@@ -25,6 +26,7 @@ class ReelDetailItem extends StatefulWidget {
       required this.onGoToComments,
       required this.onGoToAuthorProfile,
       required this.onReelLiked,
+      required this.onReelFinished,
       this.contentPadding = const EdgeInsets.all(20)})
       : super(key: key);
 
@@ -60,6 +62,9 @@ class ReelDetailItemState extends State<ReelDetailItem> {
           } else if (_videoPlayerController.value.isPlaying) {
             _updateVideoPlayingState(true);
             _playAudioInLoop(widget.reel.songUrl);
+            if (_videoPlayerController.value.position >= _videoPlayerController.value.duration - const Duration(seconds: 1)) {
+              widget.onReelFinished();
+            }
           } else {
             _stopAudio();
           }
@@ -279,7 +284,10 @@ class ReelDetailItemState extends State<ReelDetailItem> {
                         ],
                       ),
                       borderRadius: BorderRadius.circular(25)),
-                  child: buildCircleImage(imageUrl: authImageUrl, radius: 25))
+                  child: buildCircleImage(
+                      imageUrl: authImageUrl,
+                      radius: 25,
+                      showBackgroundColor: false))
             ],
           ),
         ),
