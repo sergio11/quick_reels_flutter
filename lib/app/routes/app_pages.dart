@@ -6,6 +6,7 @@ import 'package:quickreels/app/features/comments/views/comments_screen.dart';
 import 'package:quickreels/app/features/discover/bindings/discover_content_binding.dart';
 import 'package:quickreels/app/features/discover/views/discover_content_screen.dart';
 import 'package:quickreels/app/features/home/bindings/home_binding.dart';
+import 'package:quickreels/app/features/home/views/home_screen.dart';
 import 'package:quickreels/app/features/main/bindings/main_binding.dart';
 import 'package:quickreels/app/features/main/views/main_screen.dart';
 import 'package:quickreels/app/features/onboarding/onboarding_screen.dart';
@@ -75,13 +76,23 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.HOME,
-      page: () => MainScreen(
-        onGoToComments: (reelUuid) => _navigateTo(_Paths.HOME + _Paths.COMMENTS,
-            arguments: {REEL_UUID_KEY: reelUuid}),
-        onShowUserProfile: (userUuid) => _navigateTo(
-            _Paths.HOME + _Paths.PROFILE,
-            arguments: {USER_UUID_KEY: userUuid}),
-      ),
+      page: () => MainScreen(tabItems: [
+        HomeScreen(
+          onGoToComments: (reelUuid) => _navigateTo(
+              _Paths.HOME + _Paths.COMMENTS,
+              arguments: {REEL_UUID_KEY: reelUuid}),
+          onGoToUserProfile: (userUuid) => _navigateTo(
+              _Paths.HOME + _Paths.PROFILE,
+              arguments: {USER_UUID_KEY: userUuid}),
+        ),
+        DiscoverContentScreen(
+            onShowUserProfile: (userUuid) => _navigateTo(
+                _Paths.HOME + _Paths.PROFILE,
+                arguments: {USER_UUID_KEY: userUuid})),
+        const Text("Add"),
+        const Text("Favorites"),
+        ProfileScreen()
+      ]),
       binding: MainBinding(),
       bindings: [HomeBinding(), ProfileBinding(), DiscoverContentBinding()],
       children: [
@@ -89,7 +100,7 @@ class AppPages {
           name: _Paths.PROFILE,
           page: () => ProfileScreen(),
           transition: Transition.downToUp,
-          bindings: [ProfileBinding()],
+          binding: ProfileBinding(),
           curve: Curves.easeInOut,
           transitionDuration: const Duration(milliseconds: 400),
         ),
