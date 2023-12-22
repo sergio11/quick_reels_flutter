@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:quickreels/app/core/base/base_controller.dart';
 import 'package:quickreels/app/core/base/base_use_case.dart';
 import 'package:quickreels/app/domain/model/reel.dart';
@@ -10,6 +11,7 @@ class HomeController extends BaseController<HomeUiData> {
   final GetAuthUserUidUseCase getAuthUserUidUseCase;
   final FetchUserHomeFeedUseCase fetchUserHomeFeedUseCase;
   final LikeReelUseCase likeReelUseCase;
+  late PageController pageController;
 
   HomeController(
       {required this.getAuthUserUidUseCase,
@@ -20,12 +22,27 @@ class HomeController extends BaseController<HomeUiData> {
   @override
   void onInit() {
     super.onInit();
+    pageController = PageController(initialPage: 0, viewportFraction: 1);
     _fetchUserHomeFeed();
+  }
+
+  @override
+  void onClose() {
+    pageController.dispose();
+    super.onClose();
   }
 
   likeReel(String reelId) async {
     callUseCase(likeReelUseCase(LikeReelParams(reelId)),
         onComplete: (isSuccess) => _onLikeReelCompleted(reelId, isSuccess));
+  }
+
+  void nextReel() {
+    final currentIndex = pageController.page?.round() ?? 0;
+    if (currentIndex < uiData.reels.length - 1) {
+      pageController.animateToPage(currentIndex + 1,
+          duration: const Duration(milliseconds: 500), curve: Curves.ease);
+    }
   }
 
   void _fetchUserHomeFeed() async {
