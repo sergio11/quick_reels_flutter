@@ -22,6 +22,7 @@ class _ReelsPreviewState extends State<ReelsPreview> {
       onGoToComments: () {},
       onReelLiked: () {},
       onGoToAuthorProfile: () {},
+      onReelFinished: () {},
     );
   }
 }
