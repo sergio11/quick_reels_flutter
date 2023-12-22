@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:quickreels/app/core/base/base_view.dart';
 import 'package:quickreels/app/core/utils/utils.dart';
 import 'package:quickreels/app/core/values/app_colors.dart';
+import 'package:quickreels/app/core/widget/empty_state_widget.dart';
 import 'package:quickreels/app/core/widget/user_list_tile.dart';
 import 'package:quickreels/app/core/widget/video_thumbnail_widget.dart';
 import 'package:quickreels/app/features/discover/controller/discover_content_controller.dart';
@@ -90,35 +91,44 @@ class DiscoverContentScreen
   }
 
   Widget _buildUsersGridView(DiscoverContentUiState state) {
-    return ListView.separated(
-      padding: const EdgeInsets.only(top: 8),
-      physics: const BouncingScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: state.users.length,
-      separatorBuilder: (context, index) => const SizedBox(
-        height: 8,
-      ),
-      itemBuilder: (context, index) {
-        return Container(
-            padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
-            color: AppColors.colorAccent,
-            child: InkWell(
-              onTap: () => onShowUserProfile(state.users[index].uid),
-              child: UserListTile(
-                  userBO: state.users[index],
-                  onFollowPressed: () => _onFollowUser(state.users[index].uid),
-                  onUnFollowPressed: () =>
-                      _onUnFollowUser(state.users[index].uid),
-                  isFollowedByAuthUser:
-                      state.users[index].followers.contains(state.authUserUuid),
-                  isAuthUser: state.users[index].uid == state.authUserUuid,
-                  isDisabled: !state.allowUserInput),
-            ));
-      },
-    );
+    return state.users.isNotEmpty
+        ? ListView.separated(
+            padding: const EdgeInsets.only(top: 8),
+            physics: const BouncingScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: state.users.length,
+            separatorBuilder: (context, index) => const SizedBox(
+              height: 8,
+            ),
+            itemBuilder: (context, index) {
+              return Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
+                  color: AppColors.backgroundColor,
+                  child: InkWell(
+                    onTap: () => onShowUserProfile(state.users[index].uid),
+                    child: UserListTile(
+                        userBO: state.users[index],
+                        onFollowPressed: () =>
+                            _onFollowUser(state.users[index].uid),
+                        onUnFollowPressed: () =>
+                            _onUnFollowUser(state.users[index].uid),
+                        isFollowedByAuthUser: state.users[index].followers
+                            .contains(state.authUserUuid),
+                        isAuthUser:
+                            state.users[index].uid == state.authUserUuid,
+                        isDisabled: !state.allowUserInput),
+                  ));
+            },
+          )
+        : const EmptyStateWidget(
+            message: "No users found",
+            iconData: Icons.mood_bad,
+          );
   }
 
   Widget _buildReelsGridView(DiscoverContentUiState state) {
+    print("_buildReelsGridView CALLED!");
     return Container(
       color: AppColors.backgroundColor,
       child: MasonryGridView.count(
