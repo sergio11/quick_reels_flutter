@@ -5,6 +5,8 @@ import 'package:quickreels/app/features/comments/bindings/comments_binding.dart'
 import 'package:quickreels/app/features/comments/views/comments_screen.dart';
 import 'package:quickreels/app/features/discover/bindings/discover_content_binding.dart';
 import 'package:quickreels/app/features/discover/views/discover_content_screen.dart';
+import 'package:quickreels/app/features/editprofile/bindings/edit_profile_binding.dart';
+import 'package:quickreels/app/features/editprofile/views/edit_profile_screen.dart';
 import 'package:quickreels/app/features/favorites/bindings/favorites_binding.dart';
 import 'package:quickreels/app/features/favorites/views/favorites_screen.dart';
 import 'package:quickreels/app/features/followers/bindings/folllowers_binding.dart';
@@ -54,6 +56,11 @@ class AppPages {
 
   static void _navigateToProfile(String userUid) {
     _navigateTo(_Paths.HOME + _Paths.PROFILE,
+        arguments: {USER_UUID_KEY: userUid});
+  }
+
+  static void _navigateToEditProfile(String userUid) {
+    _navigateTo(_Paths.HOME + _Paths.EDIT_PROFILE,
         arguments: {USER_UUID_KEY: userUid});
   }
 
@@ -132,6 +139,7 @@ class AppPages {
           onShowFavorites: (String userUid) => _navigateToFavorites(userUid),
           onGoToComments: (String reelUuid) => _navigateToComments(reelUuid),
           onShowUserProfile: (String userUid) => _navigateToProfile(userUid),
+          onEditProfile: (String userUid) => _navigateToEditProfile(userUid),
         )
       ]),
       binding: MainBinding(),
@@ -150,6 +158,7 @@ class AppPages {
             onShowFavorites: (String userUid) => _navigateToFavorites(userUid),
             onGoToComments: (String reelUuid) => _navigateToComments(reelUuid),
             onShowUserProfile: (String userUid) => _navigateToProfile(userUid),
+            onEditProfile: (String userUid) => _navigateToEditProfile(userUid),
           ),
           transition: Transition.downToUp,
           binding: ProfileBinding(),
@@ -194,6 +203,14 @@ class AppPages {
             onGoToComments: (String reelUuid) => _navigateToComments(reelUuid),
             onShowUserProfile: (String userUid) => _navigateToProfile(userUid),
           ),
+          transition: Transition.leftToRight,
+          curve: Curves.easeInOut,
+          transitionDuration: const Duration(milliseconds: 400),
+        ),
+        GetPage(
+          name: _Paths.EDIT_PROFILE,
+          binding: EditProfileBinding(),
+          page: () => EditProfileScreen(),
           transition: Transition.leftToRight,
           curve: Curves.easeInOut,
           transitionDuration: const Duration(milliseconds: 400),

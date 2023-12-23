@@ -13,6 +13,8 @@ import 'package:quickreels/app/domain/repository/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
 
+  static const String PROFILE_PICS_FOLDER_NAME = 'profilePics';
+
   final AuthDatasource authDatasource;
   final UserDatasource userDatasource;
   final StorageDatasource storageDatasource;
@@ -72,7 +74,7 @@ class AuthRepositoryImpl implements AuthRepository {
   }) async {
     try {
       final userUid = await authDatasource.signUpUser(email: email, password: password);
-      final userPhotoUrl = await storageDatasource.uploadFileToStorage(folderName: 'profilePics', id: userUid, file: file);
+      final userPhotoUrl = await storageDatasource.uploadFileToStorage(folderName: PROFILE_PICS_FOLDER_NAME, id: userUid, file: file);
       await userDatasource.save(SaveUserDTO(
           uid: userUid,
           username: username,

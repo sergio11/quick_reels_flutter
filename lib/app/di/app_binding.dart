@@ -59,6 +59,7 @@ import 'package:quickreels/app/domain/usecase/publish_comment_use_case.dart';
 import 'package:quickreels/app/domain/usecase/sign_in_user_use_case.dart';
 import 'package:quickreels/app/domain/usecase/sign_out_use_case.dart';
 import 'package:quickreels/app/domain/usecase/sign_up_user_use_case.dart';
+import 'package:quickreels/app/domain/usecase/update_user_use_case.dart';
 import 'package:quickreels/app/features/shared/app_controller.dart';
 import 'package:quickreels/app/core/utils/app_event_bus.dart';
 
@@ -121,7 +122,9 @@ class AppBinding extends Bindings {
 
   void _initRepositoryDependencies() {
     Get.put<UserRepository>(UserRepositoryImpl(
-        userDatasource: Get.find(), userBoMapper: Get.find()));
+        userDatasource: Get.find(),
+        userBoMapper: Get.find(),
+        storageDatasource: Get.find()));
     Get.put<AuthRepository>(AuthRepositoryImpl(
         authDatasource: Get.find(),
         userDatasource: Get.find(),
@@ -174,7 +177,9 @@ class AppBinding extends Bindings {
         authRepository: Get.find(), reelRepository: Get.find()));
     Get.put<FindAllCommentsByReelUseCase>(
         FindAllCommentsByReelUseCase(reelRepository: Get.find()));
-    Get.put<FindAllFollowedByUseCase>(FindAllFollowedByUseCase(userRepository: Get.find()));
+    Get.put<FindAllFollowedByUseCase>(
+        FindAllFollowedByUseCase(userRepository: Get.find()));
+    Get.put<UpdateUserUseCase>(UpdateUserUseCase(userRepository: Get.find()));
   }
 
   void _initSharedDependencies() {

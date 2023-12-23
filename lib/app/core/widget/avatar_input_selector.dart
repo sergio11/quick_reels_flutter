@@ -43,6 +43,7 @@ class AvatarInputSelector extends StatelessWidget {
               color: AppColors.colorPrimary,
             ),
             child: IconButton(
+              iconSize: 20,
               onPressed: () => onPickUpImageFromGallery(),
               icon: const Icon(Icons.add_a_photo,
                   color: AppColors.colorSecondaryExtraLight),
