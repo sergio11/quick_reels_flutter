@@ -10,6 +10,10 @@ import 'package:quickreels/app/features/profile/controller/profile_controller.da
 import 'package:quickreels/app/features/profile/model/profile_ui_data.dart';
 
 class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
+  final Function(String userUid) onShowFollowers;
+  final Function(String userUid) onShowFollowing;
+
+  ProfileScreen({required this.onShowFollowers, required this.onShowFollowing});
 
   @override
   PreferredSizeWidget? appBar(BuildContext context, ProfileUiData uiData) {
@@ -46,7 +50,7 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               _buildProfileImage(context, uiData),
-              _buildProfileRowMetrics(context, uiData),
+              _buildProfileRow(context, uiData),
               _buildMainActionButton(context, uiData),
             ],
           ),
@@ -62,75 +66,65 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
       children: [
         Container(
           decoration: BoxDecoration(
-            border: Border.all(color: AppColors.colorWhite),
-            borderRadius: BorderRadius.circular(40)
-          ),
-          child: buildCircleImage(imageUrl: uiData.userData?.photoUrl ?? "", showBackgroundColor: false, radius: 40),
+              border: Border.all(color: AppColors.colorWhite),
+              borderRadius: BorderRadius.circular(40)),
+          child: buildCircleImage(
+              imageUrl: uiData.userData?.photoUrl ?? "",
+              showBackgroundColor: false,
+              radius: 40),
         )
       ],
     );
   }
 
-  Widget _buildProfileRowMetrics(BuildContext context, ProfileUiData uiData) {
+  Widget _buildProfileRow(BuildContext context, ProfileUiData uiData) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Column(
-          children: [
-            Text(
-              uiData.userData?.followingCount.toString() ?? "",
-              style: whiteText18,
-            ),
-            const SizedBox(height: 3),
-            const Text(
-              'Following',
-              style: whiteText16,
-            ),
-          ],
-        ),
-        Container(
-          color: AppColors.colorWhite,
-          width: 1,
-          height: 15,
-          margin: const EdgeInsets.symmetric(
-            horizontal: 15,
-          ),
-        ),
-        Column(
-          children: [
-            Text(
-              uiData.userData?.followersCount.toString() ?? "",
-              style: whiteText18,
-            ),
-            const SizedBox(height: 3),
-            const Text(
-              'Followers',
-              style: whiteText16,
-            ),
-          ],
-        ),
-        Container(
-          color: AppColors.colorWhite,
-          width: 1,
-          height: 15,
-          margin: const EdgeInsets.symmetric(
-            horizontal: 15,
-          ),
-        ),
-        Column(
-          children: [
-            Text(
-              uiData.userData?.likesCount.toString() ?? "",
-              style: whiteText18,
-            ),
-            const SizedBox(height: 3),
-            const Text(
-              'Likes',
-              style: whiteText16,
-            ),
-          ],
-        ),
+        _buildProfileRowMetrics(
+            context, 'Following', uiData.userData?.followingCount, () {
+          onShowFollowing(uiData.userUuid);
+        }),
+        _buildVerticalDivider(),
+        _buildProfileRowMetrics(
+            context, 'Followers', uiData.userData?.followersCount, () {
+          onShowFollowers(uiData.userUuid);
+        }),
+        _buildVerticalDivider(),
+        _buildProfileRowMetrics(
+            context, 'Likes', uiData.userData?.likesCount, () {}),
       ],
+    );
+  }
+
+  Widget _buildProfileRowMetrics(
+      BuildContext context, String label, int? count, Function onTap) {
+    return InkWell(
+      onTap: () => onTap(),
+      child: Column(
+        children: [
+          Text(
+            count?.toString() ?? "",
+            style: whiteText18,
+          ),
+          const SizedBox(height: 3),
+          Text(
+            label,
+            style: whiteText16,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildVerticalDivider() {
+    return Container(
+      color: AppColors.colorWhite,
+      width: 1,
+      height: 15,
+      margin: const EdgeInsets.symmetric(
+        horizontal: 15,
+      ),
     );
   }
 
@@ -184,7 +178,8 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
           childAspectRatio: 0.7,
           crossAxisSpacing: 6,
         ),
-        itemBuilder: (context, index) => _buildReelItem(uiData.reels[index], uiData.userUuid),
+        itemBuilder: (context, index) =>
+            _buildReelItem(uiData.reels[index], uiData.userUuid),
       ),
     );
   }
@@ -192,9 +187,8 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
   Widget _buildReelItem(ReelBO reel, String userUuid) {
     return GestureDetector(
       child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: AppColors.colorWhite)
-        ),
+        decoration:
+            BoxDecoration(border: Border.all(color: AppColors.colorWhite)),
         padding: const EdgeInsets.all(1),
         child: SizedBox(
           child: VideoThumbnailWidget(

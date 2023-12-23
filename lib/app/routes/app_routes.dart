@@ -19,4 +19,5 @@ abstract class _Paths {
   static const PROFILE = '/profile';
   static const DISCOVER = '/discover';
   static const COMMENTS = '/comments';
+  static const FOLLOWERS = '/followers';
 }
