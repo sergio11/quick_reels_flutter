@@ -27,7 +27,7 @@ class FollowersScreen extends BaseView<FollowersController, FollowersUiState> {
               .textTheme
               .titleLarge
               ?.copyWith(color: AppColors.colorWhite)),
-      centerTitle: false,
+      centerTitle: true,
     );
   }
 

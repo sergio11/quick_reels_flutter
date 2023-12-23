@@ -5,6 +5,8 @@ import 'package:quickreels/app/features/comments/bindings/comments_binding.dart'
 import 'package:quickreels/app/features/comments/views/comments_screen.dart';
 import 'package:quickreels/app/features/discover/bindings/discover_content_binding.dart';
 import 'package:quickreels/app/features/discover/views/discover_content_screen.dart';
+import 'package:quickreels/app/features/favorites/bindings/favorites_binding.dart';
+import 'package:quickreels/app/features/favorites/views/favorites_screen.dart';
 import 'package:quickreels/app/features/followers/bindings/folllowers_binding.dart';
 import 'package:quickreels/app/features/followers/views/followers_screen.dart';
 import 'package:quickreels/app/features/home/bindings/home_binding.dart';
@@ -70,6 +72,11 @@ class AppPages {
         arguments: {REEL_UUID_KEY: reelUuid});
   }
 
+  static void _navigateToFavorites(String userUid) {
+    _navigateTo(_Paths.HOME + _Paths.FAVORITES,
+        arguments: {USER_UUID_KEY: userUid});
+  }
+
   static final routes = [
     GetPage(
       name: _Paths.ONBOARDING,
@@ -113,20 +120,27 @@ class AppPages {
         DiscoverContentScreen(
             onShowUserProfile: (userUuid) => _navigateToProfile(userUuid)),
         const Text("Add"),
-        const Text("Favorites"),
+        FavoritesScreen(),
         ProfileScreen(
           onShowFollowers: (String userUid) => _navigateToFollowers(userUid),
           onShowFollowing: (String userUid) => _navigateToFollowing(userUid),
+          onShowFavorites: (String userUid) => _navigateToFavorites(userUid),
         )
       ]),
       binding: MainBinding(),
-      bindings: [HomeBinding(), ProfileBinding(), DiscoverContentBinding()],
+      bindings: [
+        HomeBinding(),
+        ProfileBinding(),
+        DiscoverContentBinding(),
+        FavoritesBinding()
+      ],
       children: [
         GetPage(
           name: _Paths.PROFILE,
           page: () => ProfileScreen(
             onShowFollowers: (String userUid) => _navigateToFollowers(userUid),
             onShowFollowing: (String userUid) => _navigateToFollowing(userUid),
+            onShowFavorites: (String userUid) => _navigateToFavorites(userUid)
           ),
           transition: Transition.downToUp,
           binding: ProfileBinding(),
@@ -158,6 +172,14 @@ class AppPages {
           binding: FollowersBinding(),
           page: () => FollowersScreen(
               onShowUserProfile: (userUuid) => _navigateToProfile(userUuid)),
+          transition: Transition.leftToRight,
+          curve: Curves.easeInOut,
+          transitionDuration: const Duration(milliseconds: 400),
+        ),
+        GetPage(
+          name: _Paths.FAVORITES,
+          binding: FavoritesBinding(),
+          page: () => FavoritesScreen(),
           transition: Transition.leftToRight,
           curve: Curves.easeInOut,
           transitionDuration: const Duration(milliseconds: 400),
