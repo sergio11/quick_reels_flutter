@@ -43,8 +43,9 @@ class VideoThumbnailWidgetState extends State<VideoThumbnailWidget> {
     return thumbnailFileName != null
         ? FittedBox(
             fit: BoxFit.fill,
-            child: Image(image: FileImage(File(thumbnailFileName!))),
-          )
-        : const CommonScreenProgressIndicator(backgroundColor: AppColors.backgroundColor,);
+            child: Image(image: FileImage(File(thumbnailFileName!))))
+        : const CommonScreenProgressIndicator(
+            backgroundColor: AppColors.backgroundColor,
+          );
   }
 }
