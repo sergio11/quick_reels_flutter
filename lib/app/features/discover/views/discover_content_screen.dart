@@ -118,9 +118,9 @@ class DiscoverContentScreen
                     child: UserListTile(
                         userBO: state.users[index],
                         onFollowPressed: () =>
-                            _onFollowUser(state.users[index].uid),
+                            controller.toggleFollowUser(state.users[index].uid),
                         onUnFollowPressed: () =>
-                            _onUnFollowUser(state.users[index].uid),
+                            controller.toggleFollowUser(state.users[index].uid),
                         isFollowedByAuthUser: state.users[index].followers
                             .contains(state.authUserUuid),
                         isAuthUser:
@@ -159,8 +159,8 @@ class DiscoverContentScreen
               reel: state.reels[index],
               authUserUuid: state.authUserUuid,
               onGoToComments: () => onGoToComments(state.reels[index].reelId),
-              onReelLiked: () {},
-              onGoToAuthorProfile: () {},
+              onReelLiked: () => controller.likeReel(state.reels[index].reelId),
+              onGoToAuthorProfile: () => onShowUserProfile(state.reels[index].authorUid),
             );
           },
         ),
@@ -168,13 +168,5 @@ class DiscoverContentScreen
         crossAxisSpacing: 1,
       ),
     );
-  }
-
-  void _onFollowUser(String userUid) {
-    controller.toggleFollowUser(userUid);
-  }
-
-  void _onUnFollowUser(String userUid) {
-    controller.toggleFollowUser(userUid);
   }
 }

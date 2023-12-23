@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quickreels/app/core/base/base_controller.dart';
 import 'package:quickreels/app/core/base/base_use_case.dart';
+import 'package:quickreels/app/core/utils/reel_extensions.dart';
 import 'package:quickreels/app/domain/model/reel.dart';
 import 'package:quickreels/app/domain/usecase/fetch_user_home_feed_use_case.dart';
 import 'package:quickreels/app/domain/usecase/get_auth_user_uid_use_case.dart';
@@ -78,18 +79,9 @@ class HomeController extends BaseController<HomeUiData> {
 
   void _onLikeReelCompleted(String reelId, bool isSuccess) {
     if (isSuccess) {
-      int reelIndex = uiData.reels.indexWhere((reel) => reel.reelId == reelId);
-      if (reelIndex != -1) {
-        final authUserUuid = uiData.authUserUuid;
-        final List<ReelBO> updatedReels = List.from(uiData.reels);
-        bool isLiked = updatedReels[reelIndex].likes.contains(authUserUuid);
-        if (!isLiked) {
-          updatedReels[reelIndex].likes.add(authUserUuid);
-        } else {
-          updatedReels[reelIndex].likes.remove(authUserUuid);
-        }
-        updateState(uiData.copyWith(reels: updatedReels));
-      }
+      final authUserUuid = uiData.authUserUuid;
+      final updatedReels = uiData.reels.updateLikes(reelId, authUserUuid, isSuccess);
+      updateState(uiData.copyWith(reels: updatedReels), forceRefresh: true);
     }
   }
 

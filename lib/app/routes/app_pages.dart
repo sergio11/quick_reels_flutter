@@ -124,12 +124,14 @@ class AppPages {
         const Text("Add"),
         FavoritesScreen(
           onGoToComments: (String reelUuid) => _navigateToComments(reelUuid),
+          onShowUserProfile: (String userUid) => _navigateToProfile(userUid),
         ),
         ProfileScreen(
           onShowFollowers: (String userUid) => _navigateToFollowers(userUid),
           onShowFollowing: (String userUid) => _navigateToFollowing(userUid),
           onShowFavorites: (String userUid) => _navigateToFavorites(userUid),
           onGoToComments: (String reelUuid) => _navigateToComments(reelUuid),
+          onShowUserProfile: (String userUid) => _navigateToProfile(userUid),
         )
       ]),
       binding: MainBinding(),
@@ -147,6 +149,7 @@ class AppPages {
             onShowFollowing: (String userUid) => _navigateToFollowing(userUid),
             onShowFavorites: (String userUid) => _navigateToFavorites(userUid),
             onGoToComments: (String reelUuid) => _navigateToComments(reelUuid),
+            onShowUserProfile: (String userUid) => _navigateToProfile(userUid),
           ),
           transition: Transition.downToUp,
           binding: ProfileBinding(),
@@ -189,6 +192,7 @@ class AppPages {
           binding: FavoritesBinding(),
           page: () => FavoritesScreen(
             onGoToComments: (String reelUuid) => _navigateToComments(reelUuid),
+            onShowUserProfile: (String userUid) => _navigateToProfile(userUid),
           ),
           transition: Transition.leftToRight,
           curve: Curves.easeInOut,

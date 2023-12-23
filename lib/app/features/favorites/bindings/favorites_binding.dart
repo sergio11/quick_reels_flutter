@@ -7,7 +7,8 @@ class FavoritesBinding extends Bindings {
     Get.lazyPut<FavoritesController>(
       () => FavoritesController(
           getAuthUserUidUseCase: Get.find(),
-          findFavoritesReelsByUserUseCase: Get.find()),
+          findFavoritesReelsByUserUseCase: Get.find(),
+          likeReelUseCase: Get.find()),
     );
   }
 }

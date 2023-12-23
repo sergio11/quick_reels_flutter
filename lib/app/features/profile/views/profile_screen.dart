@@ -10,13 +10,15 @@ import 'package:quickreels/app/features/profile/controller/profile_controller.da
 import 'package:quickreels/app/features/profile/model/profile_ui_data.dart';
 
 class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
+  final Function(String userUid) onShowUserProfile;
   final Function(String userUid) onShowFollowers;
   final Function(String userUid) onShowFollowing;
   final Function(String userUid) onShowFavorites;
   final Function(String reelUuid) onGoToComments;
 
   ProfileScreen(
-      {required this.onShowFollowers,
+      {required this.onShowUserProfile,
+      required this.onShowFollowers,
       required this.onShowFollowing,
       required this.onShowFavorites,
       required this.onGoToComments});
@@ -25,9 +27,11 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
   PreferredSizeWidget? appBar(BuildContext context, ProfileUiData uiData) {
     return AppBar(
       backgroundColor: Colors.black12,
-      leading: uiData.isAuthUser ? const Icon(
-        Icons.person_add_alt_1_outlined,
-      ) : null,
+      leading: uiData.isAuthUser
+          ? const Icon(
+              Icons.person_add_alt_1_outlined,
+            )
+          : null,
       actions: const [
         Icon(Icons.more_horiz),
       ],
@@ -212,7 +216,7 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
         reel: reel,
         authUserUuid: userUuid,
         onGoToComments: () => onGoToComments(reel.reelId),
-        onReelLiked: () {  }, onGoToAuthorProfile: () {  });
+        onReelLiked: () => controller.likeReel(reel.reelId),
+        onGoToAuthorProfile: () => onShowUserProfile(reel.authorUid));
   }
-
 }
