@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:quickreels/app/domain/model/user.dart';
 
 abstract class UserRepository {
@@ -10,4 +12,11 @@ abstract class UserRepository {
   Future<List<UserBO>> findAllFollowedBy(String uid);
 
   Future<List<UserBO>> findAllFollowersBy(String uid);
+
+  Future<UserBO> update(
+      {required String uid,
+      required String username,
+      required String email,
+      required Uint8List? file,
+      required String bio});
 }
