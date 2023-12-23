@@ -2,6 +2,13 @@
 
 QuickReels is a cutting-edge Flutter application designed to deliver a seamless multimedia experience. Leveraging the power of the GetX framework, QuickReels emphasizes a structured architecture, ensuring robustness and scalability throughout the development process.
 
+<p align="center">
+  <img src="https://img.shields.io/badge/Android%20Studio-3DDC84.svg?style=for-the-badge&logo=android-studio&logoColor=white" />
+  <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" />
+  <img src="https://img.shields.io/badge/firebase-ffca28?style=for-the-badge&logo=firebase&logoColor=black" />
+  <img src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white" />
+</p>
+
 ## Key Features:
 
 * **🔄 GetX Framework Integration:** QuickReels harnesses the potential of GetX, facilitating a streamlined and efficient approach to manage states, routes, and dependencies within the app.
