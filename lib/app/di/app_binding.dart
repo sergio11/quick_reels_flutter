@@ -45,7 +45,7 @@ import 'package:quickreels/app/domain/usecase/fetch_user_home_feed_use_case.dart
 import 'package:quickreels/app/domain/usecase/find_all_comments_by_reel_use_case.dart';
 import 'package:quickreels/app/domain/usecase/find_all_followed_by_use_case.dart';
 import 'package:quickreels/app/domain/usecase/find_bookmark_reels_by_user_use_case.dart';
-import 'package:quickreels/app/domain/usecase/find_favorites_posts_by_user_use_case.dart';
+import 'package:quickreels/app/domain/usecase/find_favorites_reels_by_user_use_case.dart';
 import 'package:quickreels/app/domain/usecase/find_followers_by_user_use_case.dart';
 import 'package:quickreels/app/domain/usecase/find_reel_by_id_use_case.dart';
 import 'package:quickreels/app/domain/usecase/find_reels_by_user_use_case.dart';

@@ -12,8 +12,12 @@ import 'package:quickreels/app/features/profile/model/profile_ui_data.dart';
 class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
   final Function(String userUid) onShowFollowers;
   final Function(String userUid) onShowFollowing;
+  final Function(String userUid) onShowFavorites;
 
-  ProfileScreen({required this.onShowFollowers, required this.onShowFollowing});
+  ProfileScreen(
+      {required this.onShowFollowers,
+      required this.onShowFollowing,
+      required this.onShowFavorites});
 
   @override
   PreferredSizeWidget? appBar(BuildContext context, ProfileUiData uiData) {
@@ -82,17 +86,19 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         _buildProfileRowMetrics(
-            context, 'Following', uiData.userData?.followingCount, () {
-          onShowFollowing(uiData.userUuid);
-        }),
+            context,
+            'Following',
+            uiData.userData?.followingCount,
+            () => onShowFollowing(uiData.userUuid)),
         _buildVerticalDivider(),
         _buildProfileRowMetrics(
-            context, 'Followers', uiData.userData?.followersCount, () {
-          onShowFollowers(uiData.userUuid);
-        }),
+            context,
+            'Followers',
+            uiData.userData?.followersCount,
+            () => onShowFollowers(uiData.userUuid)),
         _buildVerticalDivider(),
-        _buildProfileRowMetrics(
-            context, 'Likes', uiData.userData?.likesCount, () {}),
+        _buildProfileRowMetrics(context, 'Likes', uiData.userData?.likesCount,
+            () => onShowFavorites(uiData.userUuid)),
       ],
     );
   }
@@ -145,9 +151,7 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
                   context: context,
                   title: 'Sign Out',
                   description: 'Are you sure you want to log out?',
-                  onAcceptPressed: () {
-                    controller.signOut();
-                  },
+                  onAcceptPressed: () => controller.signOut(),
                 );
               } else {
                 controller.followUser();
@@ -190,11 +194,13 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
         decoration:
             BoxDecoration(border: Border.all(color: AppColors.colorWhite)),
         padding: const EdgeInsets.all(1),
-        child: ReelThumbnailWidget(reelBO: reel,),
+        child: ReelThumbnailWidget(
+          reelBO: reel,
+        ),
       ),
       onLongPress: () => showReelPreviewDialog(context, reel, userUuid),
       onDoubleTap: () => showReelPreviewDialog(context, reel, userUuid),
-      onTap: () {},
+      onTap: () => showReelPreviewDialog(context, reel, userUuid),
     );
   }
 }

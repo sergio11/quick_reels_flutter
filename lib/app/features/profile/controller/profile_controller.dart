@@ -59,15 +59,11 @@ class ProfileController extends BaseController<ProfileUiData> {
   }
 
   void _loadScreenContentForUser(String userUuid, bool isAuthUser) async {
-    try {
-      final userDetails = getUserDetailsUseCase(GetUserDetailsParams(userUuid));
-      final userReels = findReelsByUserUseCase(FindReelsByUserParams(userUuid));
-      callUseCase(Future.wait([userDetails, userReels]), onSuccess: (result) {
-        _handleLoadScreenContentForUser(result, userUuid, isAuthUser);
-      });
-    } catch (e) {
-      showErrorMessage("An error occurred while loading user details");
-    }
+    final userDetails = getUserDetailsUseCase(GetUserDetailsParams(userUuid));
+    final userReels = findReelsByUserUseCase(FindReelsByUserParams(userUuid));
+    callUseCase(Future.wait([userDetails, userReels]), onSuccess: (result) {
+      _handleLoadScreenContentForUser(result, userUuid, isAuthUser);
+    });
   }
 
   void _handleLoadScreenContentForUser(
