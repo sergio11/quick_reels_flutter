@@ -16,7 +16,13 @@ class CommentCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-      color: AppColors.colorDark,
+      decoration: BoxDecoration(
+        color: AppColors.colorDark,
+        border: Border.all(
+          color: AppColors.colorWhite,
+          width: 1.0,
+        ),
+      ),
       child: Row(
         children: [
           CircleAvatar(
