@@ -14,12 +14,12 @@ class UserListTile extends StatelessWidget {
 
   const UserListTile(
       {super.key,
-        required this.userBO,
-        required this.isAuthUser,
-        this.onFollowPressed,
-        this.onUnFollowPressed,
-        this.isFollowedByAuthUser = false,
-        this.isDisabled = false});
+      required this.userBO,
+      required this.isAuthUser,
+      this.onFollowPressed,
+      this.onUnFollowPressed,
+      this.isFollowedByAuthUser = false,
+      this.isDisabled = false});
 
   @override
   Widget build(BuildContext context) {
@@ -29,43 +29,40 @@ class UserListTile extends StatelessWidget {
         leading: SizedBox(
           width: 40,
           height: 40,
-          child: buildCircleImage(imageUrl: userBO.photoUrl, radius: 22, showBackgroundColor: false),
+          child: buildCircleImage(
+              imageUrl: userBO.photoUrl,
+              radius: 22,
+              showBackgroundColor: false),
         ),
         title: Text(
           userBO.username,
-          style: Theme.of(context)
-              .textTheme
-              .labelMedium
-              ?.copyWith(color: AppColors.colorWhite, fontWeight: FontWeight.bold),
+          style: Theme.of(context).textTheme.labelMedium?.copyWith(
+              color: AppColors.colorWhite, fontWeight: FontWeight.bold),
         ),
-        subtitle: Text(
-            userBO.bio,
+        subtitle: Text(userBO.bio,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: Theme.of(context)
                 .textTheme
                 .labelMedium
                 ?.copyWith(color: AppColors.colorWhite)),
-        trailing: !isAuthUser &&
-            onUnFollowPressed != null &&
-            onFollowPressed != null
-            ? CommonButton(
-          text: isFollowedByAuthUser
-              ? "Unfollow"
-              : "Follow",
-          textColor: AppColors.colorPrimary,
-          borderColor: AppColors.colorPrimary,
-          isDisabled: isDisabled,
-          onPressed: () {
-            if (isFollowedByAuthUser) {
-              onUnFollowPressed?.call();
-            } else {
-              onFollowPressed?.call();
-            }
-          },
-          sizeType: CommonButtonSizeType.tiny,
-        )
-            : null,
+        trailing:
+            !isAuthUser && onUnFollowPressed != null && onFollowPressed != null
+                ? CommonButton(
+                    text: isFollowedByAuthUser ? "Unfollow" : "Follow",
+                    textColor: isFollowedByAuthUser
+                        ? AppColors.colorPrimary
+                        : AppColors.colorWhite,
+                    borderColor: isFollowedByAuthUser
+                        ? AppColors.colorPrimary
+                        : AppColors.colorWhite,
+                    isDisabled: isDisabled,
+                    onPressed: () => isFollowedByAuthUser
+                        ? onUnFollowPressed?.call()
+                        : onFollowPressed?.call(),
+                    sizeType: CommonButtonSizeType.tiny,
+                  )
+                : null,
       ),
     );
   }
