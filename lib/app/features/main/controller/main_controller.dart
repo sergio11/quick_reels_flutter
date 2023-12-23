@@ -15,7 +15,7 @@ class MainController extends BaseController<MainUiData>
             initialUiState: const MainUiData(tabMenuItems: [
           Icons.home,
           Icons.search,
-          Icons.add,
+          Icons.add_box,
           Icons.favorite,
           Icons.person_outline
         ]));
