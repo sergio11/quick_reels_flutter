@@ -1,6 +1,8 @@
 # 🚀 QuickReels: A Fast-paced Multimedia Experience
 
-QuickReels is a cutting-edge Flutter application designed to deliver a seamless multimedia experience. Leveraging the power of the GetX framework, QuickReels emphasizes a structured architecture, ensuring robustness and scalability throughout the development process.
+<img width="auto" height="250px" align="left" src="screenshots/logo.png" />
+
+**QuickReels** is a cutting-edge Flutter application designed to deliver a seamless multimedia experience. Leveraging the power of the GetX framework, QuickReels emphasizes a structured architecture, ensuring robustness and scalability throughout the development process.
 
 <p align="center">
   <img src="https://img.shields.io/badge/Android%20Studio-3DDC84.svg?style=for-the-badge&logo=android-studio&logoColor=white" />
