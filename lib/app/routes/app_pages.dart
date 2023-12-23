@@ -118,13 +118,18 @@ class AppPages {
           onGoToUserProfile: (userUuid) => _navigateToProfile(userUuid),
         ),
         DiscoverContentScreen(
-            onShowUserProfile: (userUuid) => _navigateToProfile(userUuid)),
+          onShowUserProfile: (userUuid) => _navigateToProfile(userUuid),
+          onGoToComments: (String reelUuid) => _navigateToComments(reelUuid),
+        ),
         const Text("Add"),
-        FavoritesScreen(),
+        FavoritesScreen(
+          onGoToComments: (String reelUuid) => _navigateToComments(reelUuid),
+        ),
         ProfileScreen(
           onShowFollowers: (String userUid) => _navigateToFollowers(userUid),
           onShowFollowing: (String userUid) => _navigateToFollowing(userUid),
           onShowFavorites: (String userUid) => _navigateToFavorites(userUid),
+          onGoToComments: (String reelUuid) => _navigateToComments(reelUuid),
         )
       ]),
       binding: MainBinding(),
@@ -140,7 +145,8 @@ class AppPages {
           page: () => ProfileScreen(
             onShowFollowers: (String userUid) => _navigateToFollowers(userUid),
             onShowFollowing: (String userUid) => _navigateToFollowing(userUid),
-            onShowFavorites: (String userUid) => _navigateToFavorites(userUid)
+            onShowFavorites: (String userUid) => _navigateToFavorites(userUid),
+            onGoToComments: (String reelUuid) => _navigateToComments(reelUuid),
           ),
           transition: Transition.downToUp,
           binding: ProfileBinding(),
@@ -150,7 +156,9 @@ class AppPages {
         GetPage(
           name: _Paths.DISCOVER,
           page: () => DiscoverContentScreen(
-              onShowUserProfile: (userUuid) => _navigateToProfile(userUuid)),
+            onShowUserProfile: (userUuid) => _navigateToProfile(userUuid),
+            onGoToComments: (String reelUuid) => _navigateToComments(reelUuid),
+          ),
           transition: Transition.downToUp,
           curve: Curves.easeInOut,
           transitionDuration: const Duration(milliseconds: 400),
@@ -179,7 +187,9 @@ class AppPages {
         GetPage(
           name: _Paths.FAVORITES,
           binding: FavoritesBinding(),
-          page: () => FavoritesScreen(),
+          page: () => FavoritesScreen(
+            onGoToComments: (String reelUuid) => _navigateToComments(reelUuid),
+          ),
           transition: Transition.leftToRight,
           curve: Curves.easeInOut,
           transitionDuration: const Duration(milliseconds: 400),

@@ -14,11 +14,13 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 class DiscoverContentScreen
     extends BaseView<DiscoverContentController, DiscoverContentUiState> {
   final Function(String userUid) onShowUserProfile;
+  final Function(String reelUuid) onGoToComments;
 
   final Random random = Random();
   final List<double> reelItemHeights = [250, 220, 300, 200, 270];
 
-  DiscoverContentScreen({required this.onShowUserProfile});
+  DiscoverContentScreen(
+      {required this.onShowUserProfile, required this.onGoToComments});
 
   @override
   Widget body(BuildContext context, DiscoverContentUiState uiData) {
@@ -153,7 +155,13 @@ class DiscoverContentScreen
           ),
           onTap: () {
             showReelPreviewDialog(
-                context, state.reels[index], state.authUserUuid);
+              context: context,
+              reel: state.reels[index],
+              authUserUuid: state.authUserUuid,
+              onGoToComments: () => onGoToComments(state.reels[index].reelId),
+              onReelLiked: () {},
+              onGoToAuthorProfile: () {},
+            );
           },
         ),
         mainAxisSpacing: 1,

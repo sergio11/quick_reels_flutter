@@ -4,6 +4,7 @@ import 'package:quickreels/app/core/base/base_use_case.dart';
 import 'package:quickreels/app/domain/model/reel.dart';
 import 'package:quickreels/app/domain/model/user.dart';
 import 'package:quickreels/app/domain/usecase/find_reels_by_user_use_case.dart';
+import 'package:quickreels/app/domain/usecase/follow_user_use_case.dart';
 import 'package:quickreels/app/domain/usecase/get_auth_user_uid_use_case.dart';
 import 'package:quickreels/app/domain/usecase/get_user_details_use_case.dart';
 import 'package:quickreels/app/domain/usecase/sign_out_use_case.dart';
@@ -14,6 +15,7 @@ class ProfileController extends BaseController<ProfileUiData> {
   final SignOutUseCase signOutUseCase;
   final GetUserDetailsUseCase getUserDetailsUseCase;
   final FindReelsByUserUseCase findReelsByUserUseCase;
+  final FollowUserUseCase followUserUseCase;
 
   static const String USER_UUID_KEY = 'USER_UUID';
 
@@ -21,14 +23,27 @@ class ProfileController extends BaseController<ProfileUiData> {
       {required this.getAuthUserUidUseCase,
       required this.signOutUseCase,
       required this.getUserDetailsUseCase,
-      required this.findReelsByUserUseCase})
+      required this.findReelsByUserUseCase,
+      required this.followUserUseCase})
       : super(initialUiState: const ProfileUiData());
 
   @override
-  void onInit() {
-    super.onInit();
-    Map<String, dynamic>? args = Get.arguments as Map<String, dynamic>?;
-    if (args != null) {
+  void onResumed() {
+    _loadContent();
+  }
+
+  void signOut() async {
+    callUseCase(signOutUseCase(const DefaultParams()),
+        onComplete: (_) => _handleSignOutCompleted());
+  }
+
+  void followUser() async {
+    callUseCase(followUserUseCase(FollowUserParams(uiData.userUuid)));
+  }
+
+  void _loadContent() async {
+    final args = Get.arguments;
+    if (args is Map<String, dynamic>? && args != null) {
       if (args.containsKey(USER_UUID_KEY)) {
         String? userUuid = args[USER_UUID_KEY] as String?;
         if (userUuid != null) {
@@ -39,13 +54,6 @@ class ProfileController extends BaseController<ProfileUiData> {
     }
     _loadCurrentUserDetails();
   }
-
-  void signOut() async {
-    callUseCase(signOutUseCase(const DefaultParams()),
-        onComplete: (_) => _handleSignOutCompleted());
-  }
-
-  void followUser() async {}
 
   void _loadUserDetails(String userUuid) async {
     _loadScreenContentForUser(userUuid,
