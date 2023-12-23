@@ -4,7 +4,7 @@ import 'package:quickreels/app/core/utils/helpers.dart';
 import 'package:quickreels/app/core/utils/utils.dart';
 import 'package:quickreels/app/core/values/app_colors.dart';
 import 'package:quickreels/app/core/values/text_styles.dart';
-import 'package:quickreels/app/core/widget/video_thumbnail_widget.dart';
+import 'package:quickreels/app/core/widget/reel_thumbnail_widget.dart';
 import 'package:quickreels/app/domain/model/reel.dart';
 import 'package:quickreels/app/features/profile/controller/profile_controller.dart';
 import 'package:quickreels/app/features/profile/model/profile_ui_data.dart';
@@ -190,11 +190,7 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
         decoration:
             BoxDecoration(border: Border.all(color: AppColors.colorWhite)),
         padding: const EdgeInsets.all(1),
-        child: SizedBox(
-          child: VideoThumbnailWidget(
-            videoUrl: reel.url,
-          ),
-        ),
+        child: ReelThumbnailWidget(reelBO: reel,),
       ),
       onLongPress: () => showReelPreviewDialog(context, reel, userUuid),
       onDoubleTap: () => showReelPreviewDialog(context, reel, userUuid),

@@ -5,8 +5,8 @@ import 'package:quickreels/app/core/base/base_view.dart';
 import 'package:quickreels/app/core/utils/utils.dart';
 import 'package:quickreels/app/core/values/app_colors.dart';
 import 'package:quickreels/app/core/widget/empty_state_widget.dart';
+import 'package:quickreels/app/core/widget/reel_thumbnail_widget.dart';
 import 'package:quickreels/app/core/widget/user_list_tile.dart';
-import 'package:quickreels/app/core/widget/video_thumbnail_widget.dart';
 import 'package:quickreels/app/features/discover/controller/discover_content_controller.dart';
 import 'package:quickreels/app/features/discover/model/discover_content_ui_data.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -128,7 +128,6 @@ class DiscoverContentScreen
   }
 
   Widget _buildReelsGridView(DiscoverContentUiState state) {
-    print("_buildReelsGridView CALLED!");
     return Container(
       color: AppColors.backgroundColor,
       child: MasonryGridView.count(
@@ -141,8 +140,8 @@ class DiscoverContentScreen
             padding: const EdgeInsets.all(1),
             child: SizedBox(
               height: reelItemHeights[random.nextInt(reelItemHeights.length)],
-              child: VideoThumbnailWidget(
-                videoUrl: state.reels[index].url,
+              child: ReelThumbnailWidget(
+                reelBO: state.reels[index],
               ),
             ),
           ),
