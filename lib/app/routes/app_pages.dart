@@ -5,6 +5,8 @@ import 'package:quickreels/app/features/comments/bindings/comments_binding.dart'
 import 'package:quickreels/app/features/comments/views/comments_screen.dart';
 import 'package:quickreels/app/features/discover/bindings/discover_content_binding.dart';
 import 'package:quickreels/app/features/discover/views/discover_content_screen.dart';
+import 'package:quickreels/app/features/followers/bindings/folllowers_binding.dart';
+import 'package:quickreels/app/features/followers/views/followers_screen.dart';
 import 'package:quickreels/app/features/home/bindings/home_binding.dart';
 import 'package:quickreels/app/features/home/views/home_screen.dart';
 import 'package:quickreels/app/features/main/bindings/main_binding.dart';
@@ -28,6 +30,7 @@ class AppPages {
 
   static const String USER_UUID_KEY = 'USER_UUID';
   static const String REEL_UUID_KEY = 'REEL_UUID_KEY';
+  static const String CONTENT_TYPE_KEY = 'CONTENT_TYPE';
 
   static final unrestrictedRoutes = [
     _Paths.ONBOARDING,
@@ -40,6 +43,32 @@ class AppPages {
     _Paths.SIGN_IN,
     _Paths.SIGN_UP
   ];
+
+  static void _navigateTo(String route, {Map<String, dynamic>? arguments}) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.toNamed(route, arguments: arguments ?? {});
+    });
+  }
+
+  static void _navigateToProfile(String userUid) {
+    _navigateTo(_Paths.HOME + _Paths.PROFILE,
+        arguments: {USER_UUID_KEY: userUid});
+  }
+
+  static void _navigateToFollowers(String userUid) {
+    _navigateTo(_Paths.HOME + _Paths.FOLLOWERS,
+        arguments: {USER_UUID_KEY: userUid, CONTENT_TYPE_KEY: "followers"});
+  }
+
+  static void _navigateToFollowing(String userUid) {
+    _navigateTo(_Paths.HOME + _Paths.FOLLOWERS,
+        arguments: {USER_UUID_KEY: userUid, CONTENT_TYPE_KEY: "following"});
+  }
+
+  static void _navigateToComments(String reelUuid) {
+    _navigateTo(_Paths.HOME + _Paths.COMMENTS,
+        arguments: {REEL_UUID_KEY: reelUuid});
+  }
 
   static final routes = [
     GetPage(
@@ -78,27 +107,27 @@ class AppPages {
       name: _Paths.HOME,
       page: () => MainScreen(tabItems: [
         HomeScreen(
-          onGoToComments: (reelUuid) => _navigateTo(
-              _Paths.HOME + _Paths.COMMENTS,
-              arguments: {REEL_UUID_KEY: reelUuid}),
-          onGoToUserProfile: (userUuid) => _navigateTo(
-              _Paths.HOME + _Paths.PROFILE,
-              arguments: {USER_UUID_KEY: userUuid}),
+          onGoToComments: (reelUuid) => _navigateToComments(reelUuid),
+          onGoToUserProfile: (userUuid) => _navigateToProfile(userUuid),
         ),
         DiscoverContentScreen(
-            onShowUserProfile: (userUuid) => _navigateTo(
-                _Paths.HOME + _Paths.PROFILE,
-                arguments: {USER_UUID_KEY: userUuid})),
+            onShowUserProfile: (userUuid) => _navigateToProfile(userUuid)),
         const Text("Add"),
         const Text("Favorites"),
-        ProfileScreen()
+        ProfileScreen(
+          onShowFollowers: (String userUid) => _navigateToFollowers(userUid),
+          onShowFollowing: (String userUid) => _navigateToFollowing(userUid),
+        )
       ]),
       binding: MainBinding(),
       bindings: [HomeBinding(), ProfileBinding(), DiscoverContentBinding()],
       children: [
         GetPage(
           name: _Paths.PROFILE,
-          page: () => ProfileScreen(),
+          page: () => ProfileScreen(
+            onShowFollowers: (String userUid) => _navigateToFollowers(userUid),
+            onShowFollowing: (String userUid) => _navigateToFollowing(userUid),
+          ),
           transition: Transition.downToUp,
           binding: ProfileBinding(),
           curve: Curves.easeInOut,
@@ -107,23 +136,28 @@ class AppPages {
         GetPage(
           name: _Paths.DISCOVER,
           page: () => DiscoverContentScreen(
-              onShowUserProfile: (userUuid) => _navigateTo(
-                  _Paths.HOME + _Paths.PROFILE,
-                  arguments: {USER_UUID_KEY: userUuid})),
+              onShowUserProfile: (userUuid) => _navigateToProfile(userUuid)),
           transition: Transition.downToUp,
           curve: Curves.easeInOut,
           transitionDuration: const Duration(milliseconds: 400),
         ),
         GetPage(
           name: _Paths.COMMENTS,
-          bindings: [CommentsBinding()],
+          binding: CommentsBinding(),
           page: () => CommentsScreen(
               onBackPressed: () {
                 Get.back();
               },
-              onShowUserProfile: (userUuid) => _navigateTo(
-                  _Paths.HOME + _Paths.PROFILE,
-                  arguments: {USER_UUID_KEY: userUuid})),
+              onShowUserProfile: (userUuid) => _navigateToProfile(userUuid)),
+          transition: Transition.leftToRight,
+          curve: Curves.easeInOut,
+          transitionDuration: const Duration(milliseconds: 400),
+        ),
+        GetPage(
+          name: _Paths.FOLLOWERS,
+          binding: FollowersBinding(),
+          page: () => FollowersScreen(
+              onShowUserProfile: (userUuid) => _navigateToProfile(userUuid)),
           transition: Transition.leftToRight,
           curve: Curves.easeInOut,
           transitionDuration: const Duration(milliseconds: 400),
@@ -132,10 +166,4 @@ class AppPages {
       middlewares: [AuthMiddleware(), SystemUiMiddleware()],
     ),
   ];
-
-  static void _navigateTo(String route, {Map<String, dynamic>? arguments}) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Get.toNamed(route, arguments: arguments ?? {});
-    });
-  }
 }
