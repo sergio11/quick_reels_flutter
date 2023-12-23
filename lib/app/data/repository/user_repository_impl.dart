@@ -1,17 +1,24 @@
 import 'package:flutter/foundation.dart';
 import 'package:quickreels/app/core/utils/mapper.dart';
+import 'package:quickreels/app/data/datasource/dto/save_user_dto.dart';
 import 'package:quickreels/app/data/datasource/dto/user_dto.dart';
+import 'package:quickreels/app/data/datasource/storage_datasource.dart';
 import 'package:quickreels/app/data/datasource/user_datasource.dart';
 import 'package:quickreels/app/domain/model/failure.dart';
 import 'package:quickreels/app/domain/model/user.dart';
 import 'package:quickreels/app/domain/repository/user_repository.dart';
 
 class UserRepositoryImpl implements UserRepository {
+  static const String PROFILE_PICS_FOLDER_NAME = 'profilePics';
+
   final UserDatasource userDatasource;
+  final StorageDatasource storageDatasource;
   final Mapper<UserDTO, UserBO> userBoMapper;
 
   UserRepositoryImpl(
-      {required this.userDatasource, required this.userBoMapper});
+      {required this.userDatasource,
+      required this.storageDatasource,
+      required this.userBoMapper});
 
   @override
   Future<bool> followUser(String uid, String followId) async {
@@ -64,6 +71,41 @@ class UserRepositoryImpl implements UserRepository {
       return userList.map((e) => userBoMapper(e)).toList();
     } catch (ex) {
       debugPrint("findAllFollowersBy - ex -> ${ex.toString()}");
+      throw Failure(message: ex.toString());
+    }
+  }
+
+  @override
+  Future<UserBO> update(
+      {required String uid,
+      required String username,
+      required String email,
+      required Uint8List? file,
+      required String bio}) async {
+    try {
+      final userCurrent = await userDatasource.findByUid(uid);
+      final String userPhotoUrl = userCurrent.photoUrl;
+      final String? newPhotoUrl = file != null
+          ? await storageDatasource.uploadFileToStorage(
+              folderName: PROFILE_PICS_FOLDER_NAME,
+              id: uid,
+              file: file,
+            )
+          : null;
+      await userDatasource.save(SaveUserDTO(
+          uid: uid,
+          username: username,
+          email: email,
+          photoUrl: newPhotoUrl ?? userPhotoUrl,
+          bio: bio));
+      final updatedUser = userCurrent.copyWith(
+          username: username,
+          email: email,
+          photoUrl: newPhotoUrl ?? userPhotoUrl,
+          bio: bio);
+      return userBoMapper(updatedUser);
+    } catch (ex) {
+      debugPrint("update - ex: $ex");
       throw Failure(message: ex.toString());
     }
   }

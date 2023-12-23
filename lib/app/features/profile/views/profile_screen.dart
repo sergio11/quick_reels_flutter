@@ -15,21 +15,24 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
   final Function(String userUid) onShowFollowing;
   final Function(String userUid) onShowFavorites;
   final Function(String reelUuid) onGoToComments;
+  final Function(String userUid) onEditProfile;
 
   ProfileScreen(
       {required this.onShowUserProfile,
       required this.onShowFollowers,
       required this.onShowFollowing,
       required this.onShowFavorites,
-      required this.onGoToComments});
+      required this.onGoToComments,
+      required this.onEditProfile});
 
   @override
   PreferredSizeWidget? appBar(BuildContext context, ProfileUiData uiData) {
     return AppBar(
       backgroundColor: Colors.black12,
       leading: uiData.isAuthUser
-          ? const Icon(
-              Icons.person_add_alt_1_outlined,
+          ? IconButton(
+              icon: const Icon(Icons.edit),
+              onPressed: () => onEditProfile(uiData.userUuid),
             )
           : null,
       actions: const [
