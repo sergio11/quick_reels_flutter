@@ -173,15 +173,16 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
 
   Widget _buildReelsGridView(BuildContext context, ProfileUiData uiData) {
     return Padding(
-      padding: const EdgeInsets.only(top: 20),
+      padding: const EdgeInsets.only(top: 15),
       child: GridView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemCount: uiData.reels.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          childAspectRatio: 1,
-          crossAxisSpacing: 5,
+          crossAxisCount: 2,
+          mainAxisSpacing: 6,
+          childAspectRatio: 0.7,
+          crossAxisSpacing: 6,
         ),
         itemBuilder: (context, index) => _buildReelItem(uiData.reels[index], uiData.userUuid),
       ),

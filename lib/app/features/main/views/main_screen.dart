@@ -39,10 +39,12 @@ class MainScreen extends BaseView<MainController, MainUiData> {
               ),
             ),
         borderRadius: BorderRadius.circular(500),
-        barDecoration: !uiData.isKeyboardVisible ? BoxDecoration(
-          border: Border.all(color: AppColors.colorWhite, width: 2),
-          borderRadius: BorderRadius.circular(500),
-        ) : null,
+        barDecoration: !uiData.isKeyboardVisible
+            ? BoxDecoration(
+                border: Border.all(color: AppColors.colorWhite, width: 2),
+                borderRadius: BorderRadius.circular(500),
+              )
+            : null,
         duration: const Duration(milliseconds: 500),
         curve: Curves.decelerate,
         showIcon: true,
@@ -106,7 +108,10 @@ class MainScreen extends BaseView<MainController, MainUiData> {
       top: -15,
       child: FloatingActionButton(
         onPressed: onAddPostClicked,
-        child: const Icon(Icons.add),
+        child: Transform.scale(
+            scale: 1.7,
+            child: const Icon(Icons.add_box)
+        ),
       ),
     );
   }
