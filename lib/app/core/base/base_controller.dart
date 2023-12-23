@@ -7,7 +7,7 @@ import 'package:quickreels/app/domain/model/failure.dart';
 import 'package:quickreels/app/domain/model/page_state.dart';
 import '/flavors/build_config.dart';
 
-abstract class BaseController<UIState> extends GetxController {
+abstract class BaseController<UIState> extends SuperController<UIState> {
   final Logger logger = BuildConfig.instance.config.logger;
 
   AppLocalizations get appLocalization => AppLocalizations.of(Get.context!)!;
@@ -100,4 +100,17 @@ abstract class BaseController<UIState> extends GetxController {
     _pageSateController.close();
     super.onClose();
   }
+
+  @override
+  void onDetached() {}
+
+  @override
+  void onInactive() {}
+
+  @override
+  void onPaused() {}
+
+  @override
+  void onResumed() {}
+
 }

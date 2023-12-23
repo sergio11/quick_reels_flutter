@@ -52,8 +52,8 @@ class CommentsController extends BaseController<CommentsUiState> {
   void publishComment() {
     if (commentEditingController.text.isNotEmpty) {
       callUseCase(
-          publishCommentUseCase(
-              PublishCommentParams(uiData.reelUuid, commentEditingController.text)),
+          publishCommentUseCase(PublishCommentParams(
+              uiData.reelUuid, commentEditingController.text)),
           onSuccess: _handleOnCommentPublished, onComplete: (_) {
         commentEditingController.clear();
       });
@@ -74,14 +74,15 @@ class CommentsController extends BaseController<CommentsUiState> {
           findAllCommentsByReelUseCase(FindAllCommentsByReelParams(reelUuid));
       callUseCase(Future.wait([userDetails, commentsByReel]),
           onSuccess: (result) {
-            _handleOnLoadCommentsCompleted(result, authUserUid, reelUuid);
+        _handleOnLoadCommentsCompleted(result, authUserUid, reelUuid);
       });
     } catch (e) {
       showErrorMessage("An error occurred while loading comments by reel");
     }
   }
 
-  void _handleOnLoadCommentsCompleted(List result, String userUuid, String reelUuid) {
+  void _handleOnLoadCommentsCompleted(
+      List result, String userUuid, String reelUuid) {
     final UserBO? userDetails = result.elementAtOrNull(0) is UserBO
         ? result.elementAtOrNull(0) as UserBO
         : null;
@@ -98,6 +99,7 @@ class CommentsController extends BaseController<CommentsUiState> {
   }
 
   void _handleOnCommentPublished(CommentBO comment) {
-    updateState(uiData.copyWith(commentsByReel: uiData.commentsByReel..add(comment)));
+    updateState(uiData.copyWith(
+        commentsByReel: List.from(uiData.commentsByReel)..add(comment)));
   }
 }

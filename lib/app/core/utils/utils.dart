@@ -114,8 +114,14 @@ showConfirmDialog(
       });
 }
 
-Future<void> showReelPreviewDialog(
-    BuildContext context, ReelBO reel, String authUserUuid) async {
+Future<void> showReelPreviewDialog({
+  required BuildContext context,
+  required ReelBO reel,
+  required String authUserUuid,
+  required VoidCallback onGoToComments,
+  required VoidCallback onReelLiked,
+  required VoidCallback onGoToAuthorProfile
+}) async {
   await showDialog<void>(
     context: context,
     barrierDismissible: false,
@@ -128,6 +134,9 @@ Future<void> showReelPreviewDialog(
               child: ReelsPreview(
                 reel: reel,
                 authUserUuid: authUserUuid,
+                onGoToComments: onGoToComments,
+                onReelLiked: onReelLiked,
+                onGoToAuthorProfile: onGoToAuthorProfile,
               )));
     },
   );

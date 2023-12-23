@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quickreels/app/core/base/base_view.dart';
 import 'package:quickreels/app/core/utils/helpers.dart';
+import 'package:quickreels/app/core/utils/utils.dart';
 import 'package:quickreels/app/core/values/app_colors.dart';
 import 'package:quickreels/app/core/widget/comment_card.dart';
 import 'package:quickreels/app/core/widget/empty_state_widget.dart';
@@ -123,7 +124,10 @@ class CommentsScreen extends BaseView<CommentsController, CommentsUiState> {
             ),
           ),
           InkWell(
-            onTap: controller.publishComment,
+            onTap: () {
+              hideKeyboard(context);
+              controller.publishComment();
+            },
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
               child: Text(

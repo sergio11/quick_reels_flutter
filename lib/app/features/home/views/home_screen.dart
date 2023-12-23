@@ -35,7 +35,6 @@ class HomeScreen extends BaseView<HomeController, HomeUiData> {
                       controller.likeReel(uiData.reels[index].reelId),
                   onGoToAuthorProfile: () =>
                       onGoToUserProfile(uiData.reels[index].authorUid),
-                  onReelFinished: () => controller.nextReel(),
                 )),
         _buildMainLogo(),
       ],

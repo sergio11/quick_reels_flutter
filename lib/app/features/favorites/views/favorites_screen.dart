@@ -8,6 +8,9 @@ import 'package:quickreels/app/features/favorites/controller/favorites_controlle
 import 'package:quickreels/app/features/favorites/model/favorites_ui_data.dart';
 
 class FavoritesScreen extends BaseView<FavoritesController, FavoritesUiState> {
+  final Function(String reelUuid) onGoToComments;
+
+  FavoritesScreen({required this.onGoToComments});
 
   @override
   PreferredSizeWidget? appBar(BuildContext context, FavoritesUiState uiData) {
@@ -16,8 +19,7 @@ class FavoritesScreen extends BaseView<FavoritesController, FavoritesUiState> {
         color: AppColors.colorWhite, //change your color here
       ),
       backgroundColor: AppColors.backgroundColor,
-      title: Text(
-          "Favorites",
+      title: Text("Favorites",
           style: Theme.of(context)
               .textTheme
               .titleLarge
@@ -51,13 +53,25 @@ class FavoritesScreen extends BaseView<FavoritesController, FavoritesUiState> {
     return GestureDetector(
       child: Container(
         decoration:
-        BoxDecoration(border: Border.all(color: AppColors.colorWhite)),
+            BoxDecoration(border: Border.all(color: AppColors.colorWhite)),
         padding: const EdgeInsets.all(1),
-        child: ReelThumbnailWidget(reelBO: reel,),
+        child: ReelThumbnailWidget(
+          reelBO: reel,
+        ),
       ),
-      onLongPress: () => showReelPreviewDialog(context, reel, userUuid),
-      onDoubleTap: () => showReelPreviewDialog(context, reel, userUuid),
-      onTap: () => showReelPreviewDialog(context, reel, userUuid),
+      onLongPress: () => _showReelPreview(reel, userUuid),
+      onDoubleTap: () => _showReelPreview(reel, userUuid),
+      onTap: () => _showReelPreview(reel, userUuid),
     );
+  }
+
+  void _showReelPreview(ReelBO reel, String userUuid) {
+    showReelPreviewDialog(
+        context: context,
+        reel: reel,
+        authUserUuid: userUuid,
+        onGoToComments: () => onGoToComments(reel.reelId),
+        onReelLiked: () {},
+        onGoToAuthorProfile: () {});
   }
 }

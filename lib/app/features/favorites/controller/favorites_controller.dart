@@ -17,10 +17,13 @@ class FavoritesController extends BaseController<FavoritesUiState> {
       : super(initialUiState: const FavoritesUiState());
 
   @override
-  void onInit() {
-    super.onInit();
-    Map<String, dynamic>? args = Get.arguments as Map<String, dynamic>?;
-    if (args != null) {
+  void onResumed() {
+    _loadContent();
+  }
+
+  void _loadContent() async {
+    final args = Get.arguments;
+    if (args is Map<String, dynamic>? && args != null) {
       if (args.containsKey(USER_UUID_KEY)) {
         String? userUuid = args[USER_UUID_KEY] as String?;
         if (userUuid != null) {
