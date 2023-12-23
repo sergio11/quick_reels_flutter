@@ -8,9 +8,10 @@ import 'package:quickreels/app/features/favorites/controller/favorites_controlle
 import 'package:quickreels/app/features/favorites/model/favorites_ui_data.dart';
 
 class FavoritesScreen extends BaseView<FavoritesController, FavoritesUiState> {
+  final Function(String userUid) onShowUserProfile;
   final Function(String reelUuid) onGoToComments;
 
-  FavoritesScreen({required this.onGoToComments});
+  FavoritesScreen({required this.onShowUserProfile, required this.onGoToComments});
 
   @override
   PreferredSizeWidget? appBar(BuildContext context, FavoritesUiState uiData) {
@@ -72,6 +73,6 @@ class FavoritesScreen extends BaseView<FavoritesController, FavoritesUiState> {
         authUserUuid: userUuid,
         onGoToComments: () => onGoToComments(reel.reelId),
         onReelLiked: () {},
-        onGoToAuthorProfile: () {});
+        onGoToAuthorProfile: () => onShowUserProfile(reel.authorUid));
   }
 }

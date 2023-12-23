@@ -5,8 +5,8 @@ part 'favorites_ui_data.freezed.dart';
 
 @freezed
 class FavoritesUiState with _$FavoritesUiState {
-  const factory FavoritesUiState({
-    @Default([]) final List<ReelBO> reels,
-    @Default("") final String userUuid
-  }) = _FavoritesUiState;
+  const factory FavoritesUiState(
+      {@Default([]) final List<ReelBO> reels,
+      @Default("") final String userUuid,
+      @Default("") final String authUserUuid}) = _FavoritesUiState;
 }

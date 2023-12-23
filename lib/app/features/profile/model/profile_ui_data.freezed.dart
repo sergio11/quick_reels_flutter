@@ -19,6 +19,7 @@ mixin _$ProfileUiData {
   UserBO? get userData => throw _privateConstructorUsedError;
   bool get isFollowing => throw _privateConstructorUsedError;
   String get userUuid => throw _privateConstructorUsedError;
+  String get authUserUuid => throw _privateConstructorUsedError;
   bool get isAuthUser => throw _privateConstructorUsedError;
   List<ReelBO> get reels => throw _privateConstructorUsedError;
 
@@ -37,6 +38,7 @@ abstract class $ProfileUiDataCopyWith<$Res> {
       {UserBO? userData,
       bool isFollowing,
       String userUuid,
+      String authUserUuid,
       bool isAuthUser,
       List<ReelBO> reels});
 }
@@ -57,6 +59,7 @@ class _$ProfileUiDataCopyWithImpl<$Res, $Val extends ProfileUiData>
     Object? userData = freezed,
     Object? isFollowing = null,
     Object? userUuid = null,
+    Object? authUserUuid = null,
     Object? isAuthUser = null,
     Object? reels = null,
   }) {
@@ -72,6 +75,10 @@ class _$ProfileUiDataCopyWithImpl<$Res, $Val extends ProfileUiData>
       userUuid: null == userUuid
           ? _value.userUuid
           : userUuid // ignore: cast_nullable_to_non_nullable
+              as String,
+      authUserUuid: null == authUserUuid
+          ? _value.authUserUuid
+          : authUserUuid // ignore: cast_nullable_to_non_nullable
               as String,
       isAuthUser: null == isAuthUser
           ? _value.isAuthUser
@@ -97,6 +104,7 @@ abstract class _$$ProfileUpUiDataImplCopyWith<$Res>
       {UserBO? userData,
       bool isFollowing,
       String userUuid,
+      String authUserUuid,
       bool isAuthUser,
       List<ReelBO> reels});
 }
@@ -115,6 +123,7 @@ class __$$ProfileUpUiDataImplCopyWithImpl<$Res>
     Object? userData = freezed,
     Object? isFollowing = null,
     Object? userUuid = null,
+    Object? authUserUuid = null,
     Object? isAuthUser = null,
     Object? reels = null,
   }) {
@@ -130,6 +139,10 @@ class __$$ProfileUpUiDataImplCopyWithImpl<$Res>
       userUuid: null == userUuid
           ? _value.userUuid
           : userUuid // ignore: cast_nullable_to_non_nullable
+              as String,
+      authUserUuid: null == authUserUuid
+          ? _value.authUserUuid
+          : authUserUuid // ignore: cast_nullable_to_non_nullable
               as String,
       isAuthUser: null == isAuthUser
           ? _value.isAuthUser
@@ -150,6 +163,7 @@ class _$ProfileUpUiDataImpl implements _ProfileUpUiData {
       {this.userData,
       this.isFollowing = false,
       this.userUuid = "",
+      this.authUserUuid = "",
       this.isAuthUser = false,
       final List<ReelBO> reels = const []})
       : _reels = reels;
@@ -164,6 +178,9 @@ class _$ProfileUpUiDataImpl implements _ProfileUpUiData {
   final String userUuid;
   @override
   @JsonKey()
+  final String authUserUuid;
+  @override
+  @JsonKey()
   final bool isAuthUser;
   final List<ReelBO> _reels;
   @override
@@ -176,7 +193,7 @@ class _$ProfileUpUiDataImpl implements _ProfileUpUiData {
 
   @override
   String toString() {
-    return 'ProfileUiData(userData: $userData, isFollowing: $isFollowing, userUuid: $userUuid, isAuthUser: $isAuthUser, reels: $reels)';
+    return 'ProfileUiData(userData: $userData, isFollowing: $isFollowing, userUuid: $userUuid, authUserUuid: $authUserUuid, isAuthUser: $isAuthUser, reels: $reels)';
   }
 
   @override
@@ -190,6 +207,8 @@ class _$ProfileUpUiDataImpl implements _ProfileUpUiData {
                 other.isFollowing == isFollowing) &&
             (identical(other.userUuid, userUuid) ||
                 other.userUuid == userUuid) &&
+            (identical(other.authUserUuid, authUserUuid) ||
+                other.authUserUuid == authUserUuid) &&
             (identical(other.isAuthUser, isAuthUser) ||
                 other.isAuthUser == isAuthUser) &&
             const DeepCollectionEquality().equals(other._reels, _reels));
@@ -197,7 +216,7 @@ class _$ProfileUpUiDataImpl implements _ProfileUpUiData {
 
   @override
   int get hashCode => Object.hash(runtimeType, userData, isFollowing, userUuid,
-      isAuthUser, const DeepCollectionEquality().hash(_reels));
+      authUserUuid, isAuthUser, const DeepCollectionEquality().hash(_reels));
 
   @JsonKey(ignore: true)
   @override
@@ -212,6 +231,7 @@ abstract class _ProfileUpUiData implements ProfileUiData {
       {final UserBO? userData,
       final bool isFollowing,
       final String userUuid,
+      final String authUserUuid,
       final bool isAuthUser,
       final List<ReelBO> reels}) = _$ProfileUpUiDataImpl;
 
@@ -221,6 +241,8 @@ abstract class _ProfileUpUiData implements ProfileUiData {
   bool get isFollowing;
   @override
   String get userUuid;
+  @override
+  String get authUserUuid;
   @override
   bool get isAuthUser;
   @override

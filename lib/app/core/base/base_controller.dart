@@ -62,9 +62,11 @@ abstract class BaseController<UIState> extends SuperController<UIState> {
 
   showSuccessMessage(String msg) => _successMessageController(msg);
 
-  updateState(UIState newState) {
+  updateState(UIState newState, { bool forceRefresh = false}) {
     _uiData.value = newState;
-    _uiData.refresh();
+    if(forceRefresh) {
+      _uiData.refresh();
+    }
   }
 
   // ignore: long-parameter-list
