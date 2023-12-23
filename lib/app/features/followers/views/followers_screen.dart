@@ -39,6 +39,7 @@ class FollowersScreen extends BaseView<FollowersController, FollowersUiState> {
   Widget _buildUsersListView(FollowersUiState state) {
     return RefreshIndicator(
         color: AppColors.colorPrimary,
+        backgroundColor: AppColors.backgroundColor,
         onRefresh: () => Future.delayed(
               const Duration(seconds: 1),
               () => controller.refreshContent(),
@@ -55,27 +56,29 @@ class FollowersScreen extends BaseView<FollowersController, FollowersUiState> {
                   separatorBuilder: (context, index) => const SizedBox(
                     height: 8,
                   ),
-                  itemBuilder: (context, index) {
-                    return Container(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 4, horizontal: 4),
-                        color: AppColors.colorPrimary,
-                        child: InkWell(
-                          onTap: () =>
-                              onShowUserProfile(state.users[index].uid),
-                          child: UserListTile(
-                            userBO: state.users[index],
-                            onFollowPressed: () =>
-                                controller.toggleFollowUser(state.users[index].uid),
-                            onUnFollowPressed: () =>
-                                controller.toggleFollowUser(state.users[index].uid),
-                            isFollowedByAuthUser: state.users[index].followers
-                                .contains(state.authUserUid),
-                            isAuthUser:
-                                state.users[index].uid == state.authUserUid,
-                          ),
-                        ));
-                  },
+                  itemBuilder: (context, index) => Container(
+                      decoration: BoxDecoration(
+                        color: AppColors.colorDark,
+                        border: Border.all(
+                          color: AppColors.colorWhite,
+                          width: 1.0,
+                        ),
+                      ),
+                      child: InkWell(
+                        onTap: () =>
+                            onShowUserProfile(state.users[index].uid),
+                        child: UserListTile(
+                          userBO: state.users[index],
+                          onFollowPressed: () =>
+                              controller.toggleFollowUser(state.users[index].uid),
+                          onUnFollowPressed: () =>
+                              controller.toggleFollowUser(state.users[index].uid),
+                          isFollowedByAuthUser: state.users[index].followers
+                              .contains(state.authUserUid),
+                          isAuthUser:
+                          state.users[index].uid == state.authUserUid,
+                        ),
+                      )),
                 )
               : EmptyStateWidget(
                   message: "No users found",

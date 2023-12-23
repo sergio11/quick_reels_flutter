@@ -104,7 +104,13 @@ class DiscoverContentScreen
               return Container(
                   padding:
                       const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
-                  color: AppColors.backgroundColor,
+                  decoration: BoxDecoration(
+                    color: AppColors.colorDark,
+                    border: Border.all(
+                      color: AppColors.colorWhite,
+                      width: 1.0,
+                    ),
+                  ),
                   child: InkWell(
                     onTap: () => onShowUserProfile(state.users[index].uid),
                     child: UserListTile(

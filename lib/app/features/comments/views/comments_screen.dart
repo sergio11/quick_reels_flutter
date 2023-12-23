@@ -47,6 +47,8 @@ class CommentsScreen extends BaseView<CommentsController, CommentsUiState> {
 
   Widget _buildCommentsListView(CommentsUiState uiData) {
     return RefreshIndicator(
+        color: AppColors.colorPrimary,
+        backgroundColor: AppColors.backgroundColor,
         onRefresh: () {
           return Future.delayed(
             const Duration(seconds: 1),

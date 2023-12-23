@@ -25,17 +25,38 @@ class VideoThumbnailWidgetState extends State<VideoThumbnailWidget> {
   }
 
   Future<void> _generateThumbnail() async {
-    final fileName = await VideoThumbnail.thumbnailFile(
+    final thumbnailFileName = await _getThumbnailFileName();
+    if (thumbnailFileName != null) {
+      setState(() {
+        this.thumbnailFileName = thumbnailFileName;
+      });
+    }
+  }
+
+  Future<String?> _getThumbnailFileName() async {
+    final directory = await getTemporaryDirectory();
+    final thumbnailPath = directory.path;
+    final filePath = '$thumbnailPath/${_getFileNameFromUrl()}';
+    final file = File(filePath);
+
+    if (await file.exists()) {
+      return filePath;
+    } else {
+      return await _generateNewThumbnail(thumbnailPath);
+    }
+  }
+
+  Future<String?> _generateNewThumbnail(String thumbnailPath) async {
+    final newFileName = await VideoThumbnail.thumbnailFile(
       video: widget.videoUrl,
-      thumbnailPath: (await getTemporaryDirectory()).path,
+      thumbnailPath: thumbnailPath,
       imageFormat: ImageFormat.JPEG,
     );
 
     if (mounted) {
-      setState(() {
-        thumbnailFileName = fileName;
-      });
+      return newFileName;
     }
+    return null;
   }
 
   @override
@@ -47,5 +68,14 @@ class VideoThumbnailWidgetState extends State<VideoThumbnailWidget> {
         : const CommonScreenProgressIndicator(
             backgroundColor: AppColors.backgroundColor,
           );
+  }
+
+  String _getFileNameFromUrl() {
+    Uri uri = Uri.parse(widget.videoUrl);
+    String fileName = uri.pathSegments.last;
+    int extensionIndex = fileName.lastIndexOf('.');
+    fileName =
+        extensionIndex != -1 ? fileName.substring(0, extensionIndex) : fileName;
+    return "$fileName.jpg";
   }
 }
