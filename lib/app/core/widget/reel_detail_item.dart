@@ -62,7 +62,9 @@ class ReelDetailItemState extends State<ReelDetailItem> {
           } else if (_videoPlayerController.value.isPlaying) {
             _updateVideoPlayingState(true);
             _playAudioInLoop(widget.reel.songUrl);
-            if (_videoPlayerController.value.position >= _videoPlayerController.value.duration - const Duration(seconds: 1)) {
+            if (_videoPlayerController.value.position >=
+                _videoPlayerController.value.duration -
+                    const Duration(seconds: 1)) {
               widget.onReelFinished();
             }
           } else {
@@ -120,7 +122,17 @@ class ReelDetailItemState extends State<ReelDetailItem> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      children: [_buildVideoController(context), _buildReelScreen(context)],
+      children: [
+        _buildVideoController(context),
+        _buildReelBackgroundLayer(context),
+        _buildReelScreen(context)
+      ],
+    );
+  }
+
+  Widget _buildReelBackgroundLayer(BuildContext context) {
+    return Container(
+      color: AppColors.colorPrimaryMedium.withAlpha(80),
     );
   }
 
@@ -157,7 +169,7 @@ class ReelDetailItemState extends State<ReelDetailItem> {
               onEnd: () => _stopLikeAnimation(),
               child: const Icon(
                 Icons.favorite,
-                color: Colors.redAccent,
+                color: AppColors.colorPrimaryMedium,
                 size: 100,
               ),
             ),
@@ -324,30 +336,30 @@ class ReelDetailItemState extends State<ReelDetailItem> {
       children: [
         isIconButton
             ? IconActionAnimation(
-                isAnimating: isLikeAnimating,
-                duration: const Duration(
-                  milliseconds: 400,
-                ),
-                onEnd: () => _stopLikeAnimation(),
-                child: IconButton(
-                  icon: Icon(
-                    icon,
-                    size: 30,
-                    color: isLiked
-                        ? AppColors.colorPrimaryMedium
-                        : AppColors.colorWhite,
-                  ),
-                  onPressed: onTap,
-                ),
-              )
+          isAnimating: isLikeAnimating,
+          duration: const Duration(
+            milliseconds: 400,
+          ),
+          onEnd: () => _stopLikeAnimation(),
+          child: IconButton(
+            icon: Icon(
+              icon,
+              size: 30,
+              color: isLiked
+                  ? AppColors.colorPrimaryMedium
+                  : AppColors.colorWhite,
+            ),
+            onPressed: onTap,
+          ),
+        )
             : InkWell(
-                onTap: onTap,
-                child: Icon(
-                  icon,
-                  size: 30,
-                  color: Colors.white,
-                ),
-              ),
+          onTap: onTap,
+          child: Icon(
+            icon,
+            size: 30,
+            color: Colors.white,
+          ),
+        ),
         Text(
           count.toString(),
           style: Theme.of(context)
