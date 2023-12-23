@@ -17,7 +17,6 @@ class ReelDetailItem extends StatefulWidget {
   final VoidCallback onGoToComments;
   final VoidCallback onReelLiked;
   final VoidCallback onGoToAuthorProfile;
-  final VoidCallback onReelFinished;
   final EdgeInsetsGeometry contentPadding;
   const ReelDetailItem(
       {Key? key,
@@ -26,7 +25,6 @@ class ReelDetailItem extends StatefulWidget {
       required this.onGoToComments,
       required this.onGoToAuthorProfile,
       required this.onReelLiked,
-      required this.onReelFinished,
       this.contentPadding = const EdgeInsets.all(20)})
       : super(key: key);
 
@@ -40,6 +38,7 @@ class ReelDetailItemState extends State<ReelDetailItem> {
   bool _isVideoPlaying = true;
   bool _isAudioPlaying = false;
   bool isLikeAnimating = false;
+  bool isDisposed = false;
 
   @override
   void initState() {
@@ -62,11 +61,6 @@ class ReelDetailItemState extends State<ReelDetailItem> {
           } else if (_videoPlayerController.value.isPlaying) {
             _updateVideoPlayingState(true);
             _playAudioInLoop(widget.reel.songUrl);
-            if (_videoPlayerController.value.position >=
-                _videoPlayerController.value.duration -
-                    const Duration(seconds: 1)) {
-              widget.onReelFinished();
-            }
           } else {
             _stopAudio();
           }
@@ -76,6 +70,7 @@ class ReelDetailItemState extends State<ReelDetailItem> {
 
   @override
   void dispose() {
+    isDisposed = true;
     _videoPlayerController.dispose();
     _audioPlayer.stop();
     _audioPlayer.dispose();
@@ -97,16 +92,20 @@ class ReelDetailItemState extends State<ReelDetailItem> {
 
   void _updateVideoPlayingState(bool isPlaying) {
     if (_isVideoPlaying != isPlaying) {
-      setState(() {
-        _isVideoPlaying = isPlaying;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        setState(() {
+          _isVideoPlaying = isPlaying;
+        });
       });
     }
   }
 
   void _updateAudioPlayingState(bool isPlaying) {
     if (_isAudioPlaying != isPlaying) {
-      setState(() {
-        _isAudioPlaying = isPlaying;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        setState(() {
+          _isAudioPlaying = isPlaying;
+        });
       });
     }
   }
@@ -132,7 +131,7 @@ class ReelDetailItemState extends State<ReelDetailItem> {
 
   Widget _buildReelBackgroundLayer(BuildContext context) {
     return Container(
-      color: AppColors.colorPrimaryMedium.withAlpha(80),
+      color: AppColors.colorDark.withAlpha(80),
     );
   }
 
@@ -183,11 +182,13 @@ class ReelDetailItemState extends State<ReelDetailItem> {
     return VisibilityDetector(
       key: Key(widget.reel.reelId),
       onVisibilityChanged: (visibilityInfo) {
-        final isVisible = visibilityInfo.visibleFraction != 0;
-        if (isVisible) {
-          _videoPlayerController.play();
-        } else {
-          _videoPlayerController.pause();
+        if (!isDisposed) {
+          final isVisible = visibilityInfo.visibleFraction != 0;
+          if (isVisible) {
+            _videoPlayerController.play();
+          } else {
+            _videoPlayerController.pause();
+          }
         }
       },
       child: Container(
@@ -336,30 +337,30 @@ class ReelDetailItemState extends State<ReelDetailItem> {
       children: [
         isIconButton
             ? IconActionAnimation(
-          isAnimating: isLikeAnimating,
-          duration: const Duration(
-            milliseconds: 400,
-          ),
-          onEnd: () => _stopLikeAnimation(),
-          child: IconButton(
-            icon: Icon(
-              icon,
-              size: 30,
-              color: isLiked
-                  ? AppColors.colorPrimaryMedium
-                  : AppColors.colorWhite,
-            ),
-            onPressed: onTap,
-          ),
-        )
+                isAnimating: isLikeAnimating,
+                duration: const Duration(
+                  milliseconds: 400,
+                ),
+                onEnd: () => _stopLikeAnimation(),
+                child: IconButton(
+                  icon: Icon(
+                    icon,
+                    size: 30,
+                    color: isLiked
+                        ? AppColors.colorPrimaryMedium
+                        : AppColors.colorWhite,
+                  ),
+                  onPressed: onTap,
+                ),
+              )
             : InkWell(
-          onTap: onTap,
-          child: Icon(
-            icon,
-            size: 30,
-            color: Colors.white,
-          ),
-        ),
+                onTap: onTap,
+                child: Icon(
+                  icon,
+                  size: 30,
+                  color: Colors.white,
+                ),
+              ),
         Text(
           count.toString(),
           style: Theme.of(context)

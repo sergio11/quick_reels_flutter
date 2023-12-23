@@ -5,8 +5,17 @@ import 'package:quickreels/app/domain/model/reel.dart';
 class ReelsPreview extends StatefulWidget {
   final ReelBO reel;
   final String authUserUuid;
+  final VoidCallback onGoToComments;
+  final VoidCallback onReelLiked;
+  final VoidCallback onGoToAuthorProfile;
 
-  const ReelsPreview({Key? key, required this.reel, required this.authUserUuid})
+  const ReelsPreview(
+      {Key? key,
+      required this.reel,
+      required this.authUserUuid,
+      required this.onGoToComments,
+      required this.onReelLiked,
+      required this.onGoToAuthorProfile})
       : super(key: key);
 
   @override
@@ -19,10 +28,9 @@ class _ReelsPreviewState extends State<ReelsPreview> {
     return ReelDetailItem(
       reel: widget.reel,
       authUserUuid: widget.authUserUuid,
-      onGoToComments: () {},
-      onReelLiked: () {},
-      onGoToAuthorProfile: () {},
-      onReelFinished: () {},
+      onGoToComments: widget.onGoToComments,
+      onReelLiked: widget.onReelLiked,
+      onGoToAuthorProfile: widget.onGoToAuthorProfile,
     );
   }
 }

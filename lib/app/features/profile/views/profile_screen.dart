@@ -13,19 +13,21 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
   final Function(String userUid) onShowFollowers;
   final Function(String userUid) onShowFollowing;
   final Function(String userUid) onShowFavorites;
+  final Function(String reelUuid) onGoToComments;
 
   ProfileScreen(
       {required this.onShowFollowers,
       required this.onShowFollowing,
-      required this.onShowFavorites});
+      required this.onShowFavorites,
+      required this.onGoToComments});
 
   @override
   PreferredSizeWidget? appBar(BuildContext context, ProfileUiData uiData) {
     return AppBar(
       backgroundColor: Colors.black12,
-      leading: const Icon(
+      leading: uiData.isAuthUser ? const Icon(
         Icons.person_add_alt_1_outlined,
-      ),
+      ) : null,
       actions: const [
         Icon(Icons.more_horiz),
       ],
@@ -198,9 +200,19 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
           reelBO: reel,
         ),
       ),
-      onLongPress: () => showReelPreviewDialog(context, reel, userUuid),
-      onDoubleTap: () => showReelPreviewDialog(context, reel, userUuid),
-      onTap: () => showReelPreviewDialog(context, reel, userUuid),
+      onLongPress: () => _showReelPreview(reel, userUuid),
+      onDoubleTap: () => _showReelPreview(reel, userUuid),
+      onTap: () => _showReelPreview(reel, userUuid),
     );
   }
+
+  void _showReelPreview(ReelBO reel, String userUuid) {
+    showReelPreviewDialog(
+        context: context,
+        reel: reel,
+        authUserUuid: userUuid,
+        onGoToComments: () => onGoToComments(reel.reelId),
+        onReelLiked: () {  }, onGoToAuthorProfile: () {  });
+  }
+
 }
