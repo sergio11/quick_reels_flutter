@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$FavoritesUiState {
   List<ReelBO> get reels => throw _privateConstructorUsedError;
   String get userUuid => throw _privateConstructorUsedError;
+  String get authUserUuid => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FavoritesUiStateCopyWith<FavoritesUiState> get copyWith =>
@@ -30,7 +31,7 @@ abstract class $FavoritesUiStateCopyWith<$Res> {
           FavoritesUiState value, $Res Function(FavoritesUiState) then) =
       _$FavoritesUiStateCopyWithImpl<$Res, FavoritesUiState>;
   @useResult
-  $Res call({List<ReelBO> reels, String userUuid});
+  $Res call({List<ReelBO> reels, String userUuid, String authUserUuid});
 }
 
 /// @nodoc
@@ -48,6 +49,7 @@ class _$FavoritesUiStateCopyWithImpl<$Res, $Val extends FavoritesUiState>
   $Res call({
     Object? reels = null,
     Object? userUuid = null,
+    Object? authUserUuid = null,
   }) {
     return _then(_value.copyWith(
       reels: null == reels
@@ -57,6 +59,10 @@ class _$FavoritesUiStateCopyWithImpl<$Res, $Val extends FavoritesUiState>
       userUuid: null == userUuid
           ? _value.userUuid
           : userUuid // ignore: cast_nullable_to_non_nullable
+              as String,
+      authUserUuid: null == authUserUuid
+          ? _value.authUserUuid
+          : authUserUuid // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -70,7 +76,7 @@ abstract class _$$FavoritesUiStateImplCopyWith<$Res>
       __$$FavoritesUiStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<ReelBO> reels, String userUuid});
+  $Res call({List<ReelBO> reels, String userUuid, String authUserUuid});
 }
 
 /// @nodoc
@@ -86,6 +92,7 @@ class __$$FavoritesUiStateImplCopyWithImpl<$Res>
   $Res call({
     Object? reels = null,
     Object? userUuid = null,
+    Object? authUserUuid = null,
   }) {
     return _then(_$FavoritesUiStateImpl(
       reels: null == reels
@@ -96,6 +103,10 @@ class __$$FavoritesUiStateImplCopyWithImpl<$Res>
           ? _value.userUuid
           : userUuid // ignore: cast_nullable_to_non_nullable
               as String,
+      authUserUuid: null == authUserUuid
+          ? _value.authUserUuid
+          : authUserUuid // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -104,7 +115,9 @@ class __$$FavoritesUiStateImplCopyWithImpl<$Res>
 
 class _$FavoritesUiStateImpl implements _FavoritesUiState {
   const _$FavoritesUiStateImpl(
-      {final List<ReelBO> reels = const [], this.userUuid = ""})
+      {final List<ReelBO> reels = const [],
+      this.userUuid = "",
+      this.authUserUuid = ""})
       : _reels = reels;
 
   final List<ReelBO> _reels;
@@ -119,10 +132,13 @@ class _$FavoritesUiStateImpl implements _FavoritesUiState {
   @override
   @JsonKey()
   final String userUuid;
+  @override
+  @JsonKey()
+  final String authUserUuid;
 
   @override
   String toString() {
-    return 'FavoritesUiState(reels: $reels, userUuid: $userUuid)';
+    return 'FavoritesUiState(reels: $reels, userUuid: $userUuid, authUserUuid: $authUserUuid)';
   }
 
   @override
@@ -132,12 +148,14 @@ class _$FavoritesUiStateImpl implements _FavoritesUiState {
             other is _$FavoritesUiStateImpl &&
             const DeepCollectionEquality().equals(other._reels, _reels) &&
             (identical(other.userUuid, userUuid) ||
-                other.userUuid == userUuid));
+                other.userUuid == userUuid) &&
+            (identical(other.authUserUuid, authUserUuid) ||
+                other.authUserUuid == authUserUuid));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_reels), userUuid);
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_reels), userUuid, authUserUuid);
 
   @JsonKey(ignore: true)
   @override
@@ -150,12 +168,15 @@ class _$FavoritesUiStateImpl implements _FavoritesUiState {
 abstract class _FavoritesUiState implements FavoritesUiState {
   const factory _FavoritesUiState(
       {final List<ReelBO> reels,
-      final String userUuid}) = _$FavoritesUiStateImpl;
+      final String userUuid,
+      final String authUserUuid}) = _$FavoritesUiStateImpl;
 
   @override
   List<ReelBO> get reels;
   @override
   String get userUuid;
+  @override
+  String get authUserUuid;
   @override
   @JsonKey(ignore: true)
   _$$FavoritesUiStateImplCopyWith<_$FavoritesUiStateImpl> get copyWith =>

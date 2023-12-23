@@ -10,7 +10,8 @@ class ProfileBinding extends Bindings {
           signOutUseCase: Get.find(),
           getUserDetailsUseCase: Get.find(),
           findReelsByUserUseCase: Get.find(),
-          followUserUseCase: Get.find()),
+          followUserUseCase: Get.find(),
+          likeReelUseCase: Get.find()),
     );
   }
 }

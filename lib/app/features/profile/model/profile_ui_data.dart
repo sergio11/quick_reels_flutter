@@ -10,6 +10,7 @@ class ProfileUiData with _$ProfileUiData {
     final UserBO? userData,
     @Default(false) final bool isFollowing,
     @Default("") final String userUuid,
+    @Default("") final String authUserUuid,
     @Default(false) final bool isAuthUser,
     @Default([]) final List<ReelBO> reels
   }) = _ProfileUpUiData;
