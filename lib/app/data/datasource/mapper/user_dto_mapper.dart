@@ -18,6 +18,7 @@ class UserDtoMapper extends Mapper<DocumentSnapshot, UserDTO> {
       following: snapshot['following'] is List
           ? List<String>.from(snapshot['following'] as List)
           : [],
+      likesCount: snapshot['likeCount'] is int ? snapshot['likeCount'] : 0,
     );
   }
 }

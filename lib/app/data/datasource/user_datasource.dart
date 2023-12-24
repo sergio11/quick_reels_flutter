@@ -13,4 +13,8 @@ abstract class UserDatasource {
   Future<List<UserDTO>> findAllFollowedBy(String uid);
 
   Future<List<UserDTO>> findAllFollowersBy(String uid);
+
+  Future<void> increaseLikeCount(String uid);
+
+  Future<void> decreaseLikeCount(String uid);
 }
