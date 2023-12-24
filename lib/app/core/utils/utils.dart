@@ -82,15 +82,13 @@ showAlertDialog(
   showDialog(
       barrierColor: Colors.black.withOpacity(0.5),
       context: context,
-      builder: (BuildContext context) {
-        return CommonDialogBox(
-          title: title,
-          descriptions: description,
-          acceptText: "Accept",
-          img: buildAppLogo(),
-          onAccepted: onAcceptPressed,
-        );
-      });
+      builder: (BuildContext context) => CommonDialogBox(
+        title: title,
+        descriptions: description,
+        acceptText: "Accept",
+        img: buildAppLogo(),
+        onAccepted: onAcceptPressed,
+      ));
 }
 
 showConfirmDialog(
@@ -101,17 +99,16 @@ showConfirmDialog(
     Function()? onCancelPressed}) {
   showDialog(
       context: context,
-      builder: (BuildContext context) {
-        return CommonDialogBox(
-          title: title,
-          descriptions: description,
-          acceptText: "Accept",
-          cancelledText: "Cancel",
-          img: buildAppLogo(),
-          onAccepted: onAcceptPressed,
-          onCancelled: onCancelPressed,
-        );
-      });
+      builder: (BuildContext context) =>
+          CommonDialogBox(
+            title: title,
+            descriptions: description,
+            acceptText: "Accept",
+            cancelledText: "Cancel",
+            img: buildAppLogo(),
+            onAccepted: onAcceptPressed,
+            onCancelled: onCancelPressed,
+          ));
 }
 
 Future<void> showReelPreviewDialog({

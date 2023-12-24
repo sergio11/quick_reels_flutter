@@ -1,14 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:get/get_rx/get_rx.dart';
 import 'package:quickreels/app/core/base/base_controller.dart';
 import 'package:quickreels/app/core/base/base_use_case.dart';
 import 'package:quickreels/app/domain/usecase/fetch_geolocation_details_use_case.dart';
-import 'package:quickreels/app/domain/usecase/get_user_details_use_case.dart';
 import 'package:quickreels/app/domain/usecase/publish_reel_use_case.dart';
 import 'package:quickreels/app/features/upload/model/upload_reel_ui_data.dart';
 import 'package:textfield_tags/textfield_tags.dart';
 
 class UploadReelController extends BaseController<UploadReelUiState> {
-  final GetUserDetailsUseCase getUserDetailsUseCase;
   final PublishReelUseCase publishReelUseCase;
   final FetchGeolocationDetailsUseCase fetchGeolocationDetailsUseCase;
 
@@ -16,9 +17,11 @@ class UploadReelController extends BaseController<UploadReelUiState> {
   late TextEditingController placeInfoController;
   late TextfieldTagsController textFieldTagsController;
 
+  final _isReelUploadedController = false.obs;
+  bool get isReelUploaded => _isReelUploadedController.value;
+
   UploadReelController(
-      {required this.getUserDetailsUseCase,
-      required this.publishReelUseCase,
+      {required this.publishReelUseCase,
       required this.fetchGeolocationDetailsUseCase})
       : super(initialUiState: const UploadReelUiState());
 
@@ -28,11 +31,6 @@ class UploadReelController extends BaseController<UploadReelUiState> {
     descriptionController = TextEditingController();
     placeInfoController = TextEditingController();
     textFieldTagsController = TextfieldTagsController();
-  }
-
-  @override
-  void onResumed() {
-    super.onResumed();
   }
 
   @override
@@ -49,9 +47,29 @@ class UploadReelController extends BaseController<UploadReelUiState> {
   void videoSelected(String videoFilePath) async {
     updateState(uiData.copyWith(videoFilePath: videoFilePath));
     callUseCase(fetchGeolocationDetailsUseCase(const DefaultParams()),
-        onSuccess: (placeDetails) =>
-            updateState(uiData.copyWith(placeDetails: placeDetails)));
+        onSuccess: (placeDetails) {
+      placeInfoController.text =
+          "${placeDetails.locality}, ${placeDetails.administrativeArea}, ${placeDetails.country}";
+    });
   }
 
-  void uploadReel() async {}
+  void uploadReel() async {
+    if (uiData.videoFilePath != null) {
+      callUseCase(
+          publishReelUseCase(PublishReelUseParams(
+              description: descriptionController.text,
+              file: await File(uiData.videoFilePath!).readAsBytes(),
+              tags: textFieldTagsController.getTags ?? [],
+              placeInfo: placeInfoController.text)), onComplete: (isSuccess) {
+        _isReelUploadedController.value = isSuccess;
+      });
+    } else {
+      showErrorMessage(
+          "An error occurred when trying to upload reel, please try again!");
+    }
+  }
+
+  void clearData() async {
+    updateState(uiData.copyWith(videoFilePath: null));
+  }
 }
