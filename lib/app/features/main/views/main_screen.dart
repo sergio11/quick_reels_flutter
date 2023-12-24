@@ -15,6 +15,19 @@ class MainScreen extends BaseView<MainController, MainUiData> {
   MainScreen({required this.tabItems});
 
   @override
+  bool canPop() => false;
+
+  @override
+  void onHandleBackPressed(bool didPop) {
+    if(!didPop) {
+      final int currentPage = controller.tabController.index;
+      if (currentPage > 0) {
+        controller.tabController.animateTo(currentPage - 1);
+      }
+    }
+  }
+
+  @override
   Widget body(BuildContext context, MainUiData uiData) {
     return SafeArea(
       child: _buildBottomBar(context, uiData),
@@ -109,8 +122,7 @@ class MainScreen extends BaseView<MainController, MainUiData> {
           borderRadius:
               BorderRadius.circular(8.0), // Igual al radio de borde de Material
           onTap: () {
-            print("onTap -> middle page ${tabItems.length ~/ 2}");
-            controller.tabController.index = tabItems.length ~/ 2;
+            controller.tabController.animateTo(tabItems.length ~/ 2);
           },
           child: Padding(
               padding: const EdgeInsets.all(16.0),

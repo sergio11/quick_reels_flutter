@@ -6,7 +6,6 @@ class UploadReelBinding extends Bindings {
   void dependencies() {
     Get.lazyPut<UploadReelController>(
       () => UploadReelController(
-          getUserDetailsUseCase: Get.find(),
           publishReelUseCase: Get.find(),
           fetchGeolocationDetailsUseCase: Get.find()),
     );

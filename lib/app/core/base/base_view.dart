@@ -49,9 +49,7 @@ abstract class BaseView<Controller extends BaseController, UIState>
             children: [
               Obx(() {
                 if (controller.logoutController.isTrue) {
-                  WidgetsBinding.instance.addPostFrameCallback((_) {
-                    Get.offAllNamed(AppPages.INITIAL);
-                  });
+                  AppPages.navigateToInitial();
                 }
                 print("BaseView Obx controller.uiData UPDATED");
                 return annotatedRegion(context, controller.uiData);
@@ -82,12 +80,14 @@ abstract class BaseView<Controller extends BaseController, UIState>
     );
   }
 
+  bool canPop() => true;
+
+  void onHandleBackPressed(bool didPop) {}
+
   Widget pageScaffold(BuildContext context, UIState uiData) {
-    return WillPopScope(
-        onWillPop: () async {
-          Get.back();
-          return false;
-        },
+    return PopScope(
+        canPop: canPop(),
+        onPopInvoked: onHandleBackPressed,
         child: Scaffold(
           //sets ios status bar color
           backgroundColor: pageBackgroundColor(),
