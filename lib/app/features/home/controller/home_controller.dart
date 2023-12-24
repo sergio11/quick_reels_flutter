@@ -52,11 +52,13 @@ class HomeController extends BaseController<HomeUiData> {
   }
 
   void _nextReel() {
-    final currentIndex = pageController.page?.round() ?? 0;
-    if (currentIndex < uiData.reels.length - 1) {
-      pageController.animateToPage(currentIndex + 1,
-          duration: const Duration(milliseconds: 500), curve: Curves.ease);
-    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final currentIndex = pageController.page?.round() ?? 0;
+      if (currentIndex < uiData.reels.length - 1) {
+        pageController.animateToPage(currentIndex + 1,
+            duration: const Duration(milliseconds: 500), curve: Curves.ease);
+      }
+    });
   }
 
   void _fetchUserHomeFeed() async {

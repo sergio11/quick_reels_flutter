@@ -9,7 +9,6 @@ import 'package:quickreels/app/features/upload/views/create_reel_form.dart';
 
 class UploadReelScreen
     extends BaseView<UploadReelController, UploadReelUiState> {
-
   final VoidCallback onPostUploaded;
   final VoidCallback onBackPressed;
 
@@ -24,22 +23,16 @@ class UploadReelScreen
                 icon: const Icon(Icons.arrow_back),
                 color: AppColors.colorWhite,
                 onPressed: _onBackPressed),
-            title: Text("Add Reel",
+            title: Text("Upload Reel",
                 style: Theme.of(context)
                     .textTheme
                     .titleLarge
                     ?.copyWith(color: AppColors.colorWhite)),
-            centerTitle: false,
+            centerTitle: true,
             actions: <Widget>[
-              TextButton(
+              IconButton(
                 onPressed: () => controller.uploadReel(),
-                child: Text(
-                  "Upload",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyLarge
-                      ?.copyWith(color: AppColors.colorWhite),
-                ),
+                icon: const Icon(Icons.upload, color: AppColors.colorWhite,),
               )
             ],
           )
@@ -92,7 +85,9 @@ class UploadReelScreen
       onMediaTap: (mediaCapture) {
         final filePath = mediaCapture.captureRequest
             .when(single: (single) => single.file?.path);
-        if (filePath != null) {}
+        if (filePath != null) {
+          controller.videoSelected(filePath);
+        }
       },
     );
   }

@@ -41,6 +41,7 @@ import 'package:quickreels/app/domain/model/user.dart';
 import 'package:quickreels/app/domain/repository/auth_repository.dart';
 import 'package:quickreels/app/domain/repository/reel_repository.dart';
 import 'package:quickreels/app/domain/repository/user_repository.dart';
+import 'package:quickreels/app/domain/usecase/fetch_geolocation_details_use_case.dart';
 import 'package:quickreels/app/domain/usecase/fetch_user_home_feed_use_case.dart';
 import 'package:quickreels/app/domain/usecase/find_all_comments_by_reel_use_case.dart';
 import 'package:quickreels/app/domain/usecase/find_all_followed_by_use_case.dart';
@@ -183,6 +184,7 @@ class AppBinding extends Bindings {
     Get.put<UpdateUserUseCase>(UpdateUserUseCase(userRepository: Get.find()));
     Get.put<PublishReelUseCase>(PublishReelUseCase(
         authRepository: Get.find(), reelRepository: Get.find()));
+    Get.put<FetchGeolocationDetailsUseCase>(FetchGeolocationDetailsUseCase());
   }
 
   void _initSharedDependencies() {
