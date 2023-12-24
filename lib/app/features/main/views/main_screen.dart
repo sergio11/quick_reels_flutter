@@ -14,8 +14,6 @@ class MainScreen extends BaseView<MainController, MainUiData> {
 
   MainScreen({required this.tabItems});
 
-  void onAddPostClicked() {}
-
   @override
   Widget body(BuildContext context, MainUiData uiData) {
     return SafeArea(
@@ -39,7 +37,8 @@ class MainScreen extends BaseView<MainController, MainUiData> {
               ),
             ),
         borderRadius: BorderRadius.circular(500),
-        barDecoration: !uiData.isKeyboardVisible
+        barDecoration: !uiData.isKeyboardVisible &&
+                uiData.currentPage != tabItems.length ~/ 2
             ? BoxDecoration(
                 border: Border.all(color: AppColors.colorWhite, width: 2),
                 borderRadius: BorderRadius.circular(500),
@@ -63,7 +62,8 @@ class MainScreen extends BaseView<MainController, MainUiData> {
         onBottomBarShown: () {},
         body: (context, controller) => _buildTabBarView(uiData),
         child: Visibility(
-            visible: !uiData.isKeyboardVisible,
+            visible: !uiData.isKeyboardVisible &&
+                uiData.currentPage != tabItems.length ~/ 2,
             child: Stack(
               alignment: Alignment.center,
               clipBehavior: Clip.none,
@@ -85,15 +85,10 @@ class MainScreen extends BaseView<MainController, MainUiData> {
 
   Widget _buildTabBar(MainUiData uiData) {
     return TabBar(
-      onTap: (index) {
-        if (index == 2) {
-          onAddPostClicked();
-        } else {
-          controller.changePage(index);
-        }
-      },
+      onTap: (index) => controller.changePage(index),
       indicatorPadding: const EdgeInsets.fromLTRB(6, 0, 6, 0),
       controller: controller.tabController,
+      dividerHeight: 0,
       indicator: _buildUnderlineTabIndicator(),
       tabs: uiData.tabMenuItems
           .asMap()
@@ -106,11 +101,25 @@ class MainScreen extends BaseView<MainController, MainUiData> {
   Widget _buildFloatingActionButton(MainUiData uiData) {
     return Positioned(
       top: -15,
-      child: FloatingActionButton(
-        onPressed: onAddPostClicked,
-        child: Transform.scale(
-            scale: 1.7,
-            child: const Icon(Icons.add_box)
+      child: Material(
+        color: AppColors.colorPrimaryMedium,
+        borderRadius: BorderRadius.circular(8.0),
+        elevation: 8.0,
+        child: InkWell(
+          borderRadius:
+              BorderRadius.circular(8.0), // Igual al radio de borde de Material
+          onTap: () {
+            print("onTap -> middle page ${tabItems.length ~/ 2}");
+            controller.tabController.index = tabItems.length ~/ 2;
+          },
+          child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Transform.scale(
+                  scale: 1.7,
+                  child: const Icon(
+                    Icons.add_box,
+                    color: AppColors.colorWhite,
+                  ))),
         ),
       ),
     );

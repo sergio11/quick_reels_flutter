@@ -28,7 +28,7 @@ class CommentsScreen extends BaseView<CommentsController, CommentsUiState> {
               .textTheme
               .titleLarge
               ?.copyWith(color: AppColors.colorWhite)),
-      centerTitle: false,
+      centerTitle: true,
     );
   }
 

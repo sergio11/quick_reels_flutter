@@ -12,6 +12,7 @@ abstract class Routes {
   static const FOLLOWERS = _Paths.FOLLOWERS;
   static const FAVORITES = _Paths.FAVORITES;
   static const EDIT_PROFILE = _Paths.EDIT_PROFILE;
+  static const UPLOAD_REEL = _Paths.UPLOAD_REEL;
 }
 
 abstract class _Paths {
@@ -25,4 +26,5 @@ abstract class _Paths {
   static const FOLLOWERS = '/followers';
   static const FAVORITES = '/favorites';
   static const EDIT_PROFILE = '/edit-profile';
+  static const UPLOAD_REEL = '/upload-reel';
 }

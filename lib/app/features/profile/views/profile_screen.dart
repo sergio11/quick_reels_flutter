@@ -28,15 +28,15 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
   @override
   PreferredSizeWidget? appBar(BuildContext context, ProfileUiData uiData) {
     return AppBar(
-      backgroundColor: Colors.black12,
+      backgroundColor: AppColors.backgroundColor,
       leading: uiData.isAuthUser
           ? IconButton(
-              icon: const Icon(Icons.edit),
+              icon: const Icon(Icons.edit, color: AppColors.colorWhite,),
               onPressed: () => onEditProfile(uiData.userUuid),
             )
           : null,
       actions: const [
-        Icon(Icons.more_horiz),
+        Icon(Icons.more_horiz, color: AppColors.colorWhite),
       ],
       title: Text(
         uiData.userData?.username ?? "",
