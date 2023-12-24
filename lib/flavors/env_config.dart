@@ -1,8 +1,6 @@
 import 'package:logger/logger.dart';
 import 'package:quickreels/app/core/values/app_values.dart';
 
-
-
 class EnvConfig {
   final String appName;
   final String baseUrl;

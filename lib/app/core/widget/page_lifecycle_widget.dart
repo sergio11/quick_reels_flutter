@@ -71,6 +71,8 @@ class _PageLifecycleState extends State<PageLifecycle>
         final newValue = _visibleFraction != 0;
         _updateAppearanceStateIfNeeded(newValue);
         break;
+      case AppLifecycleState.hidden:
+        break;
     }
   }
 

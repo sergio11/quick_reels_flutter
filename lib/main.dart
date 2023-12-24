@@ -15,7 +15,7 @@ void main() async {
 
   EnvConfig devConfig = EnvConfig(
     appName: "QuickReels Dev",
-    baseUrl: "https://api.github.com",
+    baseUrl: "https://github.com/sergio11/quick_reels_flutter",
     shouldCollectCrashLog: true,
   );
 

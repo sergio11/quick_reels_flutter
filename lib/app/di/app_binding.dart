@@ -56,6 +56,7 @@ import 'package:quickreels/app/domain/usecase/get_auth_user_uid_use_case.dart';
 import 'package:quickreels/app/domain/usecase/get_user_details_use_case.dart';
 import 'package:quickreels/app/domain/usecase/like_reel_use_case.dart';
 import 'package:quickreels/app/domain/usecase/publish_comment_use_case.dart';
+import 'package:quickreels/app/domain/usecase/publish_reel_use_case.dart';
 import 'package:quickreels/app/domain/usecase/sign_in_user_use_case.dart';
 import 'package:quickreels/app/domain/usecase/sign_out_use_case.dart';
 import 'package:quickreels/app/domain/usecase/sign_up_user_use_case.dart';
@@ -180,6 +181,8 @@ class AppBinding extends Bindings {
     Get.put<FindAllFollowedByUseCase>(
         FindAllFollowedByUseCase(userRepository: Get.find()));
     Get.put<UpdateUserUseCase>(UpdateUserUseCase(userRepository: Get.find()));
+    Get.put<PublishReelUseCase>(PublishReelUseCase(
+        authRepository: Get.find(), reelRepository: Get.find()));
   }
 
   void _initSharedDependencies() {
