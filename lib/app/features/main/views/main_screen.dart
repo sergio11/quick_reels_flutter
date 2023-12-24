@@ -120,7 +120,7 @@ class MainScreen extends BaseView<MainController, MainUiData> {
         elevation: 8.0,
         child: InkWell(
           borderRadius:
-              BorderRadius.circular(8.0), // Igual al radio de borde de Material
+              BorderRadius.circular(8.0),
           onTap: () {
             controller.tabController.animateTo(tabItems.length ~/ 2);
           },
