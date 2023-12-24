@@ -56,6 +56,20 @@ class AppPages {
     });
   }
 
+  static void navigateToInitial() {
+    _navigateTo(INITIAL);
+  }
+
+  static void navigateToMain() {
+    _navigateTo(Routes.HOME);
+  }
+
+  static void goBack() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.back();
+    });
+  }
+
   static void _navigateToProfile(String userUid) {
     _navigateTo(_Paths.HOME + _Paths.PROFILE,
         arguments: {USER_UUID_KEY: userUid});
@@ -86,21 +100,75 @@ class AppPages {
         arguments: {USER_UUID_KEY: userUid});
   }
 
+  static OnBoardingScreen _buildOnBoardingScreen() => OnBoardingScreen(
+        onSignInPressed: () => _navigateTo(Routes.SIGN_IN),
+        onSignUpPressed: () => _navigateTo(Routes.SIGN_UP),
+      );
+
+  static SignInScreen _buildSignInScreen() => SignInScreen(
+        onSignInSuccess: () => navigateToMain(),
+        onGoToSignUp: () => _navigateTo(Routes.SIGN_UP),
+      );
+
+  static SignupScreen _buildSignupScreen() => SignupScreen(
+        onGoToSignIn: () => _navigateTo(Routes.SIGN_IN),
+        onSignUpSuccess: () => _navigateTo(Routes.HOME),
+      );
+
+  static HomeScreen _buildHomeScreen() => HomeScreen(
+        onGoToComments: (reelUuid) => _navigateToComments(reelUuid),
+        onGoToUserProfile: (userUuid) => _navigateToProfile(userUuid),
+      );
+
+  static DiscoverContentScreen _buildDiscoverContentScreen() =>
+      DiscoverContentScreen(
+        onShowUserProfile: (userUuid) => _navigateToProfile(userUuid),
+        onGoToComments: (String reelUuid) => _navigateToComments(reelUuid),
+      );
+
+  static FavoritesScreen _buildFavoritesScreen() => FavoritesScreen(
+        onGoToComments: (String reelUuid) => _navigateToComments(reelUuid),
+        onShowUserProfile: (String userUid) => _navigateToProfile(userUid),
+      );
+
+  static ProfileScreen _buildProfileScreen() => ProfileScreen(
+        onShowFollowers: (String userUid) => _navigateToFollowers(userUid),
+        onShowFollowing: (String userUid) => _navigateToFollowing(userUid),
+        onShowFavorites: (String userUid) => _navigateToFavorites(userUid),
+        onGoToComments: (String reelUuid) => _navigateToComments(reelUuid),
+        onShowUserProfile: (String userUid) => _navigateToProfile(userUid),
+        onEditProfile: (String userUid) => _navigateToEditProfile(userUid),
+      );
+
+  static UploadReelScreen _buildUploadReelScreen() => UploadReelScreen(
+      onPostUploaded: navigateToMain, onBackPressed: goBack);
+
+  static CommentsScreen _buildCommentScreen() => CommentsScreen(
+      onBackPressed: goBack,
+      onShowUserProfile: (userUuid) => _navigateToProfile(userUuid));
+
+  static EditProfileScreen _buildEditProfileScreen() => EditProfileScreen();
+
+  static FollowersScreen _buildFollowersScreen() => FollowersScreen(
+      onShowUserProfile: (userUuid) => _navigateToProfile(userUuid));
+
+  static MainScreen _buildMainScreen() => MainScreen(tabItems: [
+    _buildHomeScreen(),
+    _buildDiscoverContentScreen(),
+    _buildUploadReelScreen(),
+    _buildFavoritesScreen(),
+    _buildProfileScreen()
+  ]);
+
   static final routes = [
     GetPage(
       name: _Paths.ONBOARDING,
-      page: () => OnBoardingScreen(
-        onSignInPressed: () => _navigateTo(Routes.SIGN_IN),
-        onSignUpPressed: () => _navigateTo(Routes.SIGN_UP),
-      ),
+      page: _buildOnBoardingScreen,
       middlewares: [AuthMiddleware(), SystemUiMiddleware()],
     ),
     GetPage(
       name: _Paths.SIGN_IN,
-      page: () => SignInScreen(
-        onSignInSuccess: () => _navigateTo(Routes.HOME),
-        onGoToSignUp: () => _navigateTo(Routes.SIGN_UP),
-      ),
+      page: _buildSignInScreen,
       binding: SignInBinding(),
       transition: Transition.rightToLeft,
       curve: Curves.easeInOut,
@@ -109,10 +177,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.SIGN_UP,
-      page: () => SignupScreen(
-        onGoToSignIn: () => _navigateTo(Routes.SIGN_IN),
-        onSignUpSuccess: () => _navigateTo(Routes.HOME),
-      ),
+      page: _buildSignupScreen,
       binding: SignupBinding(),
       transition: Transition.rightToLeft,
       curve: Curves.easeInOut,
@@ -121,30 +186,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.HOME,
-      page: () => MainScreen(tabItems: [
-        HomeScreen(
-          onGoToComments: (reelUuid) => _navigateToComments(reelUuid),
-          onGoToUserProfile: (userUuid) => _navigateToProfile(userUuid),
-        ),
-        DiscoverContentScreen(
-          onShowUserProfile: (userUuid) => _navigateToProfile(userUuid),
-          onGoToComments: (String reelUuid) => _navigateToComments(reelUuid),
-        ),
-        UploadReelScreen(
-            onPostUploaded: () {}, onBackPressed: () => Get.back()),
-        FavoritesScreen(
-          onGoToComments: (String reelUuid) => _navigateToComments(reelUuid),
-          onShowUserProfile: (String userUid) => _navigateToProfile(userUid),
-        ),
-        ProfileScreen(
-          onShowFollowers: (String userUid) => _navigateToFollowers(userUid),
-          onShowFollowing: (String userUid) => _navigateToFollowing(userUid),
-          onShowFavorites: (String userUid) => _navigateToFavorites(userUid),
-          onGoToComments: (String reelUuid) => _navigateToComments(reelUuid),
-          onShowUserProfile: (String userUid) => _navigateToProfile(userUid),
-          onEditProfile: (String userUid) => _navigateToEditProfile(userUid),
-        )
-      ]),
+      page: _buildMainScreen,
       binding: MainBinding(),
       bindings: [
         HomeBinding(),
@@ -156,14 +198,7 @@ class AppPages {
       children: [
         GetPage(
           name: _Paths.PROFILE,
-          page: () => ProfileScreen(
-            onShowFollowers: (String userUid) => _navigateToFollowers(userUid),
-            onShowFollowing: (String userUid) => _navigateToFollowing(userUid),
-            onShowFavorites: (String userUid) => _navigateToFavorites(userUid),
-            onGoToComments: (String reelUuid) => _navigateToComments(reelUuid),
-            onShowUserProfile: (String userUid) => _navigateToProfile(userUid),
-            onEditProfile: (String userUid) => _navigateToEditProfile(userUid),
-          ),
+          page: _buildProfileScreen,
           transition: Transition.downToUp,
           binding: ProfileBinding(),
           curve: Curves.easeInOut,
@@ -171,10 +206,7 @@ class AppPages {
         ),
         GetPage(
           name: _Paths.DISCOVER,
-          page: () => DiscoverContentScreen(
-            onShowUserProfile: (userUuid) => _navigateToProfile(userUuid),
-            onGoToComments: (String reelUuid) => _navigateToComments(reelUuid),
-          ),
+          page: _buildDiscoverContentScreen,
           transition: Transition.downToUp,
           curve: Curves.easeInOut,
           transitionDuration: const Duration(milliseconds: 400),
@@ -182,11 +214,7 @@ class AppPages {
         GetPage(
           name: _Paths.COMMENTS,
           binding: CommentsBinding(),
-          page: () => CommentsScreen(
-              onBackPressed: () {
-                Get.back();
-              },
-              onShowUserProfile: (userUuid) => _navigateToProfile(userUuid)),
+          page: _buildCommentScreen,
           transition: Transition.leftToRight,
           curve: Curves.easeInOut,
           transitionDuration: const Duration(milliseconds: 400),
@@ -194,8 +222,7 @@ class AppPages {
         GetPage(
           name: _Paths.FOLLOWERS,
           binding: FollowersBinding(),
-          page: () => FollowersScreen(
-              onShowUserProfile: (userUuid) => _navigateToProfile(userUuid)),
+          page: _buildFollowersScreen,
           transition: Transition.leftToRight,
           curve: Curves.easeInOut,
           transitionDuration: const Duration(milliseconds: 400),
@@ -203,10 +230,7 @@ class AppPages {
         GetPage(
           name: _Paths.FAVORITES,
           binding: FavoritesBinding(),
-          page: () => FavoritesScreen(
-            onGoToComments: (String reelUuid) => _navigateToComments(reelUuid),
-            onShowUserProfile: (String userUid) => _navigateToProfile(userUid),
-          ),
+          page: _buildFavoritesScreen,
           transition: Transition.leftToRight,
           curve: Curves.easeInOut,
           transitionDuration: const Duration(milliseconds: 400),
@@ -214,7 +238,7 @@ class AppPages {
         GetPage(
           name: _Paths.EDIT_PROFILE,
           binding: EditProfileBinding(),
-          page: () => EditProfileScreen(),
+          page: _buildEditProfileScreen,
           transition: Transition.leftToRight,
           curve: Curves.easeInOut,
           transitionDuration: const Duration(milliseconds: 400),
@@ -222,8 +246,7 @@ class AppPages {
         GetPage(
           name: _Paths.UPLOAD_REEL,
           binding: UploadReelBinding(),
-          page: () => UploadReelScreen(
-              onPostUploaded: () {}, onBackPressed: () => Get.back()),
+          page: _buildUploadReelScreen,
           transition: Transition.leftToRight,
           curve: Curves.easeInOut,
           transitionDuration: const Duration(milliseconds: 400),

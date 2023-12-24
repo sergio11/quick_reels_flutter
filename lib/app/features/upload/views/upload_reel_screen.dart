@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:quickreels/app/core/base/base_view.dart';
 import 'package:quickreels/app/core/utils/utils.dart';
 import 'package:quickreels/app/core/values/app_colors.dart';
@@ -32,7 +33,10 @@ class UploadReelScreen
             actions: <Widget>[
               IconButton(
                 onPressed: () => controller.uploadReel(),
-                icon: const Icon(Icons.upload, color: AppColors.colorWhite,),
+                icon: const Icon(
+                  Icons.upload,
+                  color: AppColors.colorWhite,
+                ),
               )
             ],
           )
@@ -41,7 +45,12 @@ class UploadReelScreen
 
   @override
   Widget body(BuildContext context, UploadReelUiState uiData) {
-    return _buildScreenContent(uiData);
+    return Obx(() {
+      if (controller.isReelUploaded) {
+        onPostUploaded();
+      }
+      return _buildScreenContent(uiData);
+    });
   }
 
   Widget _buildScreenContent(UploadReelUiState uiData) {
@@ -113,6 +122,6 @@ class UploadReelScreen
         context: context,
         title: "_l10n.cancelUploadPostAlertTitle",
         description: "_l10n.cancelUploadPostAlertDescription",
-        onAcceptPressed: onBackPressed);
+        onAcceptPressed: () => controller.clearData());
   }
 }

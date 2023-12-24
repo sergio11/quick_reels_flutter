@@ -46,19 +46,24 @@ class HomeController extends BaseController<HomeUiData> {
     _timer.cancel();
   }
 
-  likeReel(String reelId) async {
+  void likeReel(String reelId) async {
     callUseCase(likeReelUseCase(LikeReelParams(reelId)),
         onComplete: (isSuccess) => _onLikeReelCompleted(reelId, isSuccess));
   }
 
   void _nextReel() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final currentIndex = pageController.page?.round() ?? 0;
-      if (currentIndex < uiData.reels.length - 1) {
-        pageController.animateToPage(currentIndex + 1,
-            duration: const Duration(milliseconds: 500), curve: Curves.ease);
-      }
-    });
+    if (pageController.hasClients) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final currentIndex = pageController.page?.round() ?? 0;
+        if (currentIndex < uiData.reels.length - 1) {
+          pageController.animateToPage(
+            currentIndex + 1,
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.ease,
+          );
+        }
+      });
+    }
   }
 
   void _fetchUserHomeFeed() async {

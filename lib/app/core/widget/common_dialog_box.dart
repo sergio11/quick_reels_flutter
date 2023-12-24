@@ -44,6 +44,12 @@ class CommonDialogBoxState extends State<CommonDialogBox> with SingleTickerProvi
   }
 
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ScaleTransition(
         scale: scaleAnimation,

@@ -30,12 +30,9 @@ class AppController extends GetxController {
 
   void checkAuthStatus() async {
     try {
-      print("checkAuthStatus CALLED!");
       final authUserUuid = await getAuthUserUidUseCase(const DefaultParams());
       _isAuthenticated = authUserUuid.isNotEmpty;
-      print("_isAuthenticated -> $_isAuthenticated");
     } catch (e) {
-      print("catch $e - _isAuthenticated -> $_isAuthenticated");
       _isAuthenticated = false;
     }
   }
