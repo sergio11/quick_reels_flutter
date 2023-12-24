@@ -46,7 +46,7 @@ Here are some screenshots from our app to give you a glimpse of its design and f
 
 ### Onboarding Screens
 
- <img width="300px" align="left" src="screenshots/picture_1.png" />
- <img width="300px" align="left" src="screenshots/picture_2.png" />
- <img width="300px" src="screenshots/picture_3.png" />
+ <img width="250px" align="left" src="screenshots/picture_1.png" />
+ <img width="250px" align="left" src="screenshots/picture_2.png" />
+ <img width="250px" src="screenshots/picture_3.png" />
 
