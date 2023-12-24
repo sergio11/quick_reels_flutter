@@ -78,7 +78,7 @@ abstract class SupportReelFormState<T extends SupportReelForm>
                 child: Container(
                   height: 65,
                   decoration: const BoxDecoration(
-                      color: AppColors.colorPrimary,
+                      color: AppColors.backgroundColor,
                       borderRadius: BorderRadius.vertical(
                         top: Radius.circular(40),
                       ),
@@ -99,7 +99,7 @@ abstract class SupportReelFormState<T extends SupportReelForm>
           delegate: SliverChildListDelegate(
             [
               Container(
-                color: AppColors.colorPrimary,
+                color: AppColors.backgroundColor,
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
