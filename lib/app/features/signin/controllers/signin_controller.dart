@@ -9,14 +9,17 @@ class SignInController extends BaseController<SignInUiData> {
   SignInController({ required this.signInUserUseCase }): super(initialUiState: const SignInUiData());
 
   void loginUser(String email, String password) async {
-    callUseCase(
-      signInUserUseCase(SignInParams(email, password)),
-      onComplete: (isSuccess) => _handleOnSignInCompleted(isSuccess)
-    );
+    if(email.isNotEmpty && password.isNotEmpty) {
+      callUseCase(
+          signInUserUseCase(SignInParams(email, password)),
+          onComplete: (isSuccess) => _handleOnSignInCompleted(isSuccess)
+      );
+    } else {
+      showErrorMessage('Please enter all the fields');
+    }
   }
 
   void _handleOnSignInCompleted(bool isSignIn) {
-    print("_handleOnSignInCompleted -> $isSignIn");
     updateState(SignInUiData(isSignInSuccess: isSignIn));
   }
 }

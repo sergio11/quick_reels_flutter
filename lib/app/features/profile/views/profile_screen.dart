@@ -31,7 +31,10 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
       backgroundColor: AppColors.backgroundColor,
       leading: uiData.isAuthUser
           ? IconButton(
-              icon: const Icon(Icons.edit, color: AppColors.colorWhite,),
+              icon: const Icon(
+                Icons.edit,
+                color: AppColors.colorWhite,
+              ),
               onPressed: () => onEditProfile(uiData.userUuid),
             )
           : null,
@@ -96,17 +99,20 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
       children: [
         _buildProfileRowMetrics(
             context,
-            'Following',
+            appLocalization.profileScreenFollowingLabel,
             uiData.userData?.followingCount,
             () => onShowFollowing(uiData.userUuid)),
         _buildVerticalDivider(),
         _buildProfileRowMetrics(
             context,
-            'Followers',
+            appLocalization.profileScreenFollowersLabel,
             uiData.userData?.followersCount,
             () => onShowFollowers(uiData.userUuid)),
         _buildVerticalDivider(),
-        _buildProfileRowMetrics(context, 'Likes', uiData.userData?.likesCount,
+        _buildProfileRowMetrics(
+            context,
+            appLocalization.profileScreenLikesLabel,
+            uiData.userData?.likesCount,
             () => onShowFavorites(uiData.userUuid)),
       ],
     );
@@ -158,8 +164,9 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
               if (uiData.isAuthUser) {
                 showConfirmDialog(
                   context: context,
-                  title: 'Sign Out',
-                  description: 'Are you sure you want to log out?',
+                  title: appLocalization.profileScreenSignOutDialogTitle,
+                  description:
+                      appLocalization.profileScreenSignOutDialogDescription,
                   onAcceptPressed: () => controller.signOut(),
                 );
               } else {
@@ -168,10 +175,10 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
             },
             child: Text(
               uiData.isAuthUser
-                  ? 'Sign Out'
+                  ? appLocalization.profileScreenSignOutButton
                   : uiData.isFollowing
-                      ? 'Unfollow'
-                      : 'Follow',
+                      ? appLocalization.profileScreenUnFollowButton
+                      : appLocalization.profileScreenFollowButton,
               style: whiteText16,
             ),
           ),
