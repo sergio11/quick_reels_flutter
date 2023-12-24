@@ -38,3 +38,15 @@ Technologies Used:
 * **🔐 Firebase (Authentication and Database Management)**
 
 QuickReels offers a unique blend of seamless navigation, multimedia content delivery, and robust architecture, ensuring an immersive and efficient user experience.
+
+
+## App Screenshots
+
+Here are some screenshots from our app to give you a glimpse of its design and functionality.
+
+### Onboarding Screens
+
+ <img width="300px" align="left" src="screenshots/picture_1.png" />
+ <img width="300px" align="left" src="screenshots/picture_2.png" />
+ <img width="300px" src="screenshots/picture_3.png" />
+
