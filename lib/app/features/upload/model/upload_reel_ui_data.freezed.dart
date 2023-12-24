@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$UploadReelUiState {
   String? get videoFilePath => throw _privateConstructorUsedError;
+  PlaceDetailsBO? get placeDetails => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UploadReelUiStateCopyWith<UploadReelUiState> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $UploadReelUiStateCopyWith<$Res> {
           UploadReelUiState value, $Res Function(UploadReelUiState) then) =
       _$UploadReelUiStateCopyWithImpl<$Res, UploadReelUiState>;
   @useResult
-  $Res call({String? videoFilePath});
+  $Res call({String? videoFilePath, PlaceDetailsBO? placeDetails});
 }
 
 /// @nodoc
@@ -46,12 +47,17 @@ class _$UploadReelUiStateCopyWithImpl<$Res, $Val extends UploadReelUiState>
   @override
   $Res call({
     Object? videoFilePath = freezed,
+    Object? placeDetails = freezed,
   }) {
     return _then(_value.copyWith(
       videoFilePath: freezed == videoFilePath
           ? _value.videoFilePath
           : videoFilePath // ignore: cast_nullable_to_non_nullable
               as String?,
+      placeDetails: freezed == placeDetails
+          ? _value.placeDetails
+          : placeDetails // ignore: cast_nullable_to_non_nullable
+              as PlaceDetailsBO?,
     ) as $Val);
   }
 }
@@ -64,7 +70,7 @@ abstract class _$$UploadReelUiStateImplCopyWith<$Res>
       __$$UploadReelUiStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? videoFilePath});
+  $Res call({String? videoFilePath, PlaceDetailsBO? placeDetails});
 }
 
 /// @nodoc
@@ -79,12 +85,17 @@ class __$$UploadReelUiStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? videoFilePath = freezed,
+    Object? placeDetails = freezed,
   }) {
     return _then(_$UploadReelUiStateImpl(
       videoFilePath: freezed == videoFilePath
           ? _value.videoFilePath
           : videoFilePath // ignore: cast_nullable_to_non_nullable
               as String?,
+      placeDetails: freezed == placeDetails
+          ? _value.placeDetails
+          : placeDetails // ignore: cast_nullable_to_non_nullable
+              as PlaceDetailsBO?,
     ));
   }
 }
@@ -92,14 +103,16 @@ class __$$UploadReelUiStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UploadReelUiStateImpl implements _UploadReelUiState {
-  const _$UploadReelUiStateImpl({this.videoFilePath});
+  const _$UploadReelUiStateImpl({this.videoFilePath, this.placeDetails});
 
   @override
   final String? videoFilePath;
+  @override
+  final PlaceDetailsBO? placeDetails;
 
   @override
   String toString() {
-    return 'UploadReelUiState(videoFilePath: $videoFilePath)';
+    return 'UploadReelUiState(videoFilePath: $videoFilePath, placeDetails: $placeDetails)';
   }
 
   @override
@@ -108,11 +121,13 @@ class _$UploadReelUiStateImpl implements _UploadReelUiState {
         (other.runtimeType == runtimeType &&
             other is _$UploadReelUiStateImpl &&
             (identical(other.videoFilePath, videoFilePath) ||
-                other.videoFilePath == videoFilePath));
+                other.videoFilePath == videoFilePath) &&
+            (identical(other.placeDetails, placeDetails) ||
+                other.placeDetails == placeDetails));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, videoFilePath);
+  int get hashCode => Object.hash(runtimeType, videoFilePath, placeDetails);
 
   @JsonKey(ignore: true)
   @override
@@ -123,11 +138,14 @@ class _$UploadReelUiStateImpl implements _UploadReelUiState {
 }
 
 abstract class _UploadReelUiState implements UploadReelUiState {
-  const factory _UploadReelUiState({final String? videoFilePath}) =
-      _$UploadReelUiStateImpl;
+  const factory _UploadReelUiState(
+      {final String? videoFilePath,
+      final PlaceDetailsBO? placeDetails}) = _$UploadReelUiStateImpl;
 
   @override
   String? get videoFilePath;
+  @override
+  PlaceDetailsBO? get placeDetails;
   @override
   @JsonKey(ignore: true)
   _$$UploadReelUiStateImplCopyWith<_$UploadReelUiStateImpl> get copyWith =>
