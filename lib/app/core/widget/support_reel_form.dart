@@ -7,6 +7,7 @@ import 'package:quickreels/app/core/widget/tags_row.dart';
 import 'package:quickreels/app/core/widget/text_field_input.dart';
 import 'package:textfield_tags/textfield_tags.dart';
 import 'package:video_player/video_player.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 abstract class SupportReelForm extends StatefulWidget {
   final TextEditingController descriptionController;
@@ -25,10 +26,12 @@ abstract class SupportReelFormState<T extends SupportReelForm>
     extends State<T> {
   late StreamSubscription<bool> _keyboardSubscription;
   VideoPlayerController? _videoController;
+  AppLocalizations? _appLocalizations;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    _appLocalizations = AppLocalizations.of(context);
   }
 
   @override
@@ -141,7 +144,7 @@ abstract class SupportReelFormState<T extends SupportReelForm>
 
   Widget _buildPlaceInfoTextInput() {
     return TextFieldInput(
-      hintText: "Place Information",
+      hintText: _appLocalizations?.reelFormPlaceInformationText ?? "",
       textInputType: TextInputType.text,
       icon: const Icon(Icons.location_on),
       textEditingController: widget.placeInfoController,
@@ -151,7 +154,7 @@ abstract class SupportReelFormState<T extends SupportReelForm>
 
   Widget _buildDescriptionTextInput() {
     return TextFieldInput(
-      hintText: "Description",
+      hintText: _appLocalizations?.reelFormDescriptionText ?? "",
       textInputType: TextInputType.multiline,
       textEditingController: widget.descriptionController,
       maxLines: 5,
@@ -165,7 +168,7 @@ abstract class SupportReelFormState<T extends SupportReelForm>
         letterCase: LetterCase.normal,
         validator: (String tag) {
           if (widget.textFieldTagsController.getTags?.contains(tag) == true) {
-            return "Tag already added";
+            return _appLocalizations?.reelFormTagAlreadyAdded;
           }
           return null;
         },
@@ -177,8 +180,8 @@ abstract class SupportReelFormState<T extends SupportReelForm>
                 onSubmitted: onSubmitted,
                 hintText: widget.textFieldTagsController.hasTags
                     ? ''
-                    : "Add Topics",
-                helperText: "Add Topics",
+                    : _appLocalizations?.reelFormAdTagHintText ?? "",
+                helperText: _appLocalizations?.reelFormAdTagHelperText ?? "",
                 focusNode: fn,
                 errorText: error,
                 prefixIconConstraints: BoxConstraints(

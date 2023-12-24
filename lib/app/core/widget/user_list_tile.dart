@@ -3,6 +3,7 @@ import 'package:quickreels/app/core/utils/helpers.dart';
 import 'package:quickreels/app/core/values/app_colors.dart';
 import 'package:quickreels/app/core/widget/common_button.dart';
 import 'package:quickreels/app/domain/model/user.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UserListTile extends StatelessWidget {
   final UserBO userBO;
@@ -23,6 +24,7 @@ class UserListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocalizations = AppLocalizations.of(context);
     return Container(
       color: AppColors.colorDark,
       child: ListTile(
@@ -49,7 +51,10 @@ class UserListTile extends StatelessWidget {
         trailing:
             !isAuthUser && onUnFollowPressed != null && onFollowPressed != null
                 ? CommonButton(
-                    text: isFollowedByAuthUser ? "Unfollow" : "Follow",
+                    text: (isFollowedByAuthUser
+                            ? appLocalizations?.userListTileUnFollow
+                            : appLocalizations?.userListTileFollow) ??
+                        "",
                     textColor: isFollowedByAuthUser
                         ? AppColors.colorPrimary
                         : AppColors.colorWhite,
