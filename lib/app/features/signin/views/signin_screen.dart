@@ -11,7 +11,6 @@ import 'package:quickreels/app/features/signin/controllers/signin_controller.dar
 import 'package:quickreels/app/features/signin/model/signin_ui_data.dart';
 
 class SignInScreen extends BaseView<SignInController, SignInUiData> {
-
   final VoidCallback onSignInSuccess;
   final VoidCallback onGoToSignUp;
 
@@ -34,7 +33,7 @@ class SignInScreen extends BaseView<SignInController, SignInUiData> {
 
   @override
   Widget body(BuildContext context, SignInUiData uiData) {
-    if(uiData.isSignInSuccess) {
+    if (uiData.isSignInSuccess) {
       onSignInSuccess();
     }
     return Stack(
@@ -73,12 +72,10 @@ class SignInScreen extends BaseView<SignInController, SignInUiData> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text("Explore a boundless world of movies and shows, personalized for you.",
+        Text(appLocalization.signInScreenTitle,
             textAlign: TextAlign.center,
-            style: Theme.of(context)
-                .textTheme
-            .labelLarge
-                ?.copyWith(color: AppColors.colorWhite, fontWeight: FontWeight.w300)),
+            style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                color: AppColors.colorWhite, fontWeight: FontWeight.w300)),
       ],
     );
   }
@@ -114,7 +111,7 @@ class SignInScreen extends BaseView<SignInController, SignInUiData> {
 
   Widget _buildEmailTextInput() {
     return TextFieldInput(
-      hintText: "Email",
+      hintText: appLocalization.signInScreenEmailFieldHintText,
       icon: const Icon(
         Icons.mail,
         size: 16,
@@ -122,14 +119,15 @@ class SignInScreen extends BaseView<SignInController, SignInUiData> {
       textInputType: TextInputType.emailAddress,
       textEditingController: _emailController,
       onValidate: (value) =>
-      value != null && value.isNotEmpty && value.isValidEmail(),
-      errorText: "Email",
+          value != null && value.isNotEmpty && value.isValidEmail(),
+      errorText: appLocalization.signInScreenEmailFieldErrorText,
+      errorTextColor: AppColors.colorWhite,
     );
   }
 
   Widget _buildPasswordTextInput() {
     return TextFieldInput(
-      hintText: "Password",
+      hintText: appLocalization.signInScreenPasswordFieldHintText,
       icon: const Icon(
         Icons.password,
         size: 16,
@@ -138,14 +136,15 @@ class SignInScreen extends BaseView<SignInController, SignInUiData> {
       textEditingController: _passwordController,
       isPass: true,
       onValidate: (value) =>
-      value != null && value.isNotEmpty && value.isValidPassword(),
-      errorText: "Password",
+          value != null && value.isNotEmpty && value.isValidPassword(),
+      errorText: appLocalization.signUpScreenRepeatPasswordFieldErrorText,
+      errorTextColor: AppColors.colorWhite,
     );
   }
 
   Widget _buildSignInButton() {
     return CommonButton(
-      text: 'Login',
+      text: appLocalization.signInScreenSignInButton,
       textColor: AppColors.colorWhite,
       borderColor: AppColors.colorWhite,
       onPressed: onLoginClicked,
@@ -158,7 +157,7 @@ class SignInScreen extends BaseView<SignInController, SignInUiData> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('Don\'t have an account? ',
+        Text(appLocalization.signInScreenNotHaveAccount,
             style: Theme.of(context)
                 .textTheme
                 .titleMedium
@@ -166,7 +165,7 @@ class SignInScreen extends BaseView<SignInController, SignInUiData> {
         GestureDetector(
           onTap: onGoToSignUp,
           child: Text(
-            'Sign Up',
+            appLocalization.signInScreenSignUpButton,
             style: Theme.of(context)
                 .textTheme
                 .titleMedium
