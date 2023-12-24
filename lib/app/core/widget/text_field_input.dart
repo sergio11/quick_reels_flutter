@@ -17,6 +17,7 @@ class TextFieldInput extends StatefulWidget {
   final ValueChanged<String>? onSubmitted;
   final bool Function(String? newValue)? onValidate;
   final String? errorText;
+  final Color errorTextColor;
 
   const TextFieldInput(
       {Key? key,
@@ -32,6 +33,7 @@ class TextFieldInput extends StatefulWidget {
       this.onSubmitted,
       this.focusNode,
       this.errorText,
+      this.errorTextColor = Colors.redAccent,
       this.onValidate})
       : super(key: key);
 
@@ -78,7 +80,7 @@ class _TextFieldInputState extends State<TextFieldInput> {
                     .textTheme
                     .labelMedium
                     ?.copyWith(color: AppColors.colorDark),
-                helperText: _validationError == null ? widget.helperText: null,
+                helperText: _validationError == null ? widget.helperText : null,
                 helperStyle: Theme.of(context)
                     .textTheme
                     .labelMedium
@@ -106,10 +108,8 @@ class _TextFieldInputState extends State<TextFieldInput> {
               margin: const EdgeInsets.symmetric(vertical: 4),
               child: Text(
                 _validationError!,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleSmall
-                    ?.copyWith(color: Colors.redAccent, fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: widget.errorTextColor, fontWeight: FontWeight.bold),
               ),
             )
           else

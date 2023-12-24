@@ -21,10 +21,7 @@ class SignupScreen extends BaseView<SignupController, SignUpUiData> {
   final VoidCallback onGoToSignIn;
   final VoidCallback onSignUpSuccess;
 
-  SignupScreen({
-    required this.onGoToSignIn,
-    required this.onSignUpSuccess
-  });
+  SignupScreen({required this.onGoToSignIn, required this.onSignUpSuccess});
 
   void onSignUpUser() async {
     if (_formKey.currentState?.validate() == true) {
@@ -35,7 +32,7 @@ class SignupScreen extends BaseView<SignupController, SignUpUiData> {
 
   @override
   Widget body(BuildContext context, SignUpUiData uiData) {
-    if(uiData.isSignUpSuccess) {
+    if (uiData.isSignUpSuccess) {
       onSignUpSuccess();
     }
     return Stack(
@@ -108,43 +105,46 @@ class SignupScreen extends BaseView<SignupController, SignUpUiData> {
 
   Widget _buildUsernameTextInput() {
     return TextFieldInput(
-        hintText: "Username",
+        hintText: appLocalization.signUpScreenUsernameFieldHintText,
         icon: const Icon(Icons.person, size: 16),
         textInputType: TextInputType.text,
         onValidate: (value) =>
             value != null && value.isNotEmpty && value.isValidName(),
-        errorText: "Invalid username",
+        errorText: appLocalization.signUpScreenUsernameFieldErrorText,
+        errorTextColor: AppColors.colorWhite,
         textEditingController: _usernameController);
   }
 
   Widget _buildEmailTextInput() {
     return TextFieldInput(
-      hintText: "Email",
+      hintText: appLocalization.signUpScreenEmailFieldHintText,
       icon: const Icon(Icons.mail, size: 16),
       textInputType: TextInputType.emailAddress,
       textEditingController: _emailController,
       onValidate: (value) =>
           value != null && value.isNotEmpty && value.isValidEmail(),
-      errorText: "Invalid email",
+      errorText: appLocalization.signUpScreenEmailFieldErrorText,
+      errorTextColor: AppColors.colorWhite,
     );
   }
 
   Widget _buildPasswordTextInput() {
     return TextFieldInput(
-      hintText: "Password",
+      hintText: appLocalization.signUpScreenPasswordFieldHintText,
       icon: const Icon(Icons.password, size: 16),
       textInputType: TextInputType.text,
       textEditingController: _passwordController,
       onValidate: (value) =>
           value != null && value.isNotEmpty && value.isValidPassword(),
-      errorText: "Invalid password",
+      errorText: appLocalization.signUpScreenPasswordFieldErrorText,
+      errorTextColor: AppColors.colorWhite,
       isPass: true,
     );
   }
 
   Widget _buildRepeatPasswordTextInput() {
     return TextFieldInput(
-      hintText: "Repeat Password",
+      hintText: appLocalization.signUpScreenRepeatPasswordFieldHintText,
       icon: const Icon(Icons.password, size: 16),
       textInputType: TextInputType.text,
       textEditingController: _repeatPasswordController,
@@ -152,14 +152,15 @@ class SignupScreen extends BaseView<SignupController, SignUpUiData> {
           value != null &&
           value.isNotEmpty &&
           _passwordController.value.text == value,
-      errorText: "Password not match",
+      errorText: appLocalization.signUpScreenRepeatPasswordFieldErrorText,
+      errorTextColor: AppColors.colorWhite,
       isPass: true,
     );
   }
 
   Widget _buildSignUpButton() {
     return CommonButton(
-      text: 'Sign Up',
+      text: appLocalization.signUpScreenSignUpButton,
       textColor: AppColors.colorWhite,
       borderColor: AppColors.colorWhite,
       onPressed: onSignUpUser,
@@ -172,7 +173,7 @@ class SignupScreen extends BaseView<SignupController, SignUpUiData> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('Already have an account? ',
+        Text(appLocalization.signUpScreenAlreadyHaveAnAccount,
             style: Theme.of(context)
                 .textTheme
                 .titleMedium
@@ -180,7 +181,7 @@ class SignupScreen extends BaseView<SignupController, SignUpUiData> {
         GestureDetector(
           onTap: onGoToSignIn,
           child: Text(
-            'Login',
+            appLocalization.signUpScreenSignInButton,
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 color: AppColors.colorWhite, fontWeight: FontWeight.bold),
           ),
