@@ -22,6 +22,8 @@ import 'package:quickreels/app/features/signin/bindings/signin_binding.dart';
 import 'package:quickreels/app/features/signin/views/signin_screen.dart';
 import 'package:quickreels/app/features/signup/bindings/signup_binding.dart';
 import 'package:quickreels/app/features/signup/views/signup_screen.dart';
+import 'package:quickreels/app/features/upload/bindings/upload_reel_binding.dart';
+import 'package:quickreels/app/features/upload/views/upload_reel_screen.dart';
 import 'package:quickreels/app/routes/middleware/auth_middleware.dart';
 import 'package:quickreels/app/routes/middleware/system_ui_middleware.dart';
 
@@ -128,7 +130,8 @@ class AppPages {
           onShowUserProfile: (userUuid) => _navigateToProfile(userUuid),
           onGoToComments: (String reelUuid) => _navigateToComments(reelUuid),
         ),
-        const Text("Add"),
+        UploadReelScreen(
+            onPostUploaded: () {}, onBackPressed: () => Get.back()),
         FavoritesScreen(
           onGoToComments: (String reelUuid) => _navigateToComments(reelUuid),
           onShowUserProfile: (String userUid) => _navigateToProfile(userUid),
@@ -146,6 +149,7 @@ class AppPages {
       bindings: [
         HomeBinding(),
         ProfileBinding(),
+        UploadReelBinding(),
         DiscoverContentBinding(),
         FavoritesBinding()
       ],
@@ -211,6 +215,15 @@ class AppPages {
           name: _Paths.EDIT_PROFILE,
           binding: EditProfileBinding(),
           page: () => EditProfileScreen(),
+          transition: Transition.leftToRight,
+          curve: Curves.easeInOut,
+          transitionDuration: const Duration(milliseconds: 400),
+        ),
+        GetPage(
+          name: _Paths.UPLOAD_REEL,
+          binding: UploadReelBinding(),
+          page: () => UploadReelScreen(
+              onPostUploaded: () {}, onBackPressed: () => Get.back()),
           transition: Transition.leftToRight,
           curve: Curves.easeInOut,
           transitionDuration: const Duration(milliseconds: 400),
