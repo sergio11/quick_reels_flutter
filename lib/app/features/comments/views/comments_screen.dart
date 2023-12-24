@@ -23,7 +23,7 @@ class CommentsScreen extends BaseView<CommentsController, CommentsUiState> {
           icon: const Icon(Icons.arrow_back),
           color: AppColors.colorWhite,
           onPressed: onBackPressed),
-      title: Text("Comments",
+      title: Text(appLocalization.commentsScreenTitle,
           style: Theme.of(context)
               .textTheme
               .titleLarge
@@ -77,7 +77,7 @@ class CommentsScreen extends BaseView<CommentsController, CommentsUiState> {
                     ),
                   )
                 : EmptyStateWidget(
-                    message: "Comments not found",
+                    message: appLocalization.commentsScreenNoCommentsFoundError,
                     iconData: Icons.mood_bad,
                     onRetry: controller.refreshContent,
                   )));
@@ -110,7 +110,7 @@ class CommentsScreen extends BaseView<CommentsController, CommentsUiState> {
               child: TextField(
                   controller: controller.commentEditingController,
                   decoration: InputDecoration(
-                    hintText: "Publish comment ...",
+                    hintText: appLocalization.commentsScreenPublishCommentHint,
                     hintStyle: Theme.of(context)
                         .textTheme
                         .bodyLarge
@@ -131,7 +131,7 @@ class CommentsScreen extends BaseView<CommentsController, CommentsUiState> {
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
               child: Text(
-                "Publish",
+                appLocalization.commentsScreenPublishCommentButton,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: AppColors.colorWhite, fontWeight: FontWeight.bold),
               ),

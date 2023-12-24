@@ -11,7 +11,8 @@ class FavoritesScreen extends BaseView<FavoritesController, FavoritesUiState> {
   final Function(String userUid) onShowUserProfile;
   final Function(String reelUuid) onGoToComments;
 
-  FavoritesScreen({required this.onShowUserProfile, required this.onGoToComments});
+  FavoritesScreen(
+      {required this.onShowUserProfile, required this.onGoToComments});
 
   @override
   PreferredSizeWidget? appBar(BuildContext context, FavoritesUiState uiData) {
@@ -20,7 +21,7 @@ class FavoritesScreen extends BaseView<FavoritesController, FavoritesUiState> {
         color: AppColors.colorWhite, //change your color here
       ),
       backgroundColor: AppColors.backgroundColor,
-      title: Text("Favorites",
+      title: Text(appLocalization.favoritesScreenTitle,
           style: Theme.of(context)
               .textTheme
               .titleLarge

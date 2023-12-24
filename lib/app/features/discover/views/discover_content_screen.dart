@@ -54,7 +54,7 @@ class DiscoverContentScreen
           .labelMedium
           ?.copyWith(color: AppColors.colorWhite),
       decoration: InputDecoration(
-          labelText: "Search ....",
+          labelText: appLocalization.discoverContentScreenSearchTextFieldHint,
           labelStyle: Theme.of(context)
               .textTheme
               .labelLarge
@@ -129,8 +129,8 @@ class DiscoverContentScreen
                   ));
             },
           )
-        : const EmptyStateWidget(
-            message: "No users found",
+        : EmptyStateWidget(
+            message: appLocalization.discoverContentScreenNoUsersFoundError,
             iconData: Icons.mood_bad,
           );
   }
@@ -160,7 +160,8 @@ class DiscoverContentScreen
               authUserUuid: state.authUserUuid,
               onGoToComments: () => onGoToComments(state.reels[index].reelId),
               onReelLiked: () => controller.likeReel(state.reels[index].reelId),
-              onGoToAuthorProfile: () => onShowUserProfile(state.reels[index].authorUid),
+              onGoToAuthorProfile: () =>
+                  onShowUserProfile(state.reels[index].authorUid),
             );
           },
         ),

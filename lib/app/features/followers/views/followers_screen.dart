@@ -21,8 +21,8 @@ class FollowersScreen extends BaseView<FollowersController, FollowersUiState> {
       backgroundColor: AppColors.backgroundColor,
       title: Text(
           uiData.contentType == ContentTypeEnum.followers
-              ? "Followers"
-              : "Following",
+              ? appLocalization.followersScreenTitle
+              : appLocalization.followingScreenTitle,
           style: Theme.of(context)
               .textTheme
               .titleLarge
@@ -65,23 +65,22 @@ class FollowersScreen extends BaseView<FollowersController, FollowersUiState> {
                         ),
                       ),
                       child: InkWell(
-                        onTap: () =>
-                            onShowUserProfile(state.users[index].uid),
+                        onTap: () => onShowUserProfile(state.users[index].uid),
                         child: UserListTile(
                           userBO: state.users[index],
-                          onFollowPressed: () =>
-                              controller.toggleFollowUser(state.users[index].uid),
-                          onUnFollowPressed: () =>
-                              controller.toggleFollowUser(state.users[index].uid),
+                          onFollowPressed: () => controller
+                              .toggleFollowUser(state.users[index].uid),
+                          onUnFollowPressed: () => controller
+                              .toggleFollowUser(state.users[index].uid),
                           isFollowedByAuthUser: state.users[index].followers
                               .contains(state.authUserUid),
                           isAuthUser:
-                          state.users[index].uid == state.authUserUid,
+                              state.users[index].uid == state.authUserUid,
                         ),
                       )),
                 )
               : EmptyStateWidget(
-                  message: "No users found",
+                  message: appLocalization.followersScreenNoUserFoundError,
                   iconData: Icons.mood_bad,
                   onRetry: () => controller.refreshContent(),
                 ),

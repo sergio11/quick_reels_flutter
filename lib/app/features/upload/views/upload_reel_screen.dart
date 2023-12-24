@@ -24,7 +24,7 @@ class UploadReelScreen
                 icon: const Icon(Icons.arrow_back),
                 color: AppColors.colorWhite,
                 onPressed: _onBackPressed),
-            title: Text("Upload Reel",
+            title: Text(appLocalization.uploadReelScreenTitle,
                 style: Theme.of(context)
                     .textTheme
                     .titleLarge
@@ -47,7 +47,7 @@ class UploadReelScreen
   Widget body(BuildContext context, UploadReelUiState uiData) {
     return Obx(() {
       if (controller.isReelUploaded) {
-        onPostUploaded();
+        _onReelUploaded();
       }
       return _buildScreenContent(uiData);
     });
@@ -112,16 +112,17 @@ class UploadReelScreen
   void _onReelUploaded() {
     showAlertDialog(
         context: context,
-        title: "_l10n.postUploadedAlertTitle",
-        description: "_l10n.postUploadedAlertDescription",
+        title: appLocalization.uploadReelScreenReelUploadedDialogTitle,
+        description:
+            appLocalization.uploadReelScreenReelUploadedDialogDescription,
         onAcceptPressed: onPostUploaded);
   }
 
   void _onBackPressed() {
     showConfirmDialog(
         context: context,
-        title: "_l10n.cancelUploadPostAlertTitle",
-        description: "_l10n.cancelUploadPostAlertDescription",
+        title: appLocalization.uploadReelScreenCancelDialogTitle,
+        description: appLocalization.uploadReelScreenCancelDialogDescription,
         onAcceptPressed: () => controller.clearData());
   }
 }

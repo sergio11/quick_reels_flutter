@@ -8,8 +8,8 @@ import 'package:quickreels/app/core/widget/text_field_input.dart';
 import 'package:quickreels/app/features/editprofile/controller/edit_profile_controller.dart';
 import 'package:quickreels/app/features/editprofile/model/edit_profile_ui_data.dart';
 
-class EditProfileScreen extends BaseView<EditProfileController, EditProfileUiState> {
-
+class EditProfileScreen
+    extends BaseView<EditProfileController, EditProfileUiState> {
   final _formKey = GlobalKey<FormState>();
 
   EditProfileScreen();
@@ -30,7 +30,7 @@ class EditProfileScreen extends BaseView<EditProfileController, EditProfileUiSta
         )
       ],
       backgroundColor: AppColors.backgroundColor,
-      title: Text("Edit",
+      title: Text(appLocalization.editProfileScreenTitle,
           style: Theme.of(context)
               .textTheme
               .titleLarge
@@ -72,27 +72,30 @@ class EditProfileScreen extends BaseView<EditProfileController, EditProfileUiSta
 
   Widget _buildEmailTextInput(EditProfileUiState state) {
     return TextFieldInput(
-      hintText: "Email",
+      hintText: appLocalization.editProfileScreenEmailTextFieldHint,
       icon: const Icon(Icons.mail, size: 16),
       textInputType: TextInputType.emailAddress,
       textEditingController: controller.emailController,
+      onValidate: (value) =>
+          value != null && value.isNotEmpty && value.isValidEmail(),
+      errorText: appLocalization.editProfileScreenEmailTextFieldError,
     );
   }
 
   Widget _buildUsernameTextInput(EditProfileUiState state) {
     return TextFieldInput(
-        hintText: "Username",
+        hintText: appLocalization.editProfileScreenUsernameTextFieldHint,
         icon: const Icon(Icons.person, size: 16),
         textInputType: TextInputType.text,
         onValidate: (value) =>
-        value != null && value.isNotEmpty && value.isValidName(),
-        errorText: "Invalid username",
+            value != null && value.isNotEmpty && value.isValidName(),
+        errorText: appLocalization.signUpScreenUsernameFieldErrorText,
         textEditingController: controller.usernameController);
   }
 
   Widget _buildBioTextInput(EditProfileUiState state) {
     return TextFieldInput(
-      hintText: "Bio",
+      hintText: appLocalization.editProfileScreenBioTextFieldHint,
       textInputType: TextInputType.multiline,
       maxLines: 5,
       textEditingController: controller.bioController,
