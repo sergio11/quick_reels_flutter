@@ -88,4 +88,21 @@ class UserDatasourceImpl extends UserDatasource {
 
     return snapshot.docs.map((doc) => userDtoMapper(doc)).toList();
   }
+
+  @override
+  Future<void> decreaseLikeCount(String uid) async {
+    await _updateLikeCount(uid, increment: -1);
+  }
+
+  @override
+  Future<void> increaseLikeCount(String uid) async {
+    await _updateLikeCount(uid, increment: 1);
+  }
+
+  Future<void> _updateLikeCount(String uid, {required int increment}) async {
+    final userRef = firestore.collection('users').doc(uid);
+    await userRef.update({
+      'likeCount': FieldValue.increment(increment),
+    });
+  }
 }

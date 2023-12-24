@@ -51,7 +51,14 @@ class ReelRepositoryImpl implements ReelRepository {
   @override
   Future<bool> like({required String reelId, required String userUid}) async {
     try {
-      return await reelsDatasource.like(reelId: reelId, userUuid: userUid);
+      final isLikedByUser =
+          await reelsDatasource.like(reelId: reelId, userUuid: userUid);
+      if (isLikedByUser) {
+        userDatasource.increaseLikeCount(userUid);
+      } else {
+        userDatasource.decreaseLikeCount(userUid);
+      }
+      return isLikedByUser;
     } catch (err) {
       throw Failure(message: err.toString());
     }

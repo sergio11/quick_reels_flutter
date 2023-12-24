@@ -3,6 +3,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:quickreels/app/core/utils/helpers.dart';
 import 'package:quickreels/app/core/values/app_colors.dart';
+import 'package:quickreels/app/core/values/text_styles.dart';
 import 'package:quickreels/app/core/widget/circle_animation.dart';
 import 'package:quickreels/app/core/widget/common_screen_progress_indicator.dart';
 import 'package:quickreels/app/core/widget/icon_action_animation.dart';
@@ -210,21 +211,24 @@ class ReelDetailItemState extends State<ReelDetailItem> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Text(
-          widget.reel.username,
-          style: const TextStyle(
-            fontSize: 20,
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+        Row(
+          children: [
+            Text(
+              widget.reel.username,
+              style: whiteText22,
+            ),
+            const SizedBox(width: 8),
+            if (widget.reel.placeInfo != null)
+              Text(
+                widget.reel.placeInfo!,
+                style: whiteText12,
+              )
+          ],
         ),
         const SizedBox(height: 5),
         Text(
           widget.reel.description,
-          style: const TextStyle(
-            fontSize: 12,
-            color: Colors.white,
-          ),
+          style: whiteText12,
         ),
         const SizedBox(height: 5),
         TagsRow(tags: widget.reel.tags),
