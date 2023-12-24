@@ -66,6 +66,7 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               _buildProfileImage(context, uiData),
+              _buildProfileDescription(context, uiData),
               _buildProfileRow(context, uiData),
               _buildMainActionButton(context, uiData),
             ],
@@ -91,6 +92,19 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
         )
       ],
     );
+  }
+
+  Widget _buildProfileDescription(BuildContext context, ProfileUiData uiData) {
+    final profileDescription = uiData.userData?.bio ?? "";
+    return profileDescription.isNotEmpty
+        ? Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Text(
+              profileDescription,
+              style: whiteText16,
+              textAlign: TextAlign.center,
+            ))
+        : Container();
   }
 
   Widget _buildProfileRow(BuildContext context, ProfileUiData uiData) {

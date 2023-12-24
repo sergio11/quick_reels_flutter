@@ -7,7 +7,7 @@ class UserBO {
   final String bio;
   final List<String> followers;
   final List<String> following;
-  final List<String> likes;
+  final int likesCount;
 
   const UserBO({
     required this.username,
@@ -17,12 +17,10 @@ class UserBO {
     required this.bio,
     required this.followers,
     required this.following,
-    required this.likes
+    required this.likesCount
   });
 
   int get followersCount => followers.length;
 
   int get followingCount => following.length;
-
-  int get likesCount => likes.length;
 }

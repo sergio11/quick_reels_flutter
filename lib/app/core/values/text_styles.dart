@@ -32,8 +32,20 @@ const whiteText16 = TextStyle(
   color: Colors.white,
 );
 
+const whiteText12 = TextStyle(
+  fontSize: 12,
+  fontWeight: FontWeight.w400,
+  color: Colors.white,
+);
+
 const whiteText18 = TextStyle(
   fontSize: 18,
+  fontWeight: FontWeight.w400,
+  color: Colors.white,
+);
+
+const whiteText22 = TextStyle(
+  fontSize: 22,
   fontWeight: FontWeight.w400,
   color: Colors.white,
 );
