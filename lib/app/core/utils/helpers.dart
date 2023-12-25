@@ -5,16 +5,31 @@ import 'package:quickreels/app/core/values/app_colors.dart';
 import 'package:quickreels/app/core/widget/animate_gradient_widget.dart';
 import 'package:quickreels/app/core/widget/common_screen_progress_indicator.dart';
 
+Widget buildUserAvatarImage({required String imageUrl, double? radius}) {
+  return Container(
+    decoration: BoxDecoration(
+        border: Border.all(color: AppColors.colorWhite),
+        borderRadius: BorderRadius.circular(radius ?? 22)),
+    child: buildCircleImage(
+        imageUrl: imageUrl, showBackgroundColor: false, radius: radius ?? 22),
+  );
+}
+
 Widget buildCircleImage({
   required String imageUrl,
   double? radius,
   bool showBackgroundColor = true,
+  double? progressIndicatorSize = 80
 }) {
   return imageUrl.isEmpty
-      ? CommonScreenProgressIndicator(
-          backgroundColor:
-              showBackgroundColor ? AppColors.colorWhite : Colors.transparent,
-          spinnerSize: radius ?? 40,
+      ? SizedBox(
+          height: progressIndicatorSize,
+          width: progressIndicatorSize,
+          child: CommonScreenProgressIndicator(
+            backgroundColor:
+                showBackgroundColor ? AppColors.colorWhite : Colors.transparent,
+            spinnerSize: radius ?? 80,
+          ),
         )
       : _buildCachedNetworkImage(
           imageUrl: imageUrl,
@@ -42,7 +57,8 @@ CachedNetworkImage _buildCachedNetworkImage(
     imageBuilder: imageBuilder,
     progressIndicatorBuilder: (context, url, downloadProgress) =>
         CommonScreenProgressIndicator(
-      backgroundColor: showBackgroundColor ? AppColors.colorPrimary : Colors.transparent,
+      backgroundColor:
+          showBackgroundColor ? AppColors.colorPrimary : Colors.transparent,
     ),
     errorWidget: (context, url, error) => const Icon(Icons.error),
   );

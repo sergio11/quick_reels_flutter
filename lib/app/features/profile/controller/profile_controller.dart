@@ -33,7 +33,14 @@ class ProfileController extends BaseController<ProfileUiData> {
 
   @override
   void onResumed() {
+    super.onResumed();
     _loadContent();
+  }
+
+  @override
+  void onPaused() {
+    super.onPaused();
+    resetUiState();
   }
 
   void signOut() async {

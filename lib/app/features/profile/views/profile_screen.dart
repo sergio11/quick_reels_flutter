@@ -88,15 +88,7 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Container(
-          decoration: BoxDecoration(
-              border: Border.all(color: AppColors.colorWhite),
-              borderRadius: BorderRadius.circular(40)),
-          child: buildCircleImage(
-              imageUrl: uiData.userData?.photoUrl ?? "",
-              showBackgroundColor: false,
-              radius: 40),
-        )
+        buildUserAvatarImage(imageUrl: uiData.userData?.photoUrl ?? "", radius: 40)
       ],
     );
   }
@@ -146,7 +138,7 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
       child: Column(
         children: [
           Text(
-            count?.toString() ?? "",
+            count?.toString() ?? "-",
             style: whiteText18,
           ),
           const SizedBox(height: 3),
