@@ -31,6 +31,7 @@
   "profileScreenFollowingLabel": "Following",
   "profileScreenFollowersLabel": "Followers",
   "profileScreenLikesLabel": "Likes",
+  "profileScreenNoReelsFound": "No reels found",
   "profileScreenSignOutDialogTitle": "Sign Out",
   "profileScreenSignOutDialogDescription": "Are you sure you want to sign out?",
   "profileScreenSignOutButton": "Sign Out",

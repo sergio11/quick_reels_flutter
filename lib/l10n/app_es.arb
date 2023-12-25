@@ -31,6 +31,7 @@
   "profileScreenFollowingLabel": "Siguiendo",
   "profileScreenFollowersLabel": "Seguidores",
   "profileScreenLikesLabel": "Me gusta",
+  "profileScreenNoReelsFound": "No dispone de publicaciones",
   "profileScreenSignOutDialogTitle": "Cerrar sesión",
   "profileScreenSignOutDialogDescription": "¿Estás seguro de que quieres cerrar sesión?",
   "profileScreenSignOutButton": "Cerrar sesión",
