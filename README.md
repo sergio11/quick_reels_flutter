@@ -92,11 +92,15 @@ Here are some screenshots from our app to give you a glimpse of its design and f
 
 ### Onboarding Screens
 
+🌟 Welcome to QuickReels! These screens introduce you to the app's features, guiding you through how it works. Get started easily and quickly!
+
 <img width="250px" align="left" src="screenshots/picture_4.png" />
 <img width="250px" align="left" src="screenshots/picture_1.png" />
 <img width="230px" src="screenshots/picture_7.gif" />
 
-### Login & Registration
+### Login & Registration Screens
+
+🔑 Easily sign in or create your account with the simple login and registration screens. It's safe, secure, and hassle-free.
 
 <img width="250px" align="left" src="screenshots/picture_2.png" />
 <img width="250px" align="left" src="screenshots/picture_3.png" />
@@ -105,7 +109,9 @@ Here are some screenshots from our app to give you a glimpse of its design and f
 <img width="250px" align="left" src="screenshots/picture_5.png" />
 <img width="250px" src="screenshots/picture_6.png" />
 
-### Home
+### Home Screens
+
+🏠 Explore QuickReels' main hub! Find personalized content, navigate effortlessly, and enjoy your multimedia journey here.
 
 <img width="250px" align="left" src="screenshots/picture_10.png" />
 <img width="250px" align="left" src="screenshots/picture_9.png" />
@@ -125,6 +131,8 @@ Here are some screenshots from our app to give you a glimpse of its design and f
 
 ### Explore (Discover)
 
+🔍 Discover a variety of content in one place! Dive into curated collections and find what interests you easily.
+
 <img width="250px" align="left" src="screenshots/picture_25.png" />
 <img width="250px" src="screenshots/picture_27.png" />
 
@@ -132,10 +140,14 @@ Here are some screenshots from our app to give you a glimpse of its design and f
 
 ### Favorites
 
+⭐ Make your own collection! Save your favorite videos and content to enjoy later, whenever you want.
+
 <img width="250px" align="left" src="screenshots/picture_20.png" />
 <img width="250px" src="screenshots/picture_21.png" />
 
 ### User Profile
+
+👤 Manage your profile easily! Show your interests, share content, and connect with others effortlessly.
 
 <img width="250px" align="left" src="screenshots/picture_26.png" />
 <img width="250px" src="screenshots/picture_19.png" />
