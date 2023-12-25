@@ -9,14 +9,17 @@ import 'package:quickreels/app/core/widget/common_screen_progress_indicator.dart
 import 'package:quickreels/app/core/widget/icon_action_animation.dart';
 import 'package:quickreels/app/core/widget/tags_row.dart';
 import 'package:quickreels/app/domain/model/reel.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ReelDetailItem extends StatefulWidget {
   final ReelBO reel;
   final String authUserUuid;
   final VoidCallback onGoToComments;
   final VoidCallback onReelLiked;
+  final VoidCallback onReelShared;
   final VoidCallback onGoToAuthorProfile;
   final EdgeInsetsGeometry contentPadding;
   const ReelDetailItem(
@@ -26,6 +29,7 @@ class ReelDetailItem extends StatefulWidget {
       required this.onGoToComments,
       required this.onGoToAuthorProfile,
       required this.onReelLiked,
+      required this.onReelShared,
       this.contentPadding = const EdgeInsets.all(20)})
       : super(key: key);
 
@@ -40,6 +44,7 @@ class ReelDetailItemState extends State<ReelDetailItem> {
   bool _isAudioPlaying = false;
   bool isLikeAnimating = false;
   bool isDisposed = false;
+  AppLocalizations? _appLocalizations;
 
   @override
   void initState() {
@@ -67,6 +72,12 @@ class ReelDetailItemState extends State<ReelDetailItem> {
           }
         });
       });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _appLocalizations = AppLocalizations.of(context);
   }
 
   @override
@@ -389,6 +400,14 @@ class ReelDetailItemState extends State<ReelDetailItem> {
 
   Widget _buildShareAction() {
     return _buildActionColumn(
-        Icons.reply, widget.reel.shareCount, () {}, false, false);
+        Icons.reply, widget.reel.sharesCount, _onShareContent, false, false);
+  }
+
+  void _onShareContent() async {
+    final result =
+        await Share.shareWithResult(_appLocalizations?.shareTextTitle ?? "");
+    if (result.status == ShareResultStatus.success) {
+      widget.onReelShared();
+    }
   }
 }

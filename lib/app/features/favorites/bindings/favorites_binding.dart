@@ -8,7 +8,8 @@ class FavoritesBinding extends Bindings {
       () => FavoritesController(
           getAuthUserUidUseCase: Get.find(),
           findFavoritesReelsByUserUseCase: Get.find(),
-          likeReelUseCase: Get.find()),
+          likeReelUseCase: Get.find(),
+          shareReelUseCase: Get.find()),
     );
   }
 }

@@ -8,7 +8,8 @@ class HomeBinding extends Bindings {
       () => HomeController(
           fetchUserHomeFeedUseCase: Get.find(),
           getAuthUserUidUseCase: Get.find(),
-          likeReelUseCase: Get.find()),
+          likeReelUseCase: Get.find(),
+          shareReelUseCase: Get.find()),
     );
   }
 }
