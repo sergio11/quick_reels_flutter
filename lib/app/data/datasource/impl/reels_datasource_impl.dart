@@ -55,6 +55,23 @@ class ReelsDatasourceImpl extends ReelsDatasource {
   }
 
   @override
+  Future<bool> share({required String reelId, required String userUuid}) async {
+    final DocumentReference<Map<String, dynamic>> reelRef =
+    _reelsCollection.doc(reelId);
+    final DocumentSnapshot<Map<String, dynamic>> snap = await reelRef.get();
+    Map<String, dynamic> reelData = snap.data() ?? {};
+    List<String> shares = List<String>.from(reelData['shares'] ?? []);
+    final bool isSharedByUser = shares.contains(userUuid);
+    if(!isSharedByUser) {
+      await reelRef.update({
+        'shares': FieldValue.arrayUnion([userUuid]),
+        'sharesCount': FieldValue.increment(1),
+      });
+    }
+    return !isSharedByUser;
+  }
+
+  @override
   Future<void> upload(CreateReelDTO reel) async {
     final reelData = saveReelMapper(reel);
     await _reelsCollection.doc(reelData['reelId']).set(reelData);
@@ -135,34 +152,6 @@ class ReelsDatasourceImpl extends ReelsDatasource {
         .orderBy('datePublished', descending: true)
         .get();
     return favoritePostsByUser.docs.map((doc) => reelMapper(doc)).toList();
-  }
-
-  @override
-  Future<bool> saveBookmark(
-      {required String reelId, required String userUuid}) async {
-    final DocumentSnapshot<Map<String, dynamic>> snap =
-        await _reelsCollection.doc(reelId).get();
-    var data = snap.data() ?? {};
-    List bookmarks = data['bookmarks'] is List
-        ? List<String>.from(data['bookmarks'] as List)
-        : [];
-    final bool isBookmarkedByUser = bookmarks.contains(userUuid);
-    await _reelsCollection.doc(reelId).update({
-      'bookmarks': isBookmarkedByUser
-          ? FieldValue.arrayRemove([userUuid])
-          : FieldValue.arrayUnion([userUuid]),
-    });
-    return !isBookmarkedByUser;
-  }
-
-  @override
-  Future<List<ReelDTO>> findAllBookmarkByUserUidOrderByDatePublished(
-      String userUuid) async {
-    final bookmarkPostsByUser = await _reelsCollection
-        .where('bookmarks', arrayContains: userUuid)
-        .orderBy('datePublished', descending: true)
-        .get();
-    return bookmarkPostsByUser.docs.map((doc) => reelMapper(doc)).toList();
   }
 
   @override

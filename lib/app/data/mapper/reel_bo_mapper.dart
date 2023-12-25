@@ -14,7 +14,7 @@ class ReelBoMapper extends Mapper<ReelBoMapperData, ReelBO> {
       description: reelDTO.description,
       username: userDTO.username,
       likes: reelDTO.likes,
-      bookmarks: reelDTO.bookmarks,
+      shares: reelDTO.shares,
       reelId: reelDTO.reelId,
       datePublished: reelDTO.datePublished,
       url: reelDTO.url,
@@ -25,7 +25,8 @@ class ReelBoMapper extends Mapper<ReelBoMapperData, ReelBO> {
       placeInfo: reelDTO.placeInfo,
       songName: songDTO.name,
       songUrl: songDTO.url,
-      shareCount: reelDTO.shareCount,
+      likesCount: reelDTO.likesCount,
+      sharesCount: reelDTO.sharesCount,
     );
   }
 }
@@ -35,5 +36,6 @@ class ReelBoMapperData {
   final UserDTO userDTO;
   final SongDTO songDTO;
 
-  ReelBoMapperData({required this.reelDTO, required this.userDTO, required this.songDTO});
+  ReelBoMapperData(
+      {required this.reelDTO, required this.userDTO, required this.songDTO});
 }

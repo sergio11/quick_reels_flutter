@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:quickreels/app/core/base/base_controller.dart';
 import 'package:quickreels/app/core/base/base_use_case.dart';
-import 'package:quickreels/app/core/utils/reel_extensions.dart';
+import 'package:quickreels/app/core/utils/extensions.dart';
 import 'package:quickreels/app/domain/model/reel.dart';
 import 'package:quickreels/app/domain/usecase/find_reels_order_by_date_published_use_case.dart';
 import 'package:quickreels/app/domain/usecase/find_users_by_name_use_case.dart';
 import 'package:quickreels/app/domain/usecase/follow_user_use_case.dart';
 import 'package:quickreels/app/domain/usecase/get_auth_user_uid_use_case.dart';
 import 'package:quickreels/app/domain/usecase/like_reel_use_case.dart';
+import 'package:quickreels/app/domain/usecase/share_reel_use_case.dart';
 import 'package:quickreels/app/features/discover/model/discover_content_ui_data.dart';
 
 class DiscoverContentController extends BaseController<DiscoverContentUiState> {
@@ -17,6 +18,7 @@ class DiscoverContentController extends BaseController<DiscoverContentUiState> {
       findReelsOrderByDatePublishedUseCase;
   final FollowUserUseCase followUserUseCase;
   final LikeReelUseCase likeReelUseCase;
+  final ShareReelUseCase shareReelUseCase;
 
   late TextEditingController searchController;
 
@@ -25,7 +27,8 @@ class DiscoverContentController extends BaseController<DiscoverContentUiState> {
       required this.findUsersByNameUseCase,
       required this.findReelsOrderByDatePublishedUseCase,
       required this.followUserUseCase,
-      required this.likeReelUseCase})
+      required this.likeReelUseCase,
+      required this.shareReelUseCase})
       : super(initialUiState: const DiscoverContentUiState());
 
   @override
@@ -68,8 +71,13 @@ class DiscoverContentController extends BaseController<DiscoverContentUiState> {
         onComplete: (isSuccess) => _onLikeReelCompleted(reelUuid, isSuccess));
   }
 
+  void shareReel(String reelId) async {
+    callUseCase(shareReelUseCase(ShareReelParams(reelId)),
+        onComplete: (isSuccess) => _onShareReelCompleted(reelId, isSuccess));
+  }
+
   void _loadContent() async {
-    if(uiData.isShowUsers) {
+    if (uiData.isShowUsers) {
       searchUsers(searchController.text);
     } else {
       _onLoadLastReelsPublishedEventHandler();
@@ -79,7 +87,7 @@ class DiscoverContentController extends BaseController<DiscoverContentUiState> {
   void _onLikeReelCompleted(String reelId, bool isSuccess) {
     if (isSuccess) {
       final updatedReels =
-          uiData.reels.updateLikes(reelId, uiData.authUserUuid, isSuccess);
+          uiData.reels.updateReaction(reelId, uiData.authUserUuid, true);
       updateState(uiData.copyWith(reels: updatedReels), forceRefresh: true);
     }
   }
@@ -92,5 +100,13 @@ class DiscoverContentController extends BaseController<DiscoverContentUiState> {
             authUserUuid: result[0] as String,
             reels: result[1] as List<ReelBO>,
             isShowUsers: false)));
+  }
+
+  void _onShareReelCompleted(String reelId, bool isSuccess) {
+    if (isSuccess) {
+      final updatedReels =
+          uiData.reels.updateReaction(reelId, uiData.authUserUuid, false);
+      updateState(uiData.copyWith(reels: updatedReels), forceRefresh: true);
+    }
   }
 }

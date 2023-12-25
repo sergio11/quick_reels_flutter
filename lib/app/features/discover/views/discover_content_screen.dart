@@ -162,6 +162,8 @@ class DiscoverContentScreen
               onReelLiked: () => controller.likeReel(state.reels[index].reelId),
               onGoToAuthorProfile: () =>
                   onShowUserProfile(state.reels[index].authorUid),
+              onReelShared: () =>
+                  controller.shareReel(state.reels[index].reelId),
             );
           },
         ),

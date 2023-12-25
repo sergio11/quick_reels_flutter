@@ -5,7 +5,7 @@ import 'package:quickreels/app/domain/model/reel.dart';
 /// A contract defining the operations related to reels.
 ///
 /// This abstract class provides a set of methods to interact with reel-related
-/// data, including uploading, updating, liking, saving bookmarks, commenting,
+/// data, including uploading, updating, liking, commenting,
 /// and fetching reels based on various criteria.
 abstract class ReelRepository {
   /// Uploads a new reel.
@@ -37,10 +37,10 @@ abstract class ReelRepository {
     required String userUid,
   });
 
-  /// Saves a reel post as a bookmark for a user.
+  /// Share a reel
   ///
-  /// Returns a boolean indicating whether the save bookmark operation was successful.
-  Future<bool> saveBookmark({
+  /// Returns a boolean indicating whether the share operation was successful.
+  Future<bool> share({
     required String reelId,
     required String userUid,
   });
@@ -78,11 +78,6 @@ abstract class ReelRepository {
   ///
   /// Returns a list of [ReelBO] objects representing reels favorited by the user.
   Future<List<ReelBO>> findAllFavoritesByUserUidOrderByDatePublished(String userUi);
-
-  /// Retrieves all reels bookmarked by a specific user, ordered by date published.
-  ///
-  /// Returns a list of [ReelBO] objects representing reels bookmarked by the user.
-  Future<List<ReelBO>> findAllBookmarkByUserUidOrderByDatePublished(String userUi);
 
   /// Retrieves all reels created by a list of user IDs, ordered by date published.
   ///

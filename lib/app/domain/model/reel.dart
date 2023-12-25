@@ -4,14 +4,15 @@ class ReelBO {
   final String songName;
   final String songUrl;
   final List<String> likes;
-  final List<String> bookmarks;
+  final List<String> shares;
   final String reelId;
   final String authorUid;
   final DateTime datePublished;
   final String url;
   final String authImageUrl;
   final int commentCount;
-  final int shareCount;
+  final int likesCount;
+  final int sharesCount;
   final List<String> tags;
   final String? placeInfo;
 
@@ -21,14 +22,15 @@ class ReelBO {
       required this.songUrl,
       required this.username,
       required this.likes,
-      required this.bookmarks,
+      required this.shares,
       required this.reelId,
       required this.authorUid,
       required this.datePublished,
       required this.url,
       required this.authImageUrl,
       required this.commentCount,
-      required this.shareCount,
+      required this.likesCount,
+      required this.sharesCount,
       required this.tags,
       this.placeInfo});
 }

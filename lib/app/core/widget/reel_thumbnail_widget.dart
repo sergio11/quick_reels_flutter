@@ -45,7 +45,7 @@ class ReelThumbnailWidget extends StatelessWidget {
               const SizedBox(width: 5,),
               _buildItemDetail(context, Icons.comment, reelBO.commentCount),
               const SizedBox(width: 5,),
-              _buildItemDetail(context, Icons.share, reelBO.shareCount),
+              _buildItemDetail(context, Icons.share, reelBO.sharesCount),
             ],
           ),
         ),
