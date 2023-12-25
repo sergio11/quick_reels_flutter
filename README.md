@@ -15,6 +15,15 @@
   <img src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white" />
 </p>
 
+<p align="center">
+  <img width="250px" src="screenshots/previewed/image1.jpeg" />
+  <img width="250px" src="screenshots/previewed/image2.jpeg" />
+  <img width="250px" src="screenshots/previewed/image3.jpeg" />
+  <img width="250px" src="screenshots/previewed/image4.jpeg" />
+  <img width="250px" src="screenshots/previewed/image5.jpeg" />
+</p>
+
+Slides are built using the  template from [Previewed](https://previewed.app/template/AFC0B4CB). I extend my gratitude to them for their remarkable work and contribution.
 
 ## Key Features:
 
@@ -39,18 +48,6 @@
 * **🔐 Firebase (Authentication and Database Management)**
 
 QuickReels offers a unique blend of seamless navigation, multimedia content delivery, and robust architecture, ensuring an immersive and efficient user experience.
-
-<img width="250px" align="left" src="screenshots/previewed/image1.jpeg" />
-<img width="250px" align="left" src="screenshots/previewed/image2.jpeg" />
-<img width="250px" src="screenshots/previewed/image3.jpeg" />
-
-</br>
-<img width="250px" align="left" src="screenshots/previewed/image4.jpeg" />
-<img width="250px" src="screenshots/previewed/image5.jpeg" />
-
-</br>
-
-Slides are built using the  template from [Previewed](https://previewed.app/template/AFC0B4CB). I extend my gratitude to them for their remarkable work and contribution.
 
 ## Why Flutter and Firebase for QuickReels? 🔍
 QuickReels opts for Flutter and Firebase for several core reasons that enhance both user experience and app development:
