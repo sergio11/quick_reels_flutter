@@ -250,6 +250,7 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
         authUserUuid: userUuid,
         onGoToComments: () => onGoToComments(reel.reelId),
         onReelLiked: () => controller.likeReel(reel.reelId),
-        onGoToAuthorProfile: () => onShowUserProfile(reel.authorUid));
+        onGoToAuthorProfile: () => onShowUserProfile(reel.authorUid),
+        onReelShared: () => controller.shareReel(reel.reelId));
   }
 }

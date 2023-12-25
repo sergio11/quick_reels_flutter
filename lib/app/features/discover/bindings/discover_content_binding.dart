@@ -10,7 +10,8 @@ class DiscoverContentBinding extends Bindings {
           findUsersByNameUseCase: Get.find(),
           findReelsOrderByDatePublishedUseCase: Get.find(),
           followUserUseCase: Get.find(),
-          likeReelUseCase: Get.find()),
+          likeReelUseCase: Get.find(),
+          shareReelUseCase: Get.find()),
     );
   }
 }

@@ -73,7 +73,8 @@ class FavoritesScreen extends BaseView<FavoritesController, FavoritesUiState> {
         reel: reel,
         authUserUuid: userUuid,
         onGoToComments: () => onGoToComments(reel.reelId),
-        onReelLiked: () {},
-        onGoToAuthorProfile: () => onShowUserProfile(reel.authorUid));
+        onReelLiked: () => controller.likeReel(reel.reelId),
+        onGoToAuthorProfile: () => onShowUserProfile(reel.authorUid),
+        onReelShared: () => controller.shareReel(reel.reelId));
   }
 }

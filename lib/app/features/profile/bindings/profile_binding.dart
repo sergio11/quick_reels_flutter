@@ -11,7 +11,8 @@ class ProfileBinding extends Bindings {
           getUserDetailsUseCase: Get.find(),
           findReelsByUserUseCase: Get.find(),
           followUserUseCase: Get.find(),
-          likeReelUseCase: Get.find()),
+          likeReelUseCase: Get.find(),
+          shareReelUseCase: Get.find()),
     );
   }
 }

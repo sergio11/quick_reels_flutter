@@ -18,8 +18,8 @@ abstract class ReelsDatasource {
   /// Likes a reel.
   Future<bool> like({required String reelId, required String userUuid});
 
-  /// Saves a reel as a bookmark.
-  Future<bool> saveBookmark({required String reelId, required String userUuid});
+  /// share a reel.
+  Future<bool> share({required String reelId, required String userUuid});
 
   /// Uploads a new reel.
   Future<void> upload(CreateReelDTO reel);
@@ -38,10 +38,6 @@ abstract class ReelsDatasource {
 
   /// Fetches all favorite reels by a user ordered by date published.
   Future<List<ReelDTO>> findAllFavoritesByUserUidOrderByDatePublished(
-      String userUuid);
-
-  /// Fetches all bookmarked reels by a user ordered by date published.
-  Future<List<ReelDTO>> findAllBookmarkByUserUidOrderByDatePublished(
       String userUuid);
 
   /// Fetches all posts by multiple users ordered by date published.

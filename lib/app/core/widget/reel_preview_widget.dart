@@ -7,6 +7,7 @@ class ReelsPreview extends StatefulWidget {
   final String authUserUuid;
   final VoidCallback onGoToComments;
   final VoidCallback onReelLiked;
+  final VoidCallback onReelShared;
   final VoidCallback onGoToAuthorProfile;
 
   const ReelsPreview(
@@ -15,6 +16,7 @@ class ReelsPreview extends StatefulWidget {
       required this.authUserUuid,
       required this.onGoToComments,
       required this.onReelLiked,
+      required this.onReelShared,
       required this.onGoToAuthorProfile})
       : super(key: key);
 
@@ -31,6 +33,7 @@ class _ReelsPreviewState extends State<ReelsPreview> {
       onGoToComments: widget.onGoToComments,
       onReelLiked: widget.onReelLiked,
       onGoToAuthorProfile: widget.onGoToAuthorProfile,
+      onReelShared: widget.onReelShared,
     );
   }
 }

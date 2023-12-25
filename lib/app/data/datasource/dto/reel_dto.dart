@@ -6,9 +6,10 @@ class ReelDTO {
   final String songId;
   final String url;
   final List<String> likes;
-  final List<String> bookmarks;
+  final List<String> shares;
   final int commentCount;
-  final int shareCount;
+  final int likesCount;
+  final int sharesCount;
   final List<String> tags;
   final String? placeInfo;
 
@@ -20,9 +21,10 @@ class ReelDTO {
       required this.songId,
       required this.url,
       required this.likes,
-      required this.bookmarks,
+      required this.likesCount,
+      required this.shares,
       required this.commentCount,
-      required this.shareCount,
+      required this.sharesCount,
       required this.tags,
       this.placeInfo});
 }

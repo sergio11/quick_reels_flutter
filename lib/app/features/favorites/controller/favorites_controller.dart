@@ -1,23 +1,26 @@
 import 'package:get/get.dart';
 import 'package:quickreels/app/core/base/base_controller.dart';
 import 'package:quickreels/app/core/base/base_use_case.dart';
-import 'package:quickreels/app/core/utils/reel_extensions.dart';
+import 'package:quickreels/app/core/utils/extensions.dart';
 import 'package:quickreels/app/domain/usecase/find_favorites_reels_by_user_use_case.dart';
 import 'package:quickreels/app/domain/usecase/get_auth_user_uid_use_case.dart';
 import 'package:quickreels/app/domain/usecase/like_reel_use_case.dart';
+import 'package:quickreels/app/domain/usecase/share_reel_use_case.dart';
 import 'package:quickreels/app/features/favorites/model/favorites_ui_data.dart';
 
 class FavoritesController extends BaseController<FavoritesUiState> {
   final GetAuthUserUidUseCase getAuthUserUidUseCase;
   final FindFavoritesReelsByUserUseCase findFavoritesReelsByUserUseCase;
   final LikeReelUseCase likeReelUseCase;
+  final ShareReelUseCase shareReelUseCase;
 
   static const String USER_UUID_KEY = 'USER_UUID';
 
   FavoritesController(
       {required this.getAuthUserUidUseCase,
       required this.findFavoritesReelsByUserUseCase,
-      required this.likeReelUseCase})
+      required this.likeReelUseCase,
+      required this.shareReelUseCase})
       : super(initialUiState: const FavoritesUiState());
 
   @override
@@ -44,10 +47,23 @@ class FavoritesController extends BaseController<FavoritesUiState> {
         onComplete: (isSuccess) => _onLikeReelCompleted(reelUuid, isSuccess));
   }
 
+  void shareReel(String reelId) async {
+    callUseCase(shareReelUseCase(ShareReelParams(reelId)),
+        onComplete: (isSuccess) => _onShareReelCompleted(reelId, isSuccess));
+  }
+
   void _onLikeReelCompleted(String reelId, bool isSuccess) {
     if (isSuccess) {
       final updatedReels =
-          uiData.reels.updateLikes(reelId, uiData.userUuid, isSuccess);
+          uiData.reels.updateReaction(reelId, uiData.userUuid, true);
+      updateState(uiData.copyWith(reels: updatedReels), forceRefresh: true);
+    }
+  }
+
+  void _onShareReelCompleted(String reelId, bool isSuccess) {
+    if (isSuccess) {
+      final updatedReels =
+      uiData.reels.updateReaction(reelId, uiData.authUserUuid, false);
       updateState(uiData.copyWith(reels: updatedReels), forceRefresh: true);
     }
   }

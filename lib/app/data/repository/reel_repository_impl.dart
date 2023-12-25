@@ -65,11 +65,9 @@ class ReelRepositoryImpl implements ReelRepository {
   }
 
   @override
-  Future<bool> saveBookmark(
-      {required String reelId, required String userUid}) async {
+  Future<bool> share({required String reelId, required String userUid}) async {
     try {
-      return await reelsDatasource.saveBookmark(
-          reelId: reelId, userUuid: userUid);
+      return await reelsDatasource.share(reelId: reelId, userUuid: userUid);
     } catch (err) {
       throw Failure(message: err.toString());
     }
@@ -182,21 +180,6 @@ class ReelRepositoryImpl implements ReelRepository {
     } catch (ex) {
       debugPrint(
           "findAllFavoritesByUserUidOrderByDatePublished - ex -> ${ex.toString()}");
-      throw Failure(message: ex.toString());
-    }
-  }
-
-  @override
-  Future<List<ReelBO>> findAllBookmarkByUserUidOrderByDatePublished(
-      String userUi) async {
-    try {
-      final reelsListDTO = await reelsDatasource
-          .findAllBookmarkByUserUidOrderByDatePublished(userUi);
-      return await Future.wait(
-          reelsListDTO.map((reelDTO) async => _mapToReelBO(reelDTO)));
-    } catch (ex) {
-      debugPrint(
-          "findAllBookmarkByUserUidOrderByDatePublished - ex -> ${ex.toString()}");
       throw Failure(message: ex.toString());
     }
   }

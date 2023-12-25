@@ -35,6 +35,8 @@ class HomeScreen extends BaseView<HomeController, HomeUiData> {
                       controller.likeReel(uiData.reels[index].reelId),
                   onGoToAuthorProfile: () =>
                       onGoToUserProfile(uiData.reels[index].authorUid),
+                  onReelShared: () =>
+                      controller.shareReel(uiData.reels[index].reelId),
                 )),
         _buildMainLogo(),
       ],

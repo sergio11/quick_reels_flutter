@@ -45,7 +45,6 @@ import 'package:quickreels/app/domain/usecase/fetch_geolocation_details_use_case
 import 'package:quickreels/app/domain/usecase/fetch_user_home_feed_use_case.dart';
 import 'package:quickreels/app/domain/usecase/find_all_comments_by_reel_use_case.dart';
 import 'package:quickreels/app/domain/usecase/find_all_followed_by_use_case.dart';
-import 'package:quickreels/app/domain/usecase/find_bookmark_reels_by_user_use_case.dart';
 import 'package:quickreels/app/domain/usecase/find_favorites_reels_by_user_use_case.dart';
 import 'package:quickreels/app/domain/usecase/find_followers_by_user_use_case.dart';
 import 'package:quickreels/app/domain/usecase/find_reel_by_id_use_case.dart';
@@ -58,6 +57,7 @@ import 'package:quickreels/app/domain/usecase/get_user_details_use_case.dart';
 import 'package:quickreels/app/domain/usecase/like_reel_use_case.dart';
 import 'package:quickreels/app/domain/usecase/publish_comment_use_case.dart';
 import 'package:quickreels/app/domain/usecase/publish_reel_use_case.dart';
+import 'package:quickreels/app/domain/usecase/share_reel_use_case.dart';
 import 'package:quickreels/app/domain/usecase/sign_in_user_use_case.dart';
 import 'package:quickreels/app/domain/usecase/sign_out_use_case.dart';
 import 'package:quickreels/app/domain/usecase/sign_up_user_use_case.dart';
@@ -157,10 +157,10 @@ class AppBinding extends Bindings {
         authRepository: Get.find(),
         reelRepository: Get.find(),
         userRepository: Get.find()));
-    Get.put<FindBookmarkReelsByUserUseCase>(
-        FindBookmarkReelsByUserUseCase(reelRepository: Get.find()));
     Get.put<FindFavoritesReelsByUserUseCase>(
         FindFavoritesReelsByUserUseCase(reelRepository: Get.find()));
+    Get.put<ShareReelUseCase>(ShareReelUseCase(
+        authRepository: Get.find(), reelRepository: Get.find()));
     Get.put<FindFollowersByUserUseCase>(
         FindFollowersByUserUseCase(userRepository: Get.find()));
     Get.put<FindReelByIdUseCase>(

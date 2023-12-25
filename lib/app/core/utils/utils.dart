@@ -117,6 +117,7 @@ Future<void> showReelPreviewDialog(
     required String authUserUuid,
     required VoidCallback onGoToComments,
     required VoidCallback onReelLiked,
+    required VoidCallback onReelShared,
     required VoidCallback onGoToAuthorProfile}) async {
   await showDialog<void>(
     context: context,
@@ -133,6 +134,7 @@ Future<void> showReelPreviewDialog(
                 onGoToComments: onGoToComments,
                 onReelLiked: onReelLiked,
                 onGoToAuthorProfile: onGoToAuthorProfile,
+                onReelShared: onReelShared,
               )));
     },
   );
