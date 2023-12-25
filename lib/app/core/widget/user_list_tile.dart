@@ -31,7 +31,8 @@ class UserListTile extends StatelessWidget {
         leading: SizedBox(
           width: 40,
           height: 40,
-          child: buildUserAvatarImage(imageUrl: userBO.photoUrl, radius: 22),
+          child: buildUserAvatarImage(
+              context: context, imageUrl: userBO.photoUrl, radius: 22),
         ),
         title: Text(
           userBO.username,

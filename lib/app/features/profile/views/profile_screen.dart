@@ -88,7 +88,10 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        buildUserAvatarImage(imageUrl: uiData.userData?.photoUrl ?? "", radius: 40)
+        buildUserAvatarImage(
+            context: context,
+            imageUrl: uiData.userData?.photoUrl ?? "",
+            radius: 40)
       ],
     );
   }

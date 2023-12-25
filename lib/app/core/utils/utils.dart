@@ -1,4 +1,5 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:easy_image_viewer/easy_image_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
@@ -83,12 +84,12 @@ showAlertDialog(
       barrierColor: Colors.black.withOpacity(0.5),
       context: context,
       builder: (BuildContext context) => CommonDialogBox(
-        title: title,
-        descriptions: description,
-        acceptText: "Accept",
-        img: buildAppLogo(),
-        onAccepted: onAcceptPressed,
-      ));
+            title: title,
+            descriptions: description,
+            acceptText: "Accept",
+            img: buildAppLogo(),
+            onAccepted: onAcceptPressed,
+          ));
 }
 
 showConfirmDialog(
@@ -99,8 +100,7 @@ showConfirmDialog(
     Function()? onCancelPressed}) {
   showDialog(
       context: context,
-      builder: (BuildContext context) =>
-          CommonDialogBox(
+      builder: (BuildContext context) => CommonDialogBox(
             title: title,
             descriptions: description,
             acceptText: "Accept",
@@ -111,14 +111,13 @@ showConfirmDialog(
           ));
 }
 
-Future<void> showReelPreviewDialog({
-  required BuildContext context,
-  required ReelBO reel,
-  required String authUserUuid,
-  required VoidCallback onGoToComments,
-  required VoidCallback onReelLiked,
-  required VoidCallback onGoToAuthorProfile
-}) async {
+Future<void> showReelPreviewDialog(
+    {required BuildContext context,
+    required ReelBO reel,
+    required String authUserUuid,
+    required VoidCallback onGoToComments,
+    required VoidCallback onReelLiked,
+    required VoidCallback onGoToAuthorProfile}) async {
   await showDialog<void>(
     context: context,
     barrierDismissible: false,
@@ -137,4 +136,13 @@ Future<void> showReelPreviewDialog({
               )));
     },
   );
+}
+
+showImage(BuildContext context, String imageUrl) async {
+  await showImageViewer(context, NetworkImage(imageUrl),
+      immersive: false,
+      useSafeArea: true,
+      doubleTapZoomable: true,
+      backgroundColor: AppColors.backgroundColor,
+      closeButtonColor: AppColors.colorPrimary);
 }
