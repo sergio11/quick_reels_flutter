@@ -32,13 +32,18 @@ class DiscoverContentController extends BaseController<DiscoverContentUiState> {
   void onInit() {
     super.onInit();
     searchController = TextEditingController();
-    _onLoadLastPostsPublishedEventHandler();
   }
 
   @override
   void onClose() {
     searchController.dispose();
     super.onClose();
+  }
+
+  @override
+  void onResumed() {
+    super.onResumed();
+    _loadContent();
   }
 
   void searchUsers(String term) async {
@@ -63,6 +68,14 @@ class DiscoverContentController extends BaseController<DiscoverContentUiState> {
         onComplete: (isSuccess) => _onLikeReelCompleted(reelUuid, isSuccess));
   }
 
+  void _loadContent() async {
+    if(uiData.isShowUsers) {
+      searchUsers(searchController.text);
+    } else {
+      _onLoadLastReelsPublishedEventHandler();
+    }
+  }
+
   void _onLikeReelCompleted(String reelId, bool isSuccess) {
     if (isSuccess) {
       final updatedReels =
@@ -71,7 +84,7 @@ class DiscoverContentController extends BaseController<DiscoverContentUiState> {
     }
   }
 
-  void _onLoadLastPostsPublishedEventHandler() async {
+  void _onLoadLastReelsPublishedEventHandler() async {
     final userAuthUuid = getAuthUserUidUseCase(const DefaultParams());
     final reels = findReelsOrderByDatePublishedUseCase(const DefaultParams());
     callUseCase(Future.wait([userAuthUuid, reels]),
