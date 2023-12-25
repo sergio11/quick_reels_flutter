@@ -43,7 +43,7 @@ abstract class BaseController<UIState> extends SuperController<UIState> {
   final logoutController = false.obs;
 
   BaseController({required this.initialUiState}) {
-    _uiData = initialUiState.obs;
+    resetUiState();
   }
 
   refreshPage(bool refresh) => _refreshController(refresh);
@@ -114,5 +114,9 @@ abstract class BaseController<UIState> extends SuperController<UIState> {
 
   @override
   void onResumed() {}
+
+  void resetUiState() {
+    _uiData = initialUiState.obs;
+  }
 
 }
