@@ -4,6 +4,7 @@ import 'package:quickreels/app/core/utils/helpers.dart';
 import 'package:quickreels/app/core/utils/utils.dart';
 import 'package:quickreels/app/core/values/app_colors.dart';
 import 'package:quickreels/app/core/values/text_styles.dart';
+import 'package:quickreels/app/core/widget/empty_state_widget.dart';
 import 'package:quickreels/app/core/widget/reel_thumbnail_widget.dart';
 import 'package:quickreels/app/domain/model/reel.dart';
 import 'package:quickreels/app/features/profile/controller/profile_controller.dart';
@@ -60,17 +61,23 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
     return SingleChildScrollView(
         child: Column(
       children: [
-        SizedBox(
-          height: 250,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _buildProfileImage(context, uiData),
-              _buildProfileDescription(context, uiData),
-              _buildProfileRow(context, uiData),
-              _buildMainActionButton(context, uiData),
-            ],
-          ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            _buildProfileImage(context, uiData),
+            const SizedBox(
+              height: 8,
+            ),
+            _buildProfileDescription(context, uiData),
+            const SizedBox(
+              height: 8,
+            ),
+            _buildProfileRow(context, uiData),
+            const SizedBox(
+              height: 8,
+            ),
+            _buildMainActionButton(context, uiData),
+          ],
         ),
         _buildReelsGridView(context, uiData)
       ],
@@ -202,19 +209,26 @@ class ProfileScreen extends BaseView<ProfileController, ProfileUiData> {
   Widget _buildReelsGridView(BuildContext context, ProfileUiData uiData) {
     return Padding(
       padding: const EdgeInsets.only(top: 15),
-      child: GridView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: uiData.reels.length,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: 6,
-          childAspectRatio: 0.7,
-          crossAxisSpacing: 6,
-        ),
-        itemBuilder: (context, index) =>
-            _buildReelItem(uiData.reels[index], uiData.userUuid),
-      ),
+      child: uiData.reels.isNotEmpty
+          ? GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: uiData.reels.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 6,
+                childAspectRatio: 0.7,
+                crossAxisSpacing: 6,
+              ),
+              itemBuilder: (context, index) =>
+                  _buildReelItem(uiData.reels[index], uiData.userUuid),
+            )
+          : SizedBox(
+              height: 300,
+              child: EmptyStateWidget(
+                  message: appLocalization.profileScreenNoReelsFound,
+                  iconData: Icons.mood_bad),
+            ),
     );
   }
 
