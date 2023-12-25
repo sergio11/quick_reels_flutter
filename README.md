@@ -104,20 +104,24 @@ Here are some screenshots from our app to give you a glimpse of its design and f
 
 🌟 Welcome to QuickReels! These screens introduce you to the app's features, guiding you through how it works. Get started easily and quickly!
 
-<img width="250px" align="left" src="screenshots/picture_4.png" />
-<img width="250px" align="left" src="screenshots/picture_1.png" />
-<img width="230px" src="screenshots/picture_7.gif" />
+<p align="center">
+   <img width="250px" src="screenshots/picture_4.png" />
+   <img width="250px" src="screenshots/picture_1.png" />
+   <img width="240px" src="screenshots/picture_7.gif" />
+</p>
 
 ### Login & Registration Screens
 
 🔑 Easily sign in or create your account with the simple login and registration screens. It's safe, secure, and hassle-free.
 
-<img width="250px" align="left" src="screenshots/picture_2.png" />
-<img width="250px" align="left" src="screenshots/picture_3.png" />
-<img width="230px"  src="screenshots/picture_8.gif" />
- 
-<img width="250px" align="left" src="screenshots/picture_5.png" />
-<img width="250px" src="screenshots/picture_6.png" />
+<p align="center">
+    <img width="250px" src="screenshots/picture_2.png" />
+    <img width="250px" src="screenshots/picture_3.png" />
+    <img width="240px" src="screenshots/picture_8.gif" />
+    <img width="250px" src="screenshots/picture_5.png" />
+    <img width="250px" src="screenshots/picture_6.png" />
+</p>
+
 
 ### Home Screens
 
