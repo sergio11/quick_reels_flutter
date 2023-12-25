@@ -101,22 +101,44 @@ Here are some screenshots from our app to give you a glimpse of its design and f
 <img width="250px" align="left" src="screenshots/picture_2.png" />
 <img width="250px" align="left" src="screenshots/picture_3.png" />
 <img width="230px"  src="screenshots/picture_8.gif" />
-
  
 <img width="250px" align="left" src="screenshots/picture_5.png" />
 <img width="250px" src="screenshots/picture_6.png" />
 
-<img width="250px" align="left" src="screenshots/picture_9.png" />
-<img width="250px" align="left" src="screenshots/picture_10.png" />
-<img width="250px" src="screenshots/picture_11.png" />
+### Home
 
+<img width="250px" align="left" src="screenshots/picture_10.png" />
+<img width="250px" align="left" src="screenshots/picture_9.png" />
+<img width="250px" src="screenshots/picture_11.png" />
 
 <img width="250px" align="left" src="screenshots/picture_12.png" />
 <img width="250px" align="left" src="screenshots/picture_13.png" />
 <img width="250px" src="screenshots/picture_14.png" />
 
 <img width="230px" align="left" src="screenshots/picture_16.gif" />
+<img width="250px" align="left" src="screenshots/picture_18.png" />
+<img width="250px" src="screenshots/picture_22.png" />
+
 <img width="230px" align="left" src="screenshots/picture_17.gif" />
+<img width="250px" align="left" src="screenshots/picture_23.png" />
+<img width="250px" src="screenshots/picture_24.png" />
+
+### Explore (Discover)
+
+<img width="250px" align="left" src="screenshots/picture_25.png" />
+<img width="250px" src="screenshots/picture_27.png" />
+
+### Upload reels
+
+### Favorites
+
+<img width="250px" align="left" src="screenshots/picture_20.png" />
+<img width="250px" src="screenshots/picture_21.png" />
+
+### User Profile
+
+<img width="250px" align="left" src="screenshots/picture_26.png" />
+<img width="250px" src="screenshots/picture_19.png" />
 
   
  
