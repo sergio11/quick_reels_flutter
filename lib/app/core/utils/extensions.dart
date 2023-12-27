@@ -1,4 +1,5 @@
 import 'package:quickreels/app/domain/model/reel.dart';
+import 'package:quickreels/app/domain/model/user.dart';
 
 extension ReelListExtensions on List<ReelBO> {
   List<ReelBO> updateReaction(String reelId, String authUserUuid, bool isLikes) {
@@ -13,6 +14,24 @@ extension ReelListExtensions on List<ReelBO> {
         reactions.remove(authUserUuid);
       }
       return updatedReels;
+    }
+    return this;
+  }
+}
+
+extension UserListExtensions on List<UserBO> {
+  List<UserBO> updateFollowers(String userUuid, String authUserUuid) {
+    final userIndex = indexWhere((user) => user.uid == userUuid);
+    if (userIndex != -1) {
+      final List<UserBO> updatedUsers = List.from(this);
+      final List<String> followers = updatedUsers[userIndex].followers;
+      final isFollowedBy = followers.contains(authUserUuid);
+      if (!isFollowedBy) {
+        followers.add(authUserUuid);
+      } else {
+        followers.remove(authUserUuid);
+      }
+      return updatedUsers;
     }
     return this;
   }

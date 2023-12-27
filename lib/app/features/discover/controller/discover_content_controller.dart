@@ -63,7 +63,8 @@ class DiscoverContentController extends BaseController<DiscoverContentUiState> {
   }
 
   void toggleFollowUser(String userUid) async {
-    callUseCase(followUserUseCase(FollowUserParams(userUid)));
+    callUseCase(followUserUseCase(FollowUserParams(userUid)),
+        onComplete: (isSuccess) => _onFollowUserCompleted(userUid, isSuccess));
   }
 
   void likeReel(String reelUuid) async {
@@ -81,6 +82,16 @@ class DiscoverContentController extends BaseController<DiscoverContentUiState> {
       searchUsers(searchController.text);
     } else {
       _onLoadLastReelsPublishedEventHandler();
+    }
+  }
+
+  void _onFollowUserCompleted(String userUid, bool isSuccess) {
+    if (isSuccess) {
+      updateState(
+          uiData.copyWith(
+              users:
+                  uiData.users.updateFollowers(userUid, uiData.authUserUuid)),
+          forceRefresh: true);
     }
   }
 
