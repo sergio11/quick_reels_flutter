@@ -32,7 +32,7 @@ class UploadReelScreen
             centerTitle: true,
             actions: <Widget>[
               IconButton(
-                onPressed: () => controller.uploadReel(),
+                onPressed: controller.uploadReel,
                 icon: const Icon(
                   Icons.upload,
                   color: AppColors.colorWhite,
@@ -66,6 +66,30 @@ class UploadReelScreen
         flashMode: FlashMode.auto,
         aspectRatio: CameraAspectRatios.ratio_16_9,
       ),
+      topActionsBuilder: (state) => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            AwesomeFlashButton(state: state),
+            Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: AppColors.colorPrimaryMedium.withOpacity(0.5),
+              ),
+              padding: const EdgeInsets.all(6.0),
+              child: IconButton(
+                onPressed: controller.pickFromGallery,
+                icon: const Icon(
+                  Icons.file_open_sharp,
+                  size: 30,
+                  color: AppColors.colorWhite,
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
       theme: AwesomeTheme(
         bottomActionsBackgroundColor: AppColors.colorPrimary.withOpacity(0.5),
         buttonTheme: AwesomeButtonTheme(
@@ -95,7 +119,7 @@ class UploadReelScreen
         final filePath = mediaCapture.captureRequest
             .when(single: (single) => single.file?.path);
         if (filePath != null) {
-          controller.videoSelected(filePath);
+          controller.videoSelectedFromCamera(filePath);
         }
       },
     );
