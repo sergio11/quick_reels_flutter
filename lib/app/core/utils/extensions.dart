@@ -17,3 +17,10 @@ extension ReelListExtensions on List<ReelBO> {
     return this;
   }
 }
+
+extension FileExtensionValidation on String {
+  bool isValidVideoExtension() {
+    final validExtensions = ['.mp4', '.mov'];
+    return validExtensions.contains(toLowerCase());
+  }
+}
