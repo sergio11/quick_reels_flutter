@@ -104,24 +104,19 @@ Here are some screenshots from our app to give you a glimpse of its design and f
 
 🌟 Welcome to QuickReels! These screens introduce you to the app's features, guiding you through how it works. Get started easily and quickly!
 
-<p align="center">
-   <img width="250px" src="screenshots/picture_4.png" />
-   <img width="250px" src="screenshots/picture_1.png" />
-   <img width="240px" src="screenshots/picture_7.gif" />
-</p>
+<img width="250px" align="left" src="screenshots/picture_4.png" />
+<img width="250px" align="left" src="screenshots/picture_1.png" />
+<img width="240px" src="screenshots/picture_7.gif" />
 
 ### Login & Registration Screens
 
 🔑 Easily sign in or create your account with the simple login and registration screens. It's safe, secure, and hassle-free.
 
-<p align="center">
-    <img width="250px" src="screenshots/picture_2.png" />
-    <img width="250px" src="screenshots/picture_3.png" />
-    <img width="240px" src="screenshots/picture_8.gif" />
-    <img width="250px" src="screenshots/picture_5.png" />
-    <img width="250px" src="screenshots/picture_6.png" />
-</p>
-
+<img width="250px" align="left" src="screenshots/picture_2.png" />
+<img width="250px" align="left" src="screenshots/picture_3.png" />
+<img width="240px" align="left" src="screenshots/picture_8.gif" />
+<img width="250px" align="left" src="screenshots/picture_5.png" />
+<img width="250px" src="screenshots/picture_6.png" />
 
 ### Home Screens
 
@@ -152,12 +147,23 @@ Here are some screenshots from our app to give you a glimpse of its design and f
 
 ### Upload reels
 
+📹 Welcome to the Upload Reels section! This is where you can share your favorite moments captured on video. Simply select your videos, 📥 add a touch of your creativity, 🎨 and showcase your reel to the world. Let's get started in sharing your story through video! 🌟
+
+<img width="250px" align="left" src="screenshots/picture_30.png" />
+<img width="250px" align="left" src="screenshots/picture_31.png" />
+<img width="250px" src="screenshots/picture_32.png" />
+
+<img width="250px" align="left" src="screenshots/picture_33.png" />
+<img width="250px" align="left" src="screenshots/picture_34.png" />
+<img width="250px" src="screenshots/picture_35.png" />
+
 ### Favorites
 
 ⭐ Make your own collection! Save your favorite videos and content to enjoy later, whenever you want.
 
 <img width="250px" align="left" src="screenshots/picture_20.png" />
-<img width="250px" src="screenshots/picture_21.png" />
+<img width="250px" align="left" src="screenshots/picture_21.png" />
+<img width="250px" src="screenshots/picture_36.png" />
 
 ### User Profile
 
