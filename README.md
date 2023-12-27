@@ -170,7 +170,12 @@ Here are some screenshots from our app to give you a glimpse of its design and f
 👤 Manage your profile easily! Show your interests, share content, and connect with others effortlessly.
 
 <img width="250px" align="left" src="screenshots/picture_26.png" />
-<img width="250px" src="screenshots/picture_19.png" />
+<img width="250px" align="left" src="screenshots/picture_19.png" />
+<img width="250px" src="screenshots/picture_37.png" />
+
+<img width="250px" align="left" src="screenshots/picture_38.png" />
+<img width="250px" align="left" src="screenshots/picture_39.png" />
+<img width="250px" src="screenshots/picture_40.png" />
 
   
  
