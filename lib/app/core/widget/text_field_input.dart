@@ -15,9 +15,11 @@ class TextFieldInput extends StatefulWidget {
   final FocusNode? focusNode;
   final ValueChanged<String>? onChanged;
   final ValueChanged<String>? onSubmitted;
+  final VoidCallback? onTap;
   final bool Function(String? newValue)? onValidate;
   final String? errorText;
   final Color errorTextColor;
+  final bool readOnly;
 
   const TextFieldInput(
       {Key? key,
@@ -31,9 +33,11 @@ class TextFieldInput extends StatefulWidget {
       this.prefixIconConstraints,
       this.onChanged,
       this.onSubmitted,
+      this.onTap,
       this.focusNode,
       this.errorText,
       this.errorTextColor = Colors.redAccent,
+      this.readOnly = false,
       this.onValidate})
       : super(key: key);
 
@@ -58,6 +62,7 @@ class _TextFieldInputState extends State<TextFieldInput> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           TextFormField(
+              readOnly: widget.readOnly,
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (input) {
                 final error = widget.onValidate?.call(input) ?? true;
@@ -101,6 +106,7 @@ class _TextFieldInputState extends State<TextFieldInput> {
               obscureText: widget.isPass,
               maxLines: widget.maxLines,
               onChanged: widget.onChanged,
+              onTap: widget.onTap,
               onFieldSubmitted: widget.onSubmitted),
           if (_validationError != null)
             Container(

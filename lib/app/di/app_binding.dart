@@ -31,20 +31,25 @@ import 'package:quickreels/app/data/datasource/storage_datasource.dart';
 import 'package:quickreels/app/data/datasource/user_datasource.dart';
 import 'package:quickreels/app/data/mapper/comment_bo_mapper.dart';
 import 'package:quickreels/app/data/mapper/reel_bo_mapper.dart';
+import 'package:quickreels/app/data/mapper/song_bo_mapper.dart';
 import 'package:quickreels/app/data/mapper/user_bo_mapper.dart';
 import 'package:quickreels/app/data/repository/auth_repository_impl.dart';
 import 'package:quickreels/app/data/repository/reel_repository_impl.dart';
+import 'package:quickreels/app/data/repository/song_repository_impl.dart';
 import 'package:quickreels/app/data/repository/user_repository_impl.dart';
 import 'package:quickreels/app/domain/model/comment.dart';
 import 'package:quickreels/app/domain/model/reel.dart';
+import 'package:quickreels/app/domain/model/song.dart';
 import 'package:quickreels/app/domain/model/user.dart';
 import 'package:quickreels/app/domain/repository/auth_repository.dart';
 import 'package:quickreels/app/domain/repository/reel_repository.dart';
+import 'package:quickreels/app/domain/repository/song_repository.dart';
 import 'package:quickreels/app/domain/repository/user_repository.dart';
 import 'package:quickreels/app/domain/usecase/fetch_geolocation_details_use_case.dart';
 import 'package:quickreels/app/domain/usecase/fetch_user_home_feed_use_case.dart';
 import 'package:quickreels/app/domain/usecase/find_all_comments_by_reel_use_case.dart';
 import 'package:quickreels/app/domain/usecase/find_all_followed_by_use_case.dart';
+import 'package:quickreels/app/domain/usecase/find_all_songs_use_case.dart';
 import 'package:quickreels/app/domain/usecase/find_favorites_reels_by_user_use_case.dart';
 import 'package:quickreels/app/domain/usecase/find_followers_by_user_use_case.dart';
 import 'package:quickreels/app/domain/usecase/find_reel_by_id_use_case.dart';
@@ -102,6 +107,7 @@ class AppBinding extends Bindings {
     Get.put<Mapper<CommentBoMapperData, CommentBO>>(
         CommentBoMapper(userMapper: Get.find()));
     Get.put<Mapper<DocumentSnapshot, SongDTO>>(SongDtoMapper());
+    Get.put<Mapper<SongDTO, SongBO>>(SongBoMapper());
   }
 
   void _initDatasourceDependencies() {
@@ -140,6 +146,8 @@ class AppBinding extends Bindings {
         reelBoMapper: Get.find(),
         commentBoMapper: Get.find(),
         songDatasource: Get.find()));
+    Get.put<SongRepository>(SongRepositoryImpl(
+        songDatasource: Get.find(), songBoMapper: Get.find()));
   }
 
   void _initUseCasesDependencies() {
@@ -185,6 +193,8 @@ class AppBinding extends Bindings {
     Get.put<PublishReelUseCase>(PublishReelUseCase(
         authRepository: Get.find(), reelRepository: Get.find()));
     Get.put<FetchGeolocationDetailsUseCase>(FetchGeolocationDetailsUseCase());
+    Get.put<FindAllSongsUseCase>(
+        FindAllSongsUseCase(songRepository: Get.find()));
   }
 
   void _initSharedDependencies() {

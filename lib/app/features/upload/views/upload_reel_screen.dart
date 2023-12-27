@@ -81,7 +81,7 @@ class UploadReelScreen
               ),
               padding: const EdgeInsets.all(6.0),
               child: IconButton(
-                onPressed: controller.pickFromGallery,
+                onPressed: controller.pickVideoFromGallery,
                 icon: const Icon(
                   Icons.file_open_sharp,
                   size: 30,
@@ -129,10 +129,13 @@ class UploadReelScreen
 
   Widget _buildFillReelData(UploadReelUiState uiData) {
     return CreateReelForm(
-        descriptionController: controller.descriptionController,
-        placeInfoController: controller.placeInfoController,
-        textFieldTagsController: controller.textFieldTagsController,
-        videoFilePath: uiData.videoFilePath);
+      descriptionController: controller.descriptionController,
+      placeInfoController: controller.placeInfoController,
+      textFieldTagsController: controller.textFieldTagsController,
+      videoFilePath: uiData.videoFilePath,
+      songs: uiData.songs,
+      songController: controller.songController,
+    );
   }
 
   void _onReelUploaded() {
