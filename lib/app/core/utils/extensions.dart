@@ -1,4 +1,5 @@
 import 'package:quickreels/app/domain/model/reel.dart';
+import 'package:quickreels/app/domain/model/song.dart';
 import 'package:quickreels/app/domain/model/user.dart';
 
 extension ReelListExtensions on List<ReelBO> {
@@ -37,9 +38,11 @@ extension UserListExtensions on List<UserBO> {
   }
 }
 
-extension FileExtensionValidation on String {
-  bool isValidVideoExtension() {
-    final validExtensions = ['.mp4', '.mov'];
-    return validExtensions.contains(toLowerCase());
-  }
+extension SongListExtensions on Iterable<SongBO> {
+  String findSongNameById(String songId) =>
+      firstWhere((song) => song.songId == songId, orElse: () => first).name;
+
+  String findSongIdByName(String songName) =>
+      firstWhere((song) => song.name.toLowerCase() == songName.toLowerCase(),
+          orElse: () => first).songId;
 }

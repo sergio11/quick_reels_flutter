@@ -8,7 +8,8 @@ class UploadReelBinding extends Bindings {
       () => UploadReelController(
           publishReelUseCase: Get.find(),
           fetchGeolocationDetailsUseCase: Get.find(),
-          eventBus: Get.find()),
+          eventBus: Get.find(),
+          findAllSongsUseCase: Get.find()),
     );
   }
 }

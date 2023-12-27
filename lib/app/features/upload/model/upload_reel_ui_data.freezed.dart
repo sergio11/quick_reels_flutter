@@ -16,8 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$UploadReelUiState {
+  Iterable<SongBO> get songs => throw _privateConstructorUsedError;
   String? get videoFilePath => throw _privateConstructorUsedError;
-  Uint8List? get videoImageData => throw _privateConstructorUsedError;
+  Uint8List? get videoFileData => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UploadReelUiStateCopyWith<UploadReelUiState> get copyWith =>
@@ -30,7 +31,10 @@ abstract class $UploadReelUiStateCopyWith<$Res> {
           UploadReelUiState value, $Res Function(UploadReelUiState) then) =
       _$UploadReelUiStateCopyWithImpl<$Res, UploadReelUiState>;
   @useResult
-  $Res call({String? videoFilePath, Uint8List? videoImageData});
+  $Res call(
+      {Iterable<SongBO> songs,
+      String? videoFilePath,
+      Uint8List? videoFileData});
 }
 
 /// @nodoc
@@ -46,17 +50,22 @@ class _$UploadReelUiStateCopyWithImpl<$Res, $Val extends UploadReelUiState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? songs = null,
     Object? videoFilePath = freezed,
-    Object? videoImageData = freezed,
+    Object? videoFileData = freezed,
   }) {
     return _then(_value.copyWith(
+      songs: null == songs
+          ? _value.songs
+          : songs // ignore: cast_nullable_to_non_nullable
+              as Iterable<SongBO>,
       videoFilePath: freezed == videoFilePath
           ? _value.videoFilePath
           : videoFilePath // ignore: cast_nullable_to_non_nullable
               as String?,
-      videoImageData: freezed == videoImageData
-          ? _value.videoImageData
-          : videoImageData // ignore: cast_nullable_to_non_nullable
+      videoFileData: freezed == videoFileData
+          ? _value.videoFileData
+          : videoFileData // ignore: cast_nullable_to_non_nullable
               as Uint8List?,
     ) as $Val);
   }
@@ -70,7 +79,10 @@ abstract class _$$UploadReelUiStateImplCopyWith<$Res>
       __$$UploadReelUiStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? videoFilePath, Uint8List? videoImageData});
+  $Res call(
+      {Iterable<SongBO> songs,
+      String? videoFilePath,
+      Uint8List? videoFileData});
 }
 
 /// @nodoc
@@ -84,17 +96,22 @@ class __$$UploadReelUiStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? songs = null,
     Object? videoFilePath = freezed,
-    Object? videoImageData = freezed,
+    Object? videoFileData = freezed,
   }) {
     return _then(_$UploadReelUiStateImpl(
+      songs: null == songs
+          ? _value.songs
+          : songs // ignore: cast_nullable_to_non_nullable
+              as Iterable<SongBO>,
       videoFilePath: freezed == videoFilePath
           ? _value.videoFilePath
           : videoFilePath // ignore: cast_nullable_to_non_nullable
               as String?,
-      videoImageData: freezed == videoImageData
-          ? _value.videoImageData
-          : videoImageData // ignore: cast_nullable_to_non_nullable
+      videoFileData: freezed == videoFileData
+          ? _value.videoFileData
+          : videoFileData // ignore: cast_nullable_to_non_nullable
               as Uint8List?,
     ));
   }
@@ -103,16 +120,20 @@ class __$$UploadReelUiStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UploadReelUiStateImpl implements _UploadReelUiState {
-  const _$UploadReelUiStateImpl({this.videoFilePath, this.videoImageData});
+  const _$UploadReelUiStateImpl(
+      {this.songs = const [], this.videoFilePath, this.videoFileData});
 
+  @override
+  @JsonKey()
+  final Iterable<SongBO> songs;
   @override
   final String? videoFilePath;
   @override
-  final Uint8List? videoImageData;
+  final Uint8List? videoFileData;
 
   @override
   String toString() {
-    return 'UploadReelUiState(videoFilePath: $videoFilePath, videoImageData: $videoImageData)';
+    return 'UploadReelUiState(songs: $songs, videoFilePath: $videoFilePath, videoFileData: $videoFileData)';
   }
 
   @override
@@ -120,15 +141,19 @@ class _$UploadReelUiStateImpl implements _UploadReelUiState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UploadReelUiStateImpl &&
+            const DeepCollectionEquality().equals(other.songs, songs) &&
             (identical(other.videoFilePath, videoFilePath) ||
                 other.videoFilePath == videoFilePath) &&
             const DeepCollectionEquality()
-                .equals(other.videoImageData, videoImageData));
+                .equals(other.videoFileData, videoFileData));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, videoFilePath,
-      const DeepCollectionEquality().hash(videoImageData));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(songs),
+      videoFilePath,
+      const DeepCollectionEquality().hash(videoFileData));
 
   @JsonKey(ignore: true)
   @override
@@ -140,13 +165,16 @@ class _$UploadReelUiStateImpl implements _UploadReelUiState {
 
 abstract class _UploadReelUiState implements UploadReelUiState {
   const factory _UploadReelUiState(
-      {final String? videoFilePath,
-      final Uint8List? videoImageData}) = _$UploadReelUiStateImpl;
+      {final Iterable<SongBO> songs,
+      final String? videoFilePath,
+      final Uint8List? videoFileData}) = _$UploadReelUiStateImpl;
 
+  @override
+  Iterable<SongBO> get songs;
   @override
   String? get videoFilePath;
   @override
-  Uint8List? get videoImageData;
+  Uint8List? get videoFileData;
   @override
   @JsonKey(ignore: true)
   _$$UploadReelUiStateImplCopyWith<_$UploadReelUiStateImpl> get copyWith =>
