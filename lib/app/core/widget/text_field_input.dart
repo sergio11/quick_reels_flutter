@@ -52,7 +52,7 @@ class _TextFieldInputState extends State<TextFieldInput> {
     );
     const inputBorder = OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(7.0)),
-        borderSide: BorderSide(color: AppColors.colorDark, width: 1));
+        borderSide: BorderSide(color: AppColors.textColorPrimary, width: 1));
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -79,16 +79,16 @@ class _TextFieldInputState extends State<TextFieldInput> {
                 hintStyle: Theme.of(context)
                     .textTheme
                     .labelMedium
-                    ?.copyWith(color: AppColors.colorDark),
+                    ?.copyWith(color: AppColors.textColorPrimary),
                 helperText: _validationError == null ? widget.helperText : null,
                 helperStyle: Theme.of(context)
                     .textTheme
                     .labelMedium
-                    ?.copyWith(color: AppColors.colorDark),
+                    ?.copyWith(color: AppColors.colorWhite),
                 prefixIconConstraints: widget.prefixIconConstraints,
                 prefixIcon: widget.icon,
                 border: _validationError != null ? errorBorder : inputBorder,
-                prefixIconColor: AppColors.colorDark,
+                prefixIconColor: AppColors.textColorPrimary,
                 focusedBorder:
                     _validationError != null ? errorBorder : inputBorder,
                 enabledBorder:

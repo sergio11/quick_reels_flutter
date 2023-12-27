@@ -178,6 +178,7 @@ abstract class SupportReelFormState<T extends SupportReelForm>
                 textEditingController: tec,
                 onChanged: onChanged,
                 onSubmitted: onSubmitted,
+                errorTextColor: AppColors.colorWhite,
                 hintText: widget.textFieldTagsController.hasTags
                     ? ''
                     : _appLocalizations?.reelFormAdTagHintText ?? "",

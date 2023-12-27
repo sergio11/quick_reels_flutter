@@ -7,7 +7,8 @@ class UploadReelBinding extends Bindings {
     Get.lazyPut<UploadReelController>(
       () => UploadReelController(
           publishReelUseCase: Get.find(),
-          fetchGeolocationDetailsUseCase: Get.find()),
+          fetchGeolocationDetailsUseCase: Get.find(),
+          eventBus: Get.find()),
     );
   }
 }
