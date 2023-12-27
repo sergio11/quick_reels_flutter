@@ -116,7 +116,8 @@ Here are some screenshots from our app to give you a glimpse of its design and f
 <img width="250px" align="left" src="screenshots/picture_3.png" />
 <img width="240px" align="left" src="screenshots/picture_8.gif" />
 <img width="250px" align="left" src="screenshots/picture_5.png" />
-<img width="250px" src="screenshots/picture_6.png" />
+<img width="250px" align="left" src="screenshots/picture_6.png" />
+<img width="250px" src="screenshots/picture_43.png" />
 
 ### Home Screens
 
@@ -143,7 +144,8 @@ Here are some screenshots from our app to give you a glimpse of its design and f
 🔍 Discover a variety of content in one place! Dive into curated collections and find what interests you easily.
 
 <img width="250px" align="left" src="screenshots/picture_25.png" />
-<img width="250px" src="screenshots/picture_27.png" />
+<img width="250px" align="left" src="screenshots/picture_27.png" />
+<img width="250px" src="screenshots/picture_41.png" />
 
 ### Upload reels
 
@@ -163,7 +165,7 @@ Here are some screenshots from our app to give you a glimpse of its design and f
 
 <img width="250px" align="left" src="screenshots/picture_20.png" />
 <img width="250px" align="left" src="screenshots/picture_21.png" />
-<img width="250px" src="screenshots/picture_36.png" />
+<img width="250px" src="screenshots/picture_42.png" />
 
 ### User Profile
 
