@@ -19,7 +19,8 @@ class PublishReelUseCase extends BaseUseCase<bool, PublishReelUseParams> {
         description: param.description,
         file: param.file,
         tags: param.tags,
-        placeInfo: param.placeInfo);
+        placeInfo: param.placeInfo,
+        songId: param.songId);
   }
 }
 
@@ -28,13 +29,15 @@ class PublishReelUseParams extends Equatable {
   final Uint8List file;
   final List<String> tags;
   final String? placeInfo;
+  final String songId;
 
   const PublishReelUseParams(
       {required this.description,
       required this.file,
       required this.tags,
-      required this.placeInfo});
+      required this.placeInfo,
+      required this.songId});
 
   @override
-  List<Object> get props => [description, tags];
+  List<Object> get props => [description, tags, songId];
 }

@@ -57,12 +57,12 @@ class ReelsDatasourceImpl extends ReelsDatasource {
   @override
   Future<bool> share({required String reelId, required String userUuid}) async {
     final DocumentReference<Map<String, dynamic>> reelRef =
-    _reelsCollection.doc(reelId);
+        _reelsCollection.doc(reelId);
     final DocumentSnapshot<Map<String, dynamic>> snap = await reelRef.get();
     Map<String, dynamic> reelData = snap.data() ?? {};
     List<String> shares = List<String>.from(reelData['shares'] ?? []);
     final bool isSharedByUser = shares.contains(userUuid);
-    if(!isSharedByUser) {
+    if (!isSharedByUser) {
       await reelRef.update({
         'shares': FieldValue.arrayUnion([userUuid]),
         'sharesCount': FieldValue.increment(1),

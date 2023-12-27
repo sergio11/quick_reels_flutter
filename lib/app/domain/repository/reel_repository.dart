@@ -16,6 +16,7 @@ abstract class ReelRepository {
     required String description,
     required List<String> tags,
     required Uint8List file,
+    required String songId,
     String? placeInfo,
   });
 
