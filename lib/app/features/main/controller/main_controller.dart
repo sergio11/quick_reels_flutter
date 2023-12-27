@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_rx/src/rx_workers/rx_workers.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_ticket_provider_mixin.dart';
 import 'package:quickreels/app/core/base/base_controller.dart';
+import 'package:quickreels/app/core/utils/app_event_bus.dart';
 import 'package:quickreels/app/features/main/model/main_ui_data.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'dart:async';
 
+import 'package:quickreels/app/features/shared/events/events.dart';
+
 class MainController extends BaseController<MainUiData>
     with GetSingleTickerProviderStateMixin {
+  final AppEventBus eventBus;
   late TabController tabController;
   late StreamSubscription<bool> keyboardSubscription;
 
-  MainController()
+  MainController({required this.eventBus})
       : super(
             initialUiState: const MainUiData(tabMenuItems: [
           Icons.home,
@@ -23,6 +28,11 @@ class MainController extends BaseController<MainUiData>
   @override
   void onInit() {
     super.onInit();
+    ever(eventBus.events, (event) {
+      if(event is UploadReelProcessCanceledEvent || event is ReelUploadedEvent) {
+        goToPreviousTab();
+      }
+    });
     tabController =
         TabController(vsync: this, length: uiData.tabMenuItems.length);
     changePage(0);
@@ -47,6 +57,13 @@ class MainController extends BaseController<MainUiData>
         }
       },
     );
+  }
+
+  void goToPreviousTab() {
+    final int currentPage = tabController.index;
+    if (currentPage > 0) {
+      tabController.animateTo(currentPage - 1);
+    }
   }
 
   void _configureKeyboardVisibilityController() {
