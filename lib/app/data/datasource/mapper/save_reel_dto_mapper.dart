@@ -1,4 +1,3 @@
-
 import 'package:quickreels/app/core/utils/mapper.dart';
 import 'package:quickreels/app/data/datasource/dto/create_reel_dto.dart';
 import 'package:uuid/uuid.dart';
@@ -18,7 +17,8 @@ class SaveReelDtoMapper extends Mapper<CreateReelDTO, Map<String, dynamic>> {
       "datePublished": DateTime.now(),
       'url': object.url,
       "tags": object.tags,
-      "placeInfo": object.placeInfo
+      "placeInfo": object.placeInfo,
+      "songId": object.songId
     };
   }
 }

@@ -92,6 +92,7 @@ class ReelRepositoryImpl implements ReelRepository {
       {required String authorUid,
       required String description,
       required List<String> tags,
+      required String songId,
       required Uint8List file,
       String? placeInfo}) async {
     try {
@@ -102,7 +103,8 @@ class ReelRepositoryImpl implements ReelRepository {
           description: description,
           tags: tags,
           url: postUrl,
-          placeInfo: placeInfo));
+          placeInfo: placeInfo,
+          songId: songId));
       return true;
     } catch (err) {
       throw Failure(message: err.toString());
