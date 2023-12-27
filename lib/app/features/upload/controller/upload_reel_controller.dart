@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:quickreels/app/core/base/base_controller.dart';
 import 'package:quickreels/app/core/base/base_use_case.dart';
 import 'package:quickreels/app/core/utils/app_event_bus.dart';
+import 'package:quickreels/app/core/utils/extensions.dart';
 import 'package:quickreels/app/domain/usecase/fetch_geolocation_details_use_case.dart';
 import 'package:quickreels/app/domain/usecase/find_all_songs_use_case.dart';
 import 'package:quickreels/app/domain/usecase/publish_reel_use_case.dart';
@@ -86,7 +87,9 @@ class UploadReelController extends BaseController<UploadReelUiState> {
               description: descriptionController.text,
               file: uiData.videoFileData!,
               tags: textFieldTagsController.getTags ?? [],
-              placeInfo: placeInfoController.text)), onComplete: (isSuccess) {
+              placeInfo: placeInfoController.text,
+              songId: uiData.songs.findSongIdByName(songController.text))),
+          onComplete: (isSuccess) {
         _isReelUploadedController.value = isSuccess;
       });
     } else {
@@ -98,9 +101,9 @@ class UploadReelController extends BaseController<UploadReelUiState> {
   void _fetchPlaceInfo() async {
     callUseCase(fetchGeolocationDetailsUseCase(const DefaultParams()),
         onSuccess: (placeDetails) {
-          placeInfoController.text =
+      placeInfoController.text =
           "${placeDetails.locality}, ${placeDetails.administrativeArea}, ${placeDetails.country}";
-        });
+    });
   }
 
   void _loadSongs() async {

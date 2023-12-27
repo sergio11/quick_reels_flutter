@@ -15,15 +15,14 @@ class ReelDtoMapper extends Mapper<DocumentSnapshot, ReelDTO> {
         likes: snapshot['likes'] is List
             ? List<String>.from(snapshot['likes'] as List)
             : [],
-        likesCount:
-        snapshot['likesCount'] is int ? snapshot['likesCount'] : 0,
+        likesCount: snapshot['likesCount'] is int ? snapshot['likesCount'] : 0,
         shares: snapshot['shares'] is List
             ? List<String>.from(snapshot['shares'] as List)
             : [],
         commentCount:
-        snapshot['commentsCount'] is int ? snapshot['commentsCount'] : 0,
+            snapshot['commentsCount'] is int ? snapshot['commentsCount'] : 0,
         sharesCount:
-        snapshot['sharesCount'] is int ? snapshot['sharesCount'] : 0,
+            snapshot['sharesCount'] is int ? snapshot['sharesCount'] : 0,
         tags: snapshot['tags'] is List
             ? List<String>.from(snapshot['tags'] as List)
             : [],
