@@ -49,6 +49,12 @@ Slides are built using the  template from [Previewed](https://previewed.app/temp
 
 QuickReels offers a unique blend of seamless navigation, multimedia content delivery, and robust architecture, ensuring an immersive and efficient user experience.
 
+
+<p align="center">
+  <img width="250px" src="screenshots/picture_28.gif" />
+  <img width="250px" src="screenshots/picture_29.gif" />
+</p>
+
 ## Why Flutter and Firebase for QuickReels? 🔍
 QuickReels opts for Flutter and Firebase for several core reasons that enhance both user experience and app development:
 
