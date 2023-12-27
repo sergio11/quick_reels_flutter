@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:quickreels/app/core/base/base_controller.dart';
 import 'package:quickreels/app/core/base/base_use_case.dart';
+import 'package:quickreels/app/core/utils/extensions.dart';
 import 'package:quickreels/app/domain/model/user.dart';
 import 'package:quickreels/app/domain/usecase/find_all_followed_by_use_case.dart';
 import 'package:quickreels/app/domain/usecase/find_followers_by_user_use_case.dart';
@@ -48,7 +49,8 @@ class FollowersController extends BaseController<FollowersUiState> {
   }
 
   void toggleFollowUser(String userUid) async {
-    callUseCase(followUserUseCase(FollowUserParams(userUid)));
+    callUseCase(followUserUseCase(FollowUserParams(userUid)),
+        onComplete: (isSuccess) => _onFollowUserCompleted(userUid, isSuccess));
   }
 
   void _loadContent() async {
@@ -84,5 +86,14 @@ class FollowersController extends BaseController<FollowersUiState> {
         ? result.elementAtOrNull(1) as List<UserBO>
         : List.empty();
     updateState(uiData.copyWith(authUserUid: authUserUid, users: users));
+  }
+
+  void _onFollowUserCompleted(String userUid, bool isSuccess) {
+    if (isSuccess) {
+      updateState(
+          uiData.copyWith(
+              users: uiData.users.updateFollowers(userUid, uiData.authUserUid)),
+          forceRefresh: true);
+    }
   }
 }
