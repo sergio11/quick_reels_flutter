@@ -19,19 +19,14 @@ class MainScreen extends BaseView<MainController, MainUiData> {
 
   @override
   void onHandleBackPressed(bool didPop) {
-    if(!didPop) {
-      final int currentPage = controller.tabController.index;
-      if (currentPage > 0) {
-        controller.tabController.animateTo(currentPage - 1);
-      }
+    if (!didPop) {
+      controller.goToPreviousTab();
     }
   }
 
   @override
   Widget body(BuildContext context, MainUiData uiData) {
-    return SafeArea(
-      child: _buildBottomBar(context, uiData),
-    );
+    return SafeArea(child: _buildBottomBar(context, uiData));
   }
 
   Widget _buildBottomBar(BuildContext context, MainUiData uiData) {
@@ -119,8 +114,7 @@ class MainScreen extends BaseView<MainController, MainUiData> {
         borderRadius: BorderRadius.circular(8.0),
         elevation: 8.0,
         child: InkWell(
-          borderRadius:
-              BorderRadius.circular(8.0),
+          borderRadius: BorderRadius.circular(8.0),
           onTap: () {
             controller.tabController.animateTo(tabItems.length ~/ 2);
           },

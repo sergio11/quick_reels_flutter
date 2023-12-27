@@ -10,10 +10,10 @@ import 'package:quickreels/app/features/upload/views/create_reel_form.dart';
 
 class UploadReelScreen
     extends BaseView<UploadReelController, UploadReelUiState> {
-  final VoidCallback onPostUploaded;
+  final VoidCallback onReelUploaded;
   final VoidCallback onBackPressed;
 
-  UploadReelScreen({required this.onPostUploaded, required this.onBackPressed});
+  UploadReelScreen({required this.onReelUploaded, required this.onBackPressed});
 
   @override
   PreferredSizeWidget? appBar(BuildContext context, UploadReelUiState uiData) {
@@ -32,7 +32,7 @@ class UploadReelScreen
             centerTitle: true,
             actions: <Widget>[
               IconButton(
-                onPressed: controller.uploadReel,
+                onPressed: _onUploadReel,
                 icon: const Icon(
                   Icons.upload,
                   color: AppColors.colorWhite,
@@ -47,7 +47,9 @@ class UploadReelScreen
   Widget body(BuildContext context, UploadReelUiState uiData) {
     return Obx(() {
       if (controller.isReelUploaded) {
-        _onReelUploaded();
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          _onReelUploaded();
+        });
       }
       return _buildScreenContent(uiData);
     });
@@ -139,7 +141,7 @@ class UploadReelScreen
         title: appLocalization.uploadReelScreenReelUploadedDialogTitle,
         description:
             appLocalization.uploadReelScreenReelUploadedDialogDescription,
-        onAcceptPressed: onPostUploaded);
+        onAcceptPressed: _onComplete);
   }
 
   void _onBackPressed() {
@@ -147,6 +149,21 @@ class UploadReelScreen
         context: context,
         title: appLocalization.uploadReelScreenCancelDialogTitle,
         description: appLocalization.uploadReelScreenCancelDialogDescription,
-        onAcceptPressed: () => controller.clearData());
+        onAcceptPressed: _onCancel);
+  }
+
+  void _onCancel() {
+    controller.onCancelProcess();
+    onBackPressed();
+  }
+
+  void _onComplete() {
+    controller.onCompleteProcess();
+    onReelUploaded();
+  }
+
+  void _onUploadReel() {
+    hideKeyboard(context);
+    controller.uploadReel();
   }
 }

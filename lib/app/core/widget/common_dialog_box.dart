@@ -89,7 +89,7 @@ class CommonDialogBoxState extends State<CommonDialogBox> with SingleTickerProvi
                 style: Theme.of(context)
                     .textTheme
                     .titleLarge
-                    ?.copyWith(color: AppColors.colorPrimary),
+                    ?.copyWith(color: AppColors.textColorPrimary),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(
@@ -100,7 +100,7 @@ class CommonDialogBoxState extends State<CommonDialogBox> with SingleTickerProvi
                 style: Theme.of(context)
                     .textTheme
                     .titleMedium
-                    ?.copyWith(color: AppColors.colorPrimary),
+                    ?.copyWith(color: AppColors.textColorPrimary),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(

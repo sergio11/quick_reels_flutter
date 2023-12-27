@@ -140,8 +140,8 @@ class AppPages {
         onEditProfile: (String userUid) => _navigateToEditProfile(userUid),
       );
 
-  static UploadReelScreen _buildUploadReelScreen() => UploadReelScreen(
-      onPostUploaded: navigateToMain, onBackPressed: goBack);
+  static UploadReelScreen _buildUploadReelScreen() =>
+      UploadReelScreen(onBackPressed: goBack, onReelUploaded: navigateToMain,);
 
   static CommentsScreen _buildCommentScreen() => CommentsScreen(
       onBackPressed: goBack,
@@ -153,12 +153,12 @@ class AppPages {
       onShowUserProfile: (userUuid) => _navigateToProfile(userUuid));
 
   static MainScreen _buildMainScreen() => MainScreen(tabItems: [
-    _buildHomeScreen(),
-    _buildDiscoverContentScreen(),
-    _buildUploadReelScreen(),
-    _buildFavoritesScreen(),
-    _buildProfileScreen()
-  ]);
+        _buildHomeScreen(),
+        _buildDiscoverContentScreen(),
+        _buildUploadReelScreen(),
+        _buildFavoritesScreen(),
+        _buildProfileScreen()
+      ]);
 
   static final routes = [
     GetPage(

@@ -23,7 +23,7 @@ import 'package:quickreels/app/data/datasource/mapper/save_reel_comment_dto_mapp
 import 'package:quickreels/app/data/datasource/mapper/save_reel_dto_mapper.dart';
 import 'package:quickreels/app/data/datasource/mapper/save_user_dto_mapper.dart';
 import 'package:quickreels/app/data/datasource/mapper/song_dto_mapper.dart';
-import 'package:quickreels/app/data/datasource/mapper/update_post_dto_mapper.dart';
+import 'package:quickreels/app/data/datasource/mapper/update_reel_dto_mapper.dart';
 import 'package:quickreels/app/data/datasource/mapper/user_dto_mapper.dart';
 import 'package:quickreels/app/data/datasource/reel_datasource.dart';
 import 'package:quickreels/app/data/datasource/song_datasource.dart';
