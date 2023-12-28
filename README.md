@@ -76,6 +76,8 @@ QuickReels opts for Flutter and Firebase for several core reasons that enhance b
 
 By leveraging Flutter and Firebase, QuickReels harnesses the best of two leading technologies in mobile app development, offering an advanced user experience, efficient data management, and quick, flexible development.
 
+<img src="screenshots/picture_45.png" />
+
 ## Advantages of Clean Architecture and GetX Framework in QuickReels 🏗️
 
 ### Clean Architecture for Robustness and Maintainability:
@@ -184,6 +186,13 @@ Here are some screenshots from our app to give you a glimpse of its design and f
 <img width="250px" align="left" src="screenshots/picture_38.png" />
 <img width="250px" align="left" src="screenshots/picture_39.png" />
 <img width="250px" src="screenshots/picture_40.png" />
+
+### Firestore and Firebase Storage Screenshots
+This section provides a visual overview of our Firestore database and Firebase Storage. Below, you'll find screenshots that illustrate how we've structured our data and stored files within Firebase.
+
+<img src="screenshots/picture_46.png" />
+<img src="screenshots/picture_47.png" />
+
 
 ## Contribution
 Contributions to QuickReels are highly encouraged! If you're interested in adding new features, resolving bugs, or enhancing the project's functionality, please feel free to submit pull requests.
