@@ -14,7 +14,7 @@ class HomeScreen extends BaseView<HomeController, HomeUiData> {
 
   @override
   Widget body(BuildContext context, uiData) {
-    return SafeArea(child: _buildScreenContent(context, uiData));
+    return _buildScreenContent(context, uiData);
   }
 
   Widget _buildScreenContent(BuildContext context, HomeUiData uiData) {

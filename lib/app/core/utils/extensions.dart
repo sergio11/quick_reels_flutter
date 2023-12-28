@@ -46,3 +46,13 @@ extension SongListExtensions on Iterable<SongBO> {
       firstWhere((song) => song.name.toLowerCase() == songName.toLowerCase(),
           orElse: () => first).songId;
 }
+
+extension StringExtensions on String {
+  String getFileExtension() {
+    int dotIndex = lastIndexOf('.');
+    if (dotIndex != -1 && dotIndex < length - 1) {
+      return substring(dotIndex + 1);
+    }
+    return '';
+  }
+}
