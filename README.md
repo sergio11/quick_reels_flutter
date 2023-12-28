@@ -200,6 +200,19 @@ Contributions to QuickReels are highly encouraged! If you're interested in addin
 ## Credits
 QuickReels is developed and maintained by Sergio Sánchez Sánchez (Dream Software). Special thanks to the open-source community and the contributors who have made this project possible. If you have any questions, feedback, or suggestions, feel free to reach out at dreamsoftware92@gmail.com.
 
+ ## Visitors Count
+
+<img width="auto" src="https://profile-counter.glitch.me/quick_reels_flutter/count.svg" />
+ 
+ ## Please Share & Star the repository to keep me motivated.
+  <a href = "https://github.com/sergio11/quick_reels_flutter/stargazers">
+     <img src = "https://img.shields.io/github/stars/sergio11/quick_reels_flutter" />
+  </a>
+
+<div> Icons and images takes from <a href="https://www.freepik.com" title="Freepik"> Freepik </a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es'</a></div>
+
+Template mockup from https://previewed.app/template/AFC0B4CB
+
 
 
   
