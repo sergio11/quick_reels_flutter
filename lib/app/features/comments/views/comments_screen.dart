@@ -34,7 +34,7 @@ class CommentsScreen extends BaseView<CommentsController, CommentsUiState> {
 
   @override
   Widget body(BuildContext context, CommentsUiState uiData) {
-    return _buildScreenContent(uiData);
+    return SafeArea(child: _buildScreenContent(uiData));
   }
 
   Widget _buildScreenContent(CommentsUiState uiData) {

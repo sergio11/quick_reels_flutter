@@ -16,7 +16,9 @@ class HomeController extends BaseController<HomeUiData> {
   final LikeReelUseCase likeReelUseCase;
   final ShareReelUseCase shareReelUseCase;
   late PageController pageController;
-  late Timer _timer;
+  Timer? _timer;
+
+  static const int NEXT_REEL_TIME_IN_SECONDS = 20;
 
   HomeController(
       {required this.getAuthUserUidUseCase,
@@ -29,11 +31,15 @@ class HomeController extends BaseController<HomeUiData> {
   void onInit() {
     super.onInit();
     pageController = PageController(initialPage: 0, viewportFraction: 1);
+    pageController.addListener(() {
+      print("pageController listener called!");
+      _restartTimerForNextReel();
+    });
   }
 
   @override
   void onClose() {
-    _timer.cancel();
+    _timer?.cancel();
     pageController.dispose();
     super.onClose();
   }
@@ -41,12 +47,12 @@ class HomeController extends BaseController<HomeUiData> {
   @override
   void onResumed() {
     _fetchUserHomeFeed();
-    _startTimerForNextReel();
+    _restartTimerForNextReel();
   }
 
   @override
   void onPaused() {
-    _timer.cancel();
+    _timer?.cancel();
   }
 
   void likeReel(String reelId) async {
@@ -109,8 +115,14 @@ class HomeController extends BaseController<HomeUiData> {
   }
 
   void _startTimerForNextReel() {
-    _timer = Timer.periodic(const Duration(seconds: 20), (_) {
+    _timer = Timer.periodic(const Duration(seconds: NEXT_REEL_TIME_IN_SECONDS), (_) {
       _nextReel();
     });
+  }
+
+  void _restartTimerForNextReel() {
+    print("_restartTimerForNextReel called!");
+    _timer?.cancel();
+    _startTimerForNextReel();
   }
 }

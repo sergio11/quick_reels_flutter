@@ -17,7 +17,8 @@ class PublishReelUseCase extends BaseUseCase<bool, PublishReelUseParams> {
     return await reelRepository.upload(
         authorUid: authUserUid,
         description: param.description,
-        file: param.file,
+        fileData: param.fileData,
+        fileExt: param.fileExt,
         tags: param.tags,
         placeInfo: param.placeInfo,
         songId: param.songId);
@@ -26,14 +27,16 @@ class PublishReelUseCase extends BaseUseCase<bool, PublishReelUseParams> {
 
 class PublishReelUseParams extends Equatable {
   final String description;
-  final Uint8List file;
+  final Uint8List fileData;
+  final String fileExt;
   final List<String> tags;
   final String? placeInfo;
   final String songId;
 
   const PublishReelUseParams(
       {required this.description,
-      required this.file,
+      required this.fileData,
+      required this.fileExt,
       required this.tags,
       required this.placeInfo,
       required this.songId});
