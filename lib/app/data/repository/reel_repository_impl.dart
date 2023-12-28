@@ -93,11 +93,12 @@ class ReelRepositoryImpl implements ReelRepository {
       required String description,
       required List<String> tags,
       required String songId,
-      required Uint8List file,
+      required Uint8List fileData,
+      required String fileExt,
       String? placeInfo}) async {
     try {
       final postUrl = await storageDatasource.uploadFileToStorage(
-          folderName: 'reels', id: const Uuid().v1(), file: file);
+          folderName: 'reels', id: const Uuid().v1() + fileExt, file: fileData);
       reelsDatasource.upload(CreateReelDTO(
           authorUid: authorUid,
           description: description,

@@ -103,7 +103,7 @@ class ReelDetailItemState extends State<ReelDetailItem> {
   }
 
   void _updateVideoPlayingState(bool isPlaying) {
-    if (_isVideoPlaying != isPlaying) {
+    if (_isVideoPlaying != isPlaying && !isDisposed) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         setState(() {
           _isVideoPlaying = isPlaying;
@@ -113,7 +113,7 @@ class ReelDetailItemState extends State<ReelDetailItem> {
   }
 
   void _updateAudioPlayingState(bool isPlaying) {
-    if (_isAudioPlaying != isPlaying) {
+    if (_isAudioPlaying != isPlaying && !isDisposed) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         setState(() {
           _isAudioPlaying = isPlaying;

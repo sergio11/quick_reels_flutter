@@ -82,10 +82,12 @@ class UploadReelController extends BaseController<UploadReelUiState> {
 
   void uploadReel() async {
     if (uiData.videoFilePath != null && uiData.videoFileData != null) {
+      String fileExtension = uiData.videoFilePath!.getFileExtension();
       callUseCase(
           publishReelUseCase(PublishReelUseParams(
               description: descriptionController.text,
-              file: uiData.videoFileData!,
+              fileData: uiData.videoFileData!,
+              fileExt: fileExtension,
               tags: textFieldTagsController.getTags ?? [],
               placeInfo: placeInfoController.text,
               songId: uiData.songs.findSongIdByName(songController.text))),

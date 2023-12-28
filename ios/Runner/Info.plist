@@ -53,5 +53,11 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSCameraUsageDescription</key>
+    <string>Allow access to the camera to capture video.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Enable microphone access for recording video audio.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Grant access to GPS location for capturing Exif data.</string>
 </dict>
 </plist>
