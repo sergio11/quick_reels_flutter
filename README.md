@@ -200,6 +200,14 @@ Contributions to QuickReels are highly encouraged! If you're interested in addin
 ## Credits
 QuickReels is developed and maintained by Sergio Sánchez Sánchez (Dream Software). Special thanks to the open-source community and the contributors who have made this project possible. If you have any questions, feedback, or suggestions, feel free to reach out at dreamsoftware92@gmail.com.
 
+## Acknowledgements 🙏
+
+- We express our deep appreciation to [Freepik](https://www.freepik.es/) for generously providing the resources used in this project.
+
+- We are grateful to Mixkit for providing the example video reels used in this project. Mixkit offers free assets for video projects, and their contributions were invaluable in enhancing our work. [Link to Mixkit](https://mixkit.co/)
+
+- <div> Icons and images takes from <a href="https://www.freepik.com" title="Freepik"> Freepik </a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es'</a></div>
+- Template mockup from https://previewed.app/template/AFC0B4CB
  ## Visitors Count
 
 <img width="auto" src="https://profile-counter.glitch.me/quick_reels_flutter/count.svg" />
@@ -208,14 +216,3 @@ QuickReels is developed and maintained by Sergio Sánchez Sánchez (Dream Softwa
   <a href = "https://github.com/sergio11/quick_reels_flutter/stargazers">
      <img src = "https://img.shields.io/github/stars/sergio11/quick_reels_flutter" />
   </a>
-
-<div> Icons and images takes from <a href="https://www.freepik.com" title="Freepik"> Freepik </a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es'</a></div>
-
-Template mockup from https://previewed.app/template/AFC0B4CB
-
-
-
-  
- 
- 
-
