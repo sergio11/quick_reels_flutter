@@ -112,80 +112,131 @@ Here are some screenshots from our app to give you a glimpse of its design and f
 
 🌟 Welcome to QuickReels! These screens introduce you to the app's features, guiding you through how it works. Get started easily and quickly!
 
-<img width="250px" align="left" src="screenshots/picture_4.png" />
-<img width="250px" align="left" src="screenshots/picture_1.png" />
-<img width="240px" src="screenshots/picture_7.gif" />
+<p>
+  <img width="250px" loading="lazy" src="screenshots/picture_4.png" />
+    &nbsp;&nbsp;&nbsp;
+  <img width="250px" loading="lazy" src="screenshots/picture_1.png" />
+    &nbsp;&nbsp;&nbsp;
+  <img width="240px" loading="lazy" src="screenshots/picture_7.gif" />
+</p>
 
 ### Login & Registration Screens
 
 🔑 Easily sign in or create your account with the simple login and registration screens. It's safe, secure, and hassle-free.
 
-<img width="250px" align="left" src="screenshots/picture_2.png" />
-<img width="250px" align="left" src="screenshots/picture_3.png" />
-<img width="240px" align="left" src="screenshots/picture_8.gif" />
-<img width="250px" align="left" src="screenshots/picture_5.png" />
-<img width="250px" align="left" src="screenshots/picture_6.png" />
-<img width="250px" src="screenshots/picture_43.png" />
+<p>
+  <img width="250px" loading="lazy" src="screenshots/picture_2.png" />
+  &nbsp;&nbsp;&nbsp;
+  <img width="250px" loading="lazy" src="screenshots/picture_3.png" />
+  &nbsp;&nbsp;&nbsp;
+  <img width="240px" loading="lazy" src="screenshots/picture_8.gif" />
+  &nbsp;&nbsp;&nbsp;
+  <img width="250px" loading="lazy" src="screenshots/picture_5.png" />
+  &nbsp;&nbsp;&nbsp;
+  <img width="250px" loading="lazy" src="screenshots/picture_6.png" />
+  &nbsp;&nbsp;&nbsp;
+  <img width="250px" loading="lazy" src="screenshots/picture_43.png" />
+</p>
 
 ### Home Screens
 
 🏠 Explore QuickReels' main hub! Find personalized content, navigate effortlessly, and enjoy your multimedia journey here.
 
-<img width="250px" align="left" src="screenshots/picture_10.png" />
-<img width="250px" align="left" src="screenshots/picture_9.png" />
-<img width="250px" src="screenshots/picture_11.png" />
+<p>
+  <img width="250px" loading="lazy" src="screenshots/picture_10.png" />
+  &nbsp;&nbsp;&nbsp;
+  <img width="250px" loading="lazy" src="screenshots/picture_9.png" />
+  &nbsp;&nbsp;&nbsp;
+  <img width="250px" loading="lazy" src="screenshots/picture_11.png" />
+</p>
 
-<img width="250px" align="left" src="screenshots/picture_12.png" />
-<img width="250px" align="left" src="screenshots/picture_13.png" />
-<img width="250px" src="screenshots/picture_14.png" />
+<p>
+  <img width="250px" loading="lazy" src="screenshots/picture_12.png" />
+  &nbsp;&nbsp;&nbsp;
+  <img width="250px" loading="lazy" src="screenshots/picture_13.png" />
+  &nbsp;&nbsp;&nbsp;
+  <img width="250px" loading="lazy" src="screenshots/picture_14.png" />
+</p>
 
-<img width="230px" align="left" src="screenshots/picture_16.gif" />
-<img width="250px" align="left" src="screenshots/picture_18.png" />
-<img width="250px" src="screenshots/picture_22.png" />
+<p>
+  <img width="230px" loading="lazy" src="screenshots/picture_16.gif" />
+  &nbsp;&nbsp;&nbsp;
+  <img width="250px" loading="lazy" src="screenshots/picture_18.png" />
+  &nbsp;&nbsp;&nbsp;
+  <img width="250px" loading="lazy" src="screenshots/picture_22.png" />
+</p>
 
-<img width="230px" align="left" src="screenshots/picture_17.gif" />
-<img width="250px" align="left" src="screenshots/picture_23.png" />
-<img width="250px" src="screenshots/picture_24.png" />
+<p>
+  <img width="230px" loading="lazy" src="screenshots/picture_17.gif" />
+  &nbsp;&nbsp;&nbsp;
+  <img width="250px" loading="lazy" src="screenshots/picture_23.png" />
+  &nbsp;&nbsp;&nbsp;
+  <img width="250px" loading="lazy" src="screenshots/picture_24.png" />
+</p>
 
 ### Explore (Discover)
 
 🔍 Discover a variety of content in one place! Dive into curated collections and find what interests you easily.
 
-<img width="250px" align="left" src="screenshots/picture_25.png" />
-<img width="250px" align="left" src="screenshots/picture_27.png" />
-<img width="250px" src="screenshots/picture_41.png" />
+<p>
+  <img width="250px"  loading="lazy" src="screenshots/picture_25.png" />
+  &nbsp;&nbsp;&nbsp;
+  <img width="250px"  loading="lazy" src="screenshots/picture_27.png" />
+  &nbsp;&nbsp;&nbsp;
+  <img width="250px"  loading="lazy" src="screenshots/picture_41.png" />
+</p>
 
 ### Upload reels
 
 📹 Welcome to the Upload Reels section! This is where you can share your favorite moments captured on video. Simply select your videos, 📥 add a touch of your creativity, 🎨 and showcase your reel to the world. Let's get started in sharing your story through video! 🌟
 
-<img width="250px" align="left" src="screenshots/picture_30.png" />
-<img width="250px" align="left" src="screenshots/picture_31.png" />
-<img width="250px" src="screenshots/picture_32.png" />
+<p>
+  <img width="250px" loading="lazy" src="screenshots/picture_30.png" />
+  &nbsp;&nbsp;&nbsp;
+  <img width="250px" loading="lazy" src="screenshots/picture_31.png" />
+  &nbsp;&nbsp;&nbsp;
+  <img width="250px" loading="lazy" src="screenshots/picture_32.png" />
+</p>
 
-<img width="250px" align="left" src="screenshots/picture_33.png" />
-<img width="250px" align="left" src="screenshots/picture_34.png" />
-<img width="250px" src="screenshots/picture_35.png" />
+<p>
+  <img width="250px" loading="lazy" src="screenshots/picture_33.png" />
+  &nbsp;&nbsp;&nbsp;
+  <img width="250px" loading="lazy" src="screenshots/picture_34.png" />
+  &nbsp;&nbsp;&nbsp;
+  <img width="250px" loading="lazy" src="screenshots/picture_35.png" />
+</p>
 
 ### Favorites
 
 ⭐ Make your own collection! Save your favorite videos and content to enjoy later, whenever you want.
 
-<img width="250px" align="left" src="screenshots/picture_20.png" />
-<img width="250px" align="left" src="screenshots/picture_21.png" />
-<img width="250px" src="screenshots/picture_42.png" />
+<p>
+  <img width="250px" loading="lazy" src="screenshots/picture_20.png" />
+  &nbsp;&nbsp;&nbsp;
+  <img width="250px" loading="lazy" src="screenshots/picture_21.png" />
+  &nbsp;&nbsp;&nbsp;
+  <img width="250px" loading="lazy" src="screenshots/picture_42.png" />
+</p>
 
 ### User Profile
 
 👤 Manage your profile easily! Show your interests, share content, and connect with others effortlessly.
 
-<img width="250px" align="left" src="screenshots/picture_26.png" />
-<img width="250px" align="left" src="screenshots/picture_19.png" />
-<img width="250px" src="screenshots/picture_37.png" />
+<p>
+  <img width="250px" loading="lazy" src="screenshots/picture_26.png" />
+  &nbsp;&nbsp;&nbsp;
+  <img width="250px" loading="lazy" src="screenshots/picture_19.png" />
+  &nbsp;&nbsp;&nbsp;
+  <img width="250px" loading="lazy" src="screenshots/picture_37.png" />
+</p>
 
-<img width="250px" align="left" src="screenshots/picture_38.png" />
-<img width="250px" align="left" src="screenshots/picture_39.png" />
-<img width="250px" src="screenshots/picture_40.png" />
+<p>
+  <img width="250px" loading="lazy" src="screenshots/picture_38.png" />
+  &nbsp;&nbsp;&nbsp;
+  <img width="250px" loading="lazy" src="screenshots/picture_39.png" />
+  &nbsp;&nbsp;&nbsp;
+  <img width="250px" loading="lazy" src="screenshots/picture_40.png" />
+</p>
 
 ### Firestore and Firebase Storage Screenshots
 This section provides a visual overview of our Firestore database and Firebase Storage. Below, you'll find screenshots that illustrate how we've structured our data and stored files within Firebase.
