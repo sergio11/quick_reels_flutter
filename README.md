@@ -8,6 +8,8 @@
 
 🔧🏗️ Engineered for scalability and flexibility, QuickReels is built upon a foundation that ensures adaptability to the evolving needs of its user base. This robust architecture, combined with the agility of the GetX framework, allows for rapid iterations and enhancements, ensuring QuickReels remains on the forefront of multimedia innovation.
 
+This app, **QuickReels**, includes images and resources designed by [Freepik](https://www.freepik.com). We would like to acknowledge and thank Freepik for their incredible design assets. The images used in the app are provided with attribution, as required by Freepik's licensing terms. For more information on Freepik's resources, please visit [www.freepik.com](https://www.freepik.com).
+
 <p align="center">
   <img src="https://img.shields.io/badge/Android%20Studio-3DDC84.svg?style=for-the-badge&logo=android-studio&logoColor=white" />
   <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" />
