@@ -27,6 +27,16 @@ This app, **QuickReels**, includes images and resources designed by [Freepik](ht
 
 Slides are built using the  template from [Previewed](https://previewed.app/template/AFC0B4CB). I extend my gratitude to them for their remarkable work and contribution.
 
+## ⚠️ Disclaimer
+
+**QuickReels** is an **educational and experimental project** designed to demonstrate how to build a fast-paced multimedia app using the **Flutter framework** and the **GetX** architecture. The main goal of this project is to explore and showcase multimedia integration, user interface design, and scalable app architecture.
+
+The name **"QuickReels"** and the logo were created as part of a **brainstorming session with AI**, and any resemblance to existing brands, services, or apps is purely coincidental. 
+
+This project is not intended for commercial use or production deployment. It is a demonstration of the **Flutter framework**, **GetX** architecture, and multimedia handling capabilities. All content within the app is simulated for educational purposes and does not represent actual media content from real users.
+
+The repository is meant for **learning, experimentation**, and showcasing how to build scalable and flexible multimedia applications.
+
 ## Key Features:
 
 * **🔄 GetX Framework Integration:** QuickReels harnesses the potential of GetX, facilitating a streamlined and efficient approach to manage states, routes, and dependencies within the app.
@@ -246,6 +256,15 @@ This section provides a visual overview of our Firestore database and Firebase S
 <img src="screenshots/picture_46.png" />
 <img src="screenshots/picture_47.png" />
 
+## ⚠️ Disclaimer
+
+**QuickReels** is an **educational and experimental project** designed to demonstrate how to build a fast-paced multimedia app using the **Flutter framework** and the **GetX** architecture. The main goal of this project is to explore and showcase multimedia integration, user interface design, and scalable app architecture.
+
+The name **"QuickReels"** and the logo were created as part of a **brainstorming session with AI**, and any resemblance to existing brands, services, or apps is purely coincidental. 
+
+This project is not intended for commercial use or production deployment. It is a demonstration of the **Flutter framework**, **GetX** architecture, and multimedia handling capabilities. All content within the app is simulated for educational purposes and does not represent actual media content from real users.
+
+The repository is meant for **learning, experimentation**, and showcasing how to build scalable and flexible multimedia applications.
 
 ## Contribution
 Contributions to QuickReels are highly encouraged! If you're interested in adding new features, resolving bugs, or enhancing the project's functionality, please feel free to submit pull requests.
