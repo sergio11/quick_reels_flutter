@@ -1,6 +1,6 @@
 # 🚀 QuickReels: A Fast-paced Multimedia Experience
 
-<img width="auto" height="250px" align="left" src="screenshots/logo.png" />
+<img width="auto" height="250px" align="left" src="screenshots/quick_reels_logo.jpg" />
 
 **🚀 QuickReels** is an innovative Flutter application at the forefront of technology, meticulously crafted to offer users a seamless and immersive multimedia experience. By harnessing the capabilities of the GetX framework, QuickReels underscores a meticulously structured architecture, guaranteeing durability and scalability at every stage of the development journey.
 
