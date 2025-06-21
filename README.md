@@ -266,11 +266,6 @@ This project is not intended for commercial use or production deployment. It is 
 
 The repository is meant for **learning, experimentation**, and showcasing how to build scalable and flexible multimedia applications.
 
-## Contribution
-Contributions to QuickReels are highly encouraged! If you're interested in adding new features, resolving bugs, or enhancing the project's functionality, please feel free to submit pull requests.
-
-## Credits
-QuickReels is developed and maintained by Sergio Sánchez Sánchez (Dream Software). Special thanks to the open-source community and the contributors who have made this project possible. If you have any questions, feedback, or suggestions, feel free to reach out at dreamsoftware92@gmail.com.
 
 ## Acknowledgements 🙏
 
@@ -283,8 +278,3 @@ QuickReels is developed and maintained by Sergio Sánchez Sánchez (Dream Softwa
  ## Visitors Count
 
 <img width="auto" src="https://profile-counter.glitch.me/quick_reels_flutter/count.svg" />
- 
- ## Please Share & Star the repository to keep me motivated.
-  <a href = "https://github.com/sergio11/quick_reels_flutter/stargazers">
-     <img src = "https://img.shields.io/github/stars/sergio11/quick_reels_flutter" />
-  </a>
